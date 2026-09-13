@@ -13,6 +13,8 @@ export interface StripItem {
   /** Where the context line leads. */
   to?: string;
   bad?: boolean;
+  /** A worded figure (a name, a stage): set smaller and allowed to wrap, so it never widens the page. */
+  text?: boolean;
   id?: string;
 }
 
@@ -24,7 +26,7 @@ export function Strip({ items, cols, id, label }: { items: StripItem[]; cols?: n
       {items.map((it) => (
         <div key={it.label} id={it.id}>
           <dt>{it.label}</dt>
-          <dd className={cx('big', it.bad && 'bad')}>{(it.f ?? aedm)(it.value)}</dd>
+          <dd className={cx('big', it.text && 'text', it.bad && 'bad')}>{(it.f ?? aedm)(it.value)}</dd>
           {it.sub && (
             <dd className="sub">
               {it.to ? (

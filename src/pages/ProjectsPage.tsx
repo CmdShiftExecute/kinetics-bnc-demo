@@ -101,8 +101,8 @@ export default function ProjectsPage() {
               <div className="menu-body">
                 {COLUMNS.filter((c) => c.optional).map((c) => (
                   <label key={c.key} className="facet-opt">
-                    <input type="checkbox" checked={shown.has(c.key)} onChange={() => toggleCol(c.key)} data-col={c.key} disabled={c.key === 'score' && vi == null} />
-                    <span className="facet-name">{c.key === 'score' ? `${scoreName ?? 'Vertical'} score` : c.label}</span>
+                    <input type="checkbox" checked={shown.has(c.key)} onChange={() => toggleCol(c.key)} data-col={c.key} />
+                    <span className="facet-name">{c.label}</span>
                   </label>
                 ))}
               </div>

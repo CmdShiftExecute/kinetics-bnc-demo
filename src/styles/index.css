@@ -2165,8 +2165,12 @@ table.mis.heat tr.hov:focus-within td.hv-5 {
 .party-head {
   margin-bottom: var(--s-md);
 }
-.strip .big.small {
+.strip .big.small,
+.strip .big.text {
   font-size: 18px;
+  line-height: 1.15;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .tags {
   display: flex;

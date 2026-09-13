@@ -64,9 +64,9 @@ export default function ProjectPage() {
         label="Project figures"
         items={[
           { label: 'Value', value: p.value, sub: 'AED million', id: 'p-value' },
-          { label: 'Stage', value: 0, f: () => p.stage, sub: p.completionPct != null ? `${pct(p.completionPct)} complete` : 'not under construction', id: 'p-stage' },
+          { label: 'Stage', value: 0, f: () => p.stage, text: true, sub: p.completionPct != null ? `${pct(p.completionPct)} complete` : 'not under construction', id: 'p-stage' },
           { label: 'Overall relevance', value: p.overall ?? 0, f: (n) => (p.overall == null ? 'none' : n.toFixed(1)), sub: p.overall == null ? 'no graded vertical' : `${gradeOf(p.overall)}, highest of ten`, id: 'p-overall' },
-          { label: 'Owner', value: 0, f: () => (p.ownerEngineer ? (engName.get(p.ownerEngineer) ?? '') : 'None'), sub: ownerV ? ownerV.name : why.gate === 'held' ? 'held: no contractor appointed' : 'no eligible vertical', id: 'p-owner' },
+          { label: 'Owner', value: 0, f: () => (p.ownerEngineer ? (engName.get(p.ownerEngineer) ?? '') : 'None'), text: true, sub: ownerV ? ownerV.name : why.gate === 'held' ? 'held: no contractor appointed' : 'no eligible vertical', id: 'p-owner' },
         ]}
       />
       <div className="overview-grid">

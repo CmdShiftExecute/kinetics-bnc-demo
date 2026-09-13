@@ -1,11 +1,13 @@
 /**
- * Frame-timing probe: scrolls the longest page for four seconds in a real
+ * Paint and frame-timing probe: loads the Projects page (3,500 windowed rows), measures
+ * the time to the first drawn row, then scrolls the table for four seconds in a real
  * Chromium and records requestAnimationFrame intervals.
  *
- * Run:  bun scripts/perf_probe.ts [--base <origin>] [--path /replenishment] [--insecure] [--reduce]
- * Prints median, p95, maximum and the count of intervals above 25 ms. Run it
- * before and after a change on the same machine against the same origin; the
- * numbers are observer-dependent and only comparable under identical conditions.
+ * Run:  bun scripts/perf_probe.ts [--base <origin>] [--path /projects] [--insecure] [--reduce] [--budget 1500]
+ * Prints the paint time, median, p95, maximum and the count of intervals above 25 ms,
+ * and exits 1 when the first row paints later than the budget (1.5 s by default) or
+ * when more than a tenth of the scrolled frames exceed 25 ms. The frame numbers are
+ * observer-dependent and only comparable on the same machine against the same origin.
  */
 
 import { chromium } from 'playwright';
@@ -15,19 +17,23 @@ const arg = (name: string, fallback: string) => {
   const i = args.indexOf(`--${name}`);
   return i >= 0 && args[i + 1] ? args[i + 1]! : fallback;
 };
-const base = arg('base', 'http://127.0.0.1:4180').replace(/\/$/, '');
-const path = arg('path', '/replenishment');
+const base = arg('base', 'http://127.0.0.1:4182').replace(/\/$/, '');
+const path = arg('path', '/projects');
+const budget = Number(arg('budget', '1500'));
 const insecure = args.includes('--insecure');
 const reduce = args.includes('--reduce');
 
 const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, ignoreHTTPSErrors: insecure, reducedMotion: reduce ? 'reduce' : 'no-preference' });
 const page = await context.newPage();
+/* paint time: from the navigation being committed to the first data row being in the DOM,
+   so the measure is the app's own fetch, parse and render and not an idle-network wait */
 const t0 = Date.now();
-await page.goto(`${base}${path}`, { waitUntil: 'networkidle' });
-await page.evaluate(() => document.fonts.ready);
-await page.waitForSelector('section.sec');
+await page.goto(`${base}${path}`, { waitUntil: 'commit' });
+await page.waitForSelector('.vt-row, section.sec', { timeout: 30000 });
 const loadMs = Date.now() - t0;
+await page.waitForLoadState('networkidle');
+await page.evaluate(() => document.fonts.ready);
 await page.waitForTimeout(800);
 const result = await page.evaluate(
   () =>
@@ -35,14 +41,18 @@ const result = await page.evaluate(
       const intervals: number[] = [];
       let last = performance.now();
       const start = last;
-      const height = document.documentElement.scrollHeight;
+      /* scroll the windowed table itself when the page has one, else the document */
+      const box = document.querySelector('.vt') as HTMLElement | null;
+      const height = box ? box.scrollHeight : document.documentElement.scrollHeight;
+      const view = box ? box.clientHeight : innerHeight;
       let y = 0;
       const step = () => {
         const now = performance.now();
         intervals.push(now - last);
         last = now;
-        y = (y + 14) % Math.max(1, height - innerHeight);
-        window.scrollTo(0, y);
+        y = (y + 14) % Math.max(1, height - view);
+        if (box) box.scrollTop = y;
+        else window.scrollTo(0, y);
         if (now - start < 4000) requestAnimationFrame(step);
         else resolve({ intervals: intervals.slice(1), height });
       };
@@ -53,13 +63,16 @@ await browser.close();
 const s = [...result.intervals].sort((a, b) => a - b);
 const q = (p: number) => s[Math.min(s.length - 1, Math.floor(p * s.length))] ?? 0;
 const over = s.filter((x) => x > 25).length;
+const verdict = { paintWithinBudget: loadMs <= budget, jankShareOk: over <= s.length / 10 };
 console.log(
   JSON.stringify(
     {
       base,
       path,
       reducedMotion: reduce,
+      budgetMs: budget,
       loadMs,
+      verdict,
       documentHeight: result.height,
       frames: s.length,
       medianMs: Number(q(0.5).toFixed(1)),
@@ -71,3 +84,7 @@ console.log(
     1,
   ),
 );
+if (!verdict.paintWithinBudget || !verdict.jankShareOk) {
+  console.error(`Perf budget missed: paint ${loadMs} ms against ${budget} ms, ${over} of ${s.length} frames over 25 ms.`);
+  process.exit(1);
+}

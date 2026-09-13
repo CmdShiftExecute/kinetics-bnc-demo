@@ -23,7 +23,8 @@ export const COLUMNS: Column[] = [
   { key: 'completionPct', label: 'Done', natural: 'desc', width: 70, num: true },
   { key: 'value', label: 'AED m', natural: 'desc', width: 100, num: true },
   { key: 'overall', label: 'Relev.', natural: 'desc', width: 70, num: true },
-  { key: 'score', label: 'Score', natural: 'desc', width: 70, num: true, optional: true },
+  /* shown automatically whenever a vertical is chosen in the rail, never from the column menu */
+  { key: 'score', label: 'Score', natural: 'desc', width: 70, num: true },
   { key: 'owner', label: 'Owner', natural: 'asc', width: 150 },
   { key: 'city', label: 'City', natural: 'asc', width: 120 },
   { key: 'sector', label: 'Sector', natural: 'asc', width: 150, optional: true },
