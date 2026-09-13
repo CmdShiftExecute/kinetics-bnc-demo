@@ -52,7 +52,7 @@ function needFiniteLeaves(file: string, v: unknown, path: string, nullOk = false
 }
 
 export function validateRollup(file: string, v: unknown) {
-  need(file, v, ['meta', 'verticals', 'engineers', 'matrix', 'matrixRows', 'shards', 'kpis', 'sectorStage', 'chase', 'verticalSummary', 'engineerSummary', 'funnel', 'funnelProjects', 'parties', 'definitions', 'precisionPolicy', 'assumptions', 'cascade', 'bucketRule', 'distributions']);
+  need(file, v, ['meta', 'verticals', 'engineers', 'matrix', 'matrixRows', 'shards', 'kpis', 'sectorStage', 'chase', 'verticalSummary', 'engineerSummary', 'funnel', 'funnelProjects', 'parties', 'definitions', 'precisionPolicy', 'assumptions', 'cascade', 'bucketRule', 'distributions', 'matrixSummary', 'partySummary']);
   need(file, v.meta, ['company', 'division', 'system', 'dataAsOf', 'dataAsOfLabel', 'fiscalYear', 'currency', 'unit', 'seed'], 'meta');
   needArray(file, v.verticals, 'verticals', 1);
   needArray(file, v.engineers, 'engineers', 1);
@@ -70,6 +70,8 @@ export function validateRollup(file: string, v: unknown) {
   needFiniteLeaves(file, v.verticalSummary, 'verticalSummary');
   needFiniteLeaves(file, v.engineerSummary, 'engineerSummary');
   needFiniteLeaves(file, v.sectorStage, 'sectorStage');
+  needFiniteLeaves(file, v.matrixSummary, 'matrixSummary');
+  needFiniteLeaves(file, v.partySummary, 'partySummary');
 }
 
 export function validateShard(file: string, v: unknown) {

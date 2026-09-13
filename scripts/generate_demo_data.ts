@@ -20,7 +20,7 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CHANNELS } from '../data/channels';
-import { GRADE_SCORE, NOT_YET_AWARDED, NO_UPDATE, ORDER_RECEIVED, PROJECT_CLOSED, QUOTE_SENT, ENQUIRY_GENERATED, SCOPE_FLOOR, BUYING_COMPLETION_FLOOR_PCT, bestBucket, cascade, pickEngineer, r1, sum1, worthChasing, stageGate } from '../data/rules';
+import { GRADE_SCORE, gradeOf, NOT_YET_AWARDED, NO_UPDATE, ORDER_RECEIVED, PROJECT_CLOSED, QUOTE_SENT, ENQUIRY_GENERATED, SCOPE_FLOOR, BUYING_COMPLETION_FLOOR_PCT, bestBucket, cascade, pickEngineer, r1, sum1, worthChasing, stageGate } from '../data/rules';
 import type {
   Attribute,
   BucketCode,
@@ -32,6 +32,11 @@ import type {
   Engineer,
   EngineerSummary,
   MatrixRow,
+  MatrixSummary,
+  PartyKindSummary,
+  PartyRank,
+  PartySummary,
+  VerticalReach,
   Meta,
   Owner,
   Party,
@@ -750,6 +755,67 @@ const matrixRows = matrix.map((_r, i) => {
   return { count: ps.length, value: sum1(ps.map((p) => p.value)) };
 });
 
+/* ---------- the matrix summary: reach by vertical, and the headline cards of the matrix page ---------- */
+
+const reach: VerticalReach[] = verticals.map((v, vi) => {
+  const rows = matrix.map((r) => r.cells[vi]);
+  const graded = (g: 'High' | 'Medium' | 'Low') => projects.filter((p) => gradeOf(p.scores[vi]!) === g);
+  return {
+    slug: v.slug,
+    name: v.name,
+    rowsHigh: rows.filter((c) => c === 'High').length,
+    rowsMedium: rows.filter((c) => c === 'Medium').length,
+    rowsLow: rows.filter((c) => c === 'Low').length,
+    rowsNone: rows.filter((c) => c === null).length,
+    projectsHigh: graded('High').length,
+    projectsMedium: graded('Medium').length,
+    projectsLow: graded('Low').length,
+    valueHigh: sum1(graded('High').map((p) => p.value)),
+  };
+});
+const widest = [...reach].sort((a, b) => b.rowsHigh - a.rowsHigh || a.slug.localeCompare(b.slug))[0]!;
+const topTypeRow = matrix
+  .map((r, i) => ({ r, i, highs: r.cells.filter((c) => c === 'High').length, projects: matrixRows[i]!.count }))
+  .sort((a, b) => b.highs - a.highs || b.projects - a.projects || a.i - b.i)[0]!;
+const overallHigh = projects.filter((p) => gradeOf(p.overall) === 'High');
+const matrixSummary: MatrixSummary = {
+  cellsGraded: matrix.reduce((a, r) => a + r.cells.filter(Boolean).length, 0),
+  cellsTotal: matrix.length * V,
+  projectsOverallHigh: overallHigh.length,
+  valueOverallHigh: sum1(overallHigh.map((p) => p.value)),
+  projectsBelowFloor: projects.filter((p) => p.why.eligible.length === 0).length,
+  projectsAdjusted: projects.filter((p) => p.adjusted.length > 0).length,
+  widestVertical: { slug: widest.slug, name: widest.name, rowsHigh: widest.rowsHigh },
+  topType: { type: topTypeRow.r.type, industry: topTypeRow.r.industry, sector: topTypeRow.r.sector, cellsHigh: topTypeRow.highs, projects: topTypeRow.projects },
+  reach,
+};
+
+/* ---------- the party summary: the cards and the top-firms chart of the parties page ---------- */
+
+function kindSummary(list: Party[]): PartyKindSummary {
+  const rank = (p: Party): PartyRank => ({ id: p.id, name: p.name, role: p.role, level: p.level, rating: p.rating, owner: p.owner, projectCount: p.projectCount, projectValue: p.projectValue });
+  return {
+    total: list.length,
+    senior: list.filter((p) => p.level === 'Senior management').length,
+    middle: list.filter((p) => p.level === 'Middle management').length,
+    junior: list.filter((p) => p.level === 'Junior management').length,
+    averageRating: list.length ? r1(sum(list.map((p) => p.rating)) / list.length) : 0,
+    onTenPlus: list.filter((p) => p.projectCount >= 10).length,
+    bookValue: sum1(list.map((p) => p.projectValue)),
+    top: [...list]
+      .sort((a, b) => b.projectValue - a.projectValue || b.projectCount - a.projectCount || a.id - b.id)
+      .slice(0, 20)
+      .map(rank),
+  };
+}
+const partySummary: PartySummary = {
+  consultants: kindSummary(consultantsOut),
+  contractors: kindSummary(contractorsOut),
+  projectsNoConsultant: projects.filter((p) => p.leadConsultants.length === 0 && p.mepConsultant === null).length,
+  projectsNoContractor: projects.filter((p) => p.mainContractors.length === 0 && p.mepContractor === null).length,
+  openProjectsNoContractor: projects.filter((p) => stageGate(p.stage, p.completionPct, false) === 'buying' && p.mainContractors.length === 0 && p.mepContractor === null).length,
+};
+
 /* ---------- self-checks before anything is written ---------- */
 
 function expect(cond: boolean, what: string) {
@@ -780,6 +846,8 @@ for (const p of projects) {
   expect(Math.round(p.value * 10) === p.value * 10 || Math.abs(Math.round(p.value * 10) - p.value * 10) < 1e-6, `value precision on ${p.ref}`);
 }
 for (const c of [...consultantsOut, ...contractorsOut]) expect(c.projectCount === c.projects.length && c.rating >= 1 && c.rating <= 10, `party ${c.name}`);
+expect(sum(reach.map((r) => r.rowsHigh + r.rowsMedium + r.rowsLow)) === matrixSummary.cellsGraded, 'reach rows sum to graded cells');
+for (const r of reach) expect(r.rowsHigh + r.rowsMedium + r.rowsLow + r.rowsNone === matrix.length, `reach rows of ${r.slug}`);
 
 /* ---------- definitions, policy, assumptions ---------- */
 
@@ -895,6 +963,8 @@ const rollup: Rollup = {
     sectors: SECTORS.map((sector) => ({ sector, count: projects.filter((p) => p.sector === sector).length })),
     cities: CITIES.map((city) => ({ city, count: projects.filter((p) => p.city === city).length })),
   },
+  matrixSummary,
+  partySummary,
 };
 writeFileSync(join(outDir, 'rollup.json'), JSON.stringify(rollup, null, 1) + '\n');
 

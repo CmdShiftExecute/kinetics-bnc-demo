@@ -2241,3 +2241,201 @@ table.mis.heat tr.hov:focus-within td.hv-5 {
     width: 44px;
   }
 }
+
+/* ======================================================================
+   Executive layer, 13 Sep 2026 evening: the family's second print ink and
+   its ramp (identical values to the MIS and WMS), stacked columns, grouped
+   bars, the view switch, the cursor tooltip on the matrix.
+   ====================================================================== */
+:root {
+  --spot: #2547b8;
+  --spot-2: #5c70c4;
+  --ink-3: #7f7a6f;
+}
+/* the ramp, for every segment and swatch: ink, spot, ink-2, spot-2, ink-3, hazard */
+.chart .seg.c-ink,
+.sw.c-ink {
+  fill: var(--ink);
+  background: var(--ink);
+}
+.chart .seg.c-spot,
+.sw.c-spot {
+  fill: var(--spot);
+  background: var(--spot);
+}
+.chart .seg.c-ink2,
+.sw.c-ink2 {
+  fill: var(--ink-2);
+  background: var(--ink-2);
+}
+.chart .seg.c-spot2,
+.sw.c-spot2 {
+  fill: var(--spot-2);
+  background: var(--spot-2);
+}
+.chart .seg.c-ink3,
+.sw.c-ink3 {
+  fill: var(--ink-3);
+  background: var(--ink-3);
+}
+.chart .seg.c-hz,
+.sw.c-hz {
+  fill: var(--hazard);
+  background: var(--hazard);
+}
+.chart .seg.c-rule,
+.sw.c-rule {
+  fill: var(--paper-3);
+  background: var(--paper-3);
+}
+.chart .seg {
+  stroke: var(--paper);
+  stroke-width: 1;
+  transition: opacity 120ms var(--ease);
+}
+.chart .seg.mk-on {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.sw {
+  display: inline-block;
+  width: 12px;
+  height: 10px;
+  vertical-align: -1px;
+  margin-right: 4px;
+}
+/* stacked columns */
+.chart.cols .grid line {
+  stroke: var(--rule);
+}
+.chart.cols .grid line.zero {
+  stroke: var(--ink);
+}
+.chart.cols text.ax {
+  letter-spacing: 0.06em;
+}
+.chart.cols,
+.chart.hbars {
+  cursor: crosshair;
+}
+.chart.hbars.pickable {
+  cursor: pointer;
+}
+.chart.hbars .grid line {
+  stroke: var(--rule);
+}
+.chart text.muted,
+.chart tspan.muted {
+  fill: var(--ink-2);
+}
+.chart.hbars text.grp {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+.chart .rowhi.sel {
+  fill: color-mix(in srgb, var(--spot) 12%, var(--paper));
+}
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-sm) var(--s-xl);
+  list-style: none;
+  margin: var(--s-sm) 0 0;
+  padding: 0;
+  font-size: 11px;
+  color: var(--ink-2);
+}
+/* the inline bar in a table, in the second ink */
+.bar.spot {
+  background: var(--spot);
+  height: 8px;
+  display: block;
+}
+/* the view switch */
+.chart-views {
+  min-width: 0;
+}
+.cv-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-sm);
+}
+.cv-name {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.seg-row.tight {
+  margin-bottom: 0;
+}
+/* the matrix tooltip: fixed beside the cursor, ink on paper, never under it */
+.cell-tip {
+  position: fixed;
+  z-index: 20;
+  width: 300px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: var(--s-sm) var(--s-md);
+  pointer-events: none;
+  font-size: 12px;
+}
+.cell-tip[data-grade='High'] {
+  border-left: 6px solid var(--ink);
+}
+.cell-tip[data-grade='Medium'] {
+  border-left: 6px solid var(--hg-med);
+}
+.cell-tip[data-grade='Low'] {
+  border-left: 6px solid var(--hg-low);
+}
+.cell-tip .cell-title {
+  margin: 0 0 6px;
+  max-width: none;
+}
+.tip-vals {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+  margin: 0;
+}
+.tip-vals div {
+  display: contents;
+}
+.tip-vals dt {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.tip-vals dd {
+  margin: 0;
+}
+.tip-hint {
+  margin: 6px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.scale-list.wide {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 900px;
+}
+.scale-list.wide div {
+  grid-template-columns: 90px 1fr;
+}
+@media (max-width: 640px) {
+  .scale-list.wide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cell-tip {
+    width: 240px;
+  }
+}

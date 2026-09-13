@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import type { Rollup } from '../../data/schema';
-import { BUCKETS, SECTORS } from '../../data/schema';
+import { BUCKETS, SECTORS, STAGES } from '../../data/schema';
 import { useJson } from '../lib/data';
 import { validateRollup } from '../lib/validate';
 import { aedm, count, pct, score } from '../lib/format';
@@ -11,13 +11,20 @@ import { Strip } from '../components/Strip';
 import { Footer } from '../components/Footer';
 import { PageError, PageLoading } from '../components/PageState';
 import { useRise, useRowReveal } from '../components/Reveal';
-import { SectorStageChart } from '../components/SectorStageChart';
+import { StackedColumns } from '../components/StackedColumns';
+import type { SegClass } from '../components/StackedColumns';
+import { ChartSwitch } from '../components/ChartSwitch';
 import { FunnelChart } from '../components/FunnelChart';
+
+/** The sector fills, the family's ramp in order of register share. */
+export const SECTOR_CLS: Record<string, SegClass> = { 'Urban Construction': 'spot', Industrial: 'ink', 'Oil, Gas and Fuels': 'spot2', Transport: 'ink2', Utilities: 'ink3' };
+export const STAGE_SHORT: Record<string, string> = { Concept: 'Concept', Design: 'Design', Tender: 'Tender', 'Under Construction': 'Constr.', 'Completed (3 months)': 'Done 3m', 'Completed (1 year)': 'Done 1y', 'Completed (3 years)': 'Done 3y', 'Completed (above 3 years)': 'Done 3y+' };
 
 /**
  * The overview answers what a managing director asks of a market: how big is it,
- * how much of it do we own, what is worth chasing now, who owns what, and how far
- * has the activity gone. One block per question, every block linking to its page.
+ * how much of it do we own, where does the value sit, what is worth chasing now,
+ * who owns what, and how far has the activity gone. The headline figures first,
+ * one full-width chart under them, then the detail.
  */
 export default function Overview() {
   const { data, error } = useJson<Rollup>('rollup.json', validateRollup);
@@ -36,6 +43,11 @@ export default function Overview() {
     const top = [...cs].sort((a, b) => b.value - a.value)[0]!;
     return { sector, n, value, top };
   });
+  const cell = (stage: string, sector: string) => data.sectorStage.find((c) => c.sector === sector && c.stage === stage) ?? { count: 0, value: 0 };
+  const categories = STAGES.map((s) => ({ key: s, label: s, short: STAGE_SHORT[s] }));
+  const series = SECTORS.map((s) => ({ key: s, label: s, cls: SECTOR_CLS[s]! }));
+  const byValue = STAGES.map((st) => SECTORS.map((se) => cell(st, se).value));
+  const byCount = STAGES.map((st) => SECTORS.map((se) => cell(st, se).count));
   return (
     <div className="wrap">
       <Masthead meta={meta} />
@@ -56,52 +68,27 @@ export default function Overview() {
         label="Headline figures"
         cols={6}
         items={[
-          { label: 'Projects in register', value: kpis.projects, f: count, sub: `${count(data.matrix.length)} type rows, ${count(data.parties.owners)} developers`, to: '/projects', id: 'kpi-projects' },
-          { label: 'Projects owned', value: kpis.owned, f: count, sub: `${pct((kpis.owned / kpis.projects) * 100)} of the register`, to: '/engineers', id: 'kpi-owned' },
-          { label: 'Pipeline value owned', value: kpis.ownedValue, sub: 'AED million, owned projects', to: '/projects?sort=value', id: 'kpi-value' },
-          { label: 'Open enquiries and quotes', value: kpis.openEnquiriesAndQuotes, f: count, sub: 'project and vertical pairs', to: '/projects?bucket=1|2', id: 'kpi-open' },
-          { label: `Orders received ${meta.fiscalYear}`, value: kpis.ordersThisYear, f: count, sub: 'project and vertical pairs', to: '/projects?bucket=0', id: 'kpi-orders' },
-          { label: 'No owner', value: kpis.unowned, f: count, sub: 'held or out of scope', to: '/data-basis#cascade', id: 'kpi-unowned', bad: false },
+          { label: 'Projects in register', value: kpis.projects, f: count, sub: `AED ${aedm(registerValue)} m across ${count(data.matrix.length)} type rows`, to: '/projects', id: 'kpi-projects' },
+          { label: 'Projects owned', value: kpis.owned, f: count, sub: `${pct((kpis.owned / kpis.projects) * 100)} of the register, ${data.engineers.length} engineers`, to: '/engineers', id: 'kpi-owned' },
+          { label: 'Pipeline value owned', value: kpis.ownedValue, sub: `AED million, ${pct((kpis.ownedValue / registerValue) * 100)} of register value`, to: '/projects?sort=value', id: 'kpi-value' },
+          { label: 'Open enquiries and quotes', value: kpis.openEnquiriesAndQuotes, f: count, sub: 'project and vertical pairs live now', to: '/projects?bucket=1|2', id: 'kpi-open' },
+          { label: `Orders received ${meta.fiscalYear}`, value: kpis.ordersThisYear, f: count, sub: `of ${count(data.funnel[0]!)} orders on record`, to: '/projects?bucket=0', id: 'kpi-orders' },
+          { label: 'Worth chasing now', value: data.chase.length, f: count, sub: `AED ${aedm(data.chase.reduce((a, c) => a + Math.round(c.value * 10), 0) / 10)} m, top twenty by value`, to: '#chase', id: 'kpi-chase' },
         ]}
       />
 
-      <div className="overview-grid">
-        <Section id="sector-stage" title="Where the value sits" note="Register value by sector and stage, AED million" link={{ to: '/projects', label: 'All projects' }} defs={['register', 'value']} definitions={definitions} compact>
-          <SectorStageChart cells={data.sectorStage} id="sector-stage-chart" />
-          <div className="scroll-x">
-            <table className="mis compact" id="sector-table">
-              <thead>
-                <tr>
-                  <th scope="col" className="left">
-                    Sector
-                  </th>
-                  <th scope="col">Projects</th>
-                  <th scope="col">AED m</th>
-                  <th scope="col" className="left">
-                    Largest stage by value
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {sectorRows.map((r, i) => (
-                  <motion.tr key={r.sector} className="hov" {...rowReveal(i)}>
-                    <th scope="row" className="left">
-                      <Link to={`/projects?sector=${encodeURIComponent(r.sector)}`} className="elink">
-                        {r.sector}
-                      </Link>
-                    </th>
-                    <td className="num">{count(r.n)}</td>
-                    <td className="num">{aedm(r.value)}</td>
-                    <td className="left">
-                      {r.top.stage}, AED {aedm(r.top.value)} m
-                    </td>
-                  </motion.tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Section>
+      <Section id="sector-stage" title="Where the value sits" note="Register value by stage of the project lifecycle, stacked by sector. Concept on the left, completed on the right." link={{ to: '/projects', label: 'All projects' }} defs={['register', 'value']} definitions={definitions}>
+        <ChartSwitch
+          id="sector-stage"
+          views={[
+            { key: 'value', label: 'Value, AED m', render: () => <StackedColumns id="sector-stage-chart" categories={categories} series={series} values={byValue} format={aedm} unit="AED m" ariaLabel={`Register value by stage and sector. ${STAGES.map((s, i) => `${s}: AED ${aedm(byValue[i]!.reduce((a, b) => a + b, 0))} million`).join('. ')}.`} /> },
+            { key: 'count', label: 'Projects', render: () => <StackedColumns id="sector-stage-chart" categories={categories} series={series} values={byCount} format={count} unit="projects" ariaLabel={`Projects by stage and sector. ${STAGES.map((s, i) => `${s}: ${count(byCount[i]!.reduce((a, b) => a + b, 0))}`).join('. ')}.`} /> },
+            { key: 'share', label: 'Sector share', render: () => <StackedColumns id="sector-stage-chart" categories={categories} series={series} values={byValue} format={aedm} unit="AED m" mode="share" ariaLabel="Sector share of value at each stage." /> },
+          ]}
+        />
+      </Section>
 
+      <div className="overview-grid">
         <Section id="verticals" title="Who owns what" note="Owned projects and pipeline value by vertical, AED million" link={{ to: '/engineers', label: 'Engineers' }} defs={['owner', 'pipeline']} definitions={definitions} compact>
           <div className="scroll-x">
             <table className="mis compact" id="vertical-table">
@@ -128,7 +115,42 @@ export default function Overview() {
                     <td className="num">{count(v.owned)}</td>
                     <td className="num">{aedm(v.ownedValue)}</td>
                     <td className="left barcell">
-                      <span className="bar" style={{ width: `${Math.max(1, (100 * v.ownedValue) / maxOwned)}%` }} aria-hidden="true" />
+                      <motion.span className="bar spot" style={{ width: `${Math.max(1, (100 * v.ownedValue) / maxOwned)}%`, transformOrigin: '0 50%' }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.5, delay: 0.1 + i * 0.04 }} aria-hidden="true" />
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Section>
+
+        <Section id="sectors" title="Largest stage by sector" note="Where each sector's value is concentrated, AED million" link={{ to: '/relevance', label: 'Relevance matrix' }} defs={['register']} definitions={definitions} compact>
+          <div className="scroll-x">
+            <table className="mis compact" id="sector-table">
+              <thead>
+                <tr>
+                  <th scope="col" className="left">
+                    Sector
+                  </th>
+                  <th scope="col">Projects</th>
+                  <th scope="col">AED m</th>
+                  <th scope="col" className="left">
+                    Largest stage by value
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {sectorRows.map((r, i) => (
+                  <motion.tr key={r.sector} className="hov" {...rowReveal(i)}>
+                    <th scope="row" className="left">
+                      <Link to={`/projects?sector=${encodeURIComponent(r.sector)}`} className="elink">
+                        <i className={`sw c-${SECTOR_CLS[r.sector]}`} aria-hidden="true" /> {r.sector}
+                      </Link>
+                    </th>
+                    <td className="num">{count(r.n)}</td>
+                    <td className="num">{aedm(r.value)}</td>
+                    <td className="left">
+                      {r.top.stage}, AED {aedm(r.top.value)} m ({pct((r.top.value / r.value) * 100, 0)})
                     </td>
                   </motion.tr>
                 ))}

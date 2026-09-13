@@ -235,6 +235,75 @@ export interface MatrixCellRollup {
   value: number;
 }
 
+/** Per vertical, how far its relevance reaches across the matrix and the register. */
+export interface VerticalReach {
+  slug: Slug;
+  name: string;
+  rowsHigh: number;
+  rowsMedium: number;
+  rowsLow: number;
+  rowsNone: number;
+  /** Projects whose score on this vertical reads High, Medium, Low. */
+  projectsHigh: number;
+  projectsMedium: number;
+  projectsLow: number;
+  /** AED million of the projects graded High. */
+  valueHigh: number;
+}
+
+export interface MatrixSummary {
+  cellsGraded: number;
+  cellsTotal: number;
+  /** Projects whose overall relevance reads High. */
+  projectsOverallHigh: number;
+  valueOverallHigh: number;
+  /** Projects with no vertical at or above the scope floor. */
+  projectsBelowFloor: number;
+  /** Projects carrying at least one hand-adjusted score. */
+  projectsAdjusted: number;
+  /** The vertical with the most High rows, and the type with the most High cells. */
+  widestVertical: { slug: Slug; name: string; rowsHigh: number };
+  topType: { type: string; industry: string; sector: Sector; cellsHigh: number; projects: number };
+  reach: VerticalReach[];
+}
+
+export interface PartyRank {
+  id: number;
+  name: string;
+  role: PartyRole;
+  level: RelationshipLevel;
+  rating: number;
+  owner: Slug;
+  projectCount: number;
+  projectValue: number;
+}
+
+export interface PartyKindSummary {
+  total: number;
+  senior: number;
+  middle: number;
+  junior: number;
+  /** Mean rating to one decimal. */
+  averageRating: number;
+  /** Firms on ten or more projects. */
+  onTenPlus: number;
+  /** Total AED million across the firms' project books (a project counts once per firm it sits on). */
+  bookValue: number;
+  /** The twenty largest firms by project value. */
+  top: PartyRank[];
+}
+
+export interface PartySummary {
+  consultants: PartyKindSummary;
+  contractors: PartyKindSummary;
+  /** Projects with no lead or MEP consultant recorded. */
+  projectsNoConsultant: number;
+  /** Projects with no main or MEP contractor recorded. */
+  projectsNoContractor: number;
+  /** Projects at Tender or early construction with no contractor: the ones still open to win. */
+  openProjectsNoContractor: number;
+}
+
 export interface Meta {
   company: string;
   division: string;
@@ -283,6 +352,8 @@ export interface Rollup {
   cascade: string[];
   bucketRule: string[];
   distributions: { stages: { stage: Stage; count: number }[]; sectors: { sector: Sector; count: number }[]; cities: { city: City; count: number }[] };
+  matrixSummary: MatrixSummary;
+  partySummary: PartySummary;
 }
 
 export interface Assertion {

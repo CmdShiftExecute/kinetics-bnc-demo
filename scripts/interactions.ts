@@ -37,6 +37,8 @@ const check = (ok: boolean, what: string) => {
   results.push({ ok, what });
 };
 const num = (s: string) => Number(s.replace(/[^\d.\-−]/g, '').replace('−', '-'));
+/** AED million to one decimal, grouped, upper case, as the readouts print it. */
+const aedmUp = (n: number) => new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(n).toUpperCase();
 const sum1 = (xs: number[]) => xs.reduce((a, b) => a + Math.round(b * 10), 0) / 10;
 
 /** Reads a hoverable row's first cell at rest and under the pointer, parking the mouse away first. */
@@ -184,11 +186,28 @@ try {
   const vtNeg = await rowHover(page, '#vertical-table tbody tr.hov');
   check(!vtNeg.shifted && !vtNeg.marked, `Row-hover gate reports a defeated hover rule (negative control: ${vtNeg.before} to ${vtNeg.after})`);
   await unbreakCss(page);
-  const ssHover = await chartHover(page, 'sector-stage-chart', 0.35, 0.2);
-  check(ssHover.live && ssHover.marks > 0 && /URBAN CONSTRUCTION/.test(ssHover.read), `Sector-by-stage chart reads out on a plain pointer move ("${ssHover.read.slice(0, 60)}"), no click`);
+  const ssHover = await chartHover(page, 'sector-stage-chart', 0.45, 0.8);
+  check(ssHover.live && ssHover.marks > 0 && /URBAN CONSTRUCTION/.test(ssHover.read), `Stacked columns read out on a plain pointer move ("${ssHover.read.slice(0, 60)}"), no click`);
+  await page.mouse.move(4, 4);
+  await page.locator('svg#sector-stage-chart').focus();
+  await page.keyboard.press('Home');
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowUp');
+  await page.waitForTimeout(150);
+  const ssKey = ((await page.locator('svg#sector-stage-chart .readbox text').first().textContent()) ?? '').trim();
+  const tenderUrban = rollup.sectorStage.find((c) => c.stage === 'Tender' && c.sector === 'Urban Construction')!;
+  check(/^TENDER, URBAN CONSTRUCTION/.test(ssKey) && ssKey.includes(aedmUp(tenderUrban.value)), `Arrow keys walk the columns and segments: "${ssKey.slice(0, 70)}" matches the published cell (AED ${tenderUrban.value} m)`);
+  await page.keyboard.press('Escape');
+  await page.locator('#sector-stage-views button[data-view="count"]').click();
+  await page.waitForTimeout(400);
+  const ssCount = await chartHover(page, 'sector-stage-chart', 0.45, 0.8);
+  check(/PROJECTS/.test(ssCount.read) && !/AED/.test(ssCount.read), `The view switch re-reads the chart in projects ("${ssCount.read.slice(0, 50)}")`);
+  await page.locator('#sector-stage-views button[data-view="value"]').click();
+  await page.waitForTimeout(400);
   await breakCss(page, 'svg#sector-stage-chart { pointer-events: none !important; }');
   await page.mouse.move(4, 4);
-  const ssNeg = await chartHover(page, 'sector-stage-chart', 0.35, 0.2);
+  const ssNeg = await chartHover(page, 'sector-stage-chart', 0.45, 0.8);
   check(!ssNeg.live, `Chart-hover gate reports a chart that ignores the pointer (negative control: "${ssNeg.read}")`);
   await unbreakCss(page);
   const fnHover = await chartHover(page, 'funnel-chart', 0.5, 0.05);
@@ -218,7 +237,7 @@ try {
   }
   writeFileSync(join(out, 'tab-sequence.json'), JSON.stringify(seq, null, 1));
   const idx = (re: RegExp) => seq.findIndex((s) => re.test(s));
-  const order = [idx(/^a:Relevance matrix/), idx(/^a:Data basis/), idx(/^a:80 type rows|^a:.*of the register/), idx(/^a:All projects/i)];
+  const order = [idx(/^a:Relevance matrix/), idx(/^a:Data basis/), idx(/^a:.*type rows|^a:.*of the register/), idx(/^a:All projects/i)];
   check(order.every((v, i) => v >= 0 && (i === 0 || v > order[i - 1]!)), `Tab reaches the nav, the KPI links and the section links in reading order (${seq.filter((s) => s !== 'body:').length} stops)`);
   const ring = await page.evaluate(() => {
     const a = document.querySelector('nav.nav a') as HTMLElement;
@@ -245,6 +264,20 @@ try {
   const e1 = predict('stage=Tender');
   check(t1.count === e1.count && Math.round(t1.value * 10) === Math.round(e1.value * 10), `Stage: Tender shows ${t1.count} projects, AED ${t1.value} m, exactly what the predicate predicts from the data`);
   check(/stage=Tender/.test(page.url()), `The filter is written to the address (${new URL(page.url()).search})`);
+  const tenderRows = projects.filter((p) => p.stage === 'Tender');
+  const vkCount = num((await page.locator('#vk-count dd.big').innerText()).trim());
+  const vkOwned = num((await page.locator('#vk-owned dd.big').innerText()).trim());
+  check(vkCount === tenderRows.length && vkOwned === tenderRows.filter((p) => p.ownerVertical != null).length, `The view cards re-count with the filter: ${vkCount} projects, ${vkOwned} owned, as the data predicts`);
+  await page.mouse.move(4, 4);
+  await page.locator('svg#view-columns').focus();
+  await page.keyboard.press('Home');
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowRight');
+  await page.waitForTimeout(150);
+  const vcRead = ((await page.locator('svg#view-columns .readbox text').first().textContent()) ?? '').trim();
+  const vcOther = await page.locator('svg#view-columns .readbox').count();
+  check(/^TENDER: /.test(vcRead) && vcRead.includes(`${tenderRows.length.toLocaleString('en-GB')} PROJECTS`), `The view chart re-shapes with the filter: Tender column reads "${vcRead.slice(0, 60)}" (${vcOther} readout)`);
+  await page.keyboard.press('Escape');
   const chips1 = Number(await page.locator('#chips').getAttribute('data-count'));
   check(chips1 === 1 && /Stage: Tender/.test(await page.locator('#chips').innerText()), `One chip shows the active filter (${chips1})`);
   /* negative control for the prediction: a deliberately wrong prediction must disagree */
@@ -379,10 +412,30 @@ try {
   const cellBtn = page.locator('#heatmap tr.lv-type').first().locator('td.heat-c button').first();
   const cellLabel = (await cellBtn.getAttribute('aria-label')) ?? '';
   const cellCount = Number(await cellBtn.getAttribute('data-count'));
-  await cellBtn.hover();
+  await cellBtn.scrollIntoViewIfNeeded();
+  const cb = (await cellBtn.boundingBox())!;
+  await page.mouse.move(cb.x + cb.width / 2, cb.y + cb.height / 2);
+  await page.waitForTimeout(200);
+  const tipBox = await page.locator('#cell-tip').boundingBox();
+  const tipText = await page.locator('#cell-tip').innerText();
+  const tipNear = tipBox ? Math.abs(tipBox.x - (cb.x + cb.width / 2)) < 40 || Math.abs(tipBox.x + tipBox.width - (cb.x + cb.width / 2)) < 40 : false;
+  check(/grade/i.test(tipText) && tipNear, `Pointing at a cell opens a tooltip beside the cursor (${tipBox ? Math.round(tipBox.x - cb.x) : 'no'}px from it; "${cellLabel.slice(0, 40)}")`);
+  await page.mouse.move(4, 4);
   await page.waitForTimeout(150);
-  const panel = await page.locator('#cell-read').innerText();
-  check(/grade/i.test(panel) && (await page.locator('#cell-read.on').count()) === 1, `Pointing at a cell reads it in the side panel ("${cellLabel.slice(0, 50)}")`);
+  check((await page.locator('#cell-tip').count()) === 0, 'The tooltip closes when the pointer leaves the cell');
+  const kpiCells = await page.locator('#matrix-kpis > div').count();
+  const mkHigh = num((await page.locator('#mk-high dd.big').innerText()).trim());
+  check(kpiCells === 6 && mkHigh === rollup.matrixSummary.projectsOverallHigh, `The matrix page carries six headline cards; projects reading High equals the published ${mkHigh}`);
+  const reachHover = await chartHover(page, 'reach-chart', 0.3, 0.12);
+  check(reachHover.live && /HIGH/.test(reachHover.read), `The reach chart reads out on a plain pointer move ("${reachHover.read.slice(0, 60)}")`);
+  const below = await page.evaluate(() => {
+    const t = document.querySelector('#heatmap')!.getBoundingClientRect();
+    const g = document.querySelector('#grade-scale')!.getBoundingClientRect();
+    const h = document.querySelector('#how-scores')!.getBoundingClientRect();
+    const m = document.querySelector('#matrix')!.getBoundingClientRect();
+    return { tableW: Math.round(t.width), secW: Math.round(m.width), scaleBelow: g.top >= t.bottom, howBelow: h.top >= g.bottom };
+  });
+  check(below.scaleBelow && below.howBelow && below.tableW >= below.secW * 0.9, `The matrix runs the full width (${below.tableW}px of ${below.secW}px); the grade scale and the scoring note sit below it`);
   await cellBtn.click();
   await waitRows(page);
   const tm = await tally(page);
@@ -409,6 +462,13 @@ try {
   await page.waitForSelector('.ledger-cell');
   const cards = await page.locator('.ledger-cell').count();
   check(cards === rollup.engineers.length, `One block per engineer (${cards})`);
+  const firstBook = rollup.engineerSummary.filter((e) => e.vertical === rollup.verticals[0]!.slug).sort((a, b) => b.ownedValue - a.ownedValue)[0]!;
+  await page.locator('svg#books-chart').focus();
+  await page.keyboard.press('Home');
+  await page.waitForTimeout(150);
+  const bookRead = ((await page.locator('svg#books-chart .readbox text').first().textContent()) ?? '').trim();
+  check(bookRead.startsWith(firstBook.name.toUpperCase()) && bookRead.includes(aedmUp(firstBook.ownedValue)), `The books chart walks by keyboard and reads the published value ("${bookRead.slice(0, 60)}")`);
+  await page.keyboard.press('Escape');
   const target = rollup.engineerSummary[0]!;
   const cardOwned = Number(await page.locator(`.ledger-cell[data-slug="${target.slug}"]`).getAttribute('data-owned'));
   await page.locator(`.ledger-cell[data-slug="${target.slug}"] a.drill-link`).click();
@@ -422,9 +482,12 @@ try {
     await page.waitForSelector('.ledger-cell');
     const svg = page.locator(`svg#mix-${target.slug}`);
     await svg.scrollIntoViewIfNeeded();
+    /* the section rises 8px as it reveals; a 10px bar measured mid-rise is missed by the pointer */
+    await page.waitForTimeout(600);
     const box = (await svg.boundingBox())!;
+    await page.mouse.move(box.x + 3, box.y + box.height / 2 - 2);
     await page.mouse.move(box.x + 3, box.y + box.height / 2);
-    await page.waitForTimeout(150);
+    await page.waitForTimeout(200);
     return (await page.locator(`svg#mix-${target.slug}`).locator('xpath=..').locator('.mix-read').innerText()).trim();
   })();
   check(/of \d+/.test(mixHover), `The activity mix bar reads out under the pointer ("${mixHover.slice(0, 50)}")`);
@@ -434,6 +497,20 @@ try {
   await page.waitForSelector('#plist li');
   const listN = Number(await page.locator('#picker-count').getAttribute('data-count'));
   check(listN === consultants.length && (await page.locator('#party-empty').count()) === 1, `The selector lists all ${listN} consultants and shows an empty card until one is picked`);
+  const topFirm = rollup.partySummary.consultants.top[0]!;
+  const tf = page.locator('svg#top-firms-chart');
+  await tf.scrollIntoViewIfNeeded();
+  const tfBox = (await tf.boundingBox())!;
+  await page.mouse.move(tfBox.x + tfBox.width * 0.4, tfBox.y + 34);
+  await page.waitForTimeout(120);
+  await page.mouse.click(tfBox.x + tfBox.width * 0.4, tfBox.y + 34);
+  await page.waitForSelector('#party-name');
+  const tfName = (await page.locator('#party-name').innerText()).trim();
+  check(tfName.toUpperCase() === topFirm.name.toUpperCase() && new URL(page.url()).searchParams.get('id') === String(topFirm.id), `Clicking the first bar of the top-firms chart opens that firm's card (${tfName})`);
+  const pkCells = await page.locator('#party-kpis > div').count();
+  check(pkCells === 6 && num((await page.locator('#pk-consultants dd.big').innerText()).trim()) === consultants.length, `The parties page carries six headline cards; consultants equals the party file`);
+  await page.goto(`${base}/parties`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#plist li');
   await page.locator('#plist button').first().click();
   await page.waitForSelector('#party-name');
   const pickedId = Number(await page.locator('#party-card').getAttribute('data-id'));

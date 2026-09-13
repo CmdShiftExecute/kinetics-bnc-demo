@@ -16,7 +16,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { GRADE_SCORE, bestBucket, cascade, pickEngineer, stageGate, sum1, worthChasing } from '../data/rules';
+import { GRADE_SCORE, bestBucket, cascade, gradeOf, pickEngineer, stageGate, sum1, worthChasing } from '../data/rules';
 import type { Assertion, Owner, Party, Project, Reconciliation, Rollup, Sector } from '../data/schema';
 import { BUCKETS, SECTORS, STAGES } from '../data/schema';
 
@@ -241,6 +241,42 @@ ok(C11, 'contractor-roles', 'Main links go to Main/EPC or both; MEP links go to 
 const ownerIds = new Set(owners.map((o) => o.id));
 ok(C11, 'owners-known', 'Every project owner id is in the owners file', projects.every((p) => p.owners.every((id) => ownerIds.has(id))));
 eq(C11, 'owners-rollup', 'Owner count equals the rollup figure', owners.length, rollup.parties.owners);
+
+/* ---------- 12. the matrix summary ---------- */
+const C12 = 'Matrix summary';
+const ms = rollup.matrixSummary;
+eq(C12, 'ms-cells-total', 'Matrix cells total equals rows times verticals', ms.cellsTotal, rollup.matrix.length * V);
+eq(C12, 'ms-cells-graded', 'Graded cells equal the non-empty cells of the matrix', ms.cellsGraded, rollup.matrix.reduce((a, r) => a + r.cells.filter(Boolean).length, 0));
+eq(C12, 'ms-overall-high', 'Projects whose overall relevance reads High equal the register', ms.projectsOverallHigh, projects.filter((p) => gradeOf(p.overall) === 'High').length);
+eq(C12, 'ms-overall-high-value', 'Their value equals the sum of their values', ms.valueOverallHigh, sum1(projects.filter((p) => gradeOf(p.overall) === 'High').map((p) => p.value)));
+eq(C12, 'ms-below-floor', 'Projects below the scope floor on every vertical equal the register', ms.projectsBelowFloor, projects.filter((p) => p.why.eligible.length === 0).length);
+eq(C12, 'ms-adjusted', 'Projects with a hand-adjusted score equal the register', ms.projectsAdjusted, projects.filter((p) => p.adjusted.length > 0).length);
+ms.reach.forEach((r, vi) => {
+  const cells = rollup.matrix.map((row) => row.cells[vi]);
+  eq(C12, `ms-reach-${r.slug}-rows`, `${r.name}: High, Medium, Low and none rows equal the matrix`, r.rowsHigh * 1000000 + r.rowsMedium * 10000 + r.rowsLow * 100 + r.rowsNone, cells.filter((c) => c === 'High').length * 1000000 + cells.filter((c) => c === 'Medium').length * 10000 + cells.filter((c) => c === 'Low').length * 100 + cells.filter((c) => c === null).length);
+  const g = (x: 'High' | 'Medium' | 'Low') => projects.filter((p) => gradeOf(p.scores[vi]!) === x);
+  eq(C12, `ms-reach-${r.slug}-projects`, `${r.name}: projects graded High, Medium and Low equal the register`, r.projectsHigh * 1000000 + r.projectsMedium * 1000 + r.projectsLow, g('High').length * 1000000 + g('Medium').length * 1000 + g('Low').length);
+  eq(C12, `ms-reach-${r.slug}-value`, `${r.name}: value of projects graded High equals the register`, r.valueHigh, sum1(g('High').map((p) => p.value)));
+});
+ok(C12, 'ms-widest', 'The widest vertical has the most High rows', ms.reach.every((r) => r.rowsHigh <= ms.widestVertical.rowsHigh) && ms.reach.some((r) => r.slug === ms.widestVertical.slug && r.rowsHigh === ms.widestVertical.rowsHigh));
+ok(C12, 'ms-top-type', 'The top type row has the most High cells of any row', rollup.matrix.every((row) => row.cells.filter((c) => c === 'High').length <= ms.topType.cellsHigh) && rollup.matrix.some((row) => row.type === ms.topType.type && row.industry === ms.topType.industry && row.cells.filter((c) => c === 'High').length === ms.topType.cellsHigh));
+
+/* ---------- 13. the party summary ---------- */
+const C13 = 'Party summary';
+const ps = rollup.partySummary;
+for (const [kind, list, summary] of [['consultant', consultants, ps.consultants] as const, ['contractor', contractors, ps.contractors] as const]) {
+  eq(C13, `ps-${kind}-total`, `${kind}s: total equals the party file`, summary.total, list.length);
+  eq(C13, `ps-${kind}-levels`, `${kind}s: senior, middle and junior counts equal the party file and sum to the total`, summary.senior * 1000000 + summary.middle * 1000 + summary.junior, list.filter((p) => p.level === 'Senior management').length * 1000000 + list.filter((p) => p.level === 'Middle management').length * 1000 + list.filter((p) => p.level === 'Junior management').length);
+  eq(C13, `ps-${kind}-level-sum`, `${kind}s: the three levels sum to the total`, summary.senior + summary.middle + summary.junior, summary.total);
+  eq(C13, `ps-${kind}-rating`, `${kind}s: average rating to one decimal equals the mean of the file`, summary.averageRating, list.length ? Math.round((sum(list.map((p) => p.rating)) / list.length) * 10) / 10 : 0);
+  eq(C13, `ps-${kind}-ten-plus`, `${kind}s: firms on ten or more projects equal the file`, summary.onTenPlus, list.filter((p) => p.projectCount >= 10).length);
+  eq(C13, `ps-${kind}-book`, `${kind}s: book value equals the sum of firm values`, summary.bookValue, sum1(list.map((p) => p.projectValue)));
+  const expectedTop = [...list].sort((a, b) => b.projectValue - a.projectValue || b.projectCount - a.projectCount || a.id - b.id).slice(0, 20);
+  ok(C13, `ps-${kind}-top`, `${kind}s: the top twenty by value are the twenty largest firms in the file`, expectedTop.map((p) => p.id).join() === summary.top.map((t) => t.id).join() && summary.top.every((t, i) => tenths(t.projectValue) === tenths(expectedTop[i]!.projectValue) && t.projectCount === expectedTop[i]!.projectCount && t.name === expectedTop[i]!.name));
+}
+eq(C13, 'ps-no-consultant', 'Projects with no consultant recorded equal the register', ps.projectsNoConsultant, projects.filter((p) => p.leadConsultants.length === 0 && p.mepConsultant === null).length);
+eq(C13, 'ps-no-contractor', 'Projects with no contractor recorded equal the register', ps.projectsNoContractor, projects.filter((p) => p.mainContractors.length === 0 && p.mepContractor === null).length);
+eq(C13, 'ps-open-no-contractor', 'Buying-stage projects with no contractor equal the register', ps.openProjectsNoContractor, projects.filter((p) => stageGate(p.stage, p.completionPct, false) === 'buying' && p.mainContractors.length === 0 && p.mepContractor === null).length);
 
 /* ---------- write ---------- */
 const categories = [...new Set(assertions.map((a) => a.category))].map((name) => ({ name, checked: assertions.filter((a) => a.category === name).length, passed: assertions.filter((a) => a.category === name && a.pass).length }));

@@ -20,6 +20,10 @@ The system answers one question a sales desk actually asks: of everything being 
 | `/data-basis` | Data basis: the reporting basis, the relevance grade scale, the ownership cascade, the activity buckets, the precision policy, the synthetic assumptions, the machine's own reconciliation result, and the definitions. |
 | `*` | Not found. |
 
+## The executive layer
+
+Every page opens with a band of six headline figures and, directly beneath it, one full-width chart, so the first screen answers the question before the tables do. The Overview stacks register value by stage and sector (with a value, projects or sector-share reading); the Relevance matrix shows how far each vertical reaches across the register, then the matrix itself at full width with a tooltip beside the cursor and the grade scale below the table; Projects carries six figures and a stage chart of the current view that re-shapes as the filters change; Engineers puts every book on one chart grouped by vertical; Consultants and contractors charts the twenty largest firms, and clicking a bar opens that firm's card. Charts use the family's second print ink (`--spot`, identical to the MIS and WMS) with the ramp ink, spot, ink-2, spot-2, ink-3, and hazard red only for a closed project. Every chart answers a plain pointer move, walks with the arrow keys, tweens when its data changes, and carries a view switch where a second reading helps. Every card figure is published by the generator (`matrixSummary`, `partySummary`, the rollups) and reconciled; the Projects cards are the one exception, computed in the browser from the filtered rows with the same predicate the table uses, and the interaction gate predicts them from the data.
+
 ## Run it
 
 1. `bun install` installs dependencies.

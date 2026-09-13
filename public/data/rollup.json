@@ -4256,5 +4256,574 @@
     "count": 64
    }
   ]
+ },
+ "matrixSummary": {
+  "cellsGraded": 752,
+  "cellsTotal": 800,
+  "projectsOverallHigh": 3257,
+  "valueOverallHigh": 1126719.9,
+  "projectsBelowFloor": 0,
+  "projectsAdjusted": 260,
+  "widestVertical": {
+   "slug": "electrical-distribution",
+   "name": "Electrical Distribution",
+   "rowsHigh": 46
+  },
+  "topType": {
+   "type": "Mega Urban Development",
+   "industry": "Mega Urban Development",
+   "sector": "Urban Construction",
+   "cellsHigh": 7,
+   "projects": 148
+  },
+  "reach": [
+   {
+    "slug": "electrical-distribution",
+    "name": "Electrical Distribution",
+    "rowsHigh": 46,
+    "rowsMedium": 30,
+    "rowsLow": 4,
+    "rowsNone": 0,
+    "projectsHigh": 2071,
+    "projectsMedium": 1345,
+    "projectsLow": 84,
+    "valueHigh": 953122.3
+   },
+   {
+    "slug": "cooling",
+    "name": "Cooling",
+    "rowsHigh": 20,
+    "rowsMedium": 36,
+    "rowsLow": 12,
+    "rowsNone": 12,
+    "projectsHigh": 1637,
+    "projectsMedium": 1334,
+    "projectsLow": 246,
+    "valueHigh": 747399.2
+   },
+   {
+    "slug": "mechanical-systems",
+    "name": "Mechanical Systems",
+    "rowsHigh": 30,
+    "rowsMedium": 35,
+    "rowsLow": 9,
+    "rowsNone": 6,
+    "projectsHigh": 1464,
+    "projectsMedium": 1652,
+    "projectsLow": 235,
+    "valueHigh": 868188.4
+   },
+   {
+    "slug": "pumps-and-water",
+    "name": "Pumps and Water",
+    "rowsHigh": 34,
+    "rowsMedium": 39,
+    "rowsLow": 7,
+    "rowsNone": 0,
+    "projectsHigh": 1394,
+    "projectsMedium": 1876,
+    "projectsLow": 230,
+    "valueHigh": 831272.5
+   },
+   {
+    "slug": "vertical-transport",
+    "name": "Vertical Transport",
+    "rowsHigh": 13,
+    "rowsMedium": 40,
+    "rowsLow": 18,
+    "rowsNone": 9,
+    "projectsHigh": 1438,
+    "projectsMedium": 1481,
+    "projectsLow": 358,
+    "valueHigh": 683456.2
+   },
+   {
+    "slug": "metering",
+    "name": "Metering",
+    "rowsHigh": 21,
+    "rowsMedium": 38,
+    "rowsLow": 15,
+    "rowsNone": 6,
+    "projectsHigh": 1443,
+    "projectsMedium": 1456,
+    "projectsLow": 452,
+    "valueHigh": 741503.3
+   },
+   {
+    "slug": "automation",
+    "name": "Automation",
+    "rowsHigh": 25,
+    "rowsMedium": 22,
+    "rowsLow": 29,
+    "rowsNone": 4,
+    "projectsHigh": 587,
+    "projectsMedium": 1128,
+    "projectsLow": 1654,
+    "valueHigh": 314890.2
+   },
+   {
+    "slug": "fabrication",
+    "name": "Fabrication",
+    "rowsHigh": 26,
+    "rowsMedium": 26,
+    "rowsLow": 23,
+    "rowsNone": 5,
+    "projectsHigh": 576,
+    "projectsMedium": 1152,
+    "projectsLow": 1384,
+    "valueHigh": 263143.2
+   },
+   {
+    "slug": "trading",
+    "name": "Trading",
+    "rowsHigh": 18,
+    "rowsMedium": 34,
+    "rowsLow": 22,
+    "rowsNone": 6,
+    "projectsHigh": 1404,
+    "projectsMedium": 1417,
+    "projectsLow": 530,
+    "valueHigh": 143854
+   },
+   {
+    "slug": "services",
+    "name": "Services",
+    "rowsHigh": 26,
+    "rowsMedium": 31,
+    "rowsLow": 23,
+    "rowsNone": 0,
+    "projectsHigh": 938,
+    "projectsMedium": 1608,
+    "projectsLow": 954,
+    "valueHigh": 693294.2
+   }
+  ]
+ },
+ "partySummary": {
+  "consultants": {
+   "total": 795,
+   "senior": 131,
+   "middle": 288,
+   "junior": 376,
+   "averageRating": 4.4,
+   "onTenPlus": 92,
+   "bookValue": 1528999.9,
+   "top": [
+    {
+     "id": 1,
+     "name": "Kradeemam Building Services Consultants",
+     "role": "mep",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "faisal-reyes",
+     "projectCount": 120,
+     "projectValue": 76684.9
+    },
+    {
+     "id": 11,
+     "name": "Vlusfus Planning and Design",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "faisal-reyes",
+     "projectCount": 50,
+     "projectValue": 74042.9
+    },
+    {
+     "id": 4,
+     "name": "Vanailte Planning and Design",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 7,
+     "owner": "rami-aziz",
+     "projectCount": 79,
+     "projectValue": 48196.6
+    },
+    {
+     "id": 61,
+     "name": "Bedveboum Architecture",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 8,
+     "owner": "faisal-reyes",
+     "projectCount": 13,
+     "projectValue": 47394.7
+    },
+    {
+     "id": 288,
+     "name": "Braatou Design Studio",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 5,
+     "owner": "priya-kulkarni",
+     "projectCount": 3,
+     "projectValue": 40776
+    },
+    {
+     "id": 125,
+     "name": "Nedkrou Building Services Consultants",
+     "role": "mep",
+     "level": "Middle management",
+     "rating": 2,
+     "owner": "meera-dsouza",
+     "projectCount": 5,
+     "projectValue": 40534.9
+    },
+    {
+     "id": 2,
+     "name": "Tretrol Architecture",
+     "role": "lead",
+     "level": "Junior management",
+     "rating": 2,
+     "owner": "faisal-reyes",
+     "projectCount": 118,
+     "projectValue": 37475.4
+    },
+    {
+     "id": 8,
+     "name": "Vekith Engineering Consultants",
+     "role": "both",
+     "level": "Middle management",
+     "rating": 4,
+     "owner": "rami-aziz",
+     "projectCount": 90,
+     "projectValue": 24160.1
+    },
+    {
+     "id": 3,
+     "name": "Moubi Design Studio",
+     "role": "lead",
+     "level": "Junior management",
+     "rating": 2,
+     "owner": "faisal-reyes",
+     "projectCount": 95,
+     "projectValue": 22523.2
+    },
+    {
+     "id": 7,
+     "name": "Sakrivlash Design Studio",
+     "role": "lead",
+     "level": "Junior management",
+     "rating": 5,
+     "owner": "faisal-reyes",
+     "projectCount": 65,
+     "projectValue": 19588.7
+    },
+    {
+     "id": 108,
+     "name": "Foprem Design Consultancy",
+     "role": "lead",
+     "level": "Junior management",
+     "rating": 3,
+     "owner": "priya-kulkarni",
+     "projectCount": 9,
+     "projectValue": 18606.9
+    },
+    {
+     "id": 66,
+     "name": "Kaammorees Consulting Engineers",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "faisal-reyes",
+     "projectCount": 14,
+     "projectValue": 17698.1
+    },
+    {
+     "id": 6,
+     "name": "Ridra Architects and Engineers",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "faisal-reyes",
+     "projectCount": 81,
+     "projectValue": 17367.3
+    },
+    {
+     "id": 441,
+     "name": "Voulaa Consulting Engineers",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 9,
+     "owner": "faisal-reyes",
+     "projectCount": 7,
+     "projectValue": 15631
+    },
+    {
+     "id": 13,
+     "name": "Qozas Planning and Design",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 8,
+     "owner": "vikram-fernandes",
+     "projectCount": 41,
+     "projectValue": 15581.4
+    },
+    {
+     "id": 562,
+     "name": "Zaijo Engineering Consultants",
+     "role": "lead",
+     "level": "Junior management",
+     "rating": 1,
+     "owner": "joseph-villanueva",
+     "projectCount": 3,
+     "projectValue": 15182.9
+    },
+    {
+     "id": 5,
+     "name": "Zoumshir Design Consultancy",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 6,
+     "owner": "faisal-reyes",
+     "projectCount": 68,
+     "projectValue": 14808.3
+    },
+    {
+     "id": 25,
+     "name": "Thifa Engineering Consultants",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 5,
+     "owner": "joseph-villanueva",
+     "projectCount": 22,
+     "projectValue": 13981.9
+    },
+    {
+     "id": 16,
+     "name": "Vlaatho Design and Engineering",
+     "role": "both",
+     "level": "Senior management",
+     "rating": 6,
+     "owner": "faisal-reyes",
+     "projectCount": 50,
+     "projectValue": 12312.7
+    },
+    {
+     "id": 264,
+     "name": "Trapru Engineering Consultants",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 8,
+     "owner": "arjun-sethi",
+     "projectCount": 7,
+     "projectValue": 10935.6
+    }
+   ]
+  },
+  "contractors": {
+   "total": 667,
+   "senior": 120,
+   "middle": 258,
+   "junior": 289,
+   "averageRating": 4.5,
+   "onTenPlus": 69,
+   "bookValue": 1138153.5,
+   "top": [
+    {
+     "id": 446,
+     "name": "Traishoush Construction Group",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 8,
+     "owner": "faisal-reyes",
+     "projectCount": 7,
+     "projectValue": 60775.5
+    },
+    {
+     "id": 586,
+     "name": "Nouraashol Builders",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 4,
+     "owner": "faisal-reyes",
+     "projectCount": 4,
+     "projectValue": 60119.8
+    },
+    {
+     "id": 440,
+     "name": "Rabrus Builders",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 8,
+     "owner": "dinesh-iyer",
+     "projectCount": 8,
+     "projectValue": 40753.3
+    },
+    {
+     "id": 351,
+     "name": "Visajud Engineering and Construction",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 8,
+     "owner": "bassem-farouk",
+     "projectCount": 5,
+     "projectValue": 17832.2
+    },
+    {
+     "id": 86,
+     "name": "Thaatohen Civil Works",
+     "role": "lead",
+     "level": "Junior management",
+     "rating": 2,
+     "owner": "dinesh-iyer",
+     "projectCount": 12,
+     "projectValue": 17072.2
+    },
+    {
+     "id": 48,
+     "name": "Saabordra General Contracting",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "faisal-reyes",
+     "projectCount": 12,
+     "projectValue": 16279.9
+    },
+    {
+     "id": 1,
+     "name": "Dotree Engineering and Construction",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 5,
+     "owner": "faisal-reyes",
+     "projectCount": 35,
+     "projectValue": 15666
+    },
+    {
+     "id": 46,
+     "name": "Vluhineel Contracting and Electromechanical",
+     "role": "both",
+     "level": "Senior management",
+     "rating": 4,
+     "owner": "priya-kulkarni",
+     "projectCount": 18,
+     "projectValue": 13144.7
+    },
+    {
+     "id": 85,
+     "name": "Raathnor Civil Works",
+     "role": "lead",
+     "level": "Junior management",
+     "rating": 1,
+     "owner": "rami-aziz",
+     "projectCount": 11,
+     "projectValue": 13090.1
+    },
+    {
+     "id": 357,
+     "name": "Jenaal Contracting",
+     "role": "lead",
+     "level": "Junior management",
+     "rating": 4,
+     "owner": "hana-qureshi",
+     "projectCount": 6,
+     "projectValue": 12410.4
+    },
+    {
+     "id": 95,
+     "name": "Qeqar Engineering and Construction",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 6,
+     "owner": "vikram-fernandes",
+     "projectCount": 10,
+     "projectValue": 12288.9
+    },
+    {
+     "id": 177,
+     "name": "Jeethleed Civil Works",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 7,
+     "owner": "faisal-reyes",
+     "projectCount": 11,
+     "projectValue": 11791.1
+    },
+    {
+     "id": 217,
+     "name": "Drekuvour Engineering and Contracting",
+     "role": "both",
+     "level": "Senior management",
+     "rating": 6,
+     "owner": "rami-aziz",
+     "projectCount": 3,
+     "projectValue": 11556.3
+    },
+    {
+     "id": 13,
+     "name": "Doulees Engineering and Contracting",
+     "role": "both",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "omar-nasser",
+     "projectCount": 31,
+     "projectValue": 10088.2
+    },
+    {
+     "id": 6,
+     "name": "Veebeepran Construction Group",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "dinesh-iyer",
+     "projectCount": 18,
+     "projectValue": 9591.1
+    },
+    {
+     "id": 147,
+     "name": "Fashkoun Construction and Services",
+     "role": "both",
+     "level": "Junior management",
+     "rating": 2,
+     "owner": "ziad-abdel-rahman",
+     "projectCount": 9,
+     "projectValue": 9174.9
+    },
+    {
+     "id": 4,
+     "name": "Likrusza Construction",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 4,
+     "owner": "meera-dsouza",
+     "projectCount": 29,
+     "projectValue": 8662
+    },
+    {
+     "id": 10,
+     "name": "Sakeeshas Construction Group",
+     "role": "lead",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "faisal-reyes",
+     "projectCount": 17,
+     "projectValue": 8263.6
+    },
+    {
+     "id": 3,
+     "name": "Braadihees Electromechanical",
+     "role": "mep",
+     "level": "Senior management",
+     "rating": 10,
+     "owner": "faisal-reyes",
+     "projectCount": 17,
+     "projectValue": 7844.3
+    },
+    {
+     "id": 129,
+     "name": "Baileeku Construction",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 6,
+     "owner": "sneha-menon",
+     "projectCount": 4,
+     "projectValue": 7750.2
+    }
+   ]
+  },
+  "projectsNoConsultant": 222,
+  "projectsNoContractor": 908,
+  "openProjectsNoContractor": 170
  }
 }

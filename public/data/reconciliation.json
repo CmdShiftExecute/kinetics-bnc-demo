@@ -61,6 +61,16 @@
    "name": "Consultants and contractors",
    "checked": 1474,
    "passed": 1474
+  },
+  {
+   "name": "Matrix summary",
+   "checked": 38,
+   "passed": 38
+  },
+  {
+   "name": "Party summary",
+   "checked": 17,
+   "passed": 17
   }
  ],
  "assertions": [
@@ -20559,8 +20569,448 @@
    "left": 1032,
    "right": 1032,
    "pass": true
+  },
+  {
+   "id": "ms-cells-total",
+   "category": "Matrix summary",
+   "statement": "Matrix cells total equals rows times verticals",
+   "left": 800,
+   "right": 800,
+   "pass": true
+  },
+  {
+   "id": "ms-cells-graded",
+   "category": "Matrix summary",
+   "statement": "Graded cells equal the non-empty cells of the matrix",
+   "left": 752,
+   "right": 752,
+   "pass": true
+  },
+  {
+   "id": "ms-overall-high",
+   "category": "Matrix summary",
+   "statement": "Projects whose overall relevance reads High equal the register",
+   "left": 3257,
+   "right": 3257,
+   "pass": true
+  },
+  {
+   "id": "ms-overall-high-value",
+   "category": "Matrix summary",
+   "statement": "Their value equals the sum of their values",
+   "left": 1126719.9,
+   "right": 1126719.9,
+   "pass": true
+  },
+  {
+   "id": "ms-below-floor",
+   "category": "Matrix summary",
+   "statement": "Projects below the scope floor on every vertical equal the register",
+   "left": 0,
+   "right": 0,
+   "pass": true
+  },
+  {
+   "id": "ms-adjusted",
+   "category": "Matrix summary",
+   "statement": "Projects with a hand-adjusted score equal the register",
+   "left": 260,
+   "right": 260,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-electrical-distribution-rows",
+   "category": "Matrix summary",
+   "statement": "Electrical Distribution: High, Medium, Low and none rows equal the matrix",
+   "left": 46300400,
+   "right": 46300400,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-electrical-distribution-projects",
+   "category": "Matrix summary",
+   "statement": "Electrical Distribution: projects graded High, Medium and Low equal the register",
+   "left": 2072345084,
+   "right": 2072345084,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-electrical-distribution-value",
+   "category": "Matrix summary",
+   "statement": "Electrical Distribution: value of projects graded High equals the register",
+   "left": 953122.3,
+   "right": 953122.3,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-cooling-rows",
+   "category": "Matrix summary",
+   "statement": "Cooling: High, Medium, Low and none rows equal the matrix",
+   "left": 20361212,
+   "right": 20361212,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-cooling-projects",
+   "category": "Matrix summary",
+   "statement": "Cooling: projects graded High, Medium and Low equal the register",
+   "left": 1638334246,
+   "right": 1638334246,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-cooling-value",
+   "category": "Matrix summary",
+   "statement": "Cooling: value of projects graded High equals the register",
+   "left": 747399.2,
+   "right": 747399.2,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-mechanical-systems-rows",
+   "category": "Matrix summary",
+   "statement": "Mechanical Systems: High, Medium, Low and none rows equal the matrix",
+   "left": 30350906,
+   "right": 30350906,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-mechanical-systems-projects",
+   "category": "Matrix summary",
+   "statement": "Mechanical Systems: projects graded High, Medium and Low equal the register",
+   "left": 1465652235,
+   "right": 1465652235,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-mechanical-systems-value",
+   "category": "Matrix summary",
+   "statement": "Mechanical Systems: value of projects graded High equals the register",
+   "left": 868188.4,
+   "right": 868188.4,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-pumps-and-water-rows",
+   "category": "Matrix summary",
+   "statement": "Pumps and Water: High, Medium, Low and none rows equal the matrix",
+   "left": 34390700,
+   "right": 34390700,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-pumps-and-water-projects",
+   "category": "Matrix summary",
+   "statement": "Pumps and Water: projects graded High, Medium and Low equal the register",
+   "left": 1395876230,
+   "right": 1395876230,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-pumps-and-water-value",
+   "category": "Matrix summary",
+   "statement": "Pumps and Water: value of projects graded High equals the register",
+   "left": 831272.5,
+   "right": 831272.5,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-vertical-transport-rows",
+   "category": "Matrix summary",
+   "statement": "Vertical Transport: High, Medium, Low and none rows equal the matrix",
+   "left": 13401809,
+   "right": 13401809,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-vertical-transport-projects",
+   "category": "Matrix summary",
+   "statement": "Vertical Transport: projects graded High, Medium and Low equal the register",
+   "left": 1439481358,
+   "right": 1439481358,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-vertical-transport-value",
+   "category": "Matrix summary",
+   "statement": "Vertical Transport: value of projects graded High equals the register",
+   "left": 683456.2,
+   "right": 683456.2,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-metering-rows",
+   "category": "Matrix summary",
+   "statement": "Metering: High, Medium, Low and none rows equal the matrix",
+   "left": 21381506,
+   "right": 21381506,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-metering-projects",
+   "category": "Matrix summary",
+   "statement": "Metering: projects graded High, Medium and Low equal the register",
+   "left": 1444456452,
+   "right": 1444456452,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-metering-value",
+   "category": "Matrix summary",
+   "statement": "Metering: value of projects graded High equals the register",
+   "left": 741503.3,
+   "right": 741503.3,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-automation-rows",
+   "category": "Matrix summary",
+   "statement": "Automation: High, Medium, Low and none rows equal the matrix",
+   "left": 25222904,
+   "right": 25222904,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-automation-projects",
+   "category": "Matrix summary",
+   "statement": "Automation: projects graded High, Medium and Low equal the register",
+   "left": 588129654,
+   "right": 588129654,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-automation-value",
+   "category": "Matrix summary",
+   "statement": "Automation: value of projects graded High equals the register",
+   "left": 314890.2,
+   "right": 314890.2,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-fabrication-rows",
+   "category": "Matrix summary",
+   "statement": "Fabrication: High, Medium, Low and none rows equal the matrix",
+   "left": 26262305,
+   "right": 26262305,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-fabrication-projects",
+   "category": "Matrix summary",
+   "statement": "Fabrication: projects graded High, Medium and Low equal the register",
+   "left": 577153384,
+   "right": 577153384,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-fabrication-value",
+   "category": "Matrix summary",
+   "statement": "Fabrication: value of projects graded High equals the register",
+   "left": 263143.2,
+   "right": 263143.2,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-trading-rows",
+   "category": "Matrix summary",
+   "statement": "Trading: High, Medium, Low and none rows equal the matrix",
+   "left": 18342206,
+   "right": 18342206,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-trading-projects",
+   "category": "Matrix summary",
+   "statement": "Trading: projects graded High, Medium and Low equal the register",
+   "left": 1405417530,
+   "right": 1405417530,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-trading-value",
+   "category": "Matrix summary",
+   "statement": "Trading: value of projects graded High equals the register",
+   "left": 143854,
+   "right": 143854,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-services-rows",
+   "category": "Matrix summary",
+   "statement": "Services: High, Medium, Low and none rows equal the matrix",
+   "left": 26312300,
+   "right": 26312300,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-services-projects",
+   "category": "Matrix summary",
+   "statement": "Services: projects graded High, Medium and Low equal the register",
+   "left": 939608954,
+   "right": 939608954,
+   "pass": true
+  },
+  {
+   "id": "ms-reach-services-value",
+   "category": "Matrix summary",
+   "statement": "Services: value of projects graded High equals the register",
+   "left": 693294.2,
+   "right": 693294.2,
+   "pass": true
+  },
+  {
+   "id": "ms-widest",
+   "category": "Matrix summary",
+   "statement": "The widest vertical has the most High rows",
+   "left": 1,
+   "right": 1,
+   "pass": true
+  },
+  {
+   "id": "ms-top-type",
+   "category": "Matrix summary",
+   "statement": "The top type row has the most High cells of any row",
+   "left": 1,
+   "right": 1,
+   "pass": true
+  },
+  {
+   "id": "ps-consultant-total",
+   "category": "Party summary",
+   "statement": "consultants: total equals the party file",
+   "left": 795,
+   "right": 795,
+   "pass": true
+  },
+  {
+   "id": "ps-consultant-levels",
+   "category": "Party summary",
+   "statement": "consultants: senior, middle and junior counts equal the party file and sum to the total",
+   "left": 131288376,
+   "right": 131288376,
+   "pass": true
+  },
+  {
+   "id": "ps-consultant-level-sum",
+   "category": "Party summary",
+   "statement": "consultants: the three levels sum to the total",
+   "left": 795,
+   "right": 795,
+   "pass": true
+  },
+  {
+   "id": "ps-consultant-rating",
+   "category": "Party summary",
+   "statement": "consultants: average rating to one decimal equals the mean of the file",
+   "left": 4.4,
+   "right": 4.4,
+   "pass": true
+  },
+  {
+   "id": "ps-consultant-ten-plus",
+   "category": "Party summary",
+   "statement": "consultants: firms on ten or more projects equal the file",
+   "left": 92,
+   "right": 92,
+   "pass": true
+  },
+  {
+   "id": "ps-consultant-book",
+   "category": "Party summary",
+   "statement": "consultants: book value equals the sum of firm values",
+   "left": 1528999.9,
+   "right": 1528999.9,
+   "pass": true
+  },
+  {
+   "id": "ps-consultant-top",
+   "category": "Party summary",
+   "statement": "consultants: the top twenty by value are the twenty largest firms in the file",
+   "left": 1,
+   "right": 1,
+   "pass": true
+  },
+  {
+   "id": "ps-contractor-total",
+   "category": "Party summary",
+   "statement": "contractors: total equals the party file",
+   "left": 667,
+   "right": 667,
+   "pass": true
+  },
+  {
+   "id": "ps-contractor-levels",
+   "category": "Party summary",
+   "statement": "contractors: senior, middle and junior counts equal the party file and sum to the total",
+   "left": 120258289,
+   "right": 120258289,
+   "pass": true
+  },
+  {
+   "id": "ps-contractor-level-sum",
+   "category": "Party summary",
+   "statement": "contractors: the three levels sum to the total",
+   "left": 667,
+   "right": 667,
+   "pass": true
+  },
+  {
+   "id": "ps-contractor-rating",
+   "category": "Party summary",
+   "statement": "contractors: average rating to one decimal equals the mean of the file",
+   "left": 4.5,
+   "right": 4.5,
+   "pass": true
+  },
+  {
+   "id": "ps-contractor-ten-plus",
+   "category": "Party summary",
+   "statement": "contractors: firms on ten or more projects equal the file",
+   "left": 69,
+   "right": 69,
+   "pass": true
+  },
+  {
+   "id": "ps-contractor-book",
+   "category": "Party summary",
+   "statement": "contractors: book value equals the sum of firm values",
+   "left": 1138153.5,
+   "right": 1138153.5,
+   "pass": true
+  },
+  {
+   "id": "ps-contractor-top",
+   "category": "Party summary",
+   "statement": "contractors: the top twenty by value are the twenty largest firms in the file",
+   "left": 1,
+   "right": 1,
+   "pass": true
+  },
+  {
+   "id": "ps-no-consultant",
+   "category": "Party summary",
+   "statement": "Projects with no consultant recorded equal the register",
+   "left": 222,
+   "right": 222,
+   "pass": true
+  },
+  {
+   "id": "ps-no-contractor",
+   "category": "Party summary",
+   "statement": "Projects with no contractor recorded equal the register",
+   "left": 908,
+   "right": 908,
+   "pass": true
+  },
+  {
+   "id": "ps-open-no-contractor",
+   "category": "Party summary",
+   "statement": "Buying-stage projects with no contractor equal the register",
+   "left": 170,
+   "right": 170,
+   "pass": true
   }
  ],
- "passed": 2562,
+ "passed": 2617,
  "failed": 0
 }

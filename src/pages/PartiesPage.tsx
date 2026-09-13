@@ -10,6 +10,10 @@ import { Footer } from '../components/Footer';
 import { PageError, PageLoading } from '../components/PageState';
 import { useRise, useRowReveal } from '../components/Reveal';
 import { PartyPicker, roleLabel } from '../components/PartyPicker';
+import { Strip } from '../components/Strip';
+import { Section } from '../components/Section';
+import { HBars } from '../components/HBars';
+import { ChartSwitch } from '../components/ChartSwitch';
 
 /** The "who is the door in" page: pick a consultant or contractor and see its relationship, its projects, the verticals in play, and who it shares projects with. */
 export default function PartiesPage() {
@@ -53,6 +57,15 @@ export default function PartiesPage() {
   const { rollup } = reg.data;
   const { meta } = rollup;
   const engName = new Map(rollup.engineers.map((e) => [e.slug, e.name]));
+  const ps = rollup.partySummary;
+  const topRows = (mode: 'value' | 'count') =>
+    (kind === 'consultant' ? ps.consultants : ps.contractors).top.map((t) => ({
+      key: String(t.id),
+      name: t.name,
+      segments: [{ key: 'v', label: mode === 'value' ? 'Project value' : 'Projects', value: mode === 'value' ? t.projectValue : t.projectCount, cls: (kind === 'consultant' ? 'spot' : 'spot2') as 'spot' | 'spot2' }],
+      end: mode === 'value' ? aedm(t.projectValue) : count(t.projectCount),
+      endNote: mode === 'value' ? `${count(t.projectCount)} projects, ${t.level.replace(' management', '')}` : `AED ${aedm(t.projectValue)} m`,
+    }));
   const stageMix = party ? STAGES.map((s) => ({ stage: s, n: projects.filter((p) => p.stage === s).length })).filter((x) => x.n > 0) : [];
   const roleOn = (p: (typeof projects)[number]): string => {
     if (!party) return '';
@@ -73,6 +86,28 @@ export default function PartiesPage() {
           Pick one on the left to read its card
         </p>
       </motion.div>
+      <Strip
+        id="party-kpis"
+        label="Party headline figures"
+        cols={6}
+        items={[
+          { label: 'Consultants', value: ps.consultants.total, f: count, sub: `${count(ps.consultants.senior)} at senior management, rating ${ps.consultants.averageRating.toFixed(1)} of 10`, to: '/parties?kind=consultant', id: 'pk-consultants' },
+          { label: 'Contractors', value: ps.contractors.total, f: count, sub: `${count(ps.contractors.senior)} at senior management, rating ${ps.contractors.averageRating.toFixed(1)} of 10`, to: '/parties?kind=contractor', id: 'pk-contractors' },
+          { label: 'Firms on ten or more projects', value: ps.consultants.onTenPlus + ps.contractors.onTenPlus, f: count, sub: `${count(ps.consultants.onTenPlus)} consultants, ${count(ps.contractors.onTenPlus)} contractors`, id: 'pk-tenplus' },
+          { label: 'Largest book', value: (kind === 'consultant' ? ps.consultants : ps.contractors).top[0]?.projectValue ?? 0, sub: `AED m, ${(kind === 'consultant' ? ps.consultants : ps.contractors).top[0]?.name ?? ''}`, to: `/parties?kind=${kind}&id=${(kind === 'consultant' ? ps.consultants : ps.contractors).top[0]?.id ?? ''}`, id: 'pk-largest' },
+          { label: 'Projects with no consultant', value: ps.projectsNoConsultant, f: count, sub: `${pct((ps.projectsNoConsultant / rollup.kpis.projects) * 100)} of the register`, id: 'pk-nocon' },
+          { label: 'Open, no contractor yet', value: ps.openProjectsNoContractor, f: count, sub: `at Tender or early construction: still open to win`, to: '/projects?stage=Tender|Under Construction&cmax=5', id: 'pk-open', bad: false },
+        ]}
+      />
+      <Section id="top-firms" title={kind === 'consultant' ? 'The consultants that matter most' : 'The contractors that matter most'} note="The twenty largest firms by the value of the projects they sit on. Click a bar to open the firm's card.">
+        <ChartSwitch
+          id={`top-${kind}`}
+          views={[
+            { key: 'value', label: 'Value, AED m', render: () => <HBars id="top-firms-chart" rows={topRows('value')} format={aedm} unit="AED m" onPick={(k) => put({ id: k })} activeKey={party ? String(party.id) : null} ariaLabel={`Top twenty ${kind}s by project value.`} /> },
+            { key: 'count', label: 'Projects', render: () => <HBars id="top-firms-chart" rows={topRows('count')} format={count} unit="projects" onPick={(k) => put({ id: k })} activeKey={party ? String(party.id) : null} ariaLabel={`Top twenty ${kind}s by project count.`} /> },
+          ]}
+        />
+      </Section>
       <div className="side parties">
         <PartyPicker kind={kind} role={role} list={list} selected={party?.id ?? null} onKind={(k) => put({ kind: k, id: null, role: null })} onRole={(r) => put({ role: r === 'any' ? null : r })} onPick={(pid) => put({ id: String(pid) })} />
         <div className="party-card" id="party-card" data-id={party?.id ?? ''} data-count={projects.length}>

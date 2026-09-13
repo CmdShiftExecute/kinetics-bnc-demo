@@ -60,6 +60,9 @@ const hv2 = token('hv-2');
 const hv3 = token('hv-3');
 const hv4 = token('hv-4');
 const hv5 = token('hv-5');
+const spot = token('spot');
+const spot2 = token('spot-2');
+const ink3 = token('ink-3');
 
 interface Pair {
   what: string;
@@ -99,6 +102,11 @@ const pairs: Pair[] = [
   { what: 'Heatmap value step 5 text (paper on hv-5)', fg: paper, bg: hv5, min: 4.5 },
   { what: 'Heatmap Medium against Low, adjacent steps must read apart (non-text)', fg: hgMed, bg: hgLow, min: 1.5 },
   { what: 'Selected list item text (paper on ink)', fg: paper, bg: ink, min: 4.5 },
+  /* the second print ink and its ramp, non-text marks only: bars, columns, swatches */
+  { what: 'Spot ink marks on paper (non-text)', fg: spot, bg: paper, min: 3 },
+  { what: 'Spot tint marks on paper (non-text)', fg: spot2, bg: paper, min: 3 },
+  { what: 'Third ink marks on paper (non-text)', fg: ink3, bg: paper, min: 3 },
+  { what: 'Tooltip text (ink on paper)', fg: ink, bg: paper, min: 4.5 },
   { what: 'Hairline rule on paper (decorative, reported only)', fg: rule, bg: paper, min: 0 },
 ];
 

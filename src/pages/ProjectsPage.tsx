@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router';
 import { useRegister } from '../lib/register';
 import type { Filters, SortDir, SortKey } from '../lib/filters';
 import { EMPTY, activeCount, matches, parseFilters, serialiseFilters, sortProjects } from '../lib/filters';
-import { aedm, count, cx, dateLabel, score } from '../lib/format';
+import { aedm, count, cx, dateLabel, pct, score } from '../lib/format';
 import { toCsv, download } from '../lib/csv';
 import { Masthead } from '../components/Masthead';
 import { Footer } from '../components/Footer';
@@ -13,7 +13,13 @@ import { useRise } from '../components/Reveal';
 import { FilterRail } from '../components/FilterRail';
 import { Chips, chipsFor } from '../components/Chips';
 import { COLUMNS, VirtualTable } from '../components/VirtualTable';
-import { BUCKETS } from '../../data/schema';
+import { BUCKETS, STAGES } from '../../data/schema';
+import { gradeOf } from '../../data/rules';
+import { Strip } from '../components/Strip';
+import { Section } from '../components/Section';
+import { StackedColumns } from '../components/StackedColumns';
+import { ChartSwitch } from '../components/ChartSwitch';
+import { STAGE_SHORT } from './Overview';
 
 const OPTIONAL = COLUMNS.filter((c) => c.optional).map((c) => c.key);
 
@@ -50,6 +56,19 @@ export default function ProjectsPage() {
   };
   const rows = useMemo(() => (reg.data ? sortProjects(reg.data.projects.filter((p) => matches(p, filters, vIndex)), filters, vIndex, engineerName) : []), [reg.data, filters, vIndex, engineerName]);
   const total = useMemo(() => rows.reduce((a, p) => a + Math.round(p.value * 10), 0) / 10, [rows]);
+  /* the headline figures and the chart of the CURRENT view: recomputed with every filter change from the same rows the table shows */
+  const view = useMemo(() => {
+    const vi = filters.vertical ? (vIndex.get(filters.vertical) ?? null) : null;
+    const owned = rows.filter((p) => p.ownerVertical != null);
+    const high = rows.filter((p) => gradeOf(p.overall) === 'High');
+    const pairs = (codes: number[]) => rows.reduce((a, p) => a + (vi != null ? (codes.includes(p.buckets[vi]!) ? 1 : 0) : p.buckets.filter((b) => codes.includes(b)).length), 0);
+    const byStage = STAGES.map((st) => {
+      const ps = rows.filter((p) => p.stage === st);
+      const own = ps.filter((p) => p.ownerVertical != null);
+      return { count: [own.length, ps.length - own.length], value: [Math.round(own.reduce((a, p) => a + p.value * 10, 0)) / 10, Math.round(ps.filter((p) => p.ownerVertical == null).reduce((a, p) => a + p.value * 10, 0)) / 10] };
+    });
+    return { owned: owned.length, ownedValue: Math.round(owned.reduce((a, p) => a + p.value * 10, 0)) / 10, high: high.length, open: pairs([1, 2]), orders: pairs([0]), byStage, vi };
+  }, [rows, filters.vertical, vIndex]);
   if (reg.error) return <PageError message={reg.error} />;
   if (!reg.data || !rollup) return <PageLoading rows={14} />;
   const { meta } = rollup;
@@ -85,6 +104,29 @@ export default function ProjectsPage() {
           Click a project name to open its page
         </p>
       </motion.div>
+
+      <Strip
+        id="view-kpis"
+        label="The current view"
+        cols={6}
+        items={[
+          { label: 'Projects in view', value: rows.length, f: count, sub: `of ${count(reg.data.projects.length)} in the register`, id: 'vk-count' },
+          { label: 'Value in view', value: total, sub: `AED million, ${pct(reg.data.projects.length ? (total / (reg.data.rollup.sectorStage.reduce((a, c) => a + Math.round(c.value * 10), 0) / 10)) * 100 : 0)} of the register`, id: 'vk-value' },
+          { label: 'Owned', value: view.owned, f: count, sub: `${rows.length ? pct((view.owned / rows.length) * 100) : '0.0%'} of the view, AED ${aedm(view.ownedValue)} m`, id: 'vk-owned' },
+          { label: 'Reading High overall', value: view.high, f: count, sub: `${rows.length ? pct((view.high / rows.length) * 100) : '0.0%'} of the view`, id: 'vk-high' },
+          { label: 'Open enquiries and quotes', value: view.open, f: count, sub: view.vi != null ? `on ${scoreName}` : 'project and vertical pairs', id: 'vk-open' },
+          { label: 'Orders received', value: view.orders, f: count, sub: view.vi != null ? `on ${scoreName}` : 'project and vertical pairs', id: 'vk-orders' },
+        ]}
+      />
+      <Section id="view-chart" title="The view by stage" note="The projects in the current view along the lifecycle, owned against not yet owned; the chart re-shapes as the filters change">
+        <ChartSwitch
+          id="view-chart"
+          views={[
+            { key: 'count', label: 'Projects', render: () => <StackedColumns id="view-columns" categories={STAGES.map((st) => ({ key: st, label: st, short: STAGE_SHORT[st] }))} series={[{ key: 'owned', label: 'Owned', cls: 'spot' }, { key: 'unowned', label: 'No owner', cls: 'ink3' }]} values={view.byStage.map((b) => b.count)} format={count} unit="projects" height={240} ariaLabel={`Projects in view by stage. ${STAGES.map((st, i) => `${st}: ${count(view.byStage[i]!.count[0]! + view.byStage[i]!.count[1]!)}`).join('. ')}.`} /> },
+            { key: 'value', label: 'Value, AED m', render: () => <StackedColumns id="view-columns" categories={STAGES.map((st) => ({ key: st, label: st, short: STAGE_SHORT[st] }))} series={[{ key: 'owned', label: 'Owned', cls: 'spot' }, { key: 'unowned', label: 'No owner', cls: 'ink3' }]} values={view.byStage.map((b) => b.value)} format={aedm} unit="AED m" height={240} ariaLabel={`Value in view by stage. ${STAGES.map((st, i) => `${st}: AED ${aedm(view.byStage[i]!.value[0]! + view.byStage[i]!.value[1]!)} million`).join('. ')}.`} /> },
+          ]}
+        />
+      </Section>
 
       <div className={cx('dash', !railOpen && 'rail-hidden')}>
         <FilterRail rollup={rollup} projects={reg.data.projects} consultants={reg.data.consultants} contractors={reg.data.contractors} filters={filters} set={set} vIndex={vIndex} open={railOpen} />
