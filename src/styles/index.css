@@ -2439,3 +2439,64 @@ table.mis.heat tr.hov:focus-within td.hv-5 {
     width: 240px;
   }
 }
+
+/* ---------- the relationship state, the vertical rank control and the capacity marker (13 Sep 2026 repairs) ---------- */
+.tag.norel {
+  border-color: var(--ink-3);
+  color: var(--ink-2);
+  border-style: dashed;
+}
+.tags .tag {
+  margin: 0 6px 6px 0;
+  display: inline-flex;
+  gap: 5px;
+  align-items: baseline;
+}
+.tags .tag b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.tags .tag.on {
+  background: var(--ink);
+  color: var(--paper);
+}
+.strip.norel .big {
+  color: var(--ink-2);
+}
+.picker-vertical {
+  display: grid;
+  gap: 4px;
+  margin: var(--s-sm) 0;
+}
+.picker-vertical select.pick {
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 5px 8px;
+  width: 100%;
+}
+.picker-vertical select.pick:hover {
+  border-color: var(--ink-2);
+}
+.plist-name .tag {
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.ledger-name .tag {
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.chart .marker line {
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.chart .marker text {
+  fill: var(--ink);
+  letter-spacing: 0.08em;
+}
+.chart.scores .grid {
+  stroke: var(--rule);
+}

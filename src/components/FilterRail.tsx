@@ -75,7 +75,11 @@ export function FilterRail({ rollup, projects, consultants, contractors, filters
   const typeCounts = useMemo(() => counts('type', (p) => p.type), [projects, f]); // eslint-disable-line react-hooks/exhaustive-deps
   const cityCounts = useMemo(() => counts('city', (p) => p.city), [projects, f]); // eslint-disable-line react-hooks/exhaustive-deps
   const catCounts = useMemo(() => counts('category', (p) => p.category), [projects, f]); // eslint-disable-line react-hooks/exhaustive-deps
-  const bucketCounts = useMemo(() => counts('bucket', (p) => (vi !== undefined ? [BUCKETS[p.buckets[vi]!]!] : [...new Set(p.buckets.map((b) => BUCKETS[b]!))])), [projects, f, vi]); // eslint-disable-line react-hooks/exhaustive-deps
+  /* the bucket facet counts what choosing a bucket would give, honouring the activity year, so a year plus a bucket never over-promises */
+  const yr = f.year === null ? null : String(f.year);
+  const bucketCounts = useMemo(() => counts('bucket', (p) => (vi !== undefined ? (yr === null || p.bucketDates[vi]!.startsWith(yr) ? [BUCKETS[p.buckets[vi]!]!] : []) : [...new Set(p.buckets.filter((_b, i) => yr === null || p.bucketDates[i]!.startsWith(yr)).map((b) => BUCKETS[b]!))])), [projects, f, vi, yr]); // eslint-disable-line react-hooks/exhaustive-deps
+  const ownedCounts = useMemo(() => counts('owned', (p) => (p.ownerVertical != null ? '1' : '0')), [projects, f]); // eslint-disable-line react-hooks/exhaustive-deps
+  const years = useMemo(() => [...new Set(projects.flatMap((p) => p.bucketDates.map((d) => Number(d.slice(0, 4)))))].sort((a, b) => b - a), [projects]);
   const bucketNames = BUCKETS as readonly string[];
   const s = (n: number | null) => (n == null ? '' : String(n));
   const numOrNull = (v: string) => (v === '' ? null : Number.isFinite(Number(v)) ? Number(v) : null);
@@ -107,16 +111,39 @@ export function FilterRail({ rollup, projects, consultants, contractors, filters
           )}
         </fieldset>
         <Facet id="bucket" title={f.vertical ? `Activity on ${rollup.verticals[vi!]!.name}` : 'Activity bucket (any vertical)'} options={bucketNames} selected={f.bucket.map((b) => BUCKETS[b]!)} counts={bucketCounts} onChange={(v) => set({ bucket: v.map((n) => bucketNames.indexOf(n)).filter((i) => i >= 0) as Filters['bucket'] })} scroll />
-        <fieldset className="facet" id="facet-engineer">
-          <legend className="label">Owner engineer</legend>
-          <select className="pick" id="eng-pick" value={f.engineer ?? ''} aria-label="Owner engineer" onChange={(e) => set({ engineer: e.target.value || null })}>
-            <option value="">Any owner</option>
+        <fieldset className="facet" id="facet-year">
+          <legend className="label">Activity year</legend>
+          <select className="pick" id="year-pick" value={f.year ?? ''} aria-label="Activity year" onChange={(e) => set({ year: e.target.value ? Number(e.target.value) : null })}>
+            <option value="">Any date</option>
+            {years.map((y) => (
+              <option key={y} value={y}>
+                {y}
+              </option>
+            ))}
+          </select>
+        </fieldset>
+        <fieldset className="facet" id="facet-owned">
+          <legend className="label">Owner</legend>
+          <select className="pick" id="owned-pick" value={f.owned === null ? '' : f.owned ? '1' : '0'} aria-label="Owned or not" onChange={(e) => set({ owned: e.target.value === '' ? null : e.target.value === '1' })}>
+            <option value="">Owned or not</option>
+            <option value="1">Owned ({count(ownedCounts.get('1') ?? 0)})</option>
+            <option value="0">No owner ({count(ownedCounts.get('0') ?? 0)})</option>
+          </select>
+          <select className="pick" id="eng-pick" value={f.engineer ?? ''} aria-label="Owner engineer" style={{ marginTop: 6 }} onChange={(e) => set({ engineer: e.target.value || null })}>
+            <option value="">Any engineer</option>
             {rollup.engineers.map((e) => (
               <option key={e.slug} value={e.slug}>
                 {e.name}
               </option>
             ))}
           </select>
+        </fieldset>
+        <fieldset className="facet" id="facet-overall">
+          <legend className="label">Overall relevance</legend>
+          <label className="floor">
+            <span>At least</span>
+            <input type="number" id="omin" min={0} max={8} step={0.5} value={s(f.omin)} placeholder="any" aria-label="Minimum overall relevance" onChange={(e) => set({ omin: numOrNull(e.target.value) }, false)} />
+          </label>
         </fieldset>
         <Range id="value" title="Value, AED million" lo={s(f.vmin)} hi={s(f.vmax)} setLo={(v) => set({ vmin: numOrNull(v) }, false)} setHi={(v) => set({ vmax: numOrNull(v) }, false)} step={0.1} />
         <Range id="completion" title="Completion, percent" lo={s(f.cmin)} hi={s(f.cmax)} setLo={(v) => set({ cmin: numOrNull(v) }, false)} setHi={(v) => set({ cmax: numOrNull(v) }, false)} step={0.1} />
@@ -136,6 +163,10 @@ export function FilterRail({ rollup, projects, consultants, contractors, filters
               <option key={c.id} value={c.name} />
             ))}
           </datalist>
+          <label className="facet-opt">
+            <input type="checkbox" checked={f.nocon} data-facet="nocon" onChange={(e) => set({ nocon: e.target.checked, consultant: e.target.checked ? null : f.consultant })} />
+            <span className="facet-name">No consultant recorded</span>
+          </label>
         </fieldset>
         <fieldset className="facet" id="facet-contractor">
           <legend className="label">Contractor</legend>
@@ -149,6 +180,10 @@ export function FilterRail({ rollup, projects, consultants, contractors, filters
               <option key={c.id} value={c.name} />
             ))}
           </datalist>
+          <label className="facet-opt">
+            <input type="checkbox" checked={f.nokon} data-facet="nokon" onChange={(e) => set({ nokon: e.target.checked, contractor: e.target.checked ? null : f.contractor })} />
+            <span className="facet-name">No contractor appointed</span>
+          </label>
         </fieldset>
         <Range id="updated" title="Last updated" lo={f.umin ?? ''} hi={f.umax ?? ''} setLo={(v) => set({ umin: v || null }, false)} setHi={(v) => set({ umax: v || null }, false)} type="date" placeholder={['from', 'to']} />
       </div>

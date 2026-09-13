@@ -21,7 +21,8 @@ export default function DataBasis() {
   const [openCat, setOpenCat] = useState<string | null>(null);
   if (error) return <PageError message={error} />;
   if (!data) return <PageLoading rows={12} />;
-  const { meta, definitions, precisionPolicy, assumptions, cascade, bucketRule, gradeScore } = data;
+  const { meta, definitions, precisionPolicy, assumptions, cascade, bucketRule, workloadRule, relationshipRule, gradeScore } = data;
+  const unitWord = (u: string) => (u === 'percent' ? '%' : u);
   const failed = rec.data ? rec.data.assertions.filter((a) => !a.pass) : [];
   const fmt = (n: number) => (Number.isInteger(n) ? count(n) : aedm(n));
   const total = data.sectorStage.reduce((a, c) => a + Math.round(c.value * 10), 0) / 10;
@@ -43,12 +44,15 @@ export default function DataBasis() {
       {rec.data && (
         <Strip
           id="rec-strip"
-          cols={3}
+          cols={6}
           label="Reconciliation"
           items={[
-            { label: 'Assertions checked', value: rec.data.assertions.length, f: count, sub: `${rec.data.categories.length} categories`, id: 'rec-checked' },
+            { label: 'Assertions checked', value: rec.data.assertions.length, f: count, sub: `${rec.data.categories.length} categories, every run`, to: '#reconciliation', id: 'rec-checked' },
             { label: 'Passing', value: rec.data.passed, f: count, sub: 'every figure tied to every other', id: 'rec-passed' },
             { label: 'Failing', value: rec.data.failed, f: count, sub: rec.data.failed === 0 ? 'the tables agree' : 'listed first below', bad: rec.data.failed > 0, id: 'rec-failed' },
+            { label: 'Projects reconciled', value: data.kpis.projects, f: count, sub: `${count(data.parties.consultants + data.parties.contractors)} firms, ${data.engineers.length} engineers, ${count(data.matrix.length)} matrix rows`, id: 'rec-projects' },
+            { label: 'Published files', value: data.shards.length + 5, f: count, sub: `${data.shards.length} project shards, 3 party files, the rollup and this reconciliation; byte-stable across runs`, id: 'rec-files' },
+            { label: 'Source shape', value: data.shape.filter((s) => s.pass).length, f: (n) => `${count(n)} of ${count(data.shape.length)}`, text: true, sub: data.shape.every((s) => s.pass) ? 'declared ranges met' : `${count(data.shape.filter((s) => !s.pass).length)} declared ranges missed`, bad: !data.shape.every((s) => s.pass), to: '#shape', id: 'rec-shape' },
           ]}
         />
       )}
@@ -115,6 +119,67 @@ export default function DataBasis() {
         </ol>
         <p>{bucketRule[0]}</p>
         <p>{bucketRule[bucketRule.length - 1]}</p>
+      </Section>
+
+      <Section id="workload" title="Workload and capacity" note="A synthetic measure, published so the engineers page can say who is over capacity and why" defs={['workload']} definitions={definitions}>
+        <ol className="policy" id="workload-rule">
+          {workloadRule.map((w, i) => (
+            <li key={i}>{w}</li>
+          ))}
+        </ol>
+        <p>
+          Result: {count(data.engineerSummary.filter((e) => e.overloaded).length)} of {data.engineers.length} engineers are over the capacity of {count(data.engineerCapacity)} points; workloads run from {count(Math.min(...data.engineerSummary.map((e) => e.workload)))} to {count(Math.max(...data.engineerSummary.map((e) => e.workload)))}.
+        </p>
+      </Section>
+
+      <Section id="relationships" title="Relationships, and their absence" note="When a firm has a relationship, and when the register records none" defs={['level', 'rating', 'norel']} definitions={definitions}>
+        <ol className="policy" id="relationship-rule">
+          {relationshipRule.map((w, i) => (
+            <li key={i}>{w}</li>
+          ))}
+        </ol>
+        <p>
+          Result: {count(data.partySummary.consultants.noRelationship)} of {count(data.partySummary.consultants.total)} consultants and {count(data.partySummary.contractors.noRelationship)} of {count(data.partySummary.contractors.total)} contractors have no relationship yet, on AED {aedm(Math.round((data.partySummary.consultants.noRelationshipValue + data.partySummary.contractors.noRelationshipValue) * 10) / 10)} m of projects.
+        </p>
+      </Section>
+
+      <Section id="shape" title="Declared source shape" note="The magnitudes the synthetic register is meant to resemble, each a declared range with its basis; measured by the generator before it writes, re-measured here from the written files">
+        <div className="scroll-x">
+          <table className="mis compact" id="shape-table" style={{ maxWidth: 1100 }}>
+            <thead>
+              <tr>
+                <th scope="col" className="left">
+                  Shape
+                </th>
+                <th scope="col">Measured</th>
+                <th scope="col">Declared</th>
+                <th scope="col">Result</th>
+                <th scope="col" className="left">
+                  Basis
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.shape.map((s, i) => (
+                <motion.tr key={s.key} className="hov" data-key={s.key} data-pass={s.pass} {...rowReveal(i)}>
+                  <th scope="row" className="left">
+                    {s.label}
+                  </th>
+                  <td className="num">
+                    {s.unit === 'percent' ? pct(s.measured) : count(s.measured)}
+                  </td>
+                  <td className="num nowrap">
+                    {s.unit === 'percent' ? `${s.lo.toFixed(1)} to ${s.hi.toFixed(1)}%` : `${count(s.lo)} to ${count(s.hi)} ${unitWord(s.unit)}`}
+                  </td>
+                  <td>
+                    <span className={cx('status', s.pass ? 'pass' : 'fail')}>{s.pass ? 'met' : 'missed'}</span>
+                  </td>
+                  <td className="left remark ink">{s.basis}</td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Section>
 
       <Section id="precision" title="Precision policy">

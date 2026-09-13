@@ -9,13 +9,23 @@ import { Masthead } from '../components/Masthead';
 import { Footer } from '../components/Footer';
 import { PageError, PageLoading } from '../components/PageState';
 import { useRise, useRowReveal } from '../components/Reveal';
-import { PartyPicker, roleLabel } from '../components/PartyPicker';
+import { PartyPicker, measureOf, roleLabel } from '../components/PartyPicker';
+import type { RelFilter } from '../components/PartyPicker';
 import { Strip } from '../components/Strip';
 import { Section } from '../components/Section';
 import { HBars } from '../components/HBars';
 import { ChartSwitch } from '../components/ChartSwitch';
 
-/** The "who is the door in" page: pick a consultant or contractor and see its relationship, its projects, the verticals in play, and who it shares projects with. */
+/** The address of the register filtered to buying-stage projects with no contractor: the same predicate the "Open, no contractor yet" figure counts. */
+export const OPEN_NO_CONTRACTOR_LINK = '/projects?stage=Tender|Under Construction&cmax=5&nokon=1';
+
+/**
+ * The "who is the door in" page: pick a consultant or contractor and see its relationship
+ * (or that there is none yet), its projects, every vertical in play with counts, and who
+ * it shares projects with. The list and the top-firms chart rank on the whole book or on
+ * one vertical, chosen in the address, so "which consultant matters most to Cooling" is
+ * two clicks from the Overview.
+ */
 export default function PartiesPage() {
   const reg = useRegister();
   const [sp, setSp] = useSearchParams();
@@ -24,7 +34,14 @@ export default function PartiesPage() {
   const kind: PartyKind = sp.get('kind') === 'contractor' ? 'contractor' : 'consultant';
   const roleRaw = sp.get('role');
   const role: PartyRole | 'any' = roleRaw === 'lead' || roleRaw === 'mep' ? roleRaw : 'any';
+  const relRaw = sp.get('rel');
+  const rel: RelFilter = relRaw === 'held' || relRaw === 'none' ? relRaw : 'any';
   const id = Number(sp.get('id'));
+  const verticals = reg.data?.rollup.verticals ?? [];
+  const vRaw = sp.get('v');
+  const vertical = vRaw && verticals.some((v) => v.slug === vRaw) ? vRaw : null;
+  const vi = vertical ? verticals.findIndex((v) => v.slug === vertical) : null;
+  const vName = vi !== null ? verticals[vi]!.name : null;
   const list = reg.data ? (kind === 'consultant' ? reg.data.consultants : reg.data.contractors) : [];
   const party = useMemo(() => list.find((p) => p.id === id) ?? null, [list, id]);
   const put = (patch: Record<string, string | null>) => {
@@ -52,19 +69,34 @@ export default function PartiesPage() {
     }
     return [...counts.values()].sort((a, b) => b.n - a.n || b.p.projectCount - a.p.projectCount).slice(0, 12);
   }, [reg.data, party, projects, kind]);
+  /*
+   * The top twenty of the CURRENT kind, ranked by the selected measure over the complete
+   * party list (never a value-ranked twenty re-sorted by count): by value or by count, on
+   * the whole book or on the chosen vertical. Derived from the loaded party file, which
+   * the reconciliation ties to the register firm by firm.
+   */
+  const ranked = useMemo(() => {
+    const rows = list.map((p) => ({ p, m: measureOf(p, vi) })).filter((r) => r.m.n > 0);
+    const byValue = [...rows].sort((a, b) => b.m.value - a.m.value || b.m.n - a.m.n || a.p.id - b.p.id).slice(0, 20);
+    const byCount = [...rows].sort((a, b) => b.m.n - a.m.n || b.m.value - a.m.value || a.p.id - b.p.id).slice(0, 20);
+    return { byValue, byCount };
+  }, [list, vi]);
   if (reg.error) return <PageError message={reg.error} />;
   if (!reg.data) return <PageLoading rows={12} />;
   const { rollup } = reg.data;
   const { meta } = rollup;
   const engName = new Map(rollup.engineers.map((e) => [e.slug, e.name]));
   const ps = rollup.partySummary;
+  const noRel = ps.consultants.noRelationship + ps.contractors.noRelationship;
+  const noRelValue = Math.round((ps.consultants.noRelationshipValue + ps.contractors.noRelationshipValue) * 10) / 10;
+  const largest = (kind === 'consultant' ? ps.consultants : ps.contractors).top[0];
   const topRows = (mode: 'value' | 'count') =>
-    (kind === 'consultant' ? ps.consultants : ps.contractors).top.map((t) => ({
-      key: String(t.id),
-      name: t.name,
-      segments: [{ key: 'v', label: mode === 'value' ? 'Project value' : 'Projects', value: mode === 'value' ? t.projectValue : t.projectCount, cls: (kind === 'consultant' ? 'spot' : 'spot2') as 'spot' | 'spot2' }],
-      end: mode === 'value' ? aedm(t.projectValue) : count(t.projectCount),
-      endNote: mode === 'value' ? `${count(t.projectCount)} projects, ${t.level.replace(' management', '')}` : `AED ${aedm(t.projectValue)} m`,
+    (mode === 'value' ? ranked.byValue : ranked.byCount).map(({ p, m }) => ({
+      key: String(p.id),
+      name: p.name,
+      segments: [{ key: 'v', label: mode === 'value' ? (vName ? `Value on ${vName}` : 'Project value') : vName ? `Projects on ${vName}` : 'Projects', value: mode === 'value' ? m.value : m.n, cls: (kind === 'consultant' ? 'spot' : 'spot2') as 'spot' | 'spot2' }],
+      end: mode === 'value' ? aedm(m.value) : count(m.n),
+      endNote: mode === 'value' ? `${count(m.n)} projects, ${p.level ? p.level.replace(' management', '') : 'no relationship'}` : `AED ${aedm(m.value)} m`,
     }));
   const stageMix = party ? STAGES.map((s) => ({ stage: s, n: projects.filter((p) => p.stage === s).length })).filter((x) => x.n > 0) : [];
   const roleOn = (p: (typeof projects)[number]): string => {
@@ -72,13 +104,23 @@ export default function PartiesPage() {
     if (kind === 'consultant') return [p.leadConsultants.includes(party.id) ? 'Lead' : '', p.mepConsultant === party.id ? 'MEP' : ''].filter(Boolean).join(' and ');
     return [p.mainContractors.includes(party.id) ? 'Main' : '', p.mepContractor === party.id ? 'MEP' : ''].filter(Boolean).join(' and ');
   };
+  /* every vertical in play, with its count: the whole list, most frequent first, the chosen vertical first of all */
+  const inPlay = party
+    ? party.verticalCounts
+        .map((n, i) => ({ i, n, value: party.verticalValues[i]!, name: verticals[i]!.name, slug: verticals[i]!.slug }))
+        .filter((x) => x.n > 0)
+        .sort((a, b) => (a.i === vi ? -1 : b.i === vi ? 1 : 0) || b.n - a.n || a.i - b.i)
+    : [];
+  const partyLink = (extra = '') => `/projects?${kind === 'consultant' ? 'con' : 'kon'}=${party?.id ?? ''}${extra}`;
+  const vq = vertical ? `&v=${vertical}` : '';
+  const onV = party && vi !== null ? measureOf(party, vi) : null;
   return (
     <div className="wrap wide">
       <Masthead meta={meta} />
       <motion.div className="page-head" {...rise()}>
         <div>
           <h1 className="display page-title">Consultants and contractors</h1>
-          <p className="page-sub">Who is the door in: the relationship Halvard holds with each firm, and the projects it sits on</p>
+          <p className="page-sub">Who is the door in: the relationship Halvard holds with each firm, or has yet to build, and the projects it sits on</p>
         </div>
         <p className="page-basis">
           {count(rollup.parties.consultants)} consultants, {count(rollup.parties.contractors)} contractors
@@ -93,27 +135,27 @@ export default function PartiesPage() {
         items={[
           { label: 'Consultants', value: ps.consultants.total, f: count, sub: `${count(ps.consultants.senior)} at senior management, rating ${ps.consultants.averageRating.toFixed(1)} of 10`, to: '/parties?kind=consultant', id: 'pk-consultants' },
           { label: 'Contractors', value: ps.contractors.total, f: count, sub: `${count(ps.contractors.senior)} at senior management, rating ${ps.contractors.averageRating.toFixed(1)} of 10`, to: '/parties?kind=contractor', id: 'pk-contractors' },
-          { label: 'Firms on ten or more projects', value: ps.consultants.onTenPlus + ps.contractors.onTenPlus, f: count, sub: `${count(ps.consultants.onTenPlus)} consultants, ${count(ps.contractors.onTenPlus)} contractors`, id: 'pk-tenplus' },
-          { label: 'Largest book', value: (kind === 'consultant' ? ps.consultants : ps.contractors).top[0]?.projectValue ?? 0, sub: `AED m, ${(kind === 'consultant' ? ps.consultants : ps.contractors).top[0]?.name ?? ''}`, to: `/parties?kind=${kind}&id=${(kind === 'consultant' ? ps.consultants : ps.contractors).top[0]?.id ?? ''}`, id: 'pk-largest' },
-          { label: 'Projects with no consultant', value: ps.projectsNoConsultant, f: count, sub: `${pct((ps.projectsNoConsultant / rollup.kpis.projects) * 100)} of the register`, id: 'pk-nocon' },
-          { label: 'Open, no contractor yet', value: ps.openProjectsNoContractor, f: count, sub: `at Tender or early construction: still open to win`, to: '/projects?stage=Tender|Under Construction&cmax=5', id: 'pk-open', bad: false },
+          { label: 'No relationship yet', value: noRel, f: count, sub: `firms on AED ${aedm(noRelValue)} m of projects: ${count(ps.consultants.noRelationship)} consultants, ${count(ps.contractors.noRelationship)} contractors`, to: `/parties?kind=${kind}&rel=none`, id: 'pk-norel' },
+          { label: 'Largest book', value: largest?.projectValue ?? 0, sub: `AED m, ${largest?.name ?? ''}`, to: `/parties?kind=${kind}&id=${largest?.id ?? ''}`, id: 'pk-largest' },
+          { label: 'Projects with no consultant', value: ps.projectsNoConsultant, f: count, sub: `${pct((ps.projectsNoConsultant / rollup.kpis.projects) * 100)} of the register`, to: '/projects?nocon=1', id: 'pk-nocon' },
+          { label: 'Open, no contractor yet', value: ps.openProjectsNoContractor, f: count, sub: `at Tender or early construction: still open to win`, to: OPEN_NO_CONTRACTOR_LINK, id: 'pk-open', bad: false },
         ]}
       />
-      <Section id="top-firms" title={kind === 'consultant' ? 'The consultants that matter most' : 'The contractors that matter most'} note="The twenty largest firms by the value of the projects they sit on. Click a bar to open the firm's card.">
+      <Section id="top-firms" title={`The ${kind}s that matter most${vName ? ` to ${vName}` : ''}`} note={vName ? `The twenty ${kind}s with the most projects graded Medium or High on ${vName}, or the most value there. Click a bar to open the firm's card.` : `The twenty largest ${kind}s by the value of the projects they sit on, or by their count; the two lists differ. Click a bar to open the firm's card.`}>
         <ChartSwitch
           id={`top-${kind}`}
           views={[
-            { key: 'value', label: 'Value, AED m', render: () => <HBars id="top-firms-chart" rows={topRows('value')} format={aedm} unit="AED m" onPick={(k) => put({ id: k })} activeKey={party ? String(party.id) : null} ariaLabel={`Top twenty ${kind}s by project value.`} /> },
-            { key: 'count', label: 'Projects', render: () => <HBars id="top-firms-chart" rows={topRows('count')} format={count} unit="projects" onPick={(k) => put({ id: k })} activeKey={party ? String(party.id) : null} ariaLabel={`Top twenty ${kind}s by project count.`} /> },
+            { key: 'value', label: 'Value, AED m', render: () => <HBars id="top-firms-chart" rows={topRows('value')} format={aedm} unit="AED m" onPick={(k) => put({ id: k })} activeKey={party ? String(party.id) : null} ariaLabel={`Top twenty ${kind}s by project value${vName ? ` on ${vName}` : ''}.`} /> },
+            { key: 'count', label: 'Projects', render: () => <HBars id="top-firms-chart" rows={topRows('count')} format={count} unit="projects" onPick={(k) => put({ id: k })} activeKey={party ? String(party.id) : null} ariaLabel={`Top twenty ${kind}s by project count${vName ? ` on ${vName}` : ''}.`} /> },
           ]}
         />
       </Section>
       <div className="side parties">
-        <PartyPicker kind={kind} role={role} list={list} selected={party?.id ?? null} onKind={(k) => put({ kind: k, id: null, role: null })} onRole={(r) => put({ role: r === 'any' ? null : r })} onPick={(pid) => put({ id: String(pid) })} />
-        <div className="party-card" id="party-card" data-id={party?.id ?? ''} data-count={projects.length}>
+        <PartyPicker kind={kind} role={role} rel={rel} vertical={vertical} verticals={verticals} list={list} selected={party?.id ?? null} onKind={(k) => put({ kind: k, id: null, role: null })} onRole={(r) => put({ role: r === 'any' ? null : r })} onRel={(r) => put({ rel: r === 'any' ? null : r })} onVertical={(slug) => put({ v: slug })} onPick={(pid) => put({ id: String(pid) })} />
+        <div className="party-card" id="party-card" data-id={party?.id ?? ''} data-count={projects.length} data-rel={party ? (party.level ? 'held' : 'none') : ''}>
           {!party ? (
             <div className="empty" id="party-empty">
-              <strong>No {kind} selected.</strong> Choose one from the list to see its relationship level and rating, the engineer who owns it, the projects it sits on, the verticals in play, and the other firms it shares projects with.
+              <strong>No {kind} selected.</strong> Choose one from the list to see its relationship level and rating, the engineer who owns it, the projects it sits on, every vertical in play with its count, and the other firms it shares projects with.
             </div>
           ) : (
             <>
@@ -125,49 +167,81 @@ export default function PartiesPage() {
                   {party.name}
                 </h2>
               </header>
-              <dl className="strip" style={{ '--cols': 4 } as React.CSSProperties} aria-label="Relationship">
-                <div>
-                  <dt>Relationship level</dt>
-                  <dd className="big small">{party.level.replace(' management', '')}</dd>
-                  <dd className="sub">management</dd>
-                </div>
-                <div>
-                  <dt>Rating</dt>
-                  <dd className="big">{party.rating}</dd>
-                  <dd className="sub">of 10</dd>
-                </div>
-                <div>
-                  <dt>Relationship owner</dt>
-                  <dd className="big small">
-                    <Link to={`/engineers/${party.owner}`} className="vlink">
-                      {engName.get(party.owner)}
-                    </Link>
-                  </dd>
-                  <dd className="sub">{rollup.verticals.find((v) => v.slug === rollup.engineers.find((e) => e.slug === party.owner)?.vertical)?.name}</dd>
-                </div>
-                <div>
-                  <dt>Projects</dt>
-                  <dd className="big">{count(party.projectCount)}</dd>
-                  <dd className="sub">AED {aedm(party.projectValue)} m</dd>
-                </div>
-              </dl>
+              {party.level ? (
+                <dl className="strip" style={{ '--cols': 4 } as React.CSSProperties} aria-label="Relationship" id="party-rel">
+                  <div>
+                    <dt>Relationship level</dt>
+                    <dd className="big small">{party.level.replace(' management', '')}</dd>
+                    <dd className="sub">management</dd>
+                  </div>
+                  <div>
+                    <dt>Rating</dt>
+                    <dd className="big">{party.rating}</dd>
+                    <dd className="sub">of 10</dd>
+                  </div>
+                  <div>
+                    <dt>Relationship owner</dt>
+                    <dd className="big small">
+                      <Link to={`/engineers/${party.owner}`} className="vlink">
+                        {engName.get(party.owner!)}
+                      </Link>
+                    </dd>
+                    <dd className="sub">{rollup.verticals.find((v) => v.slug === rollup.engineers.find((e) => e.slug === party.owner)?.vertical)?.name}</dd>
+                  </div>
+                  <div>
+                    <dt>Projects</dt>
+                    <dd className="big">{count(party.projectCount)}</dd>
+                    <dd className="sub">AED {aedm(party.projectValue)} m</dd>
+                  </div>
+                </dl>
+              ) : (
+                <dl className="strip norel" style={{ '--cols': 4 } as React.CSSProperties} aria-label="Relationship" id="party-rel">
+                  <div>
+                    <dt>Relationship level</dt>
+                    <dd className="big small">None yet</dd>
+                    <dd className="sub">Halvard has not worked with this firm</dd>
+                  </div>
+                  <div>
+                    <dt>Rating</dt>
+                    <dd className="big">-</dd>
+                    <dd className="sub">not rated</dd>
+                  </div>
+                  <div>
+                    <dt>Relationship owner</dt>
+                    <dd className="big small">None</dd>
+                    <dd className="sub">{inPlay[0] ? `${inPlay[0].name} would own it` : 'no vertical in play'}</dd>
+                  </div>
+                  <div>
+                    <dt>Projects</dt>
+                    <dd className="big">{count(party.projectCount)}</dd>
+                    <dd className="sub">AED {aedm(party.projectValue)} m</dd>
+                  </div>
+                </dl>
+              )}
               <section className="sec compact" aria-labelledby="party-verticals">
                 <header className="sec-head">
                   <div>
                     <h3 className="display sec-title" id="party-verticals">
                       Verticals in play
                     </h3>
-                    <p className="sec-note">Graded Medium or High on its projects, most frequent first; stage mix of its projects beside</p>
+                    <p className="sec-note">
+                      All {count(inPlay.length)} of {verticals.length} verticals graded Medium or High on this firm's projects, with the project count on each, most frequent first{vName ? `; ${vName} first` : ''}. Stage mix of its projects beneath.
+                    </p>
                   </div>
                 </header>
-                <p className="tags">
-                  {party.verticals.map((vi) => (
-                    <Link key={vi} to={`/projects?${kind === 'consultant' ? 'con' : 'kon'}=${party.id}&v=${rollup.verticals[vi]!.slug}`} className="tag press">
-                      {rollup.verticals[vi]!.name}
+                <p className="tags" id="party-vertical-tags" data-count={inPlay.length}>
+                  {inPlay.map((x) => (
+                    <Link key={x.slug} to={partyLink(`&v=${x.slug}`)} className={cx('tag press', x.i === vi && 'on')} data-slug={x.slug} data-n={x.n}>
+                      {x.name} <b>{count(x.n)}</b>
                     </Link>
                   ))}
-                  {party.verticals.length === 0 && <span className="muted">None graded Medium or above.</span>}
+                  {inPlay.length === 0 && <span className="muted">None graded Medium or above.</span>}
                 </p>
+                {onV && vName && (
+                  <p className="muted" id="party-on-vertical" style={{ marginTop: 'var(--s-sm)' }}>
+                    On {vName}: {count(onV.n)} of {count(party.projectCount)} projects, AED {aedm(onV.value)} m.
+                  </p>
+                )}
                 <p className="muted" style={{ marginTop: 'var(--s-sm)' }}>
                   {stageMix.map((x) => `${x.stage} ${count(x.n)} (${pct((x.n / projects.length) * 100, 0)})`).join(' · ')}
                 </p>
@@ -180,7 +254,7 @@ export default function PartiesPage() {
                     </h3>
                     <p className="sec-note">Largest first. Open any project for its full page.</p>
                   </div>
-                  <Link to={`/projects?${kind === 'consultant' ? 'con' : 'kon'}=${party.id}`} className="sec-link press">
+                  <Link to={partyLink(vq)} className="sec-link press">
                     In the register {'>>>'}
                   </Link>
                 </header>
@@ -233,11 +307,12 @@ export default function PartiesPage() {
                 <ul className="items" id="party-shared-list">
                   {shared.map((s) => (
                     <li key={`${s.kind}-${s.p.id}`} className={cx(s.kind)}>
-                      <Link to={`/parties?kind=${s.kind}&id=${s.p.id}`} className="elink">
+                      <Link to={`/parties?kind=${s.kind}&id=${s.p.id}${vq}`} className="elink">
                         {s.p.name}
                       </Link>
                       <span className="remark">
                         {roleLabel(s.kind, s.p.role)} {s.kind}
+                        {s.p.level === null ? ', no relationship yet' : ''}
                       </span>
                       <span className="num">
                         {count(s.n)} in common

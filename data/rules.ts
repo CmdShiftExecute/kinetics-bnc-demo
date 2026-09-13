@@ -4,7 +4,7 @@
  *
  * Nothing here draws a random number. Everything is a pure function of its arguments.
  */
-import type { BucketCode, Channel, Grade, OwnerGate, OwnerWhy, Stage } from './schema';
+import type { BucketCode, Channel, Grade, OwnerGate, OwnerWhy, Stage, TieRule } from './schema';
 
 /* ---------- precision ---------- */
 
@@ -81,15 +81,19 @@ export function cascade(input: CascadeInput): CascadeResult {
   });
   const gate = stageGate(input.stage, input.completionPct, input.contractorAppointed);
   const candidates = eligible.filter((i) => channelPasses(input.channels[i]!, gate));
-  if (candidates.length === 0) return { vertical: null, why: { eligible, gate: eligible.length === 0 ? 'none' : gate, candidates, tie: false } };
+  if (candidates.length === 0) return { vertical: null, why: { eligible, gate: eligible.length === 0 ? 'none' : gate, candidates, tie: false, tied: [], assignedAtDecision: [], tieRule: null } };
   const top = Math.max(...candidates.map((i) => input.scores[i]!));
   const tied = candidates.filter((i) => input.scores[i] === top);
   let winner = tied[0]!;
+  let tieRule: TieRule | null = null;
   if (tied.length > 1) {
     /* fewer projects already assigned wins; a dead heat goes to the earlier vertical in the published order */
     for (const i of tied) if (input.assignedSoFar[i]! < input.assignedSoFar[winner]!) winner = i;
+    const counts = tied.map((i) => input.assignedSoFar[i]!);
+    /* the decision record: "fewer" only when the winner's count is strictly below every other tied count; otherwise the published order decided among the equal-minimum set */
+    tieRule = counts.filter((c) => c === input.assignedSoFar[winner]!).length === 1 ? 'fewer' : 'order';
   }
-  return { vertical: winner, why: { eligible, gate, candidates, tie: tied.length > 1 } };
+  return { vertical: winner, why: { eligible, gate, candidates, tie: tied.length > 1, tied: tied.length > 1 ? tied : [], assignedAtDecision: tied.length > 1 ? tied.map((i) => input.assignedSoFar[i]!) : [], tieRule } };
 }
 
 /** Step 4: the engineer on the vertical with the lowest current pipeline value; a dead heat goes to the earlier engineer in the roster. */
@@ -110,6 +114,32 @@ export const NO_UPDATE: BucketCode = 10;
 
 /** A project's best bucket across its verticals: the lowest code, because the list is priority-ordered. */
 export const bestBucket = (codes: BucketCode[]): BucketCode => codes.reduce((a, b) => (b < a ? b : a), NO_UPDATE);
+
+/* ---------- the four activity bands, and the synthetic workload measure built on them ---------- */
+
+export type BandKey = 'won' | 'active' | 'quiet' | 'closed';
+/** The eleven buckets folded into four bands: won, active, waiting or quiet, closed. One source for the mix bars, the engineers chart and the workload rule. */
+export const ACTIVITY_BANDS: { key: BandKey; label: string; codes: BucketCode[] }[] = [
+  { key: 'won', label: 'Orders', codes: [0] },
+  { key: 'active', label: 'Active', codes: [1, 2, 3, 5, 6] },
+  { key: 'quiet', label: 'Waiting or quiet', codes: [7, 8, 9, 10] },
+  { key: 'closed', label: 'Closed', codes: [4] },
+];
+export const bandOf = (code: BucketCode): BandKey => ACTIVITY_BANDS.find((b) => b.codes.includes(code))!.key;
+/** Bucket counts folded into band counts, in ACTIVITY_BANDS order. */
+export const bandCounts = (funnel: number[]): number[] => ACTIVITY_BANDS.map((b) => b.codes.reduce<number>((a, c) => a + (funnel[c] ?? 0), 0));
+
+/**
+ * Workload: a SYNTHETIC measure of how much attention an engineer's book demands. Each
+ * owned project earns points by its activity band on the engineer's own vertical: a live
+ * enquiry, quote, visit or follow-up costs the most, an order or a quiet project costs a
+ * little, a closed project costs nothing. It is an illustration of the kind of rule a
+ * capacity view needs, not a survey of anyone's working hours.
+ */
+export const WORKLOAD_WEIGHTS: Record<BandKey, number> = { won: 1, active: 3, quiet: 1, closed: 0 };
+/** The capacity every engineer is measured against, in the same points. Chosen so a handful of the 24 books exceed it; published on the Data basis page. */
+export const ENGINEER_CAPACITY = 320;
+export const workloadOf = (funnel: number[]): number => bandCounts(funnel).reduce((a, n, i) => a + n * WORKLOAD_WEIGHTS[ACTIVITY_BANDS[i]!.key], 0);
 
 /** The "worth chasing" rule: Tender or early construction, overall relevance at or above this, and no closed bucket. */
 export const CHASE_RELEVANCE_FLOOR = 5;

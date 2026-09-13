@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import type { Grade, MatrixRow, Rollup } from '../../data/schema';
 import { GRADES, SECTORS } from '../../data/schema';
 import { count, cx } from '../lib/format';
+import { valueStep } from '../lib/tint';
 
 export interface CellInfo {
   label: string;
@@ -93,7 +94,21 @@ export function Heatmap({ rollup, rolled, colour }: { rollup: Rollup; rolled: bo
     }
     return out;
   }, [rollup, rolled, open]);
-  const maxValue = useMemo(() => Math.max(1, ...lines.filter((l) => l.level === (rolled ? 'sector' : 'type')).flatMap((l) => rollup.verticals.map((_, vi) => groupCell(rollup, l.rows, vi).value))), [lines, rollup, rolled]);
+  /*
+   * The value tint's domain, one per level, computed from EVERY row of the matrix at that
+   * level (all 5 sectors, every industry, all 80 types), never from what happens to be
+   * expanded: a sector cell is tinted against the largest sector cell, an industry cell
+   * against the largest industry cell, a type cell against the largest type cell. So a
+   * fresh page with nothing expanded tints its sector rows on the full five-step scale,
+   * and opening a row never re-tints the rows already on screen.
+   */
+  const maxByLevel = useMemo(() => {
+    const cellsAt = (rowSets: number[][]) => Math.max(1, ...rowSets.flatMap((rows) => rollup.verticals.map((_, vi) => groupCell(rollup, rows, vi).value)));
+    const sectorRows = SECTORS.map((sector) => rollup.matrix.map((r, i) => (r.sector === sector ? i : -1)).filter((i) => i >= 0));
+    const industryRows = [...new Set(rollup.matrix.map((r) => `${r.sector}|${r.industry}`))].map((key) => rollup.matrix.map((r, i) => (`${r.sector}|${r.industry}` === key ? i : -1)).filter((i) => i >= 0));
+    const typeRows = rollup.matrix.map((_r, i) => [i]);
+    return { sector: cellsAt(sectorRows), industry: cellsAt(industryRows), type: cellsAt(typeRows) } as Record<Level, number>;
+  }, [rollup]);
   const toggle = (key: string) =>
     setOpen((s) => {
       const n = new Set(s);
@@ -117,7 +132,7 @@ export function Heatmap({ rollup, rolled, colour }: { rollup: Rollup; rolled: bo
     const g = groupCell(rollup, l.rows, vi);
     return { label: l.level === 'type' ? `${l.type}, ${l.industry}, ${l.sector}` : l.level === 'industry' ? `${l.industry}, ${l.sector}` : l.sector, vertical: rollup.verticals[vi]!.name, grade: g.grade, graded: g.graded, byGrade: g.byGrade, projects: l.projects, value: g.value, to: linkFor(l, rollup.verticals[vi]!.slug) };
   };
-  const step = (v: number) => Math.min(5, Math.max(1, Math.ceil((5 * v) / maxValue)));
+  const step = (v: number, level: Level) => valueStep(v, maxByLevel[level]);
   return (
     <div className="scroll-x">
       <table className="mis heat" id="heatmap">
@@ -154,9 +169,9 @@ export function Heatmap({ rollup, rolled, colour }: { rollup: Rollup; rolled: bo
               <td className="num">{count(l.projects)}</td>
               {rollup.verticals.map((v, vi) => {
                 const g = groupCell(rollup, l.rows, vi);
-                const cls = colour === 'grade' ? (g.grade ? `hg-${g.grade.toLowerCase()}` : 'hg-none') : g.grade ? `hv-${step(g.value)}` : 'hg-none';
+                const cls = colour === 'grade' ? (g.grade ? `hg-${g.grade.toLowerCase()}` : 'hg-none') : g.grade ? `hv-${step(g.value, l.level)}` : 'hg-none';
                 return (
-                  <td key={v.slug} className={cx('heat-c', cls)}>
+                  <td key={v.slug} className={cx('heat-c', cls)} data-level={l.level} data-value={g.value}>
                     <button
                       type="button"
                       className="heat-b"

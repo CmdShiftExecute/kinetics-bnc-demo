@@ -1,19 +1,12 @@
 import { useState } from 'react';
 import type { PointerEvent } from 'react';
+import { ACTIVITY_BANDS, bandCounts } from '../../data/rules';
 import { count, cx, pct } from '../lib/format';
 import { keyStep } from './charts';
 
-/** The eleven buckets folded into four bands for a small stacked bar: won, active, waiting, closed. */
-export const BANDS: { key: 'won' | 'active' | 'quiet' | 'closed'; label: string; codes: number[] }[] = [
-  { key: 'won', label: 'Orders', codes: [0] },
-  { key: 'active', label: 'Active', codes: [1, 2, 3, 5, 6] },
-  { key: 'quiet', label: 'Waiting or quiet', codes: [7, 8, 9, 10] },
-  { key: 'closed', label: 'Closed', codes: [4] },
-];
-
-export function bandCounts(funnel: number[]): number[] {
-  return BANDS.map((b) => b.codes.reduce((a, c) => a + (funnel[c] ?? 0), 0));
-}
+/** The eleven buckets folded into four bands: one source, data/rules.ts, shared with the engineers chart and the workload rule. */
+export const BANDS = ACTIVITY_BANDS;
+export { bandCounts };
 
 /**
  * A small stacked bar of an engineer's activity mix, hover-driven with keyboard parity.

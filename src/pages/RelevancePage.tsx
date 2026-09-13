@@ -5,6 +5,7 @@ import type { Rollup } from '../../data/schema';
 import { useJson } from '../lib/data';
 import { validateRollup } from '../lib/validate';
 import { aedm, count, cx, pct } from '../lib/format';
+import { HIGH_FLOOR } from '../lib/filters';
 import { Masthead } from '../components/Masthead';
 import { Footer } from '../components/Footer';
 import { PageError, PageLoading } from '../components/PageState';
@@ -71,7 +72,7 @@ export default function RelevancePage() {
         cols={6}
         items={[
           { label: 'Cells graded', value: ms.cellsGraded, f: count, sub: `of ${count(ms.cellsTotal)}, ${pct((ms.cellsGraded / ms.cellsTotal) * 100)} of the matrix`, id: 'mk-cells' },
-          { label: 'Projects reading High', value: ms.projectsOverallHigh, f: count, sub: `${pct((ms.projectsOverallHigh / data.kpis.projects) * 100)} of the register, AED ${aedm(ms.valueOverallHigh)} m`, to: '/projects?sort=overall', id: 'mk-high' },
+          { label: 'Projects reading High', value: ms.projectsOverallHigh, f: count, sub: `${pct((ms.projectsOverallHigh / data.kpis.projects) * 100)} of the register, AED ${aedm(ms.valueOverallHigh)} m`, to: `/projects?omin=${HIGH_FLOOR}&sort=overall`, id: 'mk-high' },
           { label: 'Widest vertical', value: ms.widestVertical.rowsHigh, f: (n) => `${count(n)} High rows`, text: true, sub: ms.widestVertical.name, to: `/projects?v=${ms.widestVertical.slug}&floor=6.5`, id: 'mk-widest' },
           { label: 'Most relevant type', value: ms.topType.cellsHigh, f: (n) => `${count(n)} of ${data.verticals.length} High`, text: true, sub: `${ms.topType.type}, ${count(ms.topType.projects)} projects`, to: `/projects?type=${encodeURIComponent(ms.topType.type)}`, id: 'mk-type' },
           { label: 'Hand-adjusted scores', value: ms.projectsAdjusted, f: count, sub: `projects, ${pct((ms.projectsAdjusted / data.kpis.projects) * 100)} of the register`, id: 'mk-adjusted' },
@@ -137,8 +138,8 @@ export default function RelevancePage() {
           </div>
         </dl>
         {colour === 'value' && (
-          <p className="muted">
-            Value tint: five steps of one slate scale, lightest to darkest by the graded projects' value on that vertical. <span className="swatch hv-1" aria-hidden="true" />
+          <p className="muted" id="value-tint-note">
+            Value tint: five steps of one slate scale by the graded projects' value on that vertical, on a square-root scale of each cell's share of the largest cell at its own level (a sector row against the largest sector cell, an industry row against the largest industry cell, a type row against the largest type cell): 4 percent of the largest reads the first step, 16 percent the second, 36 the third, 64 the fourth, the largest the fifth. The scale is the same whatever is expanded. <span className="swatch hv-1" aria-hidden="true" />
             <span className="swatch hv-2" aria-hidden="true" />
             <span className="swatch hv-3" aria-hidden="true" />
             <span className="swatch hv-4" aria-hidden="true" />

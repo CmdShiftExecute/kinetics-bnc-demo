@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Link, useParams } from 'react-router';
-import { gateWords, gradeOf } from '../../data/rules';
+import { bestBucket, gateWords, gradeOf } from '../../data/rules';
 import { BUCKETS } from '../../data/schema';
 import { useRegister } from '../lib/register';
 import { count, cx, dateLabel, pct, score } from '../lib/format';
@@ -12,7 +12,12 @@ import { Section } from '../components/Section';
 import { Strip } from '../components/Strip';
 import { ScoreStrip } from '../components/ScoreStrip';
 
-/** Everything about one project: identity, value, the four parties, the ten scores, the owner and why, the activity per vertical, and the description. */
+/**
+ * Everything about one project: six figures, the ten scores full width directly beneath
+ * them, then identity and the four parties, the owner and why (the cascade step by step,
+ * with the tie decision as it was actually recorded), the activity per vertical, and the
+ * description.
+ */
 export default function ProjectPage() {
   const { ref } = useParams();
   const reg = useRegister();
@@ -29,13 +34,22 @@ export default function ProjectPage() {
   const cons = (ids: number[]) => ids.map((id) => reg.data!.consultantById.get(id)).filter((c) => c !== undefined);
   const kons = (ids: number[]) => ids.map((id) => reg.data!.contractorById.get(id)).filter((c) => c !== undefined);
   const why = p.why;
+  const best = bestBucket(p.buckets);
+  const bestOn = p.buckets.map((b, i) => (b === best ? verticals[i]!.name : null)).filter((x): x is string => x !== null);
+  /* the tie sentence is rendered from the decision record, never inferred: "fewer" only when the winner's count was strictly the lowest, "order" when the counts were equal */
+  const tieWords = (() => {
+    if (!why.tie || why.tieRule === null) return '';
+    const counts = why.tied.map((v, i) => `${verticals[v]!.name} ${count(why.assignedAtDecision[i]!)}`).join(', ');
+    if (why.tieRule === 'fewer') return `, chosen on the tie rule because it had fewer projects assigned at the time (${counts})`;
+    return `, chosen on the tie rule: ${why.tied.length === 2 ? 'both' : 'all'} had the same number of projects assigned at the time (${counts}), so the earlier vertical in the published order won`;
+  })();
   const whyWords = (() => {
     const eligible = why.eligible.map((i) => `${verticals[i]!.name} (${score(p.scores[i]!)})`);
     const parts = [`Step 1, scope floor: ${eligible.length ? `${eligible.length} vertical${eligible.length === 1 ? '' : 's'} at ${rollup.scopeFloor.toFixed(1)} or more, ${eligible.join(', ')}` : `no vertical scores ${rollup.scopeFloor.toFixed(1)} or more`}.`];
     parts.push(`Step 2, stage gate: the project is ${gateWords(why.gate)}.`);
     if (why.candidates.length) {
       const cands = why.candidates.map((i) => `${verticals[i]!.name} (${score(p.scores[i]!)})`);
-      parts.push(`Step 3, highest score: ${cands.length === 1 ? `only ${cands[0]} passes the gate` : `${cands.join(', ')} pass the gate; ${ownerV!.name} has the highest score${why.tie ? ', chosen on the tie rule because it had fewer projects assigned at the time' : ''}`}.`);
+      parts.push(`Step 3, highest score: ${cands.length === 1 ? `only ${cands[0]} passes the gate` : `${cands.join(', ')} pass the gate; ${ownerV!.name} has the highest score${tieWords}`}.`);
       parts.push(`Step 4, lowest pipeline: ${engName.get(p.ownerEngineer!)} had the lowest pipeline value on ${ownerV!.name} when this project was assigned, in reference order.`);
     } else parts.push('Step 5: no vertical passes, so the project has no owner and counts in the unassigned figure.');
     return parts;
@@ -60,15 +74,20 @@ export default function ProjectPage() {
       </motion.div>
       <Strip
         id="p-strip"
-        cols={4}
+        cols={6}
         label="Project figures"
         items={[
           { label: 'Value', value: p.value, sub: 'AED million', id: 'p-value' },
           { label: 'Stage', value: 0, f: () => p.stage, text: true, sub: p.completionPct != null ? `${pct(p.completionPct)} complete` : 'not under construction', id: 'p-stage' },
           { label: 'Overall relevance', value: p.overall ?? 0, f: (n) => (p.overall == null ? 'none' : n.toFixed(1)), sub: p.overall == null ? 'no graded vertical' : `${gradeOf(p.overall)}, highest of ten`, id: 'p-overall' },
-          { label: 'Owner', value: 0, f: () => (p.ownerEngineer ? (engName.get(p.ownerEngineer) ?? '') : 'None'), text: true, sub: ownerV ? ownerV.name : why.gate === 'held' ? 'held: no contractor appointed' : 'no eligible vertical', id: 'p-owner' },
+          { label: 'Verticals in scope', value: why.eligible.length, f: count, sub: `of ${verticals.length} score ${rollup.scopeFloor.toFixed(1)} or more; ${count(why.candidates.length)} pass the stage gate`, id: 'p-eligible' },
+          { label: 'Owner', value: 0, f: () => (p.ownerEngineer ? (engName.get(p.ownerEngineer) ?? '') : 'None'), text: true, sub: ownerV ? ownerV.name : why.gate === 'held' ? 'held: no contractor appointed' : 'no eligible vertical', to: p.ownerEngineer ? `/engineers/${p.ownerEngineer}` : undefined, id: 'p-owner' },
+          { label: 'Best activity', value: 0, f: () => BUCKETS[best]!, text: true, sub: `on ${bestOn.length === verticals.length ? 'every vertical' : bestOn.slice(0, 2).join(' and ')}${bestOn.length > 2 && bestOn.length < verticals.length ? ` and ${count(bestOn.length - 2)} more` : ''}`, bad: best === 4, id: 'p-best' },
         ]}
       />
+      <Section id="scores" title="Relevance by vertical" note="Score out of 8.0 with its grade; the owning vertical is outlined; an asterisk marks a hand-adjusted score" defs={['relevance', 'overall']} definitions={definitions}>
+        <ScoreStrip verticals={verticals} scores={p.scores} adjusted={p.adjusted} owner={p.ownerVertical} id="score-strip" />
+      </Section>
       <div className="overview-grid">
         <Section id="identity" title="Identity" compact defs={['value', 'completion']} definitions={definitions}>
           <dl className="basis-list">
@@ -161,11 +180,8 @@ export default function ProjectPage() {
           </dl>
         </Section>
       </div>
-      <Section id="scores" title="Relevance by vertical" note="Score out of 8.0 with its grade; the owning vertical is outlined; an asterisk marks a hand-adjusted score" defs={['relevance', 'overall']} definitions={definitions}>
-        <ScoreStrip verticals={verticals} scores={p.scores} adjusted={p.adjusted} owner={p.ownerVertical} id="score-strip" />
-      </Section>
-      <Section id="owner" title="Who owns it, and why" note="The ownership cascade, step by step, as the generator applied it" defs={['owner']} definitions={definitions} link={{ to: '/data-basis#cascade', label: 'The cascade' }}>
-        <ol className="policy" id="why">
+      <Section id="owner" title="Who owns it, and why" note="The ownership cascade, step by step, as the generator applied it; a tie names the counts it was decided on" defs={['owner']} definitions={definitions} link={{ to: '/data-basis#cascade', label: 'The cascade' }}>
+        <ol className="policy" id="why" data-tie={why.tieRule ?? 'none'}>
           {whyWords.map((w, i) => (
             <li key={i}>{w}</li>
           ))}

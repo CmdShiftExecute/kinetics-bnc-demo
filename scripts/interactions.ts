@@ -20,6 +20,7 @@ import type { Page } from 'playwright';
 import type { Party, Project, Reconciliation, Rollup } from '../data/schema';
 import { BUCKETS } from '../data/schema';
 import { EMPTY, matches, parseFilters } from '../src/lib/filters';
+import { valueStep } from '../src/lib/tint';
 
 const args = process.argv.slice(2);
 const arg = (name: string, fallback: string) => {
@@ -555,6 +556,257 @@ try {
   const activityRows = await page.locator('#activity-table tbody tr').count();
   check(activityRows === rollup.verticals.length, `Activity by vertical lists all ${activityRows} verticals`);
 
+  /* ---------- 7b. the executive layer on every route: six cards, one full-width visual directly beneath (Data basis exempt) ---------- */
+  const layoutOf = (path: string) =>
+    page.evaluate(() => {
+      const strip = document.querySelector('dl.strip') as HTMLElement | null;
+      if (!strip) return { cards: 0, visual: false, ratio: 0 };
+      let next = strip.nextElementSibling as HTMLElement | null;
+      /* the first SECTION after the strip must carry the visual; anything else (a grid, a text block) is not one */
+      const svg = next && next.tagName === 'SECTION' ? (next.querySelector('svg.chart') as SVGElement | null) : null;
+      const sw = next ? next.getBoundingClientRect().width : 0;
+      const vw = svg ? svg.getBoundingClientRect().width : 0;
+      return { cards: strip.children.length, visual: svg !== null, ratio: sw ? vw / sw : 0 };
+    }).then((r) => ({ path, ...r }));
+  const overloadedEng = rollup.engineerSummary.find((e) => e.overloaded)!;
+  const routesWithVisual = ['/', '/relevance', '/projects', '/engineers', '/parties', `/engineers/${overloadedEng.slug}`, `/p/${sample.ref}`];
+  for (const r of routesWithVisual) {
+    await page.goto(`${base}${r}`, { waitUntil: 'networkidle' });
+    await page.waitForSelector('dl.strip');
+    await page.waitForTimeout(500);
+    const l = await layoutOf(r);
+    check(l.cards === 6 && l.visual && l.ratio >= 0.9, `${r} carries six headline cards and a full-width visual directly beneath them (${l.cards} cards, visual ${l.visual}, ${Math.round(l.ratio * 100)}% of the section)`);
+  }
+  await page.goto(`${base}/data-basis`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#rec-strip');
+  await page.waitForTimeout(400);
+  const dbLayout = await layoutOf('/data-basis');
+  check(dbLayout.cards === 6 && !dbLayout.visual, `/data-basis carries six cards and, by the principal's exemption, no visual beneath them (negative control for the visual gate: ${dbLayout.visual})`);
+  const shapeRows = await page.locator('#shape-table tbody tr').count();
+  const shapeMissed = await page.locator('#shape-table tbody tr[data-pass="false"]').count();
+  check(shapeRows === rollup.shape.length && shapeRows >= 10 && shapeMissed === 0, `Data basis lists all ${shapeRows} declared source-shape ranges and every one is met`);
+
+  /* ---------- 7c. the top-twenty firms rank on the selected measure over the whole party list ---------- */
+  const byCount = [...consultants].sort((a, b) => b.projectCount - a.projectCount || b.projectValue - a.projectValue || a.id - b.id);
+  const byValue = [...consultants].sort((a, b) => b.projectValue - a.projectValue || b.projectCount - a.projectCount || a.id - b.id);
+  const countTop = byCount.slice(0, 20).map((c) => c.id);
+  const valueTop = byValue.slice(0, 20).map((c) => c.id);
+  const omitted = countTop.filter((id) => !valueTop.includes(id));
+  check(omitted.length > 0, `Negative control from the data: a count ranking drawn from the value top twenty would omit ${omitted.length} count leaders, so the two rankings must be derived separately`);
+  await page.goto(`${base}/parties`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#plist li');
+  await page.locator('#top-consultant-views button[data-view="count"]').click();
+  await page.waitForTimeout(400);
+  await page.locator('svg#top-firms-chart').focus();
+  await page.keyboard.press('Home');
+  await page.waitForTimeout(150);
+  const countRead = ((await page.locator('svg#top-firms-chart .readbox text').first().textContent()) ?? '').trim();
+  check(countRead.startsWith(byCount[0]!.name.toUpperCase()) && countRead.includes(`${byCount[0]!.projectCount.toLocaleString('en-GB')} PROJECTS`), `Projects view of the top firms ranks the whole list by count: first bar "${countRead.slice(0, 60)}" is the count leader (${byCount[0]!.projectCount} projects)`);
+  await page.keyboard.press('Escape');
+  await page.locator('#top-consultant-views button[data-view="value"]').click();
+  await page.waitForTimeout(400);
+  await page.locator('svg#top-firms-chart').focus();
+  await page.keyboard.press('Home');
+  await page.waitForTimeout(150);
+  const valueRead = ((await page.locator('svg#top-firms-chart .readbox text').first().textContent()) ?? '').trim();
+  check(valueRead.startsWith(byValue[0]!.name.toUpperCase()) && (byValue[0]!.id === byCount[0]!.id || !valueRead.startsWith(byCount[0]!.name.toUpperCase())), `Value view ranks by value: first bar "${valueRead.slice(0, 50)}" is the value leader`);
+  await page.keyboard.press('Escape');
+
+  /* ---------- 7d. the value tint on a fresh matrix, nothing expanded, against the published data ---------- */
+  const cellValue = (rows: number[], vi: number) => Math.round(rows.reduce((a, ri) => a + (rollup.matrix[ri]!.cells[vi] ? rollup.matrixRows[ri]!.value * 10 : 0), 0)) / 10;
+  const sectorRows = (sector: string) => rollup.matrix.map((r, i) => (r.sector === sector ? i : -1)).filter((i) => i >= 0);
+  const sectorMax = Math.max(1, ...['Urban Construction', 'Industrial', 'Oil, Gas and Fuels', 'Transport', 'Utilities'].flatMap((s) => rollup.verticals.map((_v, vi) => cellValue(sectorRows(s), vi))));
+  /* the page's own scale (src/lib/tint.ts), and the retired one for the negative control: five linear slices of whatever type rows happened to be expanded, which with none expanded had a domain of 1 */
+  const stepOf = valueStep;
+  const retiredStep = (v: number, max: number) => Math.min(5, Math.max(1, Math.ceil((5 * v) / Math.max(1, max))));
+  await page.goto(`${base}/relevance`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#heatmap tbody tr');
+  const typeRowsFresh = await page.locator('#heatmap tbody tr.lv-type').count();
+  await page.locator('#colour-value').click();
+  await page.waitForTimeout(200);
+  const tinted = (await page.locator('#heatmap tr.lv-sector td[class*="hv-"]').evaluateAll((tds) => tds.map((td) => ({ cls: (td.className.match(/hv-\d/) ?? [''])[0], value: Number((td as HTMLElement).dataset.value), level: (td as HTMLElement).dataset.level })))) as { cls: string; value: number; level: string }[];
+  const allTinted = (await page.locator('#heatmap td[class*="hv-"]').evaluateAll((tds) => tds.map((td) => (td.className.match(/hv-\d/) ?? [''])[0]))) as string[];
+  const distinct = new Set(allTinted);
+  const industryDistinct = new Set((await page.locator('#heatmap tr.lv-industry td[class*="hv-"]').evaluateAll((tds) => tds.map((td) => (td.className.match(/hv-\d/) ?? [''])[0]))) as string[]);
+  const predictedOk = tinted.every((t) => t.cls === `hv-${stepOf(t.value, sectorMax)}`);
+  check(typeRowsFresh === 0 && tinted.length >= 20 && distinct.size >= 3 && industryDistinct.size >= 3 && predictedOk, `Tint by value on a fresh matrix (${typeRowsFresh} type rows expanded) paints ${allTinted.length} rendered cells on ${distinct.size} distinct steps (${industryDistinct.size} among the industry rows), and every one of the ${tinted.length} sector cells is the step the published data predicts against the largest sector cell`);
+  const oldRule = new Set(tinted.map((t) => `hv-${retiredStep(t.value, 1)}`));
+  check(oldRule.size === 1 && oldRule.has('hv-5'), `Negative control: the retired rule (domain from expanded type rows, none expanded, max 1) would paint every cell ${[...oldRule].join(',')}, which this gate rejects`);
+  await page.locator('#heatmap tr.lv-industry button.disc').first().click();
+  await page.waitForTimeout(200);
+  const afterOpen = (await page.locator('#heatmap tr.lv-sector td[class*="hv-"]').evaluateAll((tds) => tds.map((td) => (td.className.match(/hv-\d/) ?? [''])[0]))) as string[];
+  check(afterOpen.join() === tinted.map((t) => t.cls).join(), 'Opening an industry never re-tints the sector rows already on screen (the scale is per level, not per what is expanded)');
+
+  /* ---------- 7e. the tie decision is explained from its record ---------- */
+  const orderTie = projects.find((p) => p.why.tieRule === 'order')!;
+  const fewerTie = projects.find((p) => p.why.tieRule === 'fewer')!;
+  check(Boolean(orderTie) && Boolean(fewerTie), `The register carries both tie outcomes to test (${projects.filter((p) => p.why.tieRule === 'order').length} decided on published order, ${projects.filter((p) => p.why.tieRule === 'fewer').length} on fewer projects assigned)`);
+  await page.goto(`${base}/p/${orderTie.ref}`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#why');
+  const orderText = await page.locator('#why').innerText();
+  const orderAttr = await page.locator('#why').getAttribute('data-tie');
+  check(orderAttr === 'order' && /same number of projects assigned/.test(orderText) && /earlier vertical in the published order/.test(orderText) && !/fewer projects assigned/.test(orderText), `${orderTie.ref}: an equal-count tie says the published order decided and never claims fewer projects (negative control: "fewer" absent)`);
+  await page.goto(`${base}/p/${fewerTie.ref}`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#why');
+  const fewerText = await page.locator('#why').innerText();
+  const winnerCount = fewerTie.why.assignedAtDecision[fewerTie.why.tied.indexOf(fewerTie.ownerVertical!)]!;
+  check(/fewer projects assigned at the time/.test(fewerText) && fewerText.includes(`${rollup.verticals[fewerTie.ownerVertical!]!.name} ${winnerCount.toLocaleString('en-GB')}`), `${fewerTie.ref}: a fewer-count tie names the counts it was decided on (winner ${winnerCount})`);
+
+  /* ---------- 7f. descriptions agree with the parties they describe ---------- */
+  const contradiction = (p: Project) => p.description.includes('No consultant recorded') !== (p.leadConsultants.length === 0 && p.mepConsultant === null);
+  const mepOnly = projects.find((p) => p.mepConsultant !== null && p.leadConsultants.length === 0)!;
+  check(projects.filter(contradiction).length === 0 && Boolean(mepOnly), `No description denies a consultant the project records (0 contradictions across ${projects.length}; ${projects.filter((p) => p.mepConsultant !== null && p.leadConsultants.length === 0).length} projects carry an MEP consultant and no lead)`);
+  check(contradiction({ ...mepOnly, description: 'No consultant recorded.' }), 'Negative control: a description that denies a recorded MEP consultant is reported as a contradiction');
+  await page.goto(`${base}/p/${mepOnly.ref}`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#p-description');
+  const descText = await page.locator('#p-description').innerText();
+  const mepName = consultants.find((c) => c.id === mepOnly.mepConsultant)!.name;
+  check(descText.includes(`MEP consultant ${mepName}`) && !descText.includes('No consultant recorded'), `${mepOnly.ref} names its MEP consultant in the description and does not say "No consultant recorded"`);
+
+  /* ---------- 7g. every headline card opens exactly the population it counts ---------- */
+  const followCard = async (path: string, cardId: string, readSel = 'dd.big') => {
+    await page.goto(`${base}${path}`, { waitUntil: 'networkidle' });
+    await page.waitForSelector(`#${cardId}`);
+    const figure = num((await page.locator(`#${cardId} ${readSel}`).innerText()).trim());
+    const href = (await page.locator(`#${cardId} dd.sub a`).getAttribute('href')) ?? '';
+    await page.goto(`${base}${href}`, { waitUntil: 'networkidle' });
+    await waitRows(page);
+    const t = await tally(page);
+    const query = new URL(page.url()).search.slice(1);
+    return { figure, href, t, query, predicted: predict(query) };
+  };
+  const openNo = await followCard('/parties', 'pk-open');
+  check(openNo.figure === rollup.partySummary.openProjectsNoContractor && openNo.t.count === openNo.figure && openNo.predicted.count === openNo.figure, `"Open, no contractor yet" (${openNo.figure}) opens exactly ${openNo.t.count} projects (${openNo.href})`);
+  const openOld = predict('stage=Tender|Under%20Construction&cmax=5');
+  check(openOld.count !== openNo.figure && openOld.count > openNo.figure, `Negative control: the retired link without the contractor-absence predicate would open ${openOld.count} projects, not ${openNo.figure}`);
+  const noCon = await followCard('/parties', 'pk-nocon');
+  check(noCon.figure === rollup.partySummary.projectsNoConsultant && noCon.t.count === noCon.figure, `"Projects with no consultant" (${noCon.figure}) opens exactly ${noCon.t.count} projects (${noCon.href})`);
+  const ownedValue = await followCard('/', 'kpi-value');
+  const vkValue = num((await page.locator('#vk-value dd.big').innerText()).trim());
+  check(Math.round(ownedValue.figure * 10) === Math.round(rollup.kpis.ownedValue * 10) && Math.round(vkValue * 10) === Math.round(ownedValue.figure * 10) && Math.round(ownedValue.predicted.value * 10) === Math.round(ownedValue.figure * 10), `"Pipeline value owned" (AED ${ownedValue.figure} m) opens a register whose value in view is the same AED ${vkValue} m (${ownedValue.href})`);
+  check(Math.round(predict('sort=value').value * 10) !== Math.round(ownedValue.figure * 10), `Negative control: the retired link would open the whole register, AED ${predict('sort=value').value} m, not the owned value`);
+  const orders = await followCard('/', 'kpi-orders');
+  const vkOrders = num((await page.locator('#vk-orders dd.big').innerText()).trim());
+  check(orders.figure === rollup.kpis.ordersThisYear && vkOrders === orders.figure, `"Orders received ${rollup.meta.fiscalYear}" (${orders.figure}) opens a register whose Orders card reads the same ${vkOrders} (${orders.href})`);
+  check(rollup.funnel[0]! !== orders.figure, `Negative control: the retired link would count every order on record, ${rollup.funnel[0]}, not the ${orders.figure} dated ${rollup.meta.fiscalYear}`);
+  const openPairs = await followCard('/', 'kpi-open');
+  const vkOpen = num((await page.locator('#vk-open dd.big').innerText()).trim());
+  check(openPairs.figure === rollup.kpis.openEnquiriesAndQuotes && vkOpen === openPairs.figure, `"Open enquiries and quotes" (${openPairs.figure}) opens a register whose card reads the same ${vkOpen}`);
+  const high = await followCard('/relevance', 'mk-high');
+  check(high.figure === rollup.matrixSummary.projectsOverallHigh && high.t.count === high.figure && high.predicted.count === high.figure, `"Projects reading High" (${high.figure}) opens exactly ${high.t.count} projects (${high.href})`);
+  check(predict('sort=overall').count !== high.figure, `Negative control: the retired link would open all ${predict('sort=overall').count} projects`);
+
+  /* ---------- 7h. the four remaining managing-director stories, each inside three clicks ---------- */
+  /* Cooling: Overview > Consultants and contractors (1) > rank on Cooling (2) */
+  const cooling = vIndex.get('cooling')!;
+  const coolingTop = [...consultants].filter((c) => c.verticalCounts[cooling]! > 0).sort((a, b) => b.verticalCounts[cooling]! - a.verticalCounts[cooling]! || b.verticalValues[cooling]! - a.verticalValues[cooling]! || a.name.localeCompare(b.name))[0]!;
+  await page.goto(`${base}/parties`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#plist li');
+  await page.locator('#party-vertical').selectOption('cooling');
+  await page.waitForTimeout(300);
+  const pcText = (await page.locator('#picker-count').innerText()).trim();
+  const firstId = Number(await page.locator('#plist button').first().getAttribute('data-id'));
+  const firstN = Number(await page.locator('#plist button').first().getAttribute('data-n'));
+  check(/relevant to Cooling/i.test(pcText) && firstId === coolingTop.id && firstN === coolingTop.verticalCounts[cooling] && /v=cooling/.test(page.url()), `Ranking on Cooling puts ${coolingTop.name} first with ${firstN} relevant projects, in two clicks from the Overview, and the choice is in the address`);
+  await page.locator('#top-consultant-views button[data-view="count"]').click();
+  await page.waitForTimeout(400);
+  await page.locator('svg#top-firms-chart').focus();
+  await page.keyboard.press('Home');
+  await page.waitForTimeout(150);
+  const coolingRead = ((await page.locator('svg#top-firms-chart .readbox text').first().textContent()) ?? '').trim();
+  check(coolingRead.startsWith(coolingTop.name.toUpperCase()) && coolingRead.includes(`${coolingTop.verticalCounts[cooling]!.toLocaleString('en-GB')} PROJECTS`), `The top-firms chart ranks on Cooling too: first bar "${coolingRead.slice(0, 60)}"`);
+  await page.keyboard.press('Escape');
+  await page.locator('#plist button').first().click();
+  await page.waitForSelector('#party-vertical-tags');
+  const tagCount = Number(await page.locator('#party-vertical-tags').getAttribute('data-count'));
+  const tagNs = (await page.locator('#party-vertical-tags a').evaluateAll((as) => as.map((a) => [(a as HTMLElement).dataset.slug, Number((a as HTMLElement).dataset.n)]))) as [string, number][];
+  const expectedTags = coolingTop.verticalCounts.map((n, i) => [rollup.verticals[i]!.slug, n] as [string, number]).filter((x) => x[1] > 0);
+  const onVertical = (await page.locator('#party-on-vertical').innerText()).trim();
+  check(tagCount === expectedTags.length && tagNs.length === expectedTags.length && tagNs.every(([slug, n]) => expectedTags.some((e) => e[0] === slug && e[1] === n)) && tagNs[0]![0] === 'cooling' && onVertical.includes(`${coolingTop.verticalCounts[cooling]!.toLocaleString('en-GB')} of ${coolingTop.projectCount.toLocaleString('en-GB')} projects`), `${coolingTop.name}'s card lists all ${tagCount} verticals in play with their counts (no top-four cap), Cooling first, and reads "${onVertical.slice(0, 60)}"`);
+  check(expectedTags.length > 4 || consultants.some((c) => c.verticalCounts.filter((n) => n > 0).length > 4), `Negative control from the data: ${consultants.filter((c) => c.verticalCounts.filter((n) => n > 0).length > 4).length} consultants have more than four verticals in play, so a four-item preview would have hidden real reach`);
+  /* Overloaded: Overview > Engineers (1) */
+  const overCount = rollup.engineerSummary.filter((e) => e.overloaded).length;
+  const heaviest = [...rollup.engineerSummary].sort((a, b) => b.loadPct - a.loadPct)[0]!;
+  await page.goto(`${base}/engineers`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#ek-over');
+  const ekOver = num((await page.locator('#ek-over dd.big').innerText()).trim());
+  const ekHeavy = (await page.locator('#ek-heaviest').innerText()).trim();
+  check(ekOver === overCount && overCount >= 2 && ekHeavy.includes(heaviest.name) && ekHeavy.includes(`${heaviest.workload.toLocaleString('en-GB')} points against ${heaviest.capacity.toLocaleString('en-GB')}`), `"Over capacity" reads ${ekOver} engineers on the published workload rule, and "Heaviest load" names ${heaviest.name} with the points and the capacity, one click from the Overview`);
+  await page.locator('#books-views button[data-view="load"]').click();
+  await page.waitForTimeout(400);
+  const markerOn = await page.locator('svg#books-chart .marker line').count();
+  await page.locator('svg#books-chart').focus();
+  await page.keyboard.press('Home');
+  await page.waitForTimeout(150);
+  const loadRead = ((await page.locator('svg#books-chart .readbox text').first().textContent()) ?? '').trim();
+  const firstOrdered = rollup.engineerSummary.filter((e) => e.vertical === rollup.verticals[0]!.slug).sort((a, b) => b.ownedValue - a.ownedValue)[0]!;
+  check(markerOn === 1 && loadRead.startsWith(firstOrdered.name.toUpperCase()) && loadRead.includes(`${firstOrdered.workload.toLocaleString('en-GB')} POINTS`), `The Workload view draws the capacity line and reads points ("${loadRead.slice(0, 50)}")`);
+  await page.keyboard.press('Escape');
+  await page.locator('#books-views button[data-view="value"]').click();
+  await page.waitForTimeout(300);
+  check((await page.locator('svg#books-chart .marker line').count()) === 0, 'Negative control: the value view carries no capacity line');
+  const overCells = await page.locator('.ledger-cell[data-overloaded="true"]').count();
+  check(overCells === overCount, `${overCells} engineer blocks carry the over-capacity mark, matching the card`);
+  await page.goto(`${base}/engineers/${overloadedEng.slug}`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#eng-load');
+  const engLoad = (await page.locator('#eng-load').innerText()).trim();
+  check(engLoad.includes(`${overloadedEng.workload.toLocaleString('en-GB')} points against ${overloadedEng.capacity.toLocaleString('en-GB')}`) && /over capacity/.test(engLoad), `${overloadedEng.name}'s page states the workload, the capacity and the verdict ("${engLoad.replace(/\n/g, ' ').slice(0, 70)}")`);
+  /* No relationship: Overview > Consultants and contractors (1) > the card's link (2) */
+  const noRelCons = consultants.filter((c) => c.level === null);
+  const noRelKons = contractors.filter((c) => c.level === null);
+  await page.goto(`${base}/parties`, { waitUntil: 'networkidle' });
+  await page.waitForSelector('#pk-norel');
+  const pkNoRel = num((await page.locator('#pk-norel dd.big').innerText()).trim());
+  check(pkNoRel === noRelCons.length + noRelKons.length && pkNoRel > 0, `"No relationship yet" reads ${pkNoRel} firms, the party files' count of firms with no level, rating or owner`);
+  await page.locator('#pk-norel dd.sub a').click();
+  await page.waitForSelector('#plist li');
+  const relList = Number(await page.locator('#picker-count').getAttribute('data-count'));
+  await page.locator('#plist button').first().click();
+  await page.waitForSelector('#party-rel');
+  const relState = await page.locator('#party-card').getAttribute('data-rel');
+  const relText = await page.locator('#party-rel').innerText();
+  check(relList === noRelCons.length && relState === 'none' && /None yet/.test(relText) && /has not worked with this firm/.test(relText), `The link lists the ${relList} consultants with no relationship, and the first card states the absence in words rather than a low rating`);
+  await page.locator('button[data-rel="held"]').click();
+  await page.waitForTimeout(200);
+  const heldList = Number(await page.locator('#picker-count').getAttribute('data-count'));
+  check(heldList === consultants.length - noRelCons.length && heldList + relList === consultants.length, `Negative control: "Relationship held" lists the other ${heldList}, and the two filters sum to all ${consultants.length} consultants`);
+  check(noRelCons.every((c) => c.rating === null && c.owner === null) && consultants.filter((c) => c.level !== null).every((c) => c.rating !== null && c.owner !== null), 'In the party file a relationship is whole or absent: no firm has a rating or an owner without a level, or the reverse');
+
+  /* ---------- 7i. complete-looking corrupt rows are refused at the boundary, row by row ---------- */
+  const shard0 = rollup.shards[0]!.file;
+  const shardBody = (await (await fetch(`${base}/data/${shard0}`)).json()) as { sector: string; projects: Record<string, unknown>[] };
+  const corrupt = (mutate: (row: Record<string, unknown>) => void) => {
+    const copy = JSON.parse(JSON.stringify(shardBody)) as typeof shardBody;
+    mutate(copy.projects[3]!);
+    return JSON.stringify(copy);
+  };
+  const tryShard = async (body: string) => {
+    await page.route(`**/data/${shard0}`, (route) => route.fulfill({ status: 200, contentType: 'application/json', body }));
+    await page.goto(`${base}/projects`, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => document.querySelector('.errbox') !== null || document.querySelector('.vt-row') !== null, null, { timeout: 30000 });
+    const err = (await page.locator('.errbox').count()) ? await page.locator('.errbox').innerText() : '';
+    await page.unroute(`**/data/${shard0}`);
+    return err.replace(/\n/g, ' ');
+  };
+  const okShard = await tryShard(JSON.stringify(shardBody));
+  await waitRows(page).catch(() => {});
+  check(okShard === '' && (await tally(page)).count === projects.length, `Positive control: the shard's own bytes, replayed through the same interception, render all ${projects.length} projects`);
+  const badBucket = await tryShard(corrupt((r) => ((r.buckets as number[])[0] = 99)));
+  check(/expected shape/i.test(badBucket) && /buckets\[0\]/.test(badBucket), `A bucket code of 99 on row 4 is refused with the row and field named ("${badBucket.slice(0, 90)}")`);
+  const badScore = await tryShard(corrupt((r) => ((r.scores as unknown[])[0] = '8.0')));
+  check(/expected shape/i.test(badScore) && /scores\[0\]/.test(badScore), `A string where a score belongs is refused before it can reach a card ("${badScore.slice(0, 90)}")`);
+  const shortVectors = await tryShard(corrupt((r) => {
+    r.scores = [8];
+    r.buckets = [0];
+  }));
+  check(/expected shape/i.test(shortVectors) && /expected exactly 10/.test(shortVectors), `One-element score and bucket vectors are refused, ten expected ("${shortVectors.slice(0, 90)}")`);
+  const badDates = await tryShard(corrupt((r) => ((r.bucketDates as string[]).length = 9)));
+  check(/expected shape/i.test(badDates) && /bucketDates/.test(badDates), `A nine-long date vector is refused ("${badDates.slice(0, 90)}")`);
+  const badRef = await tryShard(corrupt((r) => (r.leadConsultants = [999999])));
+  check(/expected shape/i.test(badRef) && /not in parties\/consultants\.json/.test(badRef), `A consultant id no party file knows is refused as a dangling reference ("${badRef.slice(0, 90)}")`);
+  const badTie = await tryShard(corrupt((r) => ((r.why as Record<string, unknown>).tieRule = 'coin')));
+  check(/expected shape/i.test(badTie) && /tieRule/.test(badTie), `An unknown tie rule is refused ("${badTie.slice(0, 90)}")`);
+
   /* ---------- 8. every route renders; invalid and missing states ---------- */
   for (const [path, h] of [
     ['/relevance', 'Relevance matrix'],
@@ -583,7 +835,6 @@ try {
   const malformed = await page.locator('.errbox').innerText();
   check(/expected shape/i.test(malformed), `Malformed rollup shows a readable shape error ("${malformed.replace(/\n/g, ' ').slice(0, 80)}")`);
   await page.unroute('**/data/rollup.json');
-  const shard0 = rollup.shards[0]!.file;
   await page.route(`**/data/${shard0}`, (route) => route.fulfill({ status: 404, contentType: 'text/plain', body: 'gone' }));
   expectMissing = true;
   await page.goto(`${base}/projects`, { waitUntil: 'networkidle' });

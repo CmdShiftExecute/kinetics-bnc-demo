@@ -69,10 +69,10 @@ export default function Overview() {
         cols={6}
         items={[
           { label: 'Projects in register', value: kpis.projects, f: count, sub: `AED ${aedm(registerValue)} m across ${count(data.matrix.length)} type rows`, to: '/projects', id: 'kpi-projects' },
-          { label: 'Projects owned', value: kpis.owned, f: count, sub: `${pct((kpis.owned / kpis.projects) * 100)} of the register, ${data.engineers.length} engineers`, to: '/engineers', id: 'kpi-owned' },
-          { label: 'Pipeline value owned', value: kpis.ownedValue, sub: `AED million, ${pct((kpis.ownedValue / registerValue) * 100)} of register value`, to: '/projects?sort=value', id: 'kpi-value' },
+          { label: 'Projects owned', value: kpis.owned, f: count, sub: `${pct((kpis.owned / kpis.projects) * 100)} of the register, ${data.engineers.length} engineers`, to: '/projects?owned=1', id: 'kpi-owned' },
+          { label: 'Pipeline value owned', value: kpis.ownedValue, sub: `AED million, ${pct((kpis.ownedValue / registerValue) * 100)} of register value`, to: '/projects?owned=1&sort=value', id: 'kpi-value' },
           { label: 'Open enquiries and quotes', value: kpis.openEnquiriesAndQuotes, f: count, sub: 'project and vertical pairs live now', to: '/projects?bucket=1|2', id: 'kpi-open' },
-          { label: `Orders received ${meta.fiscalYear}`, value: kpis.ordersThisYear, f: count, sub: `of ${count(data.funnel[0]!)} orders on record`, to: '/projects?bucket=0', id: 'kpi-orders' },
+          { label: `Orders received ${meta.fiscalYear}`, value: kpis.ordersThisYear, f: count, sub: `of ${count(data.funnel[0]!)} orders on record`, to: `/projects?bucket=0&year=${meta.fiscalYear}`, id: 'kpi-orders' },
           { label: 'Worth chasing now', value: data.chase.length, f: count, sub: `AED ${aedm(data.chase.reduce((a, c) => a + Math.round(c.value * 10), 0) / 10)} m, top twenty by value`, to: '#chase', id: 'kpi-chase' },
         ]}
       />

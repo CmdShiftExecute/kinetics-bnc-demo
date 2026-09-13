@@ -20,7 +20,8 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CHANNELS } from '../data/channels';
-import { GRADE_SCORE, gradeOf, NOT_YET_AWARDED, NO_UPDATE, ORDER_RECEIVED, PROJECT_CLOSED, QUOTE_SENT, ENQUIRY_GENERATED, SCOPE_FLOOR, BUYING_COMPLETION_FLOOR_PCT, bestBucket, cascade, pickEngineer, r1, sum1, worthChasing, stageGate } from '../data/rules';
+import { ACTIVITY_BANDS, ENGINEER_CAPACITY, GRADE_SCORE, WORKLOAD_WEIGHTS, gradeOf, NOT_YET_AWARDED, NO_UPDATE, ORDER_RECEIVED, PROJECT_CLOSED, QUOTE_SENT, ENQUIRY_GENERATED, SCOPE_FLOOR, BUYING_COMPLETION_FLOOR_PCT, bestBucket, cascade, pctOf, pickEngineer, r1, sum1, worthChasing, workloadOf, stageGate } from '../data/rules';
+import { SHAPE_TARGETS } from '../data/shape';
 import type {
   Attribute,
   BucketCode,
@@ -48,6 +49,7 @@ import type {
   Sector,
   SectorStageCell,
   Shard,
+  ShapeCheck,
   Stage,
   Vertical,
   VerticalSummary,
@@ -286,8 +288,11 @@ function makeParties(kind: PartyKind, pool: { lead: number; mep: number; both: n
   }
   return roles.map((role, i) => ({ id: i + 1, name: unique(() => `${word()} ${pick(suffix[role])}`), kind, role, w: 1 / Math.pow(i + 3, exponent), projects: new Set<string>() }));
 }
-const consultants = makeParties('consultant', CONSULTANT_POOL, 0.8, CONSULTANT_SUFFIX);
-const contractors = makeParties('contractor', CONTRACTOR_POOL, 0.45, CONTRACTOR_SUFFIX);
+/* Zipf exponents: the consultant tail is steep (a few design houses sit on a hundred projects), the contractor tail flatter; both are declared as source-shape ranges in data/shape.ts */
+const CONSULTANT_ZIPF = 0.8;
+const CONTRACTOR_ZIPF = 0.36;
+const consultants = makeParties('consultant', CONSULTANT_POOL, CONSULTANT_ZIPF, CONSULTANT_SUFFIX);
+const contractors = makeParties('contractor', CONTRACTOR_POOL, CONTRACTOR_ZIPF, CONTRACTOR_SUFFIX);
 const owners: Owner[] = Array.from({ length: OWNER_POOL }, (_, i) => ({ id: i + 1, name: unique(() => `${word()} ${pick(OWNER_SUFFIX)}`) }));
 const ownerW = owners.map((_, i) => 1 / Math.pow(i + 5, 0.9));
 
@@ -437,10 +442,23 @@ for (const r of matrix) {
 
 const CONSULTANT_FILL = 0.92;
 const MEP_CONSULTANT_FILL = 0.24;
-/** Share of rows with a main or EPC contractor recorded, by stage; about 0.7 across the register. */
-const CONTRACTOR_FILL_BY_STAGE: Record<Stage, number> = { Concept: 0.35, Design: 0.5, Tender: 0.7, 'Under Construction': 0.9, 'Completed (3 months)': 0.85, 'Completed (1 year)': 0.75, 'Completed (3 years)': 0.6, 'Completed (above 3 years)': 0.45 };
+/**
+ * Share of rows with a main or EPC contractor recorded, by stage. The register names a
+ * contractor early (pre-qualified at concept and design, appointed by tender), and the
+ * record thins on the older completed rows, which is what leaves the source share of the
+ * register unassigned under the cascade's "held" gate. The resulting overall fill and the
+ * owned share are both declared ranges in data/shape.ts and checked before anything is written.
+ */
+const CONTRACTOR_FILL_BY_STAGE: Record<Stage, number> = { Concept: 0.55, Design: 0.7, Tender: 0.85, 'Under Construction': 0.85, 'Completed (3 months)': 0.6, 'Completed (1 year)': 0.45, 'Completed (3 years)': 0.3, 'Completed (above 3 years)': 0.18 };
 /** MEP contractor fill as a share of the main-contractor fill, so about a fifth of the register overall. */
 const MEP_CONTRACTOR_SHARE = 0.28;
+/**
+ * The no-relationship cohort: a KNOWN firm Halvard has never worked with. Drawn by how much
+ * of the firm's book Halvard owns and how big the book is: a firm with no owned project is
+ * usually a stranger, a small book often is, a large book almost never. Synthetic, declared
+ * on the Data basis page, and the answer to "where do we have no relationship at all".
+ */
+const NO_RELATIONSHIP_P = { noOwnedProject: 0.6, smallBook: 0.2, midBook: 0.05 };
 
 function drawValue(type: string): number {
   /* log-normal in AED million: median 55, sigma 2.2 on the register, scaled by type, capped */
@@ -631,10 +649,13 @@ for (const d of drafts) {
   }
   const buckets = scores.map((s, i) => bucketFor(s, d.stage, res.vertical === i, contractorAppointed));
   const bucketDates = buckets.map((b) => bucketDate(b));
+  /* each role gets its own clause, and the "none" sentence is used only when BOTH roles of a kind are absent (a lead-less project with an MEP consultant names that consultant) */
+  const consultantClauses = [d.leadConsultants.length ? `Lead consultant ${d.leadConsultants.map((c) => consultantName.get(c)).join(' with ')}` : '', d.mepConsultant ? `MEP consultant ${consultantName.get(d.mepConsultant)}` : ''].filter(Boolean);
+  const contractorClauses = [d.mainContractors.length ? `Main contractor ${d.mainContractors.map((c) => contractorName.get(c)).join(' and ')}` : '', d.mepContractor ? `MEP contractor ${contractorName.get(d.mepContractor)}` : ''].filter(Boolean);
   const who = [
     d.owners.length ? `Developed by ${d.owners.map((o) => ownerName.get(o)).join(' and ')}.` : 'The developer is not yet recorded.',
-    d.leadConsultants.length ? `Lead consultant ${d.leadConsultants.map((c) => consultantName.get(c)).join(' with ')}${d.mepConsultant ? `; MEP consultant ${consultantName.get(d.mepConsultant)}` : ''}.` : 'No consultant recorded.',
-    d.mainContractors.length ? `Main contractor ${d.mainContractors.map((c) => contractorName.get(c)).join(' and ')}${d.mepContractor ? `; MEP contractor ${contractorName.get(d.mepContractor)}` : ''}.` : d.mepContractor ? `MEP contractor ${contractorName.get(d.mepContractor)}.` : 'No contractor appointed.',
+    consultantClauses.length ? `${consultantClauses.join('; ')}.` : 'No consultant recorded.',
+    contractorClauses.length ? `${contractorClauses.join('; ')}.` : 'No contractor appointed.',
   ];
   const when = d.stage.startsWith('Completed') ? `Completed ${monthLabel(d.completionDate)}.` : `Expected completion ${monthLabel(d.completionDate)}.`;
   const description = `${d.name} is a ${d.category.toLowerCase()} ${d.type.toLowerCase()} project in ${d.city}, valued at AED ${d.value.toFixed(1)} million, at ${d.stage.toLowerCase()}${d.completionPct != null && d.completionPct > 0 ? ` (${d.completionPct.toFixed(1)} percent complete)` : ''}. ${who.join(' ')} ${when}`;
@@ -658,29 +679,33 @@ function finishParty(d: PartyDraft): Party | null {
   const refs = [...d.projects].sort();
   const ps = refs.map((r) => byRef.get(r)!);
   const value = sum1(ps.map((p) => p.value));
-  /* verticals it matters to: High or Medium on its projects, by count, top four */
-  const counts = verticals.map(() => 0);
-  for (const p of ps) p.scores.forEach((s, i) => (s != null && s >= 3.5 ? counts[i]!++ : 0));
-  const vs = counts
-    .map((c, i) => ({ c, i }))
-    .filter((x) => x.c > 0)
-    .sort((a, b) => b.c - a.c || a.i - b.i)
-    .slice(0, 4)
-    .map((x) => x.i);
-  /* owner: the engineer owning most of its projects; else the least-loaded engineer on its top vertical */
+  /* the verticals it matters to: per vertical, its projects graded Medium or High (score 3.5 or more), count and value, all ten published so no list is a hidden top-N */
+  const verticalCounts = verticals.map(() => 0);
+  const verticalTenths = verticals.map(() => 0);
+  for (const p of ps)
+    p.scores.forEach((s, i) => {
+      if (s != null && s >= 3.5) {
+        verticalCounts[i]!++;
+        verticalTenths[i]! += Math.round(p.value * 10);
+      }
+    });
+  const verticalValues = verticalTenths.map((t) => t / 10);
+  const topVertical = verticalCounts.map((c, i) => ({ c, i })).sort((a, b) => b.c - a.c || a.i - b.i)[0]!.i;
+  const n = refs.length;
+  /* the relationship, or none: a firm Halvard has never worked with has no level, no rating and no owner, all three together */
   const owned = new Map<string, number>();
   for (const p of ps) if (p.ownerEngineer) owned.set(p.ownerEngineer, (owned.get(p.ownerEngineer) ?? 0) + 1);
+  const pNone = owned.size === 0 ? NO_RELATIONSHIP_P.noOwnedProject : n <= 3 ? NO_RELATIONSHIP_P.smallBook : n <= 8 ? NO_RELATIONSHIP_P.midBook : 0;
+  const base = { id: d.id, name: d.name, kind: d.kind, role: d.role, verticalCounts, verticalValues, projectCount: n, projectValue: value, projects: refs };
+  if (rnd() < pNone) return { ...base, level: null, rating: null, owner: null };
+  /* owner: the engineer owning most of its projects; else the engineer holding the fewest relationships on its top vertical */
   let owner: string;
   if (owned.size) owner = [...owned.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]![0];
-  else {
-    const vi = vs[0] ?? 0;
-    owner = pickEngineer(roster(vi), relationshipsHeld).slug;
-  }
+  else owner = pickEngineer(roster(topVertical), relationshipsHeld).slug;
   relationshipsHeld.set(owner, (relationshipsHeld.get(owner) ?? 0) + 1);
-  const n = refs.length;
   const level: RelationshipLevel = weighted(['Junior management', 'Middle management', 'Senior management'] as const, n >= 12 ? [10, 40, 50] : n >= 5 ? [30, 50, 20] : [55, 35, 10]);
   const rating = Math.max(1, Math.min(10, Math.round((level === 'Senior management' ? 7 : level === 'Middle management' ? 5 : 3) + gauss() * 1.5)));
-  return { id: d.id, name: d.name, kind: d.kind, role: d.role, verticals: vs, level, rating, owner, projectCount: n, projectValue: value, projects: refs };
+  return { ...base, level, rating, owner };
 }
 const consultantsOut = consultants.map(finishParty).filter((p): p is Party => p !== null);
 const contractorsOut = contractors.map(finishParty).filter((p): p is Party => p !== null);
@@ -735,13 +760,19 @@ const engineerSummary: EngineerSummary[] = engineers.map((e) => {
   const cons2 = new Set(consultantsOut.filter((c) => c.owner === e.slug).map((c) => c.id));
   const cont = new Set(owned.flatMap((p) => [...p.mainContractors, ...(p.mepContractor ? [p.mepContractor] : [])]));
   const cont2 = new Set(contractorsOut.filter((c) => c.owner === e.slug).map((c) => c.id));
+  const funnelE = BUCKETS.map((_, code) => owned.filter((p) => p.buckets[vi] === code).length);
+  const workload = workloadOf(funnelE);
   return {
     slug: e.slug,
     name: e.name,
     vertical: e.vertical,
     owned: owned.length,
     ownedValue: sum1(owned.map((p) => p.value)),
-    funnel: BUCKETS.map((_, code) => owned.filter((p) => p.buckets[vi] === code).length),
+    funnel: funnelE,
+    workload,
+    capacity: ENGINEER_CAPACITY,
+    loadPct: pctOf(workload, ENGINEER_CAPACITY),
+    overloaded: workload > ENGINEER_CAPACITY,
     top: [...owned]
       .sort((a, b) => b.value - a.value || a.ref.localeCompare(b.ref))
       .slice(0, 5)
@@ -799,7 +830,12 @@ function kindSummary(list: Party[]): PartyKindSummary {
     senior: list.filter((p) => p.level === 'Senior management').length,
     middle: list.filter((p) => p.level === 'Middle management').length,
     junior: list.filter((p) => p.level === 'Junior management').length,
-    averageRating: list.length ? r1(sum(list.map((p) => p.rating)) / list.length) : 0,
+    noRelationship: list.filter((p) => p.level === null).length,
+    noRelationshipValue: sum1(list.filter((p) => p.level === null).map((p) => p.projectValue)),
+    averageRating: (() => {
+      const rated = list.map((p) => p.rating).filter((r): r is number => r !== null);
+      return rated.length ? r1(sum(rated) / rated.length) : 0;
+    })(),
     onTenPlus: list.filter((p) => p.projectCount >= 10).length,
     bookValue: sum1(list.map((p) => p.projectValue)),
     top: [...list]
@@ -832,20 +868,57 @@ expect(sum1(engineerSummary.map((e) => e.ownedValue)) === kpis.ownedValue, 'engi
 expect(sum(matrixRows.map((m) => m.count)) === projects.length, 'matrix rows cover every project');
 for (const e of engineerSummary) expect(sum(e.funnel) === e.owned, `funnel of ${e.slug}`);
 const ownedShare = kpis.owned / kpis.projects;
-expect(ownedShare > 0.6 && ownedShare < 0.95, `owned share ${ownedShare}`);
 const quiet = (funnel[7]! + funnel[NO_UPDATE]!) / sum(funnel);
 const orders = funnel[ORDER_RECEIVED]! / sum(funnel);
 const closed = funnel[PROJECT_CLOSED]! / sum(funnel);
-expect(quiet > 0.4 && quiet < 0.6, `no update plus waiting share ${quiet}`);
-expect(orders < 0.05, `orders share ${orders}`);
-expect(closed > 0.06 && closed < 0.14, `closed share ${closed}`);
 const books = engineerSummary.map((e) => e.owned);
-expect(Math.min(...books) >= 15, `smallest book ${Math.min(...books)}`);
 for (const p of projects) {
   expect(p.scores.length === V && p.buckets.length === V && p.bucketDates.length === V, `vector lengths on ${p.ref}`);
   expect(Math.round(p.value * 10) === p.value * 10 || Math.abs(Math.round(p.value * 10) - p.value * 10) < 1e-6, `value precision on ${p.ref}`);
+  /* the description must agree with the parties it describes (a lead-less project with an MEP consultant is not "No consultant recorded") */
+  expect(p.description.includes('No consultant recorded') === (p.leadConsultants.length === 0 && p.mepConsultant === null), `consultant sentence on ${p.ref}`);
+  expect(p.mepConsultant === null || p.description.includes(`MEP consultant ${consultantName.get(p.mepConsultant)}`), `MEP consultant named on ${p.ref}`);
+  expect(p.description.includes('No contractor appointed') === (p.mainContractors.length === 0 && p.mepContractor === null), `contractor sentence on ${p.ref}`);
+  /* the tie decision record is complete: tied verticals, their counts, and which half of the rule decided */
+  expect(p.why.tie === (p.why.tied.length > 1) && p.why.tied.length === p.why.assignedAtDecision.length && (p.why.tie ? p.why.tieRule !== null : p.why.tieRule === null), `tie record on ${p.ref}`);
 }
-for (const c of [...consultantsOut, ...contractorsOut]) expect(c.projectCount === c.projects.length && c.rating >= 1 && c.rating <= 10, `party ${c.name}`);
+for (const c of [...consultantsOut, ...contractorsOut]) {
+  expect(c.projectCount === c.projects.length, `party ${c.name}`);
+  /* a relationship is whole or absent: level, rating and owner are all set or all null */
+  const held = c.level !== null;
+  expect(held === (c.rating !== null) && held === (c.owner !== null) && (!held || (c.rating! >= 1 && c.rating! <= 10)), `relationship state of ${c.name}`);
+  expect(c.verticalCounts.length === V && c.verticalValues.length === V && Math.max(...c.verticalCounts) <= c.projectCount, `vertical vectors of ${c.name}`);
+}
+
+/* ---------- the declared source shape, measured before anything is written ---------- */
+
+const median = (xs: number[]) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)]!;
+const allParties = [...consultantsOut, ...contractorsOut];
+const measuredShape: Record<string, number> = {
+  ownedShare: pctOf(kpis.owned, kpis.projects),
+  smallestBook: Math.min(...books),
+  largestBook: Math.max(...books),
+  quietShare: pctOf(funnel[7]! + funnel[NO_UPDATE]!, sum(funnel)),
+  ordersShare: pctOf(funnel[ORDER_RECEIVED]!, sum(funnel)),
+  closedShare: pctOf(funnel[PROJECT_CLOSED]!, sum(funnel)),
+  mepConsultantFill: pctOf(projects.filter((p) => p.mepConsultant !== null).length, projects.length),
+  mainContractorFill: pctOf(projects.filter((p) => p.mainContractors.length > 0).length, projects.length),
+  mepContractorFill: pctOf(projects.filter((p) => p.mepContractor !== null).length, projects.length),
+  consultantMedian: median(consultantsOut.map((c) => c.projectCount)),
+  consultantMax: Math.max(...consultantsOut.map((c) => c.projectCount)),
+  contractorMedian: median(contractorsOut.map((c) => c.projectCount)),
+  contractorMax: Math.max(...contractorsOut.map((c) => c.projectCount)),
+  noRelationshipShare: pctOf(allParties.filter((p) => p.level === null).length, allParties.length),
+};
+const shape: ShapeCheck[] = SHAPE_TARGETS.map((t) => {
+  const measured = measuredShape[t.key];
+  if (measured === undefined) throw new Error(`shape target ${t.key} has no measurement`);
+  return { ...t, measured, pass: measured >= t.lo && measured <= t.hi };
+});
+const shapeMisses = shape.filter((s) => !s.pass).map((s) => `${s.label}: measured ${s.measured} ${s.unit}, declared ${s.lo} to ${s.hi}`);
+expect(shapeMisses.length === 0, `source shape, ${shapeMisses.length} declared range(s) missed:\n  ${shapeMisses.join('\n  ')}\n  (all measured: ${JSON.stringify(measuredShape)})`);
+const overloaded = engineerSummary.filter((e) => e.overloaded).length;
+expect(overloaded >= 2 && overloaded <= 8, `overloaded engineers ${overloaded} of ${engineers.length}; retune ENGINEER_CAPACITY in data/rules.ts`);
 expect(sum(reach.map((r) => r.rowsHigh + r.rowsMedium + r.rowsLow)) === matrixSummary.cellsGraded, 'reach rows sum to graded cells');
 for (const r of reach) expect(r.rowsHigh + r.rowsMedium + r.rowsLow + r.rowsNone === matrix.length, `reach rows of ${r.slug}`);
 
@@ -864,8 +937,10 @@ const definitions: Record<string, Definition> = Object.fromEntries(
       ['orders', 'Orders received this year', `Project-and-vertical pairs whose bucket is Order received with an activity date in ${FISCAL_YEAR}.`],
       ['chase', 'Worth chasing now', `Projects at Tender, or under construction at ${BUYING_COMPLETION_FLOOR_PCT.toFixed(1)} percent or less, with overall relevance ${(5).toFixed(1)} or more and no vertical in Project closed; the top twenty by value.`],
       ['door', 'Door in', 'The party through which the owning vertical reaches the project: at specification stage the MEP consultant, else the lead consultant; at buying stage the main contractor, else the MEP contractor, else the lead consultant.'],
-      ['level', 'Relationship level', 'The highest management level Halvard has a working relationship with at the party: junior, middle or senior management.'],
-      ['rating', 'Relationship rating', 'A whole number from 1 to 10 recorded by the relationship owner.'],
+      ['level', 'Relationship level', 'The highest management level Halvard has a working relationship with at the party: junior, middle or senior management. A known firm Halvard has never worked with has no level, no rating and no owner.'],
+      ['rating', 'Relationship rating', 'A whole number from 1 to 10 recorded by the relationship owner; none where there is no relationship.'],
+      ['workload', 'Workload', `Synthetic points per engineer: each owned project counts ${WORKLOAD_WEIGHTS.active} when its bucket on the engineer's vertical is active (quote, enquiry, profile shared, visit, reached out), ${WORKLOAD_WEIGHTS.won} for an order or a waiting or quiet bucket, ${WORKLOAD_WEIGHTS.closed} when closed. An engineer is over capacity above ${ENGINEER_CAPACITY} points.`],
+      ['norel', 'No relationship yet', 'A firm on the register that Halvard has never worked with: its level, rating and owner are all blank. Not the same as a low rating.'],
       ['value', 'Value', 'The project value in AED million to one decimal, as recorded on the register.'],
       ['completion', 'Completion', 'Percent complete, recorded for projects under construction only; most under-construction rows carry 0.0 until a site report arrives.'],
     ] as const
@@ -882,9 +957,20 @@ const assumptions = [
   `${TARGET_PROJECTS.toLocaleString('en-GB')} projects, drawn over 80 sector, industry and project-type rows with Urban Construction about three quarters of the register, Industrial about a tenth, and Oil, Gas and Fuels, Transport and Utilities sharing the rest.`,
   'Project values follow a wide log-normal in AED million, scaled by project type (a fuel station is small, a metro line is large), capped at AED 60,000.0 million.',
   'Stages weight toward Under Construction (about a third) and Design; four completed bands cover a quarter. Completion percent is recorded for under-construction rows only, and most of those carry 0.0.',
-  `Parties: ${consultantsOut.length} consultants and ${contractorsOut.length} contractors appear on at least one project, drawn with a heavy tail so a few firms sit on many projects. MEP consultants are recorded on about a quarter of rows and MEP contractors on about a fifth; a contractor is recorded on most rows under construction, on about half at Design, and on fewer of the older completed rows.`,
+  `Parties: ${consultantsOut.length} consultants and ${contractorsOut.length} contractors appear on at least one project, drawn with a heavy tail so a few firms sit on many projects. MEP consultants are recorded on ${measuredShape.mepConsultantFill!.toFixed(1)} percent of rows, a main contractor on ${measuredShape.mainContractorFill!.toFixed(1)} percent and an MEP contractor on ${measuredShape.mepContractorFill!.toFixed(1)} percent; the contractor record is fullest at Tender and under construction and thins on the older completed rows.`,
   'Every name other than the ten verticals and the 24 engineers is built from invented syllables and checked against a list of terms that must never appear.',
-  'Relationship level and rating are drawn per party, with larger books leaning senior; the relationship owner is the engineer owning most of that party’s projects.',
+  `Relationship level and rating are drawn per firm, with larger books leaning senior; the relationship owner is the engineer owning most of that firm's projects. ${measuredShape.noRelationshipShare!.toFixed(1)} percent of firms are a synthetic no-relationship cohort with no level, rating or owner.`,
+  `Workload is a synthetic measure, ${WORKLOAD_WEIGHTS.active} points per active project on the engineer's own vertical and ${WORKLOAD_WEIGHTS.won} per order or quiet project, against a capacity of ${ENGINEER_CAPACITY} points chosen so a few of the 24 books exceed it.`,
+];
+const workloadRule = [
+  `Each owned project earns the engineer points by its activity bucket on the engineer's own vertical: ${ACTIVITY_BANDS.map((b) => `${b.label.toLowerCase()} (${b.codes.map((c) => BUCKETS[c]).join(', ')}) ${WORKLOAD_WEIGHTS[b.key]}`).join('; ')}.`,
+  `Workload is the sum of those points. Capacity is ${ENGINEER_CAPACITY} points for every engineer; an engineer whose workload exceeds it is over capacity.`,
+  'Both are synthetic: an illustration of the kind of rule a capacity view needs, never a record of hours worked.',
+];
+const relationshipRule = [
+  'A firm is known when it sits on at least one project of the register. Halvard holds a relationship with a known firm when a level, a rating and an owner are recorded; the three are always recorded together or not at all.',
+  `The no-relationship cohort is drawn per firm: a firm with no project owned by Halvard has a ${Math.round(NO_RELATIONSHIP_P.noOwnedProject * 100)} percent chance of no relationship, a firm on three projects or fewer ${Math.round(NO_RELATIONSHIP_P.smallBook * 100)} percent, a firm on four to eight ${Math.round(NO_RELATIONSHIP_P.midBook * 100)} percent, and a larger book always has one.`,
+  'The parties page filters on this state, and the "No relationship yet" figure counts exactly those firms.',
 ];
 const cascadeText = [
   `Step 1, scope floor: a vertical is eligible for a project only when its score is ${SCOPE_FLOOR.toFixed(1)} or more.`,
@@ -953,11 +1039,16 @@ const rollup: Rollup = {
   gradeScore: GRADE_SCORE,
   scopeFloor: SCOPE_FLOOR,
   buyingCompletionFloorPct: BUYING_COMPLETION_FLOOR_PCT,
+  engineerCapacity: ENGINEER_CAPACITY,
+  workloadWeights: WORKLOAD_WEIGHTS,
   definitions,
   precisionPolicy,
   assumptions,
   cascade: cascadeText,
   bucketRule,
+  workloadRule,
+  relationshipRule,
+  shape,
   distributions: {
     stages: STAGES.map((stage) => ({ stage, count: projects.filter((p) => p.stage === stage).length })),
     sectors: SECTORS.map((sector) => ({ sector, count: projects.filter((p) => p.sector === sector).length })),
@@ -978,4 +1069,6 @@ console.log(`Wrote ${projects.length} projects in ${shards.length} shards, ${con
 console.log(`Owned ${kpis.owned} (${(ownedShare * 100).toFixed(1)}%), books ${Math.min(...books)} to ${Math.max(...books)}; value p10 ${q(0.1)} p50 ${q(0.5)} p90 ${q(0.9)} max ${values[values.length - 1]} AED m`);
 console.log(`Buckets: quiet ${(quiet * 100).toFixed(1)}%, orders ${(orders * 100).toFixed(1)}%, closed ${(closed * 100).toFixed(1)}%; completion zeros ${(fz * 100).toFixed(0)}% of filled`);
 console.log(`Gates: ${(['specification', 'buying', 'appointed', 'held', 'none'] as const).map((g) => `${g} ${projects.filter((p) => p.why.gate === g).length}`).join(', ')}`);
-console.log(`Consultant books median ${consultantsOut.map((c) => c.projectCount).sort((a, b) => a - b)[Math.floor(consultantsOut.length / 2)]}, max ${Math.max(...consultantsOut.map((c) => c.projectCount))}; contractor median ${contractorsOut.map((c) => c.projectCount).sort((a, b) => a - b)[Math.floor(contractorsOut.length / 2)]}, max ${Math.max(...contractorsOut.map((c) => c.projectCount))}`);
+console.log(`Consultant books median ${measuredShape.consultantMedian}, max ${measuredShape.consultantMax}; contractor median ${measuredShape.contractorMedian}, max ${measuredShape.contractorMax}`);
+console.log(`Fills: MEP consultant ${measuredShape.mepConsultantFill}%, main contractor ${measuredShape.mainContractorFill}%, MEP contractor ${measuredShape.mepContractorFill}%; no relationship ${measuredShape.noRelationshipShare}% of firms; workload over capacity ${overloaded} of ${engineers.length} (${engineerSummary.map((e) => e.workload).sort((a, b) => b - a).slice(0, 8).join(', ')} ...)`);
+console.log(`Ties: fewer ${projects.filter((p) => p.why.tieRule === 'fewer').length}, order ${projects.filter((p) => p.why.tieRule === 'order').length}; shape ${shape.filter((s) => s.pass).length} of ${shape.length} declared ranges met`);

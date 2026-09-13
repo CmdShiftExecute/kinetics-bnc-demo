@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { useSearchParams } from 'react-router';
 import { useRegister } from '../lib/register';
 import type { Filters, SortDir, SortKey } from '../lib/filters';
-import { EMPTY, activeCount, matches, parseFilters, serialiseFilters, sortProjects } from '../lib/filters';
+import { EMPTY, activeCount, countPairs, matches, parseFilters, serialiseFilters, sortProjects } from '../lib/filters';
 import { aedm, count, cx, dateLabel, pct, score } from '../lib/format';
 import { toCsv, download } from '../lib/csv';
 import { Masthead } from '../components/Masthead';
@@ -56,19 +56,18 @@ export default function ProjectsPage() {
   };
   const rows = useMemo(() => (reg.data ? sortProjects(reg.data.projects.filter((p) => matches(p, filters, vIndex)), filters, vIndex, engineerName) : []), [reg.data, filters, vIndex, engineerName]);
   const total = useMemo(() => rows.reduce((a, p) => a + Math.round(p.value * 10), 0) / 10, [rows]);
-  /* the headline figures and the chart of the CURRENT view: recomputed with every filter change from the same rows the table shows */
+  /* the headline figures and the chart of the CURRENT view: recomputed with every filter change from the same rows the table shows; pair counts honour the vertical and the activity year of the filter, so a headline card's drill reads the same figure */
   const view = useMemo(() => {
     const vi = filters.vertical ? (vIndex.get(filters.vertical) ?? null) : null;
     const owned = rows.filter((p) => p.ownerVertical != null);
     const high = rows.filter((p) => gradeOf(p.overall) === 'High');
-    const pairs = (codes: number[]) => rows.reduce((a, p) => a + (vi != null ? (codes.includes(p.buckets[vi]!) ? 1 : 0) : p.buckets.filter((b) => codes.includes(b)).length), 0);
     const byStage = STAGES.map((st) => {
       const ps = rows.filter((p) => p.stage === st);
       const own = ps.filter((p) => p.ownerVertical != null);
       return { count: [own.length, ps.length - own.length], value: [Math.round(own.reduce((a, p) => a + p.value * 10, 0)) / 10, Math.round(ps.filter((p) => p.ownerVertical == null).reduce((a, p) => a + p.value * 10, 0)) / 10] };
     });
-    return { owned: owned.length, ownedValue: Math.round(owned.reduce((a, p) => a + p.value * 10, 0)) / 10, high: high.length, open: pairs([1, 2]), orders: pairs([0]), byStage, vi };
-  }, [rows, filters.vertical, vIndex]);
+    return { owned: owned.length, ownedValue: Math.round(owned.reduce((a, p) => a + p.value * 10, 0)) / 10, high: high.length, open: countPairs(rows, filters, vIndex, [1, 2]), orders: countPairs(rows, filters, vIndex, [0]), byStage, vi };
+  }, [rows, filters, vIndex]);
   if (reg.error) return <PageError message={reg.error} />;
   if (!reg.data || !rollup) return <PageLoading rows={14} />;
   const { meta } = rollup;
@@ -114,8 +113,8 @@ export default function ProjectsPage() {
           { label: 'Value in view', value: total, sub: `AED million, ${pct(reg.data.projects.length ? (total / (reg.data.rollup.sectorStage.reduce((a, c) => a + Math.round(c.value * 10), 0) / 10)) * 100 : 0)} of the register`, id: 'vk-value' },
           { label: 'Owned', value: view.owned, f: count, sub: `${rows.length ? pct((view.owned / rows.length) * 100) : '0.0%'} of the view, AED ${aedm(view.ownedValue)} m`, id: 'vk-owned' },
           { label: 'Reading High overall', value: view.high, f: count, sub: `${rows.length ? pct((view.high / rows.length) * 100) : '0.0%'} of the view`, id: 'vk-high' },
-          { label: 'Open enquiries and quotes', value: view.open, f: count, sub: view.vi != null ? `on ${scoreName}` : 'project and vertical pairs', id: 'vk-open' },
-          { label: 'Orders received', value: view.orders, f: count, sub: view.vi != null ? `on ${scoreName}` : 'project and vertical pairs', id: 'vk-orders' },
+          { label: 'Open enquiries and quotes', value: view.open, f: count, sub: `${view.vi != null ? `on ${scoreName}` : 'project and vertical pairs'}${filters.year !== null ? `, dated ${filters.year}` : ''}`, id: 'vk-open' },
+          { label: filters.year !== null ? `Orders received ${filters.year}` : 'Orders received', value: view.orders, f: count, sub: `${view.vi != null ? `on ${scoreName}` : 'project and vertical pairs'}${filters.year !== null ? `, dated ${filters.year}` : ''}`, id: 'vk-orders' },
         ]}
       />
       <Section id="view-chart" title="The view by stage" note="The projects in the current view along the lifecycle, owned against not yet owned; the chart re-shapes as the filters change">

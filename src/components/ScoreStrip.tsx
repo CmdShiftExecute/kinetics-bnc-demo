@@ -5,18 +5,22 @@ import { gradeOf } from '../../data/rules';
 import type { Vertical } from '../../data/schema';
 import { cx, score } from '../lib/format';
 import { keyStep } from './charts';
+import { useWidth } from './useWidth';
 
 /**
  * The ten vertical scores of one project as a bar strip: one column per vertical,
  * height by score out of 8, the grade under it, the owning vertical outlined in ink,
- * a hand-adjusted score marked. Hover-driven with keyboard parity.
+ * a hand-adjusted score marked. Drawn at the full width of its section (a narrow
+ * viewport keeps a 700px floor and scrolls). Hover-driven with keyboard parity.
  */
 export function ScoreStrip({ verticals, scores, adjusted, owner, id }: { verticals: Vertical[]; scores: (number | null)[]; adjusted: number[]; owner: number | null; id: string }) {
   const reduce = useReducedMotion();
   const [hover, setHover] = useState<number | null>(null);
-  const colW = 100;
-  const width = colW * verticals.length;
-  const plotH = 72;
+  const { ref, width: measured } = useWidth(1000, 700);
+  const width = Math.max(700, measured);
+  const colW = width / verticals.length;
+  const barW = Math.min(36, Math.max(20, colW * 0.3));
+  const plotH = 96;
   const height = plotH + 56;
   const onMove = (e: PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -26,7 +30,7 @@ export function ScoreStrip({ verticals, scores, adjusted, owner, id }: { vertica
   const h = hover != null ? hover : null;
   const readout = h != null ? `${verticals[h]!.name}: ${scores[h] == null ? 'no relevance' : `${score(scores[h] ?? null)} of 8.0, ${gradeOf(scores[h] ?? null)}${adjusted.includes(h) ? ', hand-adjusted' : ''}`}${owner === h ? ', owns this project' : ''}` : '';
   return (
-    <div className="scroll-x">
+    <div className="scroll-x chart-wrap" ref={ref}>
       <svg id={id} className="chart scores" width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`Relevance by vertical. ${verticals.map((v, i) => `${v.name}: ${score(scores[i]!)}`).join('. ')}.`} tabIndex={0} onPointerMove={onMove} onPointerLeave={() => setHover(null)} onKeyDown={(e) => keyStep(e, verticals.length, hover, setHover)}>
         <rect x={0} y={0} width={width} height={height} fill="transparent" />
         <line className="grid" x1={0} x2={width} y1={plotH + 0.5} y2={plotH + 0.5} />
@@ -38,7 +42,7 @@ export function ScoreStrip({ verticals, scores, adjusted, owner, id }: { vertica
             <g key={v.slug} transform={`translate(${i * colW} 0)`}>
               {hover === i && <rect className="rowhi" x={0} y={0} width={colW} height={height} />}
               {owner === i && <rect className="own" x={4} y={2} width={colW - 8} height={height - 4} />}
-              {s != null && <motion.rect className={cx('sbar', g === 'High' && 'g-high', g === 'Medium' && 'g-med', g === 'Low' && 'g-low', hover === i && 'mk-on')} x={colW / 2 - 14} y={plotH - bh} width={28} height={bh} style={{ transformOrigin: `0px ${plotH}px` }} {...(reduce ? {} : { initial: { scaleY: 0 }, animate: { scaleY: 1 }, transition: { duration: 0.45, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] } })} />}
+              {s != null && <motion.rect className={cx('sbar', g === 'High' && 'g-high', g === 'Medium' && 'g-med', g === 'Low' && 'g-low', hover === i && 'mk-on')} x={colW / 2 - barW / 2} y={plotH - bh} width={barW} height={bh} style={{ transformOrigin: `0px ${plotH}px` }} {...(reduce ? {} : { initial: { scaleY: 0 }, animate: { scaleY: 1 }, transition: { duration: 0.45, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] } })} />}
               <text x={colW / 2} y={s == null ? plotH - 6 : plotH - bh - 5} textAnchor="middle" className="ink num-t">
                 {s == null ? '-' : score(s)}
                 {adjusted.includes(i) ? '*' : ''}

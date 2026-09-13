@@ -74,6 +74,9 @@ export interface MatrixRow {
 /** Why a project has the owner it has: the cascade step that decided it, published as a code. */
 export type OwnerGate = 'specification' | 'buying' | 'appointed' | 'held' | 'none';
 
+/** How a top-score tie was broken: fewer projects already assigned, or the earlier vertical in the published order when the counts were equal. */
+export type TieRule = 'fewer' | 'order';
+
 export interface OwnerWhy {
   /** Verticals at or above the scope floor, in vertical order (indexes). */
   eligible: number[];
@@ -83,6 +86,12 @@ export interface OwnerWhy {
   candidates: number[];
   /** True when two or more candidates shared the top score and the tie rule decided. */
   tie: boolean;
+  /** The candidates that shared the top score (indexes, vertical order). Empty when there was no tie. */
+  tied: number[];
+  /** Projects already assigned to each tied vertical when this project was decided, in `tied` order. The decision record, so the drill can say which count won. */
+  assignedAtDecision: number[];
+  /** Which half of the tie rule decided, or null when there was no tie. */
+  tieRule: TieRule | null;
 }
 
 /** One project of the market register. Party fields are ids into the party files. */
@@ -145,18 +154,26 @@ export type PartyKind = 'consultant' | 'contractor';
 export type PartyRole = 'lead' | 'mep' | 'both';
 export type RelationshipLevel = 'Junior management' | 'Middle management' | 'Senior management';
 
+/**
+ * A firm on the register. A firm may be KNOWN (it sits on projects) without Halvard holding
+ * any relationship with it: then level, rating and owner are all null together. That is the
+ * "no relationship yet" state the parties page filters on; it is never implied by a low rating.
+ */
 export interface Party {
   id: number;
   name: string;
   kind: PartyKind;
   role: PartyRole;
-  /** Vertical indexes this party matters to: the verticals graded High or Medium on its projects, by count. */
-  verticals: number[];
-  level: RelationshipLevel;
-  /** 1 to 10, whole. */
-  rating: number;
-  /** Relationship owner, an engineer slug. */
-  owner: Slug;
+  /** Per vertical, in vertical order: projects of this firm graded Medium or High (score 3.5 or more) on that vertical. */
+  verticalCounts: number[];
+  /** Per vertical, in vertical order: AED million of those projects. */
+  verticalValues: number[];
+  /** Null when Halvard holds no relationship with the firm. */
+  level: RelationshipLevel | null;
+  /** 1 to 10, whole; null when no relationship. */
+  rating: number | null;
+  /** Relationship owner, an engineer slug; null when no relationship. */
+  owner: Slug | null;
   projectCount: number;
   /** AED million, one decimal. */
   projectValue: number;
@@ -226,6 +243,14 @@ export interface EngineerSummary {
   top: { ref: string; name: string; value: number; stage: Stage }[];
   consultants: number;
   contractors: number;
+  /** Synthetic workload points: each owned project weighted by its activity band on this engineer's vertical (rules.ts WORKLOAD_WEIGHTS). */
+  workload: number;
+  /** The synthetic capacity every engineer is measured against, in the same points. */
+  capacity: number;
+  /** Workload as a percentage of capacity, one decimal. */
+  loadPct: number;
+  /** True when workload exceeds capacity. */
+  overloaded: boolean;
 }
 
 export interface MatrixCellRollup {
@@ -271,9 +296,9 @@ export interface PartyRank {
   id: number;
   name: string;
   role: PartyRole;
-  level: RelationshipLevel;
-  rating: number;
-  owner: Slug;
+  level: RelationshipLevel | null;
+  rating: number | null;
+  owner: Slug | null;
   projectCount: number;
   projectValue: number;
 }
@@ -283,14 +308,32 @@ export interface PartyKindSummary {
   senior: number;
   middle: number;
   junior: number;
-  /** Mean rating to one decimal. */
+  /** Firms Halvard holds no relationship with (level, rating and owner all null). */
+  noRelationship: number;
+  /** AED million of projects those firms sit on. */
+  noRelationshipValue: number;
+  /** Mean rating to one decimal over the firms that have one. */
   averageRating: number;
   /** Firms on ten or more projects. */
   onTenPlus: number;
   /** Total AED million across the firms' project books (a project counts once per firm it sits on). */
   bookValue: number;
-  /** The twenty largest firms by project value. */
+  /** The twenty largest firms by project value. The page derives every other ranking (by count, or on one vertical) from the party file itself. */
   top: PartyRank[];
+}
+
+/** One declared source-shape target and the register's measured figure against it, reconciled on every run. */
+export interface ShapeCheck {
+  key: string;
+  label: string;
+  /** The measured figure, in `unit`. */
+  measured: number;
+  lo: number;
+  hi: number;
+  unit: 'percent' | 'projects' | 'firms';
+  /** Where the declared range comes from, in words. */
+  basis: string;
+  pass: boolean;
 }
 
 export interface PartySummary {
@@ -346,11 +389,18 @@ export interface Rollup {
   gradeScore: Record<Grade, number>;
   scopeFloor: number;
   buyingCompletionFloorPct: number;
+  /** The synthetic capacity in workload points, and the weights per activity band. */
+  engineerCapacity: number;
+  workloadWeights: Record<'won' | 'active' | 'quiet' | 'closed', number>;
   definitions: Record<string, Definition>;
   precisionPolicy: string[];
   assumptions: string[];
   cascade: string[];
   bucketRule: string[];
+  workloadRule: string[];
+  relationshipRule: string[];
+  /** Declared source-shape ranges and the measured figures, checked by the generator and re-checked by the reconciliation. */
+  shape: ShapeCheck[];
   distributions: { stages: { stage: Stage; count: number }[]; sectors: { sector: Sector; count: number }[]; cities: { city: City; count: number }[] };
   matrixSummary: MatrixSummary;
   partySummary: PartySummary;

@@ -39,6 +39,8 @@ interface Props {
   activeKey?: string | null;
   /** The unit for the readout, e.g. "AED m" or "projects". */
   unit: string;
+  /** A reference line across every row at this value, labelled: a capacity, a target, a floor. Value mode only. */
+  marker?: { value: number; label: string };
 }
 
 type Line = { kind: 'group'; label: string } | { kind: 'row'; i: number };
@@ -50,7 +52,7 @@ type Line = { kind: 'group'; label: string } | { kind: 'row'; i: number };
  * walking rows with the arrow keys, bands it and reads its figures out; with
  * `onPick`, a click or Enter selects it. Exact figures sit in the table beside it.
  */
-export function HBars({ id, rows, format, ariaLabel, legend, mode = 'value', onPick, activeKey, unit }: Props) {
+export function HBars({ id, rows, format, ariaLabel, legend, mode = 'value', onPick, activeKey, unit, marker }: Props) {
   const { ref, width } = useWidth(900);
   const reduce = useReducedMotion();
   const [hover, setHover] = useState<number | null>(null);
@@ -82,7 +84,7 @@ export function HBars({ id, rows, format, ariaLabel, legend, mode = 'value', onP
   const height = yAcc + m.bottom;
   const share = mode === 'share';
   const sumOf = (r: BarRow) => r.segments.reduce((a, s) => a + s.value, 0);
-  const domainMax = share ? 100 : Math.max(1, ...rows.map(sumOf));
+  const domainMax = share ? 100 : Math.max(1, ...rows.map(sumOf), marker && !share ? marker.value : 0);
   const x = share ? scaleLinear().domain([0, 100]).range([m.left, width - m.right]) : scaleLinear().domain([0, domainMax]).range([m.left, width - m.right]).nice();
   const ticks = share ? [0, 25, 50, 75, 100] : x.ticks(narrow ? 3 : 5);
   const maxChars = Math.max(8, Math.floor((labelW - 14) / 6.6));
@@ -165,6 +167,14 @@ export function HBars({ id, rows, format, ariaLabel, legend, mode = 'value', onP
             </g>
           );
         })}
+        {marker && !share && (
+          <g className="marker" aria-hidden="true">
+            <line x1={x(marker.value)} x2={x(marker.value)} y1={m.top - 4} y2={height - m.bottom} />
+            <text x={x(marker.value) + 4} y={m.top - 8} className="ink" style={{ fontSize: 10 }}>
+              {marker.label.toUpperCase()}
+            </text>
+          </g>
+        )}
         {hr && box && (
           <g className="readbox">
             <rect x={box.x} y={box.y} width={box.w} height={box.h} />

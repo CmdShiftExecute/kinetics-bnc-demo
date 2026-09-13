@@ -16,7 +16,8 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { GRADE_SCORE, bestBucket, cascade, gradeOf, pickEngineer, stageGate, sum1, worthChasing } from '../data/rules';
+import { ENGINEER_CAPACITY, GRADE_SCORE, WORKLOAD_WEIGHTS, bestBucket, cascade, gradeOf, pctOf, pickEngineer, stageGate, sum1, workloadOf, worthChasing } from '../data/rules';
+import { SHAPE_TARGETS } from '../data/shape';
 import type { Assertion, Owner, Party, Project, Reconciliation, Rollup, Sector } from '../data/schema';
 import { BUCKETS, SECTORS, STAGES } from '../data/schema';
 
@@ -34,6 +35,9 @@ const consultants = read<Party[]>('parties/consultants.json');
 const contractors = read<Party[]>('parties/contractors.json');
 const owners = read<Owner[]>('parties/owners.json');
 const V = rollup.verticals.length;
+
+const consultantsById = (id: number) => consultants.find((c) => c.id === id)?.name ?? `#${id}`;
+const contractorsById = (id: number) => contractors.find((c) => c.id === id)?.name ?? `#${id}`;
 
 const assertions: Assertion[] = [];
 const eq = (category: string, id: string, statement: string, left: number, right: number) => assertions.push({ id, category, statement, left, right, pass: tenths(left) === tenths(right) });
@@ -61,7 +65,7 @@ for (const { shard, body } of shardFiles) {
   ok(C2, `precision-${shard.file}-dates`, `${shard.file}: every date is a calendar date`, body.projects.every((p) => isoDate(p.completionDate) && isoDate(p.lastUpdated) && p.bucketDates.length === V && p.bucketDates.every(isoDate)));
   ok(C2, `precision-${shard.file}-buckets`, `${shard.file}: every bucket code is one of the ${BUCKETS.length}`, body.projects.every((p) => p.buckets.length === V && p.buckets.every((b) => Number.isInteger(b) && b >= 0 && b < BUCKETS.length)));
 }
-ok(C2, 'precision-parties-values', 'Every party value is AED million to one decimal and every rating a whole number 1 to 10', [...consultants, ...contractors].every((p) => oneDecimal(p.projectValue) && Number.isInteger(p.rating) && p.rating >= 1 && p.rating <= 10));
+ok(C2, 'precision-parties-values', 'Every party value is AED million to one decimal and every rating null or a whole number 1 to 10', [...consultants, ...contractors].every((p) => oneDecimal(p.projectValue) && p.verticalValues.every(oneDecimal) && (p.rating === null || (Number.isInteger(p.rating) && p.rating >= 1 && p.rating <= 10))));
 ok(C2, 'precision-no-timestamps', 'No published file carries a generation timestamp', !['rollup.json', 'parties/consultants.json', ...rollup.shards.map((s) => s.file)].some((f) => /generatedAt|checkedAt|importedAt/.test(raw(f))));
 ok(C2, 'precision-no-utc', 'No published file carries a UTC marker', !['rollup.json', 'parties/consultants.json', ...rollup.shards.map((s) => s.file)].some((f) => /\d{2}:\d{2}:\d{2}Z/.test(raw(f))));
 
@@ -103,7 +107,16 @@ for (const p of projects) {
     pipeline.set(e.slug, sum1([pipeline.get(e.slug) ?? 0, p.value]));
     assignedSoFar[res.vertical]!++;
   }
-  const same = res.vertical === p.ownerVertical && engineer === p.ownerEngineer && res.why.gate === p.why.gate && res.why.tie === p.why.tie && res.why.eligible.join() === p.why.eligible.join() && res.why.candidates.join() === p.why.candidates.join();
+  const same =
+    res.vertical === p.ownerVertical &&
+    engineer === p.ownerEngineer &&
+    res.why.gate === p.why.gate &&
+    res.why.tie === p.why.tie &&
+    res.why.eligible.join() === p.why.eligible.join() &&
+    res.why.candidates.join() === p.why.candidates.join() &&
+    res.why.tied.join() === p.why.tied.join() &&
+    res.why.assignedAtDecision.join() === p.why.assignedAtDecision.join() &&
+    res.why.tieRule === p.why.tieRule;
   const key = `${p.sector}|${p.stage}`;
   groups.set(key, (groups.get(key) ?? 0) + 1);
   if (!same) mismatches.set(key, (mismatches.get(key) ?? 0) + 1);
@@ -119,6 +132,28 @@ ok(C4, 'cascade-gate-words', 'Every project with a candidate has an owner and ev
 ok(C4, 'cascade-engineer-on-vertical', 'Every owning engineer is on the owning vertical', projects.every((p) => p.ownerEngineer === null || rollup.engineers.find((e) => e.slug === p.ownerEngineer)?.vertical === rollup.verticals[p.ownerVertical!]!.slug));
 ok(C4, 'cascade-floor', `Every owning vertical scores at or above the scope floor of ${rollup.scopeFloor.toFixed(1)}`, projects.every((p) => p.ownerVertical === null || (p.scores[p.ownerVertical] ?? 0) >= rollup.scopeFloor));
 ok(C4, 'cascade-gate', 'Every published gate reproduces the stage-gate rule', projects.every((p) => p.why.gate === 'none' || p.why.gate === stageGate(p.stage, p.completionPct, p.mainContractors.length > 0 || p.mepContractor !== null)));
+/* the tie decision record: "fewer" means the winner's count was strictly the lowest among the tied; "order" means an equal minimum and the earlier vertical won */
+const tiedProjects = projects.filter((p) => p.why.tie);
+ok(C4, 'cascade-tie-record', `Every one of ${tiedProjects.length} tied decisions carries the tied verticals, their counts, and the rule half that decided`, tiedProjects.every((p) => p.why.tied.length > 1 && p.why.tied.length === p.why.assignedAtDecision.length && p.why.tied.includes(p.ownerVertical!) && p.why.tieRule !== null), tiedProjects.length, tiedProjects.filter((p) => p.why.tied.length > 1 && p.why.tied.length === p.why.assignedAtDecision.length && p.why.tied.includes(p.ownerVertical!) && p.why.tieRule !== null).length);
+ok(C4, 'cascade-tie-fewer', 'Every "fewer" tie names a winner whose count was strictly below every other tied count', tiedProjects.filter((p) => p.why.tieRule === 'fewer').every((p) => {
+  const w = p.why.assignedAtDecision[p.why.tied.indexOf(p.ownerVertical!)]!;
+  return p.why.tied.every((v, i) => v === p.ownerVertical || p.why.assignedAtDecision[i]! > w);
+}));
+ok(C4, 'cascade-tie-order', 'Every "order" tie names the earliest of the verticals sharing the minimum count', tiedProjects.filter((p) => p.why.tieRule === 'order').every((p) => {
+  const min = Math.min(...p.why.assignedAtDecision);
+  const first = p.why.tied.find((_v, i) => p.why.assignedAtDecision[i] === min);
+  return first === p.ownerVertical && p.why.assignedAtDecision.filter((c) => c === min).length > 1;
+}));
+ok(C4, 'cascade-untied-record', 'Every untied decision carries an empty tie record', projects.filter((p) => !p.why.tie).every((p) => p.why.tied.length === 0 && p.why.assignedAtDecision.length === 0 && p.why.tieRule === null));
+
+/* ---------- 4b. descriptions agree with the parties they describe ---------- */
+const C4b = 'Descriptions';
+ok(C4b, 'desc-no-consultant', 'A description says "No consultant recorded" exactly when the project has neither a lead nor an MEP consultant', projects.every((p) => p.description.includes('No consultant recorded') === (p.leadConsultants.length === 0 && p.mepConsultant === null)));
+ok(C4b, 'desc-mep-consultant', 'Every project with an MEP consultant names it in its description', projects.every((p) => p.mepConsultant === null || p.description.includes(`MEP consultant ${consultantsById(p.mepConsultant)}`)));
+ok(C4b, 'desc-lead-consultant', 'Every project with a lead consultant names the first one in its description', projects.every((p) => p.leadConsultants.length === 0 || p.description.includes(`Lead consultant ${consultantsById(p.leadConsultants[0]!)}`)));
+ok(C4b, 'desc-no-contractor', 'A description says "No contractor appointed" exactly when the project has neither a main nor an MEP contractor', projects.every((p) => p.description.includes('No contractor appointed') === (p.mainContractors.length === 0 && p.mepContractor === null)));
+ok(C4b, 'desc-mep-contractor', 'Every project with an MEP contractor names it in its description', projects.every((p) => p.mepContractor === null || p.description.includes(`MEP contractor ${contractorsById(p.mepContractor)}`)));
+ok(C4b, 'desc-value', 'Every description states the project value to one decimal', projects.every((p) => p.description.includes(`AED ${p.value.toFixed(1)} million`)));
 
 /* ---------- 5. engineers ---------- */
 const C5 = 'Engineers';
@@ -136,8 +171,15 @@ for (const e of rollup.engineerSummary) {
   const cont = new Set([...owned.flatMap((p) => [...p.mainContractors, ...(p.mepContractor ? [p.mepContractor] : [])]), ...contractors.filter((c) => c.owner === e.slug).map((c) => c.id)]);
   eq(C5, `eng-${e.slug}-consultants`, `${e.name}: consultant relationships equal the distinct consultants on owned projects plus those owned`, cons.size, e.consultants);
   eq(C5, `eng-${e.slug}-contractors`, `${e.name}: contractor relationships equal the distinct contractors on owned projects plus those owned`, cont.size, e.contractors);
+  const funnelHere = BUCKETS.map((_, code) => owned.filter((p) => p.buckets[vi] === code).length);
+  eq(C5, `eng-${e.slug}-workload`, `${e.name}: workload equals the weighted activity bands of the owned projects (${WORKLOAD_WEIGHTS.active} active, ${WORKLOAD_WEIGHTS.won} order or quiet, ${WORKLOAD_WEIGHTS.closed} closed)`, workloadOf(funnelHere), e.workload);
+  eq(C5, `eng-${e.slug}-capacity`, `${e.name}: capacity is the published ${ENGINEER_CAPACITY} points`, e.capacity, ENGINEER_CAPACITY);
+  eq(C5, `eng-${e.slug}-load`, `${e.name}: load percent is workload over capacity to one decimal`, pctOf(e.workload, e.capacity), e.loadPct);
+  ok(C5, `eng-${e.slug}-overloaded`, `${e.name}: over capacity exactly when workload exceeds capacity`, e.overloaded === e.workload > e.capacity);
 }
 eq(C5, 'eng-total-owned', 'Engineer owned counts sum to the owned figure', sum(rollup.engineerSummary.map((e) => e.owned)), rollup.kpis.owned);
+eq(C5, 'eng-capacity-rollup', 'The rollup capacity equals the rule', rollup.engineerCapacity, ENGINEER_CAPACITY);
+ok(C5, 'eng-weights-rollup', 'The rollup workload weights equal the rule', JSON.stringify(rollup.workloadWeights) === JSON.stringify(WORKLOAD_WEIGHTS));
 eq(C5, 'eng-total-value', 'Engineer pipeline values sum to the pipeline value owned', sum1(rollup.engineerSummary.map((e) => e.ownedValue)), rollup.kpis.ownedValue);
 ok(C5, 'eng-roster', 'The 24 engineers each sit on one of the ten verticals', rollup.engineers.length === 24 && rollup.engineers.every((e) => vIndex.has(e.vertical)), rollup.engineers.length, 24);
 
@@ -226,12 +268,20 @@ function partyCheck(kind: 'consultant' | 'contractor', list: Party[]) {
     const same = refs.join() === party.projects.join() && refs.length === party.projectCount;
     ok(C11, `${kind}-${party.id}`, `${party.name}: ${party.projectCount} projects and AED ${party.projectValue.toFixed(1)} m equal the register`, same && tenths(value) === tenths(party.projectValue), party.projectValue, value);
   }
-  ok(C11, `${kind}s-owner`, `Every ${kind} relationship owner is an engineer`, list.every((p) => rollup.engineers.some((e) => e.slug === p.owner)));
-  ok(C11, `${kind}s-verticals`, `Every ${kind}'s verticals are the ones graded Medium or High on its projects, by count`, list.every((party) => {
+  ok(C11, `${kind}s-owner`, `Every ${kind} relationship owner is an engineer, or null where there is no relationship`, list.every((p) => p.owner === null || rollup.engineers.some((e) => e.slug === p.owner)));
+  ok(C11, `${kind}s-relationship-whole`, `Every ${kind}'s relationship is whole or absent: level, rating and owner all set, or all null`, list.every((p) => (p.level === null) === (p.rating === null) && (p.level === null) === (p.owner === null)));
+  ok(C11, `${kind}s-vertical-counts`, `Every ${kind}'s ten vertical counts are its projects graded Medium or High on that vertical`, list.every((party) => {
     const counts = rollup.verticals.map(() => 0);
     for (const r of party.projects) byRef.get(r)!.scores.forEach((s, i) => (s !== null && s >= 3.5 ? counts[i]!++ : 0));
-    const expected = counts.map((c, i) => ({ c, i })).filter((x) => x.c > 0).sort((a, b) => b.c - a.c || a.i - b.i).slice(0, 4).map((x) => x.i);
-    return expected.join() === party.verticals.join();
+    return counts.join() === party.verticalCounts.join();
+  }));
+  ok(C11, `${kind}s-vertical-values`, `Every ${kind}'s ten vertical values are the AED million of those projects`, list.every((party) => {
+    const t = rollup.verticals.map(() => 0);
+    for (const r of party.projects) {
+      const p = byRef.get(r)!;
+      p.scores.forEach((s, i) => (s !== null && s >= 3.5 ? (t[i]! += tenths(p.value)) : 0));
+    }
+    return party.verticalValues.length === V && t.every((x, i) => x === tenths(party.verticalValues[i]!));
   }));
 }
 partyCheck('consultant', consultants);
@@ -267,8 +317,11 @@ const ps = rollup.partySummary;
 for (const [kind, list, summary] of [['consultant', consultants, ps.consultants] as const, ['contractor', contractors, ps.contractors] as const]) {
   eq(C13, `ps-${kind}-total`, `${kind}s: total equals the party file`, summary.total, list.length);
   eq(C13, `ps-${kind}-levels`, `${kind}s: senior, middle and junior counts equal the party file and sum to the total`, summary.senior * 1000000 + summary.middle * 1000 + summary.junior, list.filter((p) => p.level === 'Senior management').length * 1000000 + list.filter((p) => p.level === 'Middle management').length * 1000 + list.filter((p) => p.level === 'Junior management').length);
-  eq(C13, `ps-${kind}-level-sum`, `${kind}s: the three levels sum to the total`, summary.senior + summary.middle + summary.junior, summary.total);
-  eq(C13, `ps-${kind}-rating`, `${kind}s: average rating to one decimal equals the mean of the file`, summary.averageRating, list.length ? Math.round((sum(list.map((p) => p.rating)) / list.length) * 10) / 10 : 0);
+  eq(C13, `ps-${kind}-level-sum`, `${kind}s: the three levels plus the no-relationship firms sum to the total`, summary.senior + summary.middle + summary.junior + summary.noRelationship, summary.total);
+  eq(C13, `ps-${kind}-no-relationship`, `${kind}s: no-relationship count equals the firms with no level in the file`, summary.noRelationship, list.filter((p) => p.level === null).length);
+  eq(C13, `ps-${kind}-no-relationship-value`, `${kind}s: no-relationship value equals the sum of those firms' books`, summary.noRelationshipValue, sum1(list.filter((p) => p.level === null).map((p) => p.projectValue)));
+  const rated = list.map((p) => p.rating).filter((r): r is number => r !== null);
+  eq(C13, `ps-${kind}-rating`, `${kind}s: average rating to one decimal equals the mean over the rated firms`, summary.averageRating, rated.length ? Math.round((sum(rated) / rated.length) * 10) / 10 : 0);
   eq(C13, `ps-${kind}-ten-plus`, `${kind}s: firms on ten or more projects equal the file`, summary.onTenPlus, list.filter((p) => p.projectCount >= 10).length);
   eq(C13, `ps-${kind}-book`, `${kind}s: book value equals the sum of firm values`, summary.bookValue, sum1(list.map((p) => p.projectValue)));
   const expectedTop = [...list].sort((a, b) => b.projectValue - a.projectValue || b.projectCount - a.projectCount || a.id - b.id).slice(0, 20);
@@ -277,6 +330,36 @@ for (const [kind, list, summary] of [['consultant', consultants, ps.consultants]
 eq(C13, 'ps-no-consultant', 'Projects with no consultant recorded equal the register', ps.projectsNoConsultant, projects.filter((p) => p.leadConsultants.length === 0 && p.mepConsultant === null).length);
 eq(C13, 'ps-no-contractor', 'Projects with no contractor recorded equal the register', ps.projectsNoContractor, projects.filter((p) => p.mainContractors.length === 0 && p.mepContractor === null).length);
 eq(C13, 'ps-open-no-contractor', 'Buying-stage projects with no contractor equal the register', ps.openProjectsNoContractor, projects.filter((p) => stageGate(p.stage, p.completionPct, false) === 'buying' && p.mainContractors.length === 0 && p.mepContractor === null).length);
+
+/* ---------- 14. the declared source shape, re-measured from the written files ---------- */
+const C14 = 'Source shape';
+const funnelAll = rollup.funnel;
+const median = (xs: number[]) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)]!;
+const books = rollup.engineerSummary.map((e) => e.owned);
+const allParties = [...consultants, ...contractors];
+const remeasured: Record<string, number> = {
+  ownedShare: pctOf(owned.length, projects.length),
+  smallestBook: Math.min(...books),
+  largestBook: Math.max(...books),
+  quietShare: pctOf(funnelAll[7]! + funnelAll[10]!, sum(funnelAll)),
+  ordersShare: pctOf(funnelAll[0]!, sum(funnelAll)),
+  closedShare: pctOf(funnelAll[4]!, sum(funnelAll)),
+  mepConsultantFill: pctOf(projects.filter((p) => p.mepConsultant !== null).length, projects.length),
+  mainContractorFill: pctOf(projects.filter((p) => p.mainContractors.length > 0).length, projects.length),
+  mepContractorFill: pctOf(projects.filter((p) => p.mepContractor !== null).length, projects.length),
+  consultantMedian: median(consultants.map((c) => c.projectCount)),
+  consultantMax: Math.max(...consultants.map((c) => c.projectCount)),
+  contractorMedian: median(contractors.map((c) => c.projectCount)),
+  contractorMax: Math.max(...contractors.map((c) => c.projectCount)),
+  noRelationshipShare: pctOf(allParties.filter((p) => p.level === null).length, allParties.length),
+};
+ok(C14, 'shape-complete', `The rollup publishes every one of the ${SHAPE_TARGETS.length} declared shape targets, once each, in order`, rollup.shape.map((s) => s.key).join() === SHAPE_TARGETS.map((t) => t.key).join(), SHAPE_TARGETS.length, rollup.shape.length);
+for (const t of SHAPE_TARGETS) {
+  const published = rollup.shape.find((s) => s.key === t.key);
+  const m = remeasured[t.key]!;
+  eq(C14, `shape-${t.key}-measured`, `${t.label}: the published measurement equals the figure re-measured from the files`, m, published?.measured ?? Number.NaN);
+  ok(C14, `shape-${t.key}-range`, `${t.label}: ${m} ${t.unit} lies inside the declared ${t.lo} to ${t.hi}`, m >= t.lo && m <= t.hi && published?.pass === true && published.lo === t.lo && published.hi === t.hi, m, m >= t.lo && m <= t.hi ? m : t.lo);
+}
 
 /* ---------- write ---------- */
 const categories = [...new Set(assertions.map((a) => a.category))].map((name) => ({ name, checked: assertions.filter((a) => a.category === name).length, passed: assertions.filter((a) => a.category === name && a.pass).length }));
