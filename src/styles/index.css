@@ -1,0 +1,1412 @@
+@import 'tailwindcss';
+
+/* ---------- tokens: Swiss Industrial Print, light substrate, one hazard accent ---------- */
+:root {
+  --paper: #f4f4f0;
+  --paper-2: #eae8e3;
+  --paper-3: #dedbd3;
+  --row-hover: var(--paper-3);
+  --ink: #111111;
+  --ink-2: #4a4842;
+  --rule: #c9c6bd;
+  --hazard: #e61919;
+  --hazard-text: #b81111;
+  --font-display: 'Archivo Black', 'Arial Black', Impact, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --s-xs: 4px;
+  --s-sm: 8px;
+  --s-md: 12px;
+  --s-lg: 16px;
+  --s-xl: 24px;
+  --s-2xl: 32px;
+  --s-3xl: 48px;
+  --s-4xl: 64px;
+  --maxw: 1440px;
+  /* One size for the page heading and the masthead's system name, so the two always match. */
+  --title-size: clamp(1.6rem, 2.6vw, 2.4rem);
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  color-scheme: light;
+}
+body {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'tnum' 1;
+  overflow-x: hidden;
+}
+* {
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+code {
+  font-family: var(--font-mono);
+  background: var(--paper-2);
+  padding: 0 4px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--s-2xl) var(--s-2xl);
+}
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 var(--s-lg) var(--s-lg);
+  }
+}
+
+/* ---------- type ---------- */
+.display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-weight: 400;
+}
+.label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 0;
+}
+.num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+.bad {
+  color: var(--hazard-text);
+}
+.muted {
+  color: var(--ink-2);
+}
+.press:active {
+  transform: scale(0.98);
+}
+p {
+  max-width: 78ch;
+}
+
+/* ---------- masthead, stamp, nav ---------- */
+.mast {
+  padding-top: var(--s-xl);
+}
+/* Three columns with equal outer tracks, so the system title is centred on the page, as on the MIS. */
+.mast-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: var(--s-xl);
+}
+.mast-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.wordmark {
+  font-size: 28px;
+  letter-spacing: 0.02em;
+}
+.mast-division {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+/* The system's name at the page-heading size, so the masthead says which system this is. */
+.mast-system {
+  font-size: var(--title-size);
+  margin: 0 0 2px;
+  justify-self: center;
+  text-align: center;
+  white-space: nowrap;
+}
+.mast-row .stamp {
+  justify-self: end;
+  flex-wrap: nowrap;
+}
+@media (max-width: 980px) {
+  .mast-row {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: var(--s-lg);
+  }
+  .mast-system {
+    justify-self: start;
+    text-align: left;
+    white-space: normal;
+  }
+  .mast-row .stamp {
+    justify-self: start;
+    flex-wrap: wrap;
+  }
+}
+.strip.answers {
+  margin-top: var(--s-xl);
+  border-top: 2px solid var(--ink);
+}
+.strip.answers .big {
+  font-size: 22px;
+}
+.strip.answers .sub a {
+  font-weight: 400;
+}
+.stamp {
+  display: flex;
+  gap: var(--s-xl);
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+.stamp div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stamp dt {
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.stamp dd {
+  margin: 0;
+  font-weight: 600;
+  white-space: nowrap;
+}
+/* the nav row carries the reports; the stamp lives in the masthead row beside the system title */
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-lg) var(--s-2xl);
+  flex-wrap: wrap;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+  margin-top: var(--s-lg);
+  padding: var(--s-sm) 0;
+}
+.nav {
+  display: flex;
+  gap: var(--s-xl);
+  flex-wrap: wrap;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+.nav a {
+  position: relative;
+  padding: 2px 0;
+  color: var(--ink-2);
+  transition: color 160ms var(--ease);
+}
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms var(--ease);
+}
+.nav a:hover::after,
+.nav a[aria-current='page']::after {
+  transform: scaleX(1);
+}
+.nav a:hover {
+  color: var(--ink);
+}
+.nav a[aria-current='page'] {
+  color: var(--ink);
+  font-weight: 600;
+}
+.crumbs ol {
+  list-style: none;
+  padding: 0;
+  margin: var(--s-lg) 0 0;
+  display: flex;
+  gap: var(--s-sm);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  flex-wrap: wrap;
+}
+.crumbs li + li::before {
+  content: '/';
+  margin-right: var(--s-sm);
+}
+.crumbs a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+.crumbs [aria-current='page'] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- page head ---------- */
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--s-xl);
+  margin-top: var(--s-xl);
+  flex-wrap: wrap;
+}
+.page-title {
+  font-size: var(--title-size);
+  margin: 0;
+}
+.page-sub {
+  margin: var(--s-xs) 0 0;
+  color: var(--ink-2);
+}
+.page-basis {
+  text-align: right;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  text-transform: uppercase;
+  line-height: 1.6;
+  margin-left: auto;
+  max-width: none;
+}
+.vnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-sm) var(--s-lg);
+  margin-top: var(--s-md);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.vnav a {
+  color: var(--ink-2);
+  border-bottom: 1px solid transparent;
+}
+.vnav a:hover,
+.vnav a[aria-current='page'] {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+/* ---------- headline strip ---------- */
+.strip {
+  --cols: 6;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+  margin: var(--s-xl) 0 0;
+}
+.strip > div {
+  background: var(--paper);
+  padding: var(--s-md) var(--s-md) var(--s-md) 0;
+  min-width: 0;
+}
+.strip > div + div {
+  padding-left: var(--s-md);
+}
+.strip dt {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.strip .big {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 4px 0 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.strip .sub {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--ink-2);
+}
+@media (max-width: 1100px) {
+  .strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .strip > div:nth-child(3n + 1) {
+    padding-left: 0;
+  }
+}
+@media (max-width: 560px) {
+  .strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .strip > div:nth-child(3n + 1) {
+    padding-left: var(--s-md);
+  }
+  .strip > div:nth-child(2n + 1) {
+    padding-left: 0;
+  }
+}
+
+/* ---------- sections ---------- */
+.sec {
+  margin-top: var(--s-3xl);
+  min-width: 0;
+}
+.sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--s-lg);
+  border-top: 2px solid var(--ink);
+  padding-top: var(--s-sm);
+  margin-bottom: var(--s-md);
+}
+.sec-head > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.sec-head .sec-link {
+  flex: 0 0 auto;
+  margin-bottom: 2px;
+}
+@media (max-width: 700px) {
+  .sec-head {
+    flex-wrap: wrap;
+  }
+}
+.sec-title {
+  font-size: 18px;
+  margin: 0;
+}
+.sec-note {
+  margin: 4px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+.sec-link {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-bottom: 1px solid var(--ink);
+  white-space: nowrap;
+}
+.sec-link {
+  transition: background-color 140ms var(--ease), color 140ms var(--ease);
+}
+.sec-link:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.sec-intro {
+  margin: 0 0 var(--s-md);
+}
+.sec-intro p {
+  margin: 0 0 var(--s-sm);
+}
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--s-3xl);
+}
+.overview-grid > * {
+  min-width: 0;
+}
+.overview-grid .sec {
+  margin-top: var(--s-2xl);
+}
+@media (max-width: 1100px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+/* ---------- disclosures ---------- */
+details.defs,
+details.values,
+details.netting {
+  margin-top: var(--s-md);
+  font-size: 12px;
+}
+details summary {
+  cursor: pointer;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding: 4px 0;
+  width: max-content;
+  max-width: 100%;
+}
+details summary:hover {
+  color: var(--ink);
+}
+details[open] summary {
+  color: var(--ink);
+}
+@keyframes disclose {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+details[open] > *:not(summary) {
+  animation: disclose 220ms var(--ease);
+}
+details.defs dl {
+  margin: var(--s-sm) 0 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px var(--s-lg);
+  max-width: 90ch;
+}
+details.defs dl > div {
+  display: contents;
+}
+details.defs dt {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 10.5px;
+  color: var(--ink-2);
+  padding-top: 2px;
+}
+details.defs dd {
+  margin: 0;
+}
+details.values table {
+  margin-top: var(--s-sm);
+  max-width: 560px;
+}
+details.netting .netting-box {
+  margin-top: var(--s-sm);
+  border: 1px solid var(--ink);
+  padding: var(--s-md) var(--s-lg);
+  background: var(--paper-2);
+  max-width: 78ch;
+}
+details.netting .netting-box p {
+  margin: 0 0 var(--s-sm);
+}
+details.netting table {
+  margin-top: var(--s-sm);
+}
+
+/* ---------- tables ---------- */
+table.mis {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12.5px;
+}
+table.mis th {
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  font-weight: 500;
+  text-align: right;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--ink);
+  vertical-align: bottom;
+  line-height: 1.25;
+  white-space: nowrap;
+  background: var(--paper);
+}
+table.mis th.group {
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  font-weight: 600;
+}
+table.mis td.blank {
+  border-bottom: 1px solid var(--rule);
+}
+table.mis th:first-child,
+table.mis td:first-child,
+table.mis tbody th[scope='row'] {
+  text-align: left;
+  padding-left: 0;
+  font-weight: 400;
+  color: var(--ink);
+  font-size: 12.5px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+table.mis th:last-child,
+table.mis td:last-child {
+  padding-right: 0;
+}
+table.mis th.left,
+table.mis td.left {
+  text-align: left;
+}
+table.mis td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  background: var(--paper);
+  transition: background-color 120ms var(--ease);
+}
+table.mis tbody th[scope='row'] {
+  padding: 7px 10px 7px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  background: var(--paper);
+}
+table.mis tr.total td,
+table.mis tr.total th[scope='row'] {
+  border-top: 1px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  font-weight: 600;
+}
+table.mis tr.sub td,
+table.mis tr.sub th[scope='row'] {
+  border-top: 1px solid var(--ink);
+  font-weight: 600;
+}
+table.mis tr.indent td:first-child,
+table.mis tr.indent th[scope='row'] {
+  padding-left: var(--s-xl);
+  color: var(--ink-2);
+}
+/* A numeric dashboard is read, not written: the text caret has no business
+   over a figure. Selection is untouched, so he can still copy any number. */
+table.mis th,
+table.mis td,
+.strip,
+.chart-axis-note {
+  cursor: default;
+}
+table.mis tr.clickable,
+table.mis tr.clickable td,
+table.mis tr.clickable th {
+  cursor: pointer;
+}
+a[href],
+summary,
+button,
+button.sort,
+.sort,
+.vlink,
+.elink,
+.press,
+.drill-link,
+.sec-link {
+  cursor: pointer;
+}
+table.mis tbody.hov:hover > tr td,
+table.mis tbody.hov:hover > tr th[scope='row'],
+table.mis tbody.hov:focus-within > tr td,
+table.mis tbody.hov:focus-within > tr th[scope='row'],
+table.mis tr.hov:hover td,
+table.mis tr.hov:hover th[scope='row'],
+table.mis tr.hov:focus-within td,
+table.mis tr.hov:focus-within th[scope='row'] {
+  background: var(--row-hover);
+}
+/* The hovered row is marked with an ink rule down its first cell. An inset
+   shadow, never a border: a border would widen the cell and shift the whole
+   dense numeric table sideways on hover. */
+table.mis tbody.hov:hover > tr > :first-child,
+table.mis tbody.hov:focus-within > tr > :first-child,
+table.mis tr.hov:hover > :first-child,
+table.mis tr.hov:focus-within > :first-child {
+  box-shadow: inset 3px 0 0 var(--ink);
+}
+table.mis tr.eng td,
+table.mis tr.eng th[scope='row'] {
+  font-weight: 600;
+}
+table.mis tr.prod td,
+table.mis tr.prod th[scope='row'] {
+  color: var(--ink-2);
+  font-weight: 400;
+  border-bottom: 1px solid var(--paper-3);
+}
+table.mis tr.prod td:first-child,
+table.mis tr.prod th[scope='row'] {
+  padding-left: var(--s-xl);
+}
+table.mis tbody.hov > tr.prod:last-child td,
+table.mis tbody.hov > tr.prod:last-child th[scope='row'] {
+  border-bottom: 1px solid var(--rule);
+}
+table.mis.compact td,
+table.mis.compact th {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+table.mis.compact tbody th[scope='row'] {
+  padding: 5px 10px 5px 0;
+  font-size: 12px;
+}
+table.mis.dense td,
+table.mis.dense th {
+  padding: 6px 7px;
+  font-size: 11.5px;
+}
+table.mis.dense th {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+table.mis.dense th:first-child,
+table.mis.dense td:first-child {
+  font-size: 11.5px;
+}
+table.mis td.remark {
+  white-space: normal;
+  min-width: 220px;
+  max-width: 320px;
+  color: var(--ink-2);
+}
+table.mis td.remark.ink {
+  color: var(--ink);
+}
+table.mis td.nowrap {
+  white-space: nowrap;
+}
+/* row identity survives horizontal scrolling */
+table.mis .sticky-first,
+table.mis.sticky th:first-child,
+table.mis.sticky td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--paper);
+  box-shadow: 1px 0 0 var(--rule);
+}
+table.mis.sticky tbody.hov:hover > tr td:first-child,
+table.mis.sticky tbody.hov:hover > tr th:first-child,
+table.mis.sticky tbody.hov:focus-within > tr td:first-child,
+table.mis.sticky tbody.hov:focus-within > tr th:first-child,
+table.mis.sticky tr.hov:hover td:first-child,
+table.mis.sticky tr.hov:hover th:first-child,
+table.mis.sticky tr.hov:focus-within td:first-child,
+table.mis.sticky tr.hov:focus-within th:first-child {
+  background: var(--row-hover);
+  /* the sticky column keeps its right-hand hairline alongside the hover marker */
+  box-shadow: inset 3px 0 0 var(--ink), 1px 0 0 var(--rule);
+}
+table.mis.sticky thead th {
+  z-index: 3;
+}
+table.mis.sticky th:first-child,
+table.mis.sticky td:first-child {
+  min-width: 150px;
+}
+.vlink {
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 160ms var(--ease);
+}
+.vlink:hover {
+  border-bottom-color: var(--ink);
+}
+.elink {
+  border-bottom: 1px solid var(--rule);
+}
+.elink:hover {
+  border-bottom-color: var(--ink);
+}
+.tag {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border: 1px solid var(--ink);
+  white-space: nowrap;
+  margin-left: 6px;
+}
+.tag.hz {
+  border-color: var(--hazard);
+  color: var(--hazard-text);
+}
+button.sort {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  display: inline-flex;
+  gap: 4px;
+  align-items: baseline;
+}
+button.sort:hover {
+  color: var(--ink);
+}
+th[aria-sort='ascending'] button.sort,
+th[aria-sort='descending'] button.sort {
+  color: var(--ink);
+  font-weight: 600;
+}
+.sort-mark {
+  font-size: 9px;
+  letter-spacing: -2px;
+}
+
+/* thin ink marks, no track */
+.bar {
+  display: inline-block;
+  height: 6px;
+  background: var(--ink);
+  vertical-align: middle;
+  margin-right: 8px;
+  min-width: 1px;
+}
+.bar.hz {
+  background: var(--hazard);
+}
+.bar.soft {
+  background: var(--ink-2);
+}
+
+/* items list under reasons */
+.items {
+  list-style: none;
+  margin: var(--s-sm) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.items li {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.1fr) max-content 1.6fr;
+  gap: var(--s-lg);
+  border-bottom: 1px solid var(--paper-3);
+  padding: 5px 0;
+  align-items: start;
+}
+.items .num {
+  font-weight: 600;
+  text-align: right;
+}
+.items .num .muted {
+  display: block;
+  font-weight: 400;
+  font-size: 11px;
+}
+.items .remark {
+  color: var(--ink-2);
+}
+@media (max-width: 700px) {
+  .items li {
+    grid-template-columns: 1fr max-content;
+  }
+  .items .remark {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- P&L ladder with definition rail ---------- */
+.pl {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--s-2xl);
+  align-items: start;
+}
+.pl-rail {
+  position: sticky;
+  top: var(--s-xl);
+  border: 1px solid var(--ink);
+  padding: var(--s-lg);
+  background: var(--paper-2);
+  min-height: 220px;
+}
+.pl-rail h3 {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  margin: var(--s-xs) 0 var(--s-md);
+  line-height: 1.05;
+}
+.pl-rail p {
+  margin: 0 0 var(--s-md);
+}
+.pl-rail .vals {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px var(--s-md);
+  margin: var(--s-md) 0 0;
+  padding-top: var(--s-md);
+  border-top: 1px solid var(--rule);
+}
+.pl-rail .vals dt {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.pl-rail .vals dd {
+  margin: 0;
+}
+table.mis tr.rung {
+  cursor: default;
+}
+table.mis tr.rung:hover td,
+table.mis tr.rung:hover th[scope='row'],
+table.mis tr.rung:focus-visible td,
+table.mis tr.rung:focus-visible th[scope='row'],
+table.mis tr.rung.active td,
+table.mis tr.rung.active th[scope='row'] {
+  background: var(--row-hover);
+}
+table.mis tr.rung:hover > :first-child,
+table.mis tr.rung:focus-visible > :first-child,
+table.mis tr.rung.active > :first-child {
+  box-shadow: inset 3px 0 0 var(--ink);
+}
+@media (max-width: 1023px) {
+  .pl {
+    grid-template-columns: 1fr;
+  }
+  .pl-rail {
+    position: static;
+  }
+}
+
+/* ---------- charts ---------- */
+.chart-wrap {
+  margin-bottom: var(--s-md);
+  min-width: 0;
+}
+.chart-axis-note {
+  margin: 0 0 4px;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+.chart {
+  width: 100%;
+  cursor: crosshair;
+  display: block;
+  overflow: visible;
+}
+.chart:focus-visible {
+  outline-offset: 6px;
+}
+.chart text {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  fill: var(--ink-2);
+}
+.chart text.ink {
+  fill: var(--ink);
+  font-weight: 600;
+}
+.chart text.hz {
+  fill: var(--hazard-text);
+  font-weight: 600;
+}
+.chart .grid line {
+  stroke: var(--rule);
+}
+.chart .fc-zone rect {
+  fill: var(--paper-2);
+}
+.chart .fc-zone line {
+  stroke: var(--ink-2);
+  stroke-dasharray: 2 4;
+}
+.chart .fc-zone text {
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  fill: var(--ink);
+}
+.chart .l-budget {
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  fill: none;
+}
+.chart .l-actual {
+  stroke: var(--ink);
+  stroke-width: 2;
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.chart .l-forecast {
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-dasharray: 3 6;
+  fill: none;
+  stroke-linecap: round;
+}
+.chart .xh {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+/* a short ink tick at the baseline, so the crosshair's position on the axis
+   reads instantly without following the line down */
+.chart .xh-tick {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+/* the mark under the pointer or the keyboard cursor, outlined in ink */
+.chart .mk-on {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.chart circle.mk-on {
+  fill: none;
+}
+/* the band behind the hovered row of a horizontal bar chart */
+.chart .rowhi {
+  fill: var(--paper-3);
+}
+.chart .readbox rect {
+  fill: var(--ink);
+}
+.chart .readbox text {
+  fill: var(--paper);
+}
+.chart .readbox text.hz {
+  fill: #ff9a9a;
+}
+.chart .dot {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.chart .zero {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.chart .vbar {
+  fill: var(--ink);
+}
+.chart .vbar.neg {
+  fill: var(--hazard);
+}
+.chart .vbar.fc {
+  fill-opacity: 0.55;
+}
+.chart-legend {
+  display: flex;
+  gap: var(--s-xl);
+  margin: var(--s-sm) 0 0;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.chart-legend i {
+  display: inline-block;
+  width: 22px;
+  height: 0;
+  border-top: 2px solid var(--ink);
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.chart-legend i.fc {
+  border-top-style: dashed;
+}
+.chart-legend i.bd {
+  border-top-width: 1px;
+  border-top-color: var(--ink-2);
+}
+
+/* ---------- month bridge ---------- */
+.bridge {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin: var(--s-lg) 0 0;
+}
+.bridge > div {
+  background: var(--paper);
+  padding: var(--s-md) var(--s-lg);
+}
+.bridge dt {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.bridge .big {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 4px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.bridge .op {
+  color: var(--ink-2);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+@media (max-width: 640px) {
+  .bridge {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- empty, error, skeleton ---------- */
+.empty {
+  border: 1px dashed var(--rule);
+  padding: var(--s-xl);
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+.empty strong {
+  color: var(--ink);
+}
+.errbox {
+  border: 1px solid var(--hazard);
+  padding: var(--s-lg);
+  margin-top: var(--s-2xl);
+  max-width: 70ch;
+}
+.skel {
+  display: grid;
+  gap: 10px;
+  padding: var(--s-lg) 0;
+}
+.skel div {
+  height: 13px;
+  background: var(--paper-2);
+}
+.skel div.h {
+  height: 40px;
+  width: 40%;
+}
+.drill-link {
+  display: inline-block;
+  margin-top: var(--s-lg);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  padding: 8px 12px;
+  font-weight: 600;
+}
+.drill-link {
+  transition: background-color 140ms var(--ease), color 140ms var(--ease);
+}
+.drill-link:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.status {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border: 1px solid var(--ink);
+  white-space: nowrap;
+}
+.status.pass {
+  color: var(--ink);
+}
+.status.fail {
+  border-color: var(--hazard);
+  color: var(--hazard-text);
+}
+
+/* ---------- footer ---------- */
+.foot {
+  margin: var(--s-4xl) 0 var(--s-2xl);
+  border-top: 2px solid var(--ink);
+  padding-top: var(--s-md);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s-md);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+.foot a {
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .press:active {
+    transform: none;
+  }
+}
+
+/* ---------- data basis page ---------- */
+.basis-list {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px var(--s-xl);
+  max-width: 100ch;
+}
+.basis-list > div {
+  display: contents;
+}
+.basis-list dt {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding-top: 2px;
+}
+.basis-list dd {
+  margin: 0;
+  border-bottom: 1px solid var(--paper-3);
+  padding-bottom: 6px;
+}
+.policy {
+  margin: 0;
+  padding-left: 1.4em;
+  max-width: 90ch;
+}
+.policy li {
+  margin-bottom: var(--s-sm);
+}
+@media (max-width: 640px) {
+  .basis-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- warehouse charts ---------- */
+.chart .grid line.hundred {
+  stroke: var(--ink);
+}
+.chart .dot.hzdot {
+  stroke: var(--hazard);
+}
+.chart .aband.b0 {
+  fill: var(--ink);
+}
+.chart .aband.b1 {
+  fill: var(--ink-2);
+}
+.chart .aband.b2 {
+  fill: var(--rule);
+}
+.chart .aband.b3 {
+  fill: var(--hazard);
+}
+.chart-legend i.sw {
+  width: 12px;
+  height: 10px;
+  border: 0;
+}
+.chart-legend i.sw.b0 {
+  background: var(--ink);
+}
+.chart-legend i.sw.b1 {
+  background: var(--ink-2);
+}
+.chart-legend i.sw.b2 {
+  background: var(--rule);
+}
+.chart-legend i.sw.b3 {
+  background: var(--hazard);
+}
+.chart-legend {
+  flex-wrap: wrap;
+  gap: var(--s-md) var(--s-xl);
+}
+.side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-2xl);
+  align-items: start;
+}
+.side > * {
+  min-width: 0;
+}
+@media (max-width: 1023px) {
+  .side {
+    grid-template-columns: 1fr;
+  }
+}
+table.mis tr.over td,
+table.mis tr.over th[scope='row'] {
+  background: var(--paper-2);
+}
+td.st {
+  white-space: nowrap;
+}
+
+/* ---------- CBM calculator ---------- */
+.calc-head {
+  display: flex;
+  gap: var(--s-xl);
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-top: var(--s-lg);
+}
+.calc-head label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+select.pick {
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 6px 10px;
+  min-width: 240px;
+}
+table.mis.calc input {
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  width: 84px;
+  padding: 4px 6px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  transition: border-color 140ms var(--ease);
+}
+table.mis.calc input:hover {
+  border-color: var(--ink-2);
+}
+table.mis.calc input:focus-visible {
+  border-color: var(--ink);
+  outline-offset: 0;
+}
+table.mis.calc input[aria-invalid='true'] {
+  border-color: var(--hazard);
+  color: var(--hazard-text);
+}
+table.mis.calc input[type='checkbox'] {
+  width: auto;
+  accent-color: var(--ink);
+}
+table.mis.calc td.qty input {
+  width: 96px;
+}
+table.mis.calc td.changed {
+  font-weight: 600;
+}
+.field-err {
+  display: block;
+  font-size: 10.5px;
+  color: var(--hazard-text);
+  white-space: normal;
+  max-width: 120px;
+  text-align: right;
+  margin-top: 2px;
+}
+.calc-live {
+  --cols: 4;
+}
+.calc-live .big.hz,
+.calc-live .big.bad {
+  color: var(--hazard-text);
+}
+.calc-note {
+  border: 1px solid var(--ink);
+  padding: var(--s-md) var(--s-lg);
+  background: var(--paper-2);
+  margin-top: var(--s-lg);
+  max-width: 78ch;
+}
+.calc-note p {
+  margin: 0 0 var(--s-sm);
+}
+.calc-note p:last-child {
+  margin-bottom: 0;
+}
+.calc-note.over {
+  border-color: var(--hazard);
+}
+.btn {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  padding: 8px 12px;
+  font-weight: 600;
+  transition: background-color 140ms var(--ease), color 140ms var(--ease);
+}
+.btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.btn:disabled:hover {
+  background: none;
+  color: inherit;
+}
+.delta {
+  font-size: 11px;
+  color: var(--ink-2);
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.delta.hz {
+  color: var(--hazard-text);
+}
+
+/* The entry signature: a rule drawn left to right on every route entry, on the nav
+   underline's own curve. It carries the page's arrival so the FIGURES do not have to,
+   which is why the headline count-up could be removed. Under reduced motion the element
+   is not rendered at all, so there is nothing to suppress. */
+.entry-rule {
+  height: 2px;
+  background: var(--ink);
+  transform-origin: left;
+  margin-bottom: -2px;
+}

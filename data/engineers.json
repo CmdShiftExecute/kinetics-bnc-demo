@@ -1,0 +1,125 @@
+{
+ "source": "kinetics-mis-demo public/data/index.json",
+ "engineers": [
+  {
+   "slug": "rohan-pillai",
+   "name": "Rohan Pillai",
+   "vertical": "electrical-distribution"
+  },
+  {
+   "slug": "farah-haddad",
+   "name": "Farah Haddad",
+   "vertical": "electrical-distribution"
+  },
+  {
+   "slug": "dinesh-iyer",
+   "name": "Dinesh Iyer",
+   "vertical": "electrical-distribution"
+  },
+  {
+   "slug": "marwan-saleh",
+   "name": "Marwan Saleh",
+   "vertical": "electrical-distribution"
+  },
+  {
+   "slug": "kavya-nair",
+   "name": "Kavya Nair",
+   "vertical": "electrical-distribution"
+  },
+  {
+   "slug": "joseph-villanueva",
+   "name": "Joseph Villanueva",
+   "vertical": "cooling"
+  },
+  {
+   "slug": "lina-khoury",
+   "name": "Lina Khoury",
+   "vertical": "cooling"
+  },
+  {
+   "slug": "arjun-sethi",
+   "name": "Arjun Sethi",
+   "vertical": "cooling"
+  },
+  {
+   "slug": "bassem-farouk",
+   "name": "Bassem Farouk",
+   "vertical": "mechanical-systems"
+  },
+  {
+   "slug": "sneha-menon",
+   "name": "Sneha Menon",
+   "vertical": "mechanical-systems"
+  },
+  {
+   "slug": "tarek-hamdan",
+   "name": "Tarek Hamdan",
+   "vertical": "mechanical-systems"
+  },
+  {
+   "slug": "omar-nasser",
+   "name": "Omar Nasser",
+   "vertical": "pumps-and-water"
+  },
+  {
+   "slug": "meera-dsouza",
+   "name": "Meera Dsouza",
+   "vertical": "pumps-and-water"
+  },
+  {
+   "slug": "hana-qureshi",
+   "name": "Hana Qureshi",
+   "vertical": "vertical-transport"
+  },
+  {
+   "slug": "yusuf-rahman",
+   "name": "Yusuf Rahman",
+   "vertical": "vertical-transport"
+  },
+  {
+   "slug": "divya-bhatt",
+   "name": "Divya Bhatt",
+   "vertical": "vertical-transport"
+  },
+  {
+   "slug": "karim-mansour",
+   "name": "Karim Mansour",
+   "vertical": "metering"
+  },
+  {
+   "slug": "ananya-kapoor",
+   "name": "Ananya Kapoor",
+   "vertical": "metering"
+  },
+  {
+   "slug": "nadia-zaki",
+   "name": "Nadia Zaki",
+   "vertical": "automation"
+  },
+  {
+   "slug": "vikram-fernandes",
+   "name": "Vikram Fernandes",
+   "vertical": "automation"
+  },
+  {
+   "slug": "rami-aziz",
+   "name": "Rami Aziz",
+   "vertical": "fabrication"
+  },
+  {
+   "slug": "faisal-reyes",
+   "name": "Faisal Reyes",
+   "vertical": "trading"
+  },
+  {
+   "slug": "ziad-abdel-rahman",
+   "name": "Ziad Abdel-Rahman",
+   "vertical": "services"
+  },
+  {
+   "slug": "priya-kulkarni",
+   "name": "Priya Kulkarni",
+   "vertical": "services"
+  }
+ ]
+}
