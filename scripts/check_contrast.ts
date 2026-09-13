@@ -52,6 +52,14 @@ const ink2 = token('ink-2');
 const hazard = token('hazard');
 const hazardText = token('hazard-text');
 const rule = token('rule');
+const hgHigh = token('hg-high');
+const hgMed = token('hg-med');
+const hgLow = token('hg-low');
+const hv1 = token('hv-1');
+const hv2 = token('hv-2');
+const hv3 = token('hv-3');
+const hv4 = token('hv-4');
+const hv5 = token('hv-5');
 
 interface Pair {
   what: string;
@@ -80,6 +88,17 @@ const pairs: Pair[] = [
      paper, below what an eye registers on a dense table; paper-3 measures 1.25:1,
      so 1.2 is the floor this implementation is held to. */
   { what: 'Hovered row against the page, must be visible (row-hover vs paper, non-text, floor 1.2:1)', fg: paper3, bg: paper, min: 1.2 },
+  /* heatmap cells: the grade letter and count are text, so every tint carries its text colour at 4.5:1 */
+  { what: 'Heatmap High cell text (paper on hg-high)', fg: paper, bg: hgHigh, min: 4.5 },
+  { what: 'Heatmap Medium cell text (ink on hg-med)', fg: ink, bg: hgMed, min: 4.5 },
+  { what: 'Heatmap Low cell text (ink on hg-low)', fg: ink, bg: hgLow, min: 4.5 },
+  { what: 'Heatmap value step 1 text (ink on hv-1)', fg: ink, bg: hv1, min: 4.5 },
+  { what: 'Heatmap value step 2 text (ink on hv-2)', fg: ink, bg: hv2, min: 4.5 },
+  { what: 'Heatmap value step 3 text (ink on hv-3)', fg: ink, bg: hv3, min: 4.5 },
+  { what: 'Heatmap value step 4 text (paper on hv-4)', fg: paper, bg: hv4, min: 4.5 },
+  { what: 'Heatmap value step 5 text (paper on hv-5)', fg: paper, bg: hv5, min: 4.5 },
+  { what: 'Heatmap Medium against Low, adjacent steps must read apart (non-text)', fg: hgMed, bg: hgLow, min: 1.5 },
+  { what: 'Selected list item text (paper on ink)', fg: paper, bg: ink, min: 4.5 },
   { what: 'Hairline rule on paper (decorative, reported only)', fg: rule, bg: paper, min: 0 },
 ];
 

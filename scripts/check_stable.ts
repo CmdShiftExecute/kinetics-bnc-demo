@@ -6,6 +6,7 @@
  * Run:  bun scripts/check_stable.ts
  * Exit 1 if any file differs, is added or is removed between the two runs.
  */
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
@@ -25,10 +26,10 @@ function snapshot(): Map<string, string> {
   return new Map(walk(dataDir).map((p) => [relative(dataDir, p), createHash('sha256').update(readFileSync(p)).digest('hex')]));
 }
 function run(script: string) {
-  const r = Bun.spawnSync(['bun', join(here, script)], { cwd: root, stdout: 'pipe', stderr: 'pipe' });
-  if (r.exitCode !== 0) {
-    console.error(r.stderr.toString());
-    throw new Error(`${script} exited ${r.exitCode}`);
+  const r = spawnSync('bun', [join(here, script)], { cwd: root, encoding: 'utf8' });
+  if (r.status !== 0) {
+    console.error(r.stderr);
+    throw new Error(`${script} exited ${r.status}`);
   }
 }
 

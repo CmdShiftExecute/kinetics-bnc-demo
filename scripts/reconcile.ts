@@ -17,7 +17,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { GRADE_SCORE, bestBucket, cascade, pickEngineer, stageGate, sum1, worthChasing } from '../data/rules';
-import type { Assertion, Owner, Party, Project, Reconciliation, Rollup, Sector, Stage } from '../data/schema';
+import type { Assertion, Owner, Party, Project, Reconciliation, Rollup, Sector } from '../data/schema';
 import { BUCKETS, SECTORS, STAGES } from '../data/schema';
 
 const here = dirname(fileURLToPath(import.meta.url));

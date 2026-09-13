@@ -1410,3 +1410,830 @@ table.mis.calc td.changed {
   transform-origin: left;
   margin-bottom: -2px;
 }
+
+/* ======================================================================
+   Project Intelligence System: the dashboard grammar on the shared tokens.
+   A persistent filter rail, a KPI strip, dense windowed tables, chips, a
+   heatmap on one sequential ink scale (grade) and one slate scale (value).
+   ====================================================================== */
+:root {
+  /* heatmap grade tints: one sequential ink scale, three steps plus none */
+  --hg-high: #1d1d1b;
+  --hg-med: #a9a69c;
+  --hg-low: #e2e0d9;
+  --hg-none: #f4f4f0;
+  /* heatmap value tints: one sequential slate scale, five steps */
+  --hv-1: #e1e6ec;
+  --hv-2: #bcc8d4;
+  --hv-3: #8fa3b7;
+  --hv-4: #4b6379;
+  --hv-5: #2c4157;
+  --rail-w: 272px;
+}
+.wrap.wide {
+  max-width: 1680px;
+}
+/* ---------- the dashboard layout: rail plus main ---------- */
+.dash {
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  gap: var(--s-xl);
+  align-items: start;
+  margin-top: var(--s-lg);
+}
+.dash.rail-hidden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.dash.rail-hidden .rail {
+  display: none;
+}
+.rail {
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid var(--rule);
+  padding-right: var(--s-lg);
+  scrollbar-width: thin;
+}
+.rail-in {
+  display: grid;
+  gap: var(--s-lg);
+  padding-bottom: var(--s-2xl);
+}
+.facet {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.facet > legend {
+  padding: 0;
+  margin-bottom: var(--s-xs);
+}
+.facet-list {
+  display: grid;
+  gap: 2px;
+}
+.facet-list.scroll {
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-right: 4px;
+}
+.facet-opt {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 0;
+  transition: background-color 120ms var(--ease);
+}
+.facet-opt:hover {
+  background: var(--paper-2);
+}
+.facet-opt.zero {
+  color: var(--ink-2);
+}
+.facet-opt input {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--ink);
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+}
+.facet-opt input:checked {
+  background: var(--ink);
+}
+.facet-opt input:checked::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: var(--paper);
+}
+.facet-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.facet-n {
+  font-size: 11px;
+  color: var(--ink-2);
+}
+.rail input[type='search'],
+.rail input[type='number'],
+.rail input[type='date'],
+.rail input[list],
+.rail select.pick,
+.picker input[type='search'] {
+  font: inherit;
+  font-size: 12px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 5px 8px;
+  width: 100%;
+  transition: border-color 140ms var(--ease);
+}
+.rail input:hover,
+.rail select.pick:hover,
+.picker input:hover {
+  border-color: var(--ink-2);
+}
+.rail input:focus-visible,
+.rail select.pick:focus-visible,
+.picker input:focus-visible {
+  border-color: var(--ink);
+  outline-offset: 0;
+}
+.range {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 6px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--ink-2);
+}
+.floor {
+  display: grid;
+  grid-template-columns: 1fr 72px;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--ink-2);
+}
+/* ---------- toolbar, tally, chips ---------- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-md);
+  padding-bottom: var(--s-md);
+  border-bottom: 1px solid var(--rule);
+}
+.tally {
+  margin: 0;
+  flex: 1 1 auto;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.tally strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.menu {
+  position: relative;
+}
+.menu summary {
+  list-style: none;
+  cursor: pointer;
+}
+.menu summary::-webkit-details-marker {
+  display: none;
+}
+.menu-body {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 5;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: var(--s-sm) var(--s-md);
+  min-width: 220px;
+  display: grid;
+  gap: 4px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: var(--s-md) 0;
+  font-size: 12px;
+}
+p.chips {
+  margin: var(--s-md) 0;
+}
+.chip {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--ink);
+  padding: 3px 8px;
+  background: var(--paper);
+  transition: background-color 140ms var(--ease), color 140ms var(--ease);
+  cursor: pointer;
+}
+.chip:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.chip.clear {
+  border-style: dashed;
+  color: var(--ink-2);
+}
+.chip.clear:hover {
+  color: var(--paper);
+}
+/* ---------- the windowed table ---------- */
+.vt {
+  overflow: auto;
+  border-bottom: 1px solid var(--ink);
+  position: relative;
+  scrollbar-width: thin;
+}
+.vt-table {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.vt-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--paper);
+}
+.vt-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.vt-row td {
+  cursor: default;
+}
+.row-link {
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 140ms var(--ease);
+}
+.row-link:hover {
+  border-bottom-color: var(--ink);
+}
+.vt-row.hi .vt-cell:first-child {
+  box-shadow: inset 0 0 0 0 transparent;
+}
+/* ---------- the heatmap ---------- */
+table.mis.heat th.heat-h {
+  vertical-align: bottom;
+  text-align: center;
+  height: 118px;
+  padding: 0 2px 6px;
+  width: 64px;
+}
+table.mis.heat th.heat-h span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+table.mis.heat td.heat-c {
+  padding: 0;
+  width: 64px;
+  border-left: 1px solid var(--paper);
+}
+.heat-b {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-content: center;
+  width: 100%;
+  height: 34px;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 1.1;
+  transition: box-shadow 120ms var(--ease);
+}
+.heat-b:hover,
+.heat-b:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--ink);
+  outline: none;
+}
+.hg-t {
+  font-weight: 700;
+}
+.hg-n {
+  font-size: 10px;
+}
+table.mis.heat td.hg-high {
+  background: var(--hg-high);
+  color: var(--paper);
+}
+table.mis.heat td.hg-med {
+  background: var(--hg-med);
+}
+table.mis.heat td.hg-low {
+  background: var(--hg-low);
+}
+table.mis.heat td.hg-none {
+  background: var(--hg-none);
+  color: var(--ink-2);
+}
+table.mis.heat td.hv-1 {
+  background: var(--hv-1);
+}
+table.mis.heat td.hv-2 {
+  background: var(--hv-2);
+}
+table.mis.heat td.hv-3 {
+  background: var(--hv-3);
+}
+table.mis.heat td.hv-4 {
+  background: var(--hv-4);
+  color: var(--paper);
+}
+table.mis.heat td.hv-5 {
+  background: var(--hv-5);
+  color: var(--paper);
+}
+table.mis.heat td.hg-high .heat-b:hover,
+table.mis.heat td.hg-high .heat-b:focus-visible,
+table.mis.heat td.hv-4 .heat-b:hover,
+table.mis.heat td.hv-4 .heat-b:focus-visible,
+table.mis.heat td.hv-5 .heat-b:hover,
+table.mis.heat td.hv-5 .heat-b:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--paper);
+}
+table.mis.heat tr.lv-sector th[scope='row'] {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+}
+table.mis.heat tr.lv-industry th[scope='row'] {
+  padding-left: 22px;
+  font-weight: 600;
+}
+table.mis.heat tr.lv-type th[scope='row'] {
+  padding-left: 44px;
+  color: var(--ink-2);
+}
+table.mis.heat tr.lv-type:hover th[scope='row'],
+table.mis.heat tr.lv-type:focus-within th[scope='row'] {
+  color: var(--ink);
+}
+.disc {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  font-weight: inherit;
+}
+.disc-mark {
+  display: inline-block;
+  width: 12px;
+  text-align: center;
+  color: var(--ink-2);
+}
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--rule);
+  vertical-align: -2px;
+  margin-right: 4px;
+}
+.swatch.hg-high {
+  background: var(--hg-high);
+}
+.swatch.hg-med {
+  background: var(--hg-med);
+}
+.swatch.hg-low {
+  background: var(--hg-low);
+}
+.swatch.hg-none {
+  background: var(--hg-none);
+}
+.swatch.hv-1 {
+  background: var(--hv-1);
+}
+.swatch.hv-2 {
+  background: var(--hv-2);
+}
+.swatch.hv-3 {
+  background: var(--hv-3);
+}
+.swatch.hv-4 {
+  background: var(--hv-4);
+}
+.swatch.hv-5 {
+  background: var(--hv-5);
+}
+.heat-side {
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+.heat-panel {
+  position: sticky;
+  top: var(--s-lg);
+}
+.cell-read {
+  border: 1px dashed var(--rule);
+  padding: var(--s-md);
+  min-height: 150px;
+  transition: border-color 140ms var(--ease);
+}
+.cell-read.on {
+  border: 1px solid var(--ink);
+}
+.cell-title {
+  margin: 0 0 var(--s-sm);
+}
+table.mis.heat tr.hov:hover td.heat-c,
+table.mis.heat tr.hov:focus-within td.heat-c {
+  filter: none;
+}
+/* the ink-tinted cells keep their tint under the hover wash; the row's label cells take the hover tone */
+table.mis.heat tr.hov:hover td.hg-high,
+table.mis.heat tr.hov:focus-within td.hg-high {
+  background: var(--hg-high);
+}
+table.mis.heat tr.hov:hover td.hg-med,
+table.mis.heat tr.hov:focus-within td.hg-med {
+  background: var(--hg-med);
+}
+table.mis.heat tr.hov:hover td.hg-low,
+table.mis.heat tr.hov:focus-within td.hg-low {
+  background: var(--hg-low);
+}
+table.mis.heat tr.hov:hover td.hv-1,
+table.mis.heat tr.hov:focus-within td.hv-1 {
+  background: var(--hv-1);
+}
+table.mis.heat tr.hov:hover td.hv-2,
+table.mis.heat tr.hov:focus-within td.hv-2 {
+  background: var(--hv-2);
+}
+table.mis.heat tr.hov:hover td.hv-3,
+table.mis.heat tr.hov:focus-within td.hv-3 {
+  background: var(--hv-3);
+}
+table.mis.heat tr.hov:hover td.hv-4,
+table.mis.heat tr.hov:focus-within td.hv-4 {
+  background: var(--hv-4);
+}
+table.mis.heat tr.hov:hover td.hv-5,
+table.mis.heat tr.hov:focus-within td.hv-5 {
+  background: var(--hv-5);
+}
+/* the grade scale in the side panel: one line per grade */
+.scale-list {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 var(--s-lg);
+  font-size: 12px;
+}
+.scale-list div {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 8px;
+}
+.scale-list dt {
+  font-weight: 600;
+}
+.scale-list dd {
+  margin: 0;
+  color: var(--ink-2);
+}
+/* ---------- segmented buttons ---------- */
+.seg-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: var(--s-md);
+  align-items: center;
+}
+.seg-gap {
+  width: var(--s-md);
+}
+.segb {
+  font-size: 12px;
+  border: 1px solid var(--ink);
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 140ms var(--ease), color 140ms var(--ease);
+}
+.segb.small {
+  font-size: 11px;
+  padding: 4px 10px;
+  letter-spacing: 0.04em;
+}
+.segb:hover {
+  background: var(--paper-2);
+}
+.segb.on {
+  background: var(--ink);
+  color: var(--paper);
+}
+/* ---------- charts specific to this system ---------- */
+.chart .seg {
+  fill: var(--ink);
+  transition: opacity 120ms var(--ease);
+}
+.chart .seg.st0 {
+  fill: var(--hg-low);
+}
+.chart .seg.st1 {
+  fill: #cfccc3;
+}
+.chart .seg.st2 {
+  fill: var(--hg-med);
+}
+.chart .seg.st3 {
+  fill: #7d7a71;
+}
+.chart .seg.st4 {
+  fill: #5e5b54;
+}
+.chart .seg.st5 {
+  fill: #45433d;
+}
+.chart .seg.st6 {
+  fill: #2f2e2a;
+}
+.chart .seg.st7 {
+  fill: var(--ink);
+}
+.chart .seg.mk-on {
+  stroke: var(--ink);
+  stroke-width: 2;
+  opacity: 0.85;
+}
+.chart .fbar {
+  fill: var(--ink);
+}
+.chart .fbar.hz {
+  fill: var(--hazard);
+}
+.chart .fbar.mk-on {
+  stroke: var(--ink);
+  stroke-width: 2;
+  opacity: 0.8;
+}
+.chart .num-t {
+  font-size: 11px;
+}
+.chart.mixbar {
+  display: block;
+  height: 10px;
+  cursor: crosshair;
+}
+.chart .mseg.won {
+  fill: var(--ink);
+}
+.chart .mseg.active {
+  fill: #7d7a71;
+}
+.chart .mseg.quiet {
+  fill: var(--hg-low);
+}
+.chart .mseg.closed {
+  fill: var(--hazard);
+}
+.chart .mseg.mk-on {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.mix {
+  margin: var(--s-sm) 0;
+}
+.mix-read {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: var(--ink-2);
+  min-height: 15px;
+  transition: color 120ms var(--ease);
+}
+.mix-read.on {
+  color: var(--ink);
+}
+.chart.scores {
+  cursor: crosshair;
+}
+.chart .sbar {
+  fill: var(--hg-med);
+}
+.chart .sbar.g-high {
+  fill: var(--ink);
+}
+.chart .sbar.g-low {
+  fill: var(--hg-low);
+  stroke: var(--rule);
+}
+.chart .sbar.mk-on {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.chart .own {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+}
+.chart line.grid {
+  stroke: var(--rule);
+}
+/* ---------- the engineers ledger ---------- */
+.ledger {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+.ledger-cell {
+  background: var(--paper);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: var(--s-lg);
+  display: grid;
+  gap: var(--s-sm);
+  align-content: start;
+  transition: background-color 160ms var(--ease);
+  cursor: default;
+}
+.ledger-cell:hover,
+.ledger-cell:focus-within {
+  background: var(--row-hover);
+  box-shadow: inset 3px 0 0 var(--ink);
+}
+.ledger-name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+.ledger-figs {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: var(--s-lg);
+  margin: 0;
+  justify-content: start;
+}
+.ledger-figs div {
+  display: grid;
+  gap: 2px;
+}
+.ledger-figs dt {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.ledger-figs dd {
+  margin: 0;
+  font-size: 16px;
+  text-align: left;
+}
+.ledger-top {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 3px;
+  font-size: 12px;
+}
+.ledger-top li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-md);
+}
+.ledger-top .elink {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* ---------- the party picker and card ---------- */
+.parties {
+  grid-template-columns: 340px minmax(0, 1fr);
+}
+.picker {
+  display: grid;
+  gap: var(--s-sm);
+  align-content: start;
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+}
+.plist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  max-height: calc(100vh - 220px);
+  border-top: 1px solid var(--ink);
+  scrollbar-width: thin;
+}
+.plist-b {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  text-align: left;
+  padding: 8px 8px 8px 10px;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: background-color 120ms var(--ease);
+}
+.plist-b:hover {
+  background: var(--row-hover);
+  box-shadow: inset 3px 0 0 var(--ink);
+}
+.plist-b.on {
+  background: var(--ink);
+  color: var(--paper);
+}
+.plist-b.on .plist-meta {
+  color: var(--paper-3);
+}
+.plist-name {
+  font-weight: 600;
+}
+.plist-meta {
+  font-size: 11px;
+  color: var(--ink-2);
+}
+.party-card {
+  min-height: 300px;
+}
+.party-head {
+  margin-bottom: var(--s-md);
+}
+.strip .big.small {
+  font-size: 18px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+.tags .tag {
+  margin: 0;
+  cursor: pointer;
+  transition: background-color 140ms var(--ease), color 140ms var(--ease);
+}
+.tags .tag:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.items li.consultant .remark::before {
+  content: '';
+}
+.barcell {
+  width: 30%;
+}
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .heat-side,
+  .parties {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .heat-panel,
+  .picker {
+    position: static;
+    max-height: none;
+  }
+  .plist {
+    max-height: 320px;
+  }
+  .ledger {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 1023px) {
+  .dash {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rail {
+    position: static;
+    max-height: none;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    padding-right: 0;
+  }
+  .rail-in {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .rail-in {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ledger {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ledger-figs {
+    gap: var(--s-md);
+  }
+  table.mis.heat th.heat-h,
+  table.mis.heat td.heat-c {
+    width: 44px;
+  }
+}

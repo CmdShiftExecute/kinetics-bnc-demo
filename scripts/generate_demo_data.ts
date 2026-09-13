@@ -31,7 +31,6 @@ import type {
   Definition,
   Engineer,
   EngineerSummary,
-  Grade,
   MatrixRow,
   Meta,
   Owner,
@@ -113,7 +112,6 @@ const fromT = (t: number) => {
   return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}-${String(d.getUTCDate()).padStart(2, '0')}`;
 };
 const addDays = (iso: string, days: number) => fromT(toT(iso) + days * dayMs);
-const T0 = toT(DATA_AS_OF);
 
 /* ---------- invented names ---------- */
 
@@ -571,23 +569,26 @@ const BAND_W: Record<'none' | 'low' | 'medium' | 'high', number[]> = {
 function bucketFor(score: number | null, stage: Stage, owned: boolean, contractorAppointed: boolean): BucketCode {
   const band = score == null ? 'none' : score < 3.5 ? 'low' : score < 6.5 ? 'medium' : 'high';
   const w = [...BAND_W[band]];
+  const mul = (i: number, k: number) => {
+    w[i] = (w[i] ?? 0) * k;
+  };
   if (stage === 'Concept' || stage === 'Design') {
-    w[NOT_YET_AWARDED] *= 2;
-    w[ORDER_RECEIVED] *= 0.2;
-    w[QUOTE_SENT] *= 0.4;
+    mul(NOT_YET_AWARDED, 2);
+    mul(ORDER_RECEIVED, 0.2);
+    mul(QUOTE_SENT, 0.4);
   }
   if (stage.startsWith('Completed')) {
-    w[ORDER_RECEIVED] *= 2;
-    w[PROJECT_CLOSED] *= 1.8;
-    w[ENQUIRY_GENERATED] *= 0.3;
-    w[QUOTE_SENT] *= 0.5;
-    w[5] *= 0.3;
-    w[NOT_YET_AWARDED] *= 0.1;
+    mul(ORDER_RECEIVED, 2);
+    mul(PROJECT_CLOSED, 1.8);
+    mul(ENQUIRY_GENERATED, 0.3);
+    mul(QUOTE_SENT, 0.5);
+    mul(5, 0.3);
+    mul(NOT_YET_AWARDED, 0.1);
   }
-  if (contractorAppointed) w[NOT_YET_AWARDED] *= 0.15;
+  if (contractorAppointed) mul(NOT_YET_AWARDED, 0.15);
   if (owned) {
-    for (const i of [ENQUIRY_GENERATED, QUOTE_SENT, 3, 5, 6]) w[i] *= 1.8;
-    w[NO_UPDATE] *= 0.5;
+    for (const i of [ENQUIRY_GENERATED, QUOTE_SENT, 3, 5, 6]) mul(i, 1.8);
+    mul(NO_UPDATE, 0.5);
   }
   return weighted([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const, w);
 }
@@ -744,7 +745,7 @@ const engineerSummary: EngineerSummary[] = engineers.map((e) => {
     contractors: new Set([...cont, ...cont2]).size,
   };
 });
-const matrixRows = matrix.map((r, i) => {
+const matrixRows = matrix.map((_r, i) => {
   const ps = projects.filter((p) => rowIndex.get(`${p.sector}|${p.industry}|${p.type}`) === i);
   return { count: ps.length, value: sum1(ps.map((p) => p.value)) };
 });
@@ -899,7 +900,7 @@ writeFileSync(join(outDir, 'rollup.json'), JSON.stringify(rollup, null, 1) + '\n
 
 /* ---------- report ---------- */
 
-const values = [...projects.map((p) => p.value)].sort((a, b) => a - b);
+const values = projects.map((p) => p.value).sort((a, b) => a - b);
 const q = (f: number) => values[Math.min(values.length - 1, Math.floor(f * values.length))];
 const filled = projects.filter((p) => p.completionPct != null).map((p) => p.completionPct!);
 const fz = filled.filter((x) => x === 0).length / filled.length;
@@ -907,4 +908,4 @@ console.log(`Wrote ${projects.length} projects in ${shards.length} shards, ${con
 console.log(`Owned ${kpis.owned} (${(ownedShare * 100).toFixed(1)}%), books ${Math.min(...books)} to ${Math.max(...books)}; value p10 ${q(0.1)} p50 ${q(0.5)} p90 ${q(0.9)} max ${values[values.length - 1]} AED m`);
 console.log(`Buckets: quiet ${(quiet * 100).toFixed(1)}%, orders ${(orders * 100).toFixed(1)}%, closed ${(closed * 100).toFixed(1)}%; completion zeros ${(fz * 100).toFixed(0)}% of filled`);
 console.log(`Gates: ${(['specification', 'buying', 'appointed', 'held', 'none'] as const).map((g) => `${g} ${projects.filter((p) => p.why.gate === g).length}`).join(', ')}`);
-console.log(`Consultant books median ${[...consultantsOut.map((c) => c.projectCount)].sort((a, b) => a - b)[Math.floor(consultantsOut.length / 2)]}, max ${Math.max(...consultantsOut.map((c) => c.projectCount))}; contractor median ${[...contractorsOut.map((c) => c.projectCount)].sort((a, b) => a - b)[Math.floor(contractorsOut.length / 2)]}, max ${Math.max(...contractorsOut.map((c) => c.projectCount))}`);
+console.log(`Consultant books median ${consultantsOut.map((c) => c.projectCount).sort((a, b) => a - b)[Math.floor(consultantsOut.length / 2)]}, max ${Math.max(...consultantsOut.map((c) => c.projectCount))}; contractor median ${contractorsOut.map((c) => c.projectCount).sort((a, b) => a - b)[Math.floor(contractorsOut.length / 2)]}, max ${Math.max(...contractorsOut.map((c) => c.projectCount))}`);

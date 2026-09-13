@@ -1,0 +1,39 @@
+# Halvard Project Intelligence System demo (kinetics-bnc-demo): static Vite build, tailnet-only HTTPS on port 928.
+# Installed by deploy/install-site.sh into /etc/nginx/sites-enabled/kinetics-bnc-demo. Edit here, then re-run the installer.
+# The register is about 3 MB of JSON across eight shards, so JSON is gzipped here (the global nginx.conf compresses HTML only).
+
+server {
+    listen 100.100.228.66:928 ssl;
+    server_name node-ss.tail640a1e.ts.net;
+
+    ssl_certificate     /etc/nginx/ssl/node-ss.crt;
+    ssl_certificate_key /etc/nginx/ssl/node-ss.key;
+    ssl_protocols       TLSv1.2 TLSv1.3;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+
+    allow 100.64.0.0/10;
+    allow 127.0.0.1;
+    deny all;
+
+    root /home/sharmas0910/code/kinetics-bnc-demo/dist;
+    index index.html;
+
+    gzip on;
+    gzip_types application/json application/javascript text/css image/svg+xml;
+    gzip_min_length 1024;
+    gzip_comp_level 5;
+
+    location /assets/ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location /data/ {
+        expires 5m;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+        add_header Cache-Control "no-cache";
+    }
+}
