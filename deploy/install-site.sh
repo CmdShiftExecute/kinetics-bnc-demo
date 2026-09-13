@@ -5,14 +5,16 @@
 #
 #   bash /home/sharmas0910/code/kinetics-bnc-demo/deploy/install-site.sh
 #
-# What it does, every time: copies the site file when it differs, runs sudo nginx -t, reloads only on
+# What it does, every time: writes the site file to sites-available when it differs, makes sure the
+# sites-enabled symlink points at it, runs sudo nginx -t, reloads only on
 # a passing test, then proves port 928 answers from 127.0.0.1 with the built index.html. It never
 # touches any other site file, including the MIS demo on 926.
 set -euo pipefail
 
 REPO=/home/sharmas0910/code/kinetics-bnc-demo
 SRC="$REPO/deploy/kinetics-bnc-demo.nginx"
-DST=/etc/nginx/sites-enabled/kinetics-bnc-demo
+DST=/etc/nginx/sites-available/kinetics-bnc-demo
+LINK=/etc/nginx/sites-enabled/kinetics-bnc-demo
 say() { printf '%s %s\n' "$(date '+%H:%M:%S')" "$*"; }
 
 [ -f "$REPO/dist/index.html" ] || { say "dist/index.html is missing; run bun run build first"; exit 1; }
@@ -23,6 +25,11 @@ if sudo cmp -s "$SRC" "$DST" 2>/dev/null; then
 else
   sudo install -m 0644 "$SRC" "$DST"
   say "site file written to $DST"
+  changed=1
+fi
+if [ "$(readlink -f "$LINK" 2>/dev/null)" != "$DST" ]; then
+  sudo ln -sfn "$DST" "$LINK"
+  say "sites-enabled symlink pointed at $DST"
   changed=1
 fi
 sudo nginx -t
