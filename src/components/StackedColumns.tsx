@@ -135,8 +135,9 @@ export function StackedColumns({ id, categories, series, values, format, ariaLab
         {geo.map((col, c) => {
           const top = col.length ? Math.min(...col.map((g) => g.y)) : baseline;
           return (
-            <motion.text key={`t-${c}`} x={colX(c) + colW / 2} y={top - 6} textAnchor="middle" className="ink num-t" {...fadeIn(0.3 + c * 0.04, reduce)}>
-              {share ? '' : format(totals[c]!)}
+            <motion.text key={`t-${c}`} x={colX(c) + colW / 2} y={top - 6} textAnchor="middle" className="ink num-t" style={{ fontSize: slot < 90 ? 9 : 11 }} {...fadeIn(0.3 + c * 0.04, reduce)}>
+              {/* a printed total needs room: under 62px a slot cannot hold one, and the readout carries it instead */}
+              {share || slot < 62 ? '' : format(totals[c]!)}
             </motion.text>
           );
         })}
