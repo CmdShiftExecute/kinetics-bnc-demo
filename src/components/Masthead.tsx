@@ -4,6 +4,7 @@ import type { Meta } from '../../data/schema';
 import { NAV } from '../lib/nav';
 import { ThemeControl } from './ThemeControl';
 import { IconMenu } from './IconMenu';
+import { SUITE } from '../lib/suite'
 
 /** Persistent technical masthead: reporting context, modules, theme and report navigation. */
 export function Masthead({ meta }: { meta: Meta }) {
@@ -42,8 +43,8 @@ export function Masthead({ meta }: { meta: Meta }) {
         </div>
         <div className="mast-tools">
           <IconMenu label="Module" icon={<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1" /><rect x="14" y="4" width="6" height="6" rx="1" /><rect x="4" y="14" width="6" height="6" rx="1" /><rect x="14" y="14" width="6" height="6" rx="1" /></svg>}>
-            <a role="menuitem" tabIndex={-1} href="https://node-ss.tail640a1e.ts.net:926/">Group MIS</a>
-            <a role="menuitem" tabIndex={-1} href="https://node-ss.tail640a1e.ts.net:927/">Central Store</a>
+            <a role="menuitem" tabIndex={-1} href={SUITE.mis}>Group MIS</a>
+            <a role="menuitem" tabIndex={-1} href={SUITE.wms}>Central Store</a>
             <Link role="menuitem" tabIndex={-1} to="/" aria-current="true"><span>Project Intelligence</span><span className="menu-check" aria-hidden="true">✓</span></Link>
           </IconMenu>
           <ThemeControl />
