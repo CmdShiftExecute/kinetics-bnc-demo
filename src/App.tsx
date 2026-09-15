@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy, useEffect, useRef } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -24,8 +24,12 @@ function Fallback() {
 
 /** Scroll to the top on every path change, or to the anchor when the address carries one. The search string alone never scrolls: a filter change keeps the reader where they are. */
 function ScrollManager() {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, search, key } = useLocation();
+  const previous = useRef<{ pathname: string; hash: string; search: string } | null>(null);
   useEffect(() => {
+    const last = previous.current;
+    previous.current = { pathname, hash, search };
+    if (last && last.pathname === pathname && last.hash === hash && last.search !== search) return;
     if (!hash) { window.scrollTo({ top: 0 }); return; }
     // A direct anchor can precede lazy route and JSON loading. Resolve only on the destination.
     const scroll = () => {
@@ -39,7 +43,7 @@ function ScrollManager() {
     observer.observe(document.getElementById('root')!, { childList: true, subtree: true });
     const timeout = window.setTimeout(() => observer.disconnect(), 10000);
     return () => { observer.disconnect(); window.clearTimeout(timeout); };
-  }, [pathname, hash]);
+  }, [pathname, hash, search, key]);
   return null;
 }
 

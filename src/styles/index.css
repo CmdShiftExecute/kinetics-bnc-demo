@@ -2616,8 +2616,9 @@ html { scroll-padding-top: var(--mast-offset, 210px); }
 .defs dd, .sec-intro { font-size: 13px; line-height: 1.75; max-width: 78ch; }
 table.mis.compact td, table.mis.compact th { padding-top: 10px; padding-bottom: 10px; }
 .rail, .heat-panel { top: var(--mast-offset, 170px); max-height: calc(100vh - var(--mast-offset, 170px)); }
-.picker { top: var(--mast-offset, 170px); max-height: calc(100vh - var(--mast-offset, 170px)); }
-.plist { max-height: calc(100vh - var(--mast-offset, 170px) - 220px); }
+.picker { display: flex; flex-direction: column; top: var(--mast-offset, 170px); max-height: calc(100vh - var(--mast-offset, 170px)); }
+.picker > :not(.plist) { flex-shrink: 0; }
+.plist { flex: 1 1 auto; min-height: 0; max-height: none; }
 section.sec, [id] { scroll-margin-top: 8px; }
 @media (max-width: 1100px) {
  .mast-row { grid-template-columns: auto 1fr auto; gap: 16px; }

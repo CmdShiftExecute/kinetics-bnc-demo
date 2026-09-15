@@ -129,6 +129,10 @@ export function FilterRail({ rollup, projects, consultants, contractors, filters
             <option value="1">Owned ({count(ownedCounts.get('1') ?? 0)})</option>
             <option value="0">No owner ({count(ownedCounts.get('0') ?? 0)})</option>
           </select>
+          <select className="pick" id="owner-vertical-pick" value={f.ownerVertical ?? ''} aria-label="Owning vertical" style={{ marginTop: 6 }} onChange={(e) => set({ ownerVertical: e.target.value || null })}>
+            <option value="">Any owning vertical</option>
+            {rollup.verticals.map(v => <option key={v.slug} value={v.slug}>{v.name}</option>)}
+          </select>
           <select className="pick" id="eng-pick" value={f.engineer ?? ''} aria-label="Owner engineer" style={{ marginTop: 6 }} onChange={(e) => set({ engineer: e.target.value || null })}>
             <option value="">Any engineer</option>
             {rollup.engineers.map((e) => (
@@ -137,6 +141,11 @@ export function FilterRail({ rollup, projects, consultants, contractors, filters
               </option>
             ))}
           </select>
+        </fieldset>
+        <fieldset className="facet" id="facet-chase">
+          <legend className="label">Worth chasing</legend>
+          <label className="facet-opt"><input type="checkbox" checked={f.chase} onChange={e => set({ chase: e.target.checked })} /><span className="facet-name">All qualifying projects</span></label>
+          <p className="sec-note">Tender or early construction, relevance at least 5.0, no vertical closed.</p>
         </fieldset>
         <fieldset className="facet" id="facet-overall">
           <legend className="label">Overall relevance</legend>

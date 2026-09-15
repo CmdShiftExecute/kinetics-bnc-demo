@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import { aedm, cx } from '../lib/format';
@@ -9,7 +10,7 @@ export interface StripItem {
   value: number;
   /** Formatter, defaults to AED million to one decimal. */
   f?: (n: number) => string;
-  sub?: string;
+  sub?: ReactNode;
   /** Where the context line leads. */
   to?: string;
   bad?: boolean;

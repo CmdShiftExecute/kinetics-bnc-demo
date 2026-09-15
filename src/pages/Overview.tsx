@@ -123,7 +123,7 @@ export default function Overview() {
                 {data.verticalSummary.map((v, i) => (
                   <motion.tr key={v.slug} className="hov" {...rowReveal(i)}>
                     <th scope="row" className="left">
-                      <Link to={`/projects?v=${v.slug}&floor=4`} className="elink">
+                      <Link to={`/projects?ov=${v.slug}`} className="elink">
                         {v.name}
                       </Link>
                     </th>
@@ -176,7 +176,7 @@ export default function Overview() {
         </Section>
       </div>
 
-      <Section id="chase" title="Worth chasing now" note={`Top twenty by value: Tender or under construction at ${data.buyingCompletionFloorPct.toFixed(1)} percent or less, overall relevance ${(5).toFixed(1)} or more, no vertical closed`} link={{ to: '/projects?stage=Tender|Under Construction&cmax=5&sort=value', label: 'Open the filtered register' }} defs={['chase', 'door', 'overall']} definitions={definitions}>
+      <Section id="chase" title="Worth chasing now" note={`Top twenty by value: Tender or under construction at ${data.buyingCompletionFloorPct.toFixed(1)} percent or less, overall relevance ${(5).toFixed(1)} or more, no vertical closed`} link={{ to: '/projects?chase=1', label: 'All qualifying projects' }} defs={['chase', 'door', 'overall']} definitions={definitions}>
         <div className="scroll-x">
           <table className="mis compact sticky" id="chase-table">
             <thead>

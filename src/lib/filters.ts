@@ -15,6 +15,7 @@
  */
 import type { BucketCode, Project, Rollup } from '../../data/schema';
 import { BUCKETS, CATEGORIES, CITIES, SECTORS, STAGES } from '../../data/schema';
+import { worthChasing } from '../../data/rules';
 
 export type SortKey = 'ref' | 'name' | 'stage' | 'completionPct' | 'value' | 'city' | 'sector' | 'industry' | 'type' | 'overall' | 'owner' | 'lastUpdated' | 'score';
 export type SortDir = 'asc' | 'desc';
@@ -36,6 +37,10 @@ export interface Filters {
   /** Vertical slug and the minimum score on it. */
   vertical: string | null;
   floor: number | null;
+  /** Assigned ownership, independent of relevance on a vertical. */
+  ownerVertical: string | null;
+  /** All projects meeting the published chase criteria, before the top-twenty limit. */
+  chase: boolean;
   engineer: string | null;
   consultant: number | null;
   contractor: number | null;
@@ -57,7 +62,7 @@ export interface Filters {
   dir: SortDir;
 }
 
-export const EMPTY: Filters = { sector: [], industry: [], type: [], stage: [], city: [], category: [], bucket: [], cmin: null, cmax: null, vmin: null, vmax: null, vertical: null, floor: null, engineer: null, consultant: null, contractor: null, umin: null, umax: null, q: '', owned: null, omin: null, year: null, nocon: false, nokon: false, sort: 'value', dir: 'desc' };
+export const EMPTY: Filters = { sector: [], industry: [], type: [], stage: [], city: [], category: [], bucket: [], cmin: null, cmax: null, vmin: null, vmax: null, vertical: null, floor: null, ownerVertical: null, chase: false, engineer: null, consultant: null, contractor: null, umin: null, umax: null, q: '', owned: null, omin: null, year: null, nocon: false, nokon: false, sort: 'value', dir: 'desc' };
 
 /** The score at which a vertical score, or the overall relevance, reads High (rules.ts gradeOf). */
 export const HIGH_FLOOR = 6.5;
@@ -87,6 +92,7 @@ export function parseFilters(sp: URLSearchParams, rollup: Rollup): Filters {
   const types = [...new Set(rollup.matrix.map((r) => r.type))];
   const engineer = sp.get('eng');
   const vertical = sp.get('v');
+  const ownerVertical = sp.get('ov');
   const sort = sp.get('sort');
   const dir = sp.get('dir');
   const cmin = num(sp, 'cmin');
@@ -114,6 +120,8 @@ export function parseFilters(sp: URLSearchParams, rollup: Rollup): Filters {
     vmax: vmax === null ? null : Math.max(0, vmax),
     vertical: vertical && verticalSlugs.includes(vertical) ? vertical : null,
     floor: num(sp, 'floor'),
+    ownerVertical: ownerVertical && verticalSlugs.includes(ownerVertical) ? ownerVertical : null,
+    chase: flag(sp, 'chase'),
     engineer: engineer && rollup.engineers.some((e) => e.slug === engineer) ? engineer : null,
     consultant: consultant !== null && Number.isInteger(consultant) && consultant > 0 ? consultant : null,
     contractor: contractor !== null && Number.isInteger(contractor) && contractor > 0 ? contractor : null,
@@ -148,6 +156,8 @@ export function serialiseFilters(f: Filters): URLSearchParams {
   put('vmax', f.vmax);
   put('v', f.vertical);
   if (f.vertical) put('floor', f.floor);
+  put('ov', f.ownerVertical);
+  if (f.chase) sp.set('chase', '1');
   put('eng', f.engineer);
   put('con', f.consultant);
   put('kon', f.contractor);
@@ -170,6 +180,8 @@ export function activeCount(f: Filters): number {
   if (f.cmin !== null || f.cmax !== null) n++;
   if (f.vmin !== null || f.vmax !== null) n++;
   if (f.vertical) n++;
+  if (f.ownerVertical) n++;
+  if (f.chase) n++;
   if (f.engineer) n++;
   if (f.consultant) n++;
   if (f.contractor) n++;
@@ -217,6 +229,8 @@ export function matches(p: Project, f: Filters, vIndex: Map<string, number>, ski
     if (f.floor !== null && s < f.floor) return false;
     if (activity && vi !== undefined && !pairMatches(p, vi, f, skip === 'bucket')) return false;
   } else if (activity && !p.buckets.some((_b, vi) => pairMatches(p, vi, f, skip === 'bucket'))) return false;
+  if (f.ownerVertical && p.ownerVertical !== vIndex.get(f.ownerVertical)) return false;
+  if (f.chase && !worthChasing(p.stage, p.completionPct, p.overall, p.buckets)) return false;
   if (f.engineer && p.ownerEngineer !== f.engineer) return false;
   if (f.consultant !== null && !p.leadConsultants.includes(f.consultant) && p.mepConsultant !== f.consultant) return false;
   if (f.contractor !== null && !p.mainContractors.includes(f.contractor) && p.mepContractor !== f.contractor) return false;

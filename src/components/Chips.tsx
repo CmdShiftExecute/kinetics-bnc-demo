@@ -28,6 +28,8 @@ export function chipsFor(f: Filters, rollup: Rollup, consultants: Party[], contr
   for (const b of f.bucket) out.push({ key: `bucket:${b}`, label: `Activity: ${BUCKETS[b]}`, clear: { bucket: f.bucket.filter((x) => x !== b) } });
   if (f.year !== null) out.push({ key: 'year', label: `Activity in ${f.year}`, clear: { year: null } });
   if (f.owned !== null) out.push({ key: 'owned', label: f.owned ? 'Owned' : 'No owner', clear: { owned: null } });
+  if (f.ownerVertical) out.push({ key: 'ownerVertical', label: `Owned by ${rollup.verticals.find(v => v.slug === f.ownerVertical)?.name ?? f.ownerVertical}`, clear: { ownerVertical: null } });
+  if (f.chase) out.push({ key: 'chase', label: 'Worth chasing: all qualifying projects', clear: { chase: false } });
   if (f.omin !== null) out.push({ key: 'omin', label: `Overall relevance at least ${f.omin.toFixed(1)}`, clear: { omin: null } });
   if (f.cmin != null || f.cmax != null) out.push({ key: 'completion', label: `Completion ${f.cmin ?? 0}% to ${f.cmax ?? 100}%`, clear: { cmin: null, cmax: null } });
   if (f.vmin != null || f.vmax != null) out.push({ key: 'value', label: `Value AED ${f.vmin ?? 0} m to ${f.vmax != null ? `${f.vmax} m` : 'any'}`, clear: { vmin: null, vmax: null } });

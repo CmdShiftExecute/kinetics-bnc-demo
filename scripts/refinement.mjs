@@ -2,7 +2,7 @@
 import { chromium, firefox } from 'playwright';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-const base = process.env.BASE ?? 'http://100.100.228.66:4182';
+const base = process.env.BASE ?? 'http://node-ss.tail640a1e.ts.net:4182';
 const out = process.env.OUT ?? '/tmp/halvard-pis-refinement';
 mkdirSync(out,{recursive:true});
 const data = JSON.parse(readFileSync('public/data/rollup.json','utf8'));

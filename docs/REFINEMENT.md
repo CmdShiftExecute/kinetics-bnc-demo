@@ -28,3 +28,11 @@ Considered: enlarging the existing six equal cards would preserve familiarity bu
 
 ## Runtime boundary
 Original main and nginx port 928 remain the source/build baseline. Review runs from the isolated refinement build. Backups under the task artifact directory remain until explicit deletion approval. Promotion is a separate final approval after the reviewable build exists.
+
+## Adversarial repairs after independent Astra review
+
+The user replaced the unavailable Claude review with an independent read-only Astra assessment. Five inherited defects were reproduced and repaired: ownership rows now drill by assigned vertical (`ov`), chase expands to all612 qualifying projects (`chase=1`) while preserving the exact top20, no-relationship totals retain182 firms with separate110/72 links and disclose repeated project exposure, the party picker gives the list its actual remaining viewport height, and repeated section-link activation scrolls again. Search-only URL changes retain position. No data fixture or generator rule changed.
+
+The hostname preview was an additional delivery defect: IP checks had passed while Vite rejected the hostname. The preview now explicitly allows node-ss.tail640a1e.ts.net, and the suite gate defaults to that actual HTTP4182 address. HTTPS928 publication still waits for user confirmation.
+
+Run `bun scripts/adversarial.ts` against the served build for exact ownership and chase CSV populations, independent fixture expectations, exclusion controls, removable chips, relationship destinations, last-row reachability and repeated anchors. `OUT` selects evidence. Existing interaction and three-theme gates remain in force.

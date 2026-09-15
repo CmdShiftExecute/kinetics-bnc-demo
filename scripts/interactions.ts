@@ -760,7 +760,7 @@ try {
   await page.waitForSelector('#pk-norel');
   const pkNoRel = num((await page.locator('#pk-norel dd.big').innerText()).trim());
   check(pkNoRel === noRelCons.length + noRelKons.length && pkNoRel > 0, `"No relationship yet" reads ${pkNoRel} firms, the party files' count of firms with no level, rating or owner`);
-  await page.locator('#pk-norel dd.sub a').click();
+  await page.locator('#pk-norel a[href="/parties?kind=consultant&rel=none"]').click();
   await page.waitForSelector('#plist li');
   const relList = Number(await page.locator('#picker-count').getAttribute('data-count'));
   await page.locator('#plist button').first().click();

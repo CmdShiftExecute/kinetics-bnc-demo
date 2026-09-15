@@ -30,7 +30,7 @@ A persistent Halvard masthead now shares the finalized MIS circular Module and T
 
 The semantic palettes and controls follow MIS at commit `227629042371be9db44a9fae7a8972aa78d7cde4`. The PIS grade and value heatmaps add sequential theme-specific ramps with unchanged grade meanings, data-driven steps and text polarity. Relevance measures fit; ownership assigns a relationship; neither represents an order win.
 
-See [the refinement design and analytical preservation map](docs/REFINEMENT.md). No fixture, ownership rule, ranking rule, filter predicate, export calculation or virtual-table row height changed in this refinement.
+See [the refinement design and analytical preservation map](docs/REFINEMENT.md). Fixtures, ownership rules, ranking rules, export calculations and virtual-table row height are preserved. The adversarial audit added exact ownership (`ov`) and chase-eligibility (`chase=1`) filters, with URL state, removable chips and shared table/chart/CSV predicates, to repair inherited drill mismatches.
 
 ## Run it
 
@@ -52,6 +52,14 @@ See [the refinement design and analytical preservation map](docs/REFINEMENT.md).
 16. `bash scripts/scan_staged.sh [--tree]` runs the scan by hand: with no argument it checks the staged diff, `--tree` checks every tracked file instead.
 
 `bun x playwright install chromium` installs the Chromium build the interaction gate, the screenshot script and the performance probe all drive. Run it once before the first use of any of the three. The dev server binds `127.0.0.1:5182`; preview binds `127.0.0.1:4182`, one port pair up from the MIS demo's 5180/4180, so both can run on the same box at once.
+
+### Private refinement preview
+
+The review is **HTTP**, at `http://node-ss.tail640a1e.ts.net:4182/`; port 4182 has no TLS listener. The Tailscale IP equivalent is `http://100.100.228.66:4182/`. The hostname is explicitly listed in `preview.allowedHosts`; do not use an unrestricted allowlist. For a normal installed checkout, `bun run preview --host 100.100.228.66` serves its build on the tailnet.
+
+On node-ss, the transient user unit `halvard-pis-refinement-preview.service` serves the isolated refinement `dist` using the original checkout's installed Vite. Its environment explicitly sets `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS=node-ss.tail640a1e.ts.net`, since that runtime reads the original checkout's config. This avoids changing the existing staging checkout. The unit is not persistent across reboot; retain its exact launch command in the review evidence. Verify the exact hostname in a fresh browser after starting it. An IP-only check does not verify hostname access.
+
+The suite regression gate now defaults to the hostname: `node scripts/refinement.mjs`; `BASE` can override the origin and `OUT` selects the evidence directory. HTTPS port 928 is the separately published service and requires explicit approval before promotion.
 
 ## Data schema
 

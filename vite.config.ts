@@ -6,6 +6,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: { host: '127.0.0.1', port: 5182, strictPort: true },
-  preview: { host: '127.0.0.1', port: 4182, strictPort: true },
+  preview: {
+    host: '127.0.0.1', port: 4182, strictPort: true,
+    allowedHosts: ['node-ss.tail640a1e.ts.net'],
+  },
   build: { target: 'es2022', sourcemap: false },
 });
