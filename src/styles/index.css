@@ -31,6 +31,10 @@ html {
   background: var(--paper);
   color: var(--ink);
   color-scheme: light;
+  max-width: 100%;
+  /* The register and report navigation are intentionally horizontal scrollers.
+     Keep their wide contents from enlarging the root viewport on narrow screens. */
+  overflow-x: clip;
 }
 body {
   margin: 0;
@@ -374,6 +378,11 @@ p {
 @media (max-width: 560px) {
   .strip {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .strip .big {
+    /* Plain-English money labels such as "AED 482.5 billion" need two lines
+       inside a half-width executive card on a phone. */
+    white-space: normal;
   }
   .strip > div:nth-child(3n + 1) {
     padding-left: var(--s-md);

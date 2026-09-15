@@ -3,7 +3,7 @@ import type { PointerEvent } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import type { SectorStageCell } from '../../data/schema';
 import { SECTORS, STAGES } from '../../data/schema';
-import { aedm, count, cx, pct } from '../lib/format';
+import { aedCompact, aedLabel, count, cx, pct } from '../lib/format';
 import { keyStep, readboxAt } from './charts';
 import { useWidth } from './useWidth';
 
@@ -51,7 +51,7 @@ export function SectorStageChart({ cells, id }: { cells: SectorStageCell[]; id: 
     setHover(hit(e.clientX - r.left, e.clientY - r.top));
   };
   const h = hover != null ? flat[hover] : undefined;
-  const readout = h ? `${h.c.sector}, ${h.c.stage}: ${count(h.c.count)} projects, AED ${aedm(h.c.value)} m, ${pct(h.total ? (h.c.value / h.total) * 100 : 0)} of the sector` : '';
+  const readout = h ? `${h.c.sector}, ${h.c.stage}: ${count(h.c.count)} projects, ${aedLabel(h.c.value)}, ${pct(h.total ? (h.c.value / h.total) * 100 : 0)} of the sector` : '';
   const box = h ? readboxAt(readout.toUpperCase(), m.left + h.x, m.top + h.ri * rowH - 14, width) : null;
   return (
     <div className="chart-wrap" ref={ref}>
@@ -62,7 +62,7 @@ export function SectorStageChart({ cells, id }: { cells: SectorStageCell[]; id: 
         height={height}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label={`Value by sector and stage. ${rows.map((r) => `${r.sector}: AED ${aedm(r.total)} million across ${count(r.n)} projects`).join('. ')}.`}
+        aria-label={`Value by sector and stage. ${rows.map((r) => `${r.sector}: ${aedLabel(r.total)} across ${count(r.n)} projects`).join('. ')}.`}
         tabIndex={0}
         onPointerMove={onMove}
         onPointerLeave={() => setHover(null)}
@@ -88,7 +88,7 @@ export function SectorStageChart({ cells, id }: { cells: SectorStageCell[]; id: 
               />
             ))}
             <text x={m.left + plotW + 8} y={rowH / 2 + 4} className="ink num-t">
-              {aedm(r.total)}
+              {aedCompact(r.total)}
             </text>
           </g>
         ))}
@@ -101,7 +101,7 @@ export function SectorStageChart({ cells, id }: { cells: SectorStageCell[]; id: 
           </g>
         )}
       </svg>
-      <p className="chart-axis-note">Share of each sector's value by stage, Concept (light) to Completed (ink); the sector total in AED million at the right.</p>
+      <p className="chart-axis-note">Share of each sector's value by stage, Concept (light) to Completed (ink); the sector total uses million, billion or trillion as appropriate.</p>
       <p className="sr-only" aria-live="polite">
         {readout}
       </p>

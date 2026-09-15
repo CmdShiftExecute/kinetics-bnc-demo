@@ -4,7 +4,7 @@ import type { Rollup } from '../../data/schema';
 import { BUCKETS, SECTORS, STAGES } from '../../data/schema';
 import { useJson } from '../lib/data';
 import { validateRollup } from '../lib/validate';
-import { aedm, count, pct, score } from '../lib/format';
+import { aedCompact, aedLabel, count, pct, score } from '../lib/format';
 import { Masthead } from '../components/Masthead';
 import { Section } from '../components/Section';
 import { Strip } from '../components/Strip';
@@ -59,7 +59,7 @@ export default function Overview() {
           <p className="page-sub">Market coverage and the next conversations to pursue</p>
         </div>
         <p className="page-basis">
-          Register as of {meta.dataAsOfLabel}<br />Amounts in AED million to one decimal
+          BNC source register as of {meta.dataAsOfLabel}<br />USD shown in million, billion or trillion as appropriate
         </p>
       </motion.div>
 
@@ -68,9 +68,9 @@ export default function Overview() {
         label="Headline figures"
         cols={6}
         items={[
-          { label: 'Projects in register', value: kpis.projects, f: count, sub: `AED ${aedm(registerValue)} m · ${count(data.matrix.length)} type rows`, to: '/projects', id: 'kpi-projects' },
-          { label: 'Owned project value · AED m', value: kpis.ownedValue, sub: `${pct((kpis.ownedValue / registerValue) * 100)} of register value`, to: '/projects?owned=1&sort=value', id: 'kpi-value' },
-          { label: 'Worth chasing now', value: data.chase.length, f: count, sub: `Top twenty by value · AED ${aedm(chaseValue)} m`, to: '#chase', id: 'kpi-chase' },
+          { label: 'Projects in register', value: kpis.projects, f: count, sub: `${aedLabel(registerValue)} · ${count(data.matrix.length)} type rows`, to: '/projects', id: 'kpi-projects' },
+          { label: 'Owned project value', value: kpis.ownedValue, f: aedLabel, sub: `${pct((kpis.ownedValue / registerValue) * 100)} of register value`, to: '/projects?owned=1&sort=value', id: 'kpi-value' },
+          { label: 'Worth chasing now', value: data.chase.length, f: count, sub: `Top twenty by value · ${aedLabel(chaseValue)}`, to: '#chase', id: 'kpi-chase' },
           { label: 'Projects owned', value: kpis.owned, f: count, sub: `${pct((kpis.owned / kpis.projects) * 100)} coverage · ${data.engineers.length} engineers`, to: '/projects?owned=1', id: 'kpi-owned' },
           { label: 'Open enquiries and quotes', value: kpis.openEnquiriesAndQuotes, f: count, sub: 'project and vertical pairs', to: '/projects?bucket=1|2', id: 'kpi-open' },
           { label: `Orders received ${meta.fiscalYear}`, value: kpis.ordersThisYear, f: count, sub: `pairs · ${count(data.funnel[0]!)} orders across all years`, to: `/projects?bucket=0&year=${meta.fiscalYear}`, id: 'kpi-orders' },
@@ -97,15 +97,15 @@ export default function Overview() {
         <ChartSwitch
           id="sector-stage"
           views={[
-            { key: 'value', label: 'Value, AED m', render: () => <StackedColumns id="sector-stage-chart" categories={categories} series={series} values={byValue} format={aedm} unit="AED m" ariaLabel={`Register value by stage and sector. ${STAGES.map((s, i) => `${s}: AED ${aedm(byValue[i]!.reduce((a, b) => a + b, 0))} million`).join('. ')}.`} /> },
+            { key: 'value', label: 'Project value', render: () => <StackedColumns id="sector-stage-chart" categories={categories} series={series} values={byValue} format={aedCompact} unit="" ariaLabel={`Register value by stage and sector. ${STAGES.map((s, i) => `${s}: ${aedLabel(byValue[i]!.reduce((a, b) => a + b, 0))}`).join('. ')}.`} /> },
             { key: 'count', label: 'Projects', render: () => <StackedColumns id="sector-stage-chart" categories={categories} series={series} values={byCount} format={count} unit="projects" ariaLabel={`Projects by stage and sector. ${STAGES.map((s, i) => `${s}: ${count(byCount[i]!.reduce((a, b) => a + b, 0))}`).join('. ')}.`} /> },
-            { key: 'share', label: 'Sector share', render: () => <StackedColumns id="sector-stage-chart" categories={categories} series={series} values={byValue} format={aedm} unit="AED m" mode="share" ariaLabel="Sector share of value at each stage." /> },
+            { key: 'share', label: 'Sector share', render: () => <StackedColumns id="sector-stage-chart" categories={categories} series={series} values={byValue} format={aedCompact} unit="" mode="share" ariaLabel="Sector share of value at each stage." /> },
           ]}
         />
       </Section>
 
       <div className="overview-grid">
-        <Section id="verticals" title="Who owns what" note="Owned projects and pipeline value by vertical, AED million" link={{ to: '/engineers', label: 'Engineers' }} defs={['owner', 'pipeline']} definitions={definitions} compact>
+        <Section id="verticals" title="Who owns what" note="Owned projects and whole-project value by vertical" link={{ to: '/engineers', label: 'Engineers' }} defs={['owner', 'pipeline']} definitions={definitions} compact>
           <div className="scroll-x">
             <table className="mis compact" id="vertical-table">
               <thead>
@@ -115,7 +115,7 @@ export default function Overview() {
                   </th>
                   <th scope="col">Eng.</th>
                   <th scope="col">Owned</th>
-                  <th scope="col">AED m</th>
+                  <th scope="col">Project value</th>
                   <th scope="col" className="left" aria-label="Pipeline value as a bar" />
                 </tr>
               </thead>
@@ -129,7 +129,7 @@ export default function Overview() {
                     </th>
                     <td className="num">{v.engineers}</td>
                     <td className="num">{count(v.owned)}</td>
-                    <td className="num">{aedm(v.ownedValue)}</td>
+                    <td className="num">{aedCompact(v.ownedValue)}</td>
                     <td className="left barcell">
                       <motion.span className="bar spot" style={{ width: `${Math.max(1, (100 * v.ownedValue) / maxOwned)}%`, transformOrigin: '0 50%' }} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.5, delay: 0.1 + i * 0.04 }} aria-hidden="true" />
                     </td>
@@ -140,7 +140,7 @@ export default function Overview() {
           </div>
         </Section>
 
-        <Section id="sectors" title="Largest stage by sector" note="Where each sector's value is concentrated, AED million" link={{ to: '/relevance', label: 'Relevance matrix' }} defs={['register']} definitions={definitions} compact>
+        <Section id="sectors" title="Largest stage by sector" note="Where each sector's whole-project value is concentrated" link={{ to: '/relevance', label: 'Relevance matrix' }} defs={['register']} definitions={definitions} compact>
           <div className="scroll-x">
             <table className="mis compact" id="sector-table">
               <thead>
@@ -149,7 +149,7 @@ export default function Overview() {
                     Sector
                   </th>
                   <th scope="col">Projects</th>
-                  <th scope="col">AED m</th>
+                  <th scope="col">Project value</th>
                   <th scope="col" className="left">
                     Largest stage by value
                   </th>
@@ -164,9 +164,9 @@ export default function Overview() {
                       </Link>
                     </th>
                     <td className="num">{count(r.n)}</td>
-                    <td className="num">{aedm(r.value)}</td>
+                    <td className="num">{aedCompact(r.value)}</td>
                     <td className="left">
-                      {r.top.stage}, AED {aedm(r.top.value)} m ({pct((r.top.value / r.value) * 100, 0)})
+                      {r.top.stage}, {aedLabel(r.top.value)} ({pct((r.top.value / r.value) * 100, 0)})
                     </td>
                   </motion.tr>
                 ))}
@@ -187,7 +187,7 @@ export default function Overview() {
                 <th scope="col" className="left">
                   Stage
                 </th>
-                <th scope="col">AED m</th>
+                <th scope="col">Project value</th>
                 <th scope="col">Relev.</th>
                 <th scope="col" className="left">
                   City
@@ -215,7 +215,7 @@ export default function Overview() {
                     {c.stage}
                     {c.completionPct != null && c.completionPct > 0 ? `, ${pct(c.completionPct)}` : ''}
                   </td>
-                  <td className="num">{aedm(c.value)}</td>
+                  <td className="num">{aedCompact(c.value)}</td>
                   <td className="num">{score(c.overall)}</td>
                   <td className="left">{c.city}</td>
                   <td className="left">{c.type}</td>

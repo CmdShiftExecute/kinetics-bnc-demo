@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router';
 import { bestBucket, gateWords, gradeOf } from '../../data/rules';
 import { BUCKETS } from '../../data/schema';
 import { useRegister } from '../lib/register';
-import { count, cx, dateLabel, pct, score } from '../lib/format';
+import { aedLabel, count, cx, dateLabel, pct, score } from '../lib/format';
 import { Crumbs, Masthead } from '../components/Masthead';
 import { Footer } from '../components/Footer';
 import { PageError, PageLoading } from '../components/PageState';
@@ -27,7 +27,7 @@ export default function ProjectPage() {
   if (!reg.data) return <PageLoading rows={12} />;
   const { rollup } = reg.data;
   const p = ref ? reg.data.byRef.get(ref.toUpperCase()) : undefined;
-  if (!p) return <PageError message={`No such project: "${ref}". References look like HV-26-00001; every project is listed on the Projects page.`} back={{ to: '/projects', label: 'Back to the projects' }} />;
+  if (!p) return <PageError message={`No such project: "${ref}". References look like PRJAE0615645; every project is listed on the Projects page.`} back={{ to: '/projects', label: 'Back to the projects' }} />;
   const { meta, verticals, definitions } = rollup;
   const engName = new Map(rollup.engineers.map((e) => [e.slug, e.name]));
   const ownerV = p.ownerVertical != null ? verticals[p.ownerVertical]! : null;
@@ -69,7 +69,7 @@ export default function ProjectPage() {
         <p className="page-basis">
           Last updated {dateLabel(p.lastUpdated)}
           <br />
-          {p.stage.startsWith('Completed') ? 'Completed' : 'Expected completion'} {dateLabel(p.completionDate)}
+          {p.completionDate ? `${p.stage.startsWith('Completed') ? 'Completed' : 'Expected completion'} ${dateLabel(p.completionDate)}` : 'Completion date not recorded'}
         </p>
       </motion.div>
       <Strip
@@ -77,8 +77,8 @@ export default function ProjectPage() {
         cols={6}
         label="Project figures"
         items={[
-          { label: 'Value', value: p.value, sub: 'AED million', id: 'p-value' },
-          { label: 'Stage', value: 0, f: () => p.stage, text: true, sub: p.completionPct != null ? `${pct(p.completionPct)} complete` : 'not under construction', id: 'p-stage' },
+          { label: 'Whole-project value', value: p.value, f: aedLabel, sub: p.value > 0 ? 'BNC source value; not Halvard revenue' : 'Not recorded in the BNC source', id: 'p-value' },
+          { label: 'Stage', value: 0, f: () => p.stage, text: true, sub: p.completionPct != null ? `${pct(p.completionPct)} complete` : p.stage === 'Under Construction' ? 'completion not recorded' : 'not under construction', id: 'p-stage' },
           { label: 'Overall relevance', value: p.overall ?? 0, f: (n) => (p.overall == null ? 'none' : n.toFixed(1)), sub: p.overall == null ? 'no graded vertical' : `${gradeOf(p.overall)}, highest of ten`, id: 'p-overall' },
           { label: 'Verticals in scope', value: why.eligible.length, f: count, sub: `of ${verticals.length} score ${rollup.scopeFloor.toFixed(1)} or more; ${count(why.candidates.length)} pass the stage gate`, id: 'p-eligible' },
           { label: 'Owner', value: 0, f: () => (p.ownerEngineer ? (engName.get(p.ownerEngineer) ?? '') : 'None'), text: true, sub: ownerV ? ownerV.name : why.gate === 'held' ? 'held: no contractor appointed' : 'no eligible vertical', to: p.ownerEngineer ? `/engineers/${p.ownerEngineer}` : undefined, id: 'p-owner' },
@@ -128,9 +128,17 @@ export default function ProjectPage() {
               <dd>{p.city}, United Arab Emirates</dd>
             </div>
             <div>
+              <dt>Location</dt>
+              <dd>{p.location || 'not recorded'}</dd>
+            </div>
+            <div>
+              <dt>BNC source</dt>
+              <dd>{p.source === 'brownfield' ? 'Brownfield, all sectors' : p.source === 'other_sectors' ? 'Other sectors master file' : 'Urban & industrial greenfield master file'}</dd>
+            </div>
+            <div>
               <dt>Completion</dt>
               <dd>
-                {p.completionPct == null ? 'not recorded, not under construction' : pct(p.completionPct)}; {p.stage.startsWith('Completed') ? 'completed' : 'expected'} {dateLabel(p.completionDate)}
+                {p.completionPct == null ? 'percentage not recorded' : pct(p.completionPct)}; {p.completionDate ? `${p.stage.startsWith('Completed') ? 'completed' : 'expected'} ${dateLabel(p.completionDate)}` : 'date not recorded'}
               </dd>
             </div>
           </dl>
@@ -232,7 +240,7 @@ export default function ProjectPage() {
       <Section id="description" title="Description">
         <p id="p-description">{p.description}</p>
         <p className="muted" style={{ fontSize: 11 }}>
-          Synthetic record {p.ref} of {count(rollup.kpis.projects)}. Every figure above traces to the generator and is reconciled on the Data basis page.
+          BNC record {p.ref} of {count(rollup.kpis.projects)}. Project and company fields trace to the supplied workbook; the internal relevance, ownership, relationship and activity layer is illustrative and reconciled on the Data basis page.
         </p>
       </Section>
       <Footer meta={meta} />

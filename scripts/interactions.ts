@@ -20,6 +20,7 @@ import type { Page } from 'playwright';
 import type { Party, Project, Reconciliation, Rollup } from '../data/schema';
 import { BUCKETS } from '../data/schema';
 import { EMPTY, matches, parseFilters } from '../src/lib/filters';
+import { aedCompact } from '../src/lib/format';
 import { valueStep } from '../src/lib/tint';
 
 const args = process.argv.slice(2);
@@ -38,8 +39,13 @@ const check = (ok: boolean, what: string) => {
   results.push({ ok, what });
 };
 const num = (s: string) => Number(s.replace(/[^\d.\-−]/g, '').replace('−', '-'));
-/** AED million to one decimal, grouped, upper case, as the readouts print it. */
-const aedmUp = (n: number) => new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(n).toUpperCase();
+const stripNum = async (page: Page, selector: string) => {
+  const node = page.locator(selector);
+  const raw = await node.getAttribute('data-value');
+  return raw === null ? num((await node.innerText()).trim()) : Number(raw);
+};
+/** Adaptive USD display, upper case, as the chart readouts print it. */
+const aedUp = (n: number) => aedCompact(n).toUpperCase();
 const sum1 = (xs: number[]) => xs.reduce((a, b) => a + Math.round(b * 10), 0) / 10;
 
 /** Reads a hoverable row's first cell at rest and under the pointer, parking the mouse away first. */
@@ -173,8 +179,8 @@ try {
   await page.evaluate(() => document.fonts.ready);
   await page.waitForSelector('#chase-table tbody tr');
   await page.waitForTimeout(800);
-  const kpiOwned = num((await page.locator('#kpi-owned dd.big').innerText()).trim());
-  const kpiValue = num((await page.locator('#kpi-value dd.big').innerText()).trim());
+  const kpiOwned = await stripNum(page, '#kpi-owned dd.big');
+  const kpiValue = await stripNum(page, '#kpi-value dd.big');
   check(kpiOwned === rollup.kpis.owned && Math.round(kpiValue * 10) === Math.round(rollup.kpis.ownedValue * 10), `KPI strip shows the published owned count and value (${kpiOwned}, ${kpiValue})`);
   const chaseRows = await page.locator('#chase-table tbody tr').count();
   const chaseFirst = (await page.locator('#chase-table tbody tr').first().locator('th').innerText()).trim();
@@ -198,12 +204,12 @@ try {
   await page.waitForTimeout(150);
   const ssKey = ((await page.locator('svg#sector-stage-chart .readbox text').first().textContent()) ?? '').trim();
   const tenderUrban = rollup.sectorStage.find((c) => c.stage === 'Tender' && c.sector === 'Urban Construction')!;
-  check(ssKey.startsWith('TENDER, URBAN CONSTRUCTION') && ssKey.includes(aedmUp(tenderUrban.value)), `Arrow keys walk the columns and segments: "${ssKey.slice(0, 70)}" matches the published cell (AED ${tenderUrban.value} m)`);
+  check(ssKey.startsWith('TENDER, URBAN CONSTRUCTION') && ssKey.includes(aedUp(tenderUrban.value)), `Arrow keys walk the columns and segments: "${ssKey.slice(0, 70)}" matches the published cell (USD ${tenderUrban.value} m)`);
   await page.keyboard.press('Escape');
   await page.locator('#sector-stage-views button[data-view="count"]').click();
   await page.waitForTimeout(400);
   const ssCount = await chartHover(page, 'sector-stage-chart', 0.45, 0.8);
-  check(/PROJECTS/.test(ssCount.read) && !/AED/.test(ssCount.read), `The view switch re-reads the chart in projects ("${ssCount.read.slice(0, 50)}")`);
+  check(/PROJECTS/.test(ssCount.read) && !/USD/.test(ssCount.read), `The view switch re-reads the chart in projects ("${ssCount.read.slice(0, 50)}")`);
   await page.locator('#sector-stage-views button[data-view="value"]').click();
   await page.waitForTimeout(400);
   await breakCss(page, 'svg#sector-stage-chart { pointer-events: none !important; }');
@@ -251,10 +257,10 @@ try {
   await page.goto(`${base}/projects`, { waitUntil: 'networkidle' });
   await waitRows(page);
   const t0 = await tally(page);
-  check(t0.count === projects.length && Math.round(t0.value * 10) === Math.round(sum1(projects.map((p) => p.value)) * 10), `Unfiltered register shows ${t0.count} projects and AED ${t0.value} m, the sum of every row`);
+  check(t0.count === projects.length && Math.round(t0.value * 10) === Math.round(sum1(projects.map((p) => p.value)) * 10), `Unfiltered register shows ${t0.count} projects and USD ${t0.value} m, the sum of every row`);
   const shown = await page.locator('.vt-row').count();
   check(shown < 80 && shown > 10, `The windowed table draws ${shown} rows of ${t0.count} (only the rows in view plus a margin)`);
-  const firstVal = num((await page.locator('.vt-row').first().locator('td').nth(4).innerText()).trim());
+  const firstVal = Number(await page.locator('.vt-row').first().locator('td').nth(4).getAttribute('data-value'));
   const maxVal = Math.max(...projects.map((p) => p.value));
   check(firstVal === maxVal, `Default sort is value descending: first row shows ${firstVal}, the largest value in the register`);
   /* a facet: Tender */
@@ -263,11 +269,11 @@ try {
   await waitRows(page);
   const t1 = await tally(page);
   const e1 = predict('stage=Tender');
-  check(t1.count === e1.count && Math.round(t1.value * 10) === Math.round(e1.value * 10), `Stage: Tender shows ${t1.count} projects, AED ${t1.value} m, exactly what the predicate predicts from the data`);
+  check(t1.count === e1.count && Math.round(t1.value * 10) === Math.round(e1.value * 10), `Stage: Tender shows ${t1.count} projects, USD ${t1.value} m, exactly what the predicate predicts from the data`);
   check(/stage=Tender/.test(page.url()), `The filter is written to the address (${new URL(page.url()).search})`);
   const tenderRows = projects.filter((p) => p.stage === 'Tender');
-  const vkCount = num((await page.locator('#vk-count dd.big').innerText()).trim());
-  const vkOwned = num((await page.locator('#vk-owned dd.big').innerText()).trim());
+  const vkCount = await stripNum(page, '#vk-count dd.big');
+  const vkOwned = await stripNum(page, '#vk-owned dd.big');
   check(vkCount === tenderRows.length && vkOwned === tenderRows.filter((p) => p.ownerVertical != null).length, `The view cards re-count with the filter: ${vkCount} projects, ${vkOwned} owned, as the data predicts`);
   await page.mouse.move(4, 4);
   await page.locator('svg#view-columns').focus();
@@ -358,9 +364,9 @@ try {
     if (sorted === 1 && rows > 0) sortsOk++;
   }
   check(sortsOk === headers.length && headers.length >= 9, `Every one of ${headers.length} columns sorts the full register with aria-sort set (${sortsOk} ok)`);
-  await page.locator('thead th[aria-sort] button', { hasText: 'AED m' }).click();
+  await page.locator('thead th[aria-sort] button', { hasText: 'Value' }).click();
   await page.waitForTimeout(150);
-  const asc = num((await page.locator('.vt-row').first().locator('td').nth(4).innerText()).trim());
+  const asc = Number(await page.locator('.vt-row').first().locator('td').nth(4).getAttribute('data-value'));
   const minVal = Math.min(...projects.map((p) => p.value));
   check(asc === minVal || asc === maxVal, `Clicking the value header again flips the direction (first row ${asc})`);
   /* column chooser */
@@ -425,7 +431,7 @@ try {
   await page.waitForTimeout(150);
   check((await page.locator('#cell-tip').count()) === 0, 'The tooltip closes when the pointer leaves the cell');
   const kpiCells = await page.locator('#matrix-kpis > div').count();
-  const mkHigh = num((await page.locator('#mk-high dd.big').innerText()).trim());
+  const mkHigh = await stripNum(page, '#mk-high dd.big');
   check(kpiCells === 6 && mkHigh === rollup.matrixSummary.projectsOverallHigh, `The matrix page carries six headline cards; projects reading High equals the published ${mkHigh}`);
   const reachHover = await chartHover(page, 'reach-chart', 0.3, 0.12);
   check(reachHover.live && /HIGH/.test(reachHover.read), `The reach chart reads out on a plain pointer move ("${reachHover.read.slice(0, 60)}")`);
@@ -468,14 +474,14 @@ try {
   await page.keyboard.press('Home');
   await page.waitForTimeout(150);
   const bookRead = ((await page.locator('svg#books-chart .readbox text').first().textContent()) ?? '').trim();
-  check(bookRead.startsWith(firstBook.name.toUpperCase()) && bookRead.includes(aedmUp(firstBook.ownedValue)), `The books chart walks by keyboard and reads the published value ("${bookRead.slice(0, 60)}")`);
+  check(bookRead.startsWith(firstBook.name.toUpperCase()) && bookRead.includes(aedUp(firstBook.ownedValue)), `The books chart walks by keyboard and reads the published value ("${bookRead.slice(0, 60)}")`);
   await page.keyboard.press('Escape');
   const target = rollup.engineerSummary[0]!;
   const cardOwned = Number(await page.locator(`.ledger-cell[data-slug="${target.slug}"]`).getAttribute('data-owned'));
   await page.locator(`.ledger-cell[data-slug="${target.slug}"] a.drill-link`).click();
   await page.waitForSelector('#eng-owned');
   await waitRows(page).catch(() => {});
-  const engOwned = num((await page.locator('#eng-owned dd.big').innerText()).trim());
+  const engOwned = await stripNum(page, '#eng-owned dd.big');
   const engRows = Number(await page.locator('.vt').getAttribute('data-total'));
   check(engOwned === cardOwned && engRows === cardOwned && cardOwned === projects.filter((p) => p.ownerEngineer === target.slug).length, `${target.name}'s page count (${engOwned}) equals the card (${cardOwned}) and the register`);
   const mixHover = await (async () => {
@@ -509,7 +515,7 @@ try {
   const tfName = (await page.locator('#party-name').innerText()).trim();
   check(tfName.toUpperCase() === topFirm.name.toUpperCase() && new URL(page.url()).searchParams.get('id') === String(topFirm.id), `Clicking the first bar of the top-firms chart opens that firm's card (${tfName})`);
   const pkCells = await page.locator('#party-kpis > div').count();
-  check(pkCells === 6 && num((await page.locator('#pk-consultants dd.big').innerText()).trim()) === consultants.length, `The parties page carries six headline cards; consultants equals the party file`);
+  check(pkCells === 6 && await stripNum(page, '#pk-consultants dd.big') === consultants.length, `The parties page carries six headline cards; consultants equals the party file`);
   await page.goto(`${base}/parties`, { waitUntil: 'networkidle' });
   await page.waitForSelector('#plist li');
   await page.locator('#plist button').first().click();
@@ -541,7 +547,7 @@ try {
   const sample = projects.find((p) => p.ownerEngineer && p.mepConsultant && p.mainContractors.length)!;
   await page.goto(`${base}/p/${sample.ref}`, { waitUntil: 'networkidle' });
   await page.waitForSelector('#score-strip');
-  const pValue = num((await page.locator('#p-value dd.big').innerText()).trim());
+  const pValue = await stripNum(page, '#p-value dd.big');
   const why = await page.locator('#why li').count();
   const whyText = await page.locator('#why').innerText();
   const ownerName = rollup.engineers.find((e) => e.slug === sample.ownerEngineer)!.name;
@@ -669,7 +675,7 @@ try {
   const followCard = async (path: string, cardId: string, readSel = 'dd.big') => {
     await page.goto(`${base}${path}`, { waitUntil: 'networkidle' });
     await page.waitForSelector(`#${cardId}`);
-    const figure = num((await page.locator(`#${cardId} ${readSel}`).innerText()).trim());
+    const figure = await stripNum(page, `#${cardId} ${readSel}`);
     const href = (await page.locator(`#${cardId} dd.sub a`).getAttribute('href')) ?? '';
     await page.goto(`${base}${href}`, { waitUntil: 'networkidle' });
     await waitRows(page);
@@ -684,15 +690,15 @@ try {
   const noCon = await followCard('/parties', 'pk-nocon');
   check(noCon.figure === rollup.partySummary.projectsNoConsultant && noCon.t.count === noCon.figure, `"Projects with no consultant" (${noCon.figure}) opens exactly ${noCon.t.count} projects (${noCon.href})`);
   const ownedValue = await followCard('/', 'kpi-value');
-  const vkValue = num((await page.locator('#vk-value dd.big').innerText()).trim());
-  check(Math.round(ownedValue.figure * 10) === Math.round(rollup.kpis.ownedValue * 10) && Math.round(vkValue * 10) === Math.round(ownedValue.figure * 10) && Math.round(ownedValue.predicted.value * 10) === Math.round(ownedValue.figure * 10), `"Pipeline value owned" (AED ${ownedValue.figure} m) opens a register whose value in view is the same AED ${vkValue} m (${ownedValue.href})`);
-  check(Math.round(predict('sort=value').value * 10) !== Math.round(ownedValue.figure * 10), `Negative control: the retired link would open the whole register, AED ${predict('sort=value').value} m, not the owned value`);
+  const vkValue = await stripNum(page, '#vk-value dd.big');
+  check(Math.round(ownedValue.figure * 10) === Math.round(rollup.kpis.ownedValue * 10) && Math.round(vkValue * 10) === Math.round(ownedValue.figure * 10) && Math.round(ownedValue.predicted.value * 10) === Math.round(ownedValue.figure * 10), `"Pipeline value owned" (USD ${ownedValue.figure} m) opens a register whose value in view is the same USD ${vkValue} m (${ownedValue.href})`);
+  check(Math.round(predict('sort=value').value * 10) !== Math.round(ownedValue.figure * 10), `Negative control: the retired link would open the whole register, USD ${predict('sort=value').value} m, not the owned value`);
   const orders = await followCard('/', 'kpi-orders');
-  const vkOrders = num((await page.locator('#vk-orders dd.big').innerText()).trim());
+  const vkOrders = await stripNum(page, '#vk-orders dd.big');
   check(orders.figure === rollup.kpis.ordersThisYear && vkOrders === orders.figure, `"Orders received ${rollup.meta.fiscalYear}" (${orders.figure}) opens a register whose Orders card reads the same ${vkOrders} (${orders.href})`);
   check(rollup.funnel[0]! !== orders.figure, `Negative control: the retired link would count every order on record, ${rollup.funnel[0]}, not the ${orders.figure} dated ${rollup.meta.fiscalYear}`);
   const openPairs = await followCard('/', 'kpi-open');
-  const vkOpen = num((await page.locator('#vk-open dd.big').innerText()).trim());
+  const vkOpen = await stripNum(page, '#vk-open dd.big');
   check(openPairs.figure === rollup.kpis.openEnquiriesAndQuotes && vkOpen === openPairs.figure, `"Open enquiries and quotes" (${openPairs.figure}) opens a register whose card reads the same ${vkOpen}`);
   const high = await followCard('/relevance', 'mk-high');
   check(high.figure === rollup.matrixSummary.projectsOverallHigh && high.t.count === high.figure && high.predicted.count === high.figure, `"Projects reading High" (${high.figure}) opens exactly ${high.t.count} projects (${high.href})`);
@@ -731,7 +737,7 @@ try {
   const heaviest = [...rollup.engineerSummary].sort((a, b) => b.loadPct - a.loadPct)[0]!;
   await page.goto(`${base}/engineers`, { waitUntil: 'networkidle' });
   await page.waitForSelector('#ek-over');
-  const ekOver = num((await page.locator('#ek-over dd.big').innerText()).trim());
+  const ekOver = await stripNum(page, '#ek-over dd.big');
   const ekHeavy = (await page.locator('#ek-heaviest').innerText()).trim();
   check(ekOver === overCount && overCount >= 2 && ekHeavy.includes(heaviest.name) && ekHeavy.includes(`${heaviest.workload.toLocaleString('en-GB')} points against ${heaviest.capacity.toLocaleString('en-GB')}`), `"Over capacity" reads ${ekOver} engineers on the published workload rule, and "Heaviest load" names ${heaviest.name} with the points and the capacity, one click from the Overview`);
   await page.locator('#books-views button[data-view="load"]').click();
@@ -758,10 +764,11 @@ try {
   const noRelKons = contractors.filter((c) => c.level === null);
   await page.goto(`${base}/parties`, { waitUntil: 'networkidle' });
   await page.waitForSelector('#pk-norel');
-  const pkNoRel = num((await page.locator('#pk-norel dd.big').innerText()).trim());
+  const pkNoRel = await stripNum(page, '#pk-norel dd.big');
   check(pkNoRel === noRelCons.length + noRelKons.length && pkNoRel > 0, `"No relationship yet" reads ${pkNoRel} firms, the party files' count of firms with no level, rating or owner`);
   await page.locator('#pk-norel a[href="/parties?kind=consultant&rel=none"]').click();
-  await page.waitForSelector('#plist li');
+  await page.waitForURL(/kind=consultant.*rel=none/);
+  await page.waitForFunction((expected) => document.querySelector('#picker-count')?.getAttribute('data-count') === String(expected), noRelCons.length);
   const relList = Number(await page.locator('#picker-count').getAttribute('data-count'));
   await page.locator('#plist button').first().click();
   await page.waitForSelector('#party-rel');
@@ -769,7 +776,7 @@ try {
   const relText = await page.locator('#party-rel').innerText();
   check(relList === noRelCons.length && relState === 'none' && /None yet/.test(relText) && /has not worked with this firm/.test(relText), `The link lists the ${relList} consultants with no relationship, and the first card states the absence in words rather than a low rating`);
   await page.locator('button[data-rel="held"]').click();
-  await page.waitForTimeout(200);
+  await page.waitForFunction((expected) => document.querySelector('#picker-count')?.getAttribute('data-count') === String(expected), consultants.length - noRelCons.length);
   const heldList = Number(await page.locator('#picker-count').getAttribute('data-count'));
   check(heldList === consultants.length - noRelCons.length && heldList + relList === consultants.length, `Negative control: "Relationship held" lists the other ${heldList}, and the two filters sum to all ${consultants.length} consultants`);
   check(noRelCons.every((c) => c.rating === null && c.owner === null) && consultants.filter((c) => c.level !== null).every((c) => c.rating !== null && c.owner !== null), 'In the party file a relationship is whole or absent: no firm has a rating or an owner without a level, or the reverse');

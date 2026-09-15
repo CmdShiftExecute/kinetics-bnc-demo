@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { Party, PartyKind, PartyRole, Vertical } from '../../data/schema';
-import { aedm, count, cx } from '../lib/format';
+import { aedLabel, count, cx } from '../lib/format';
 
 const ROLE_LABEL: Record<PartyKind, Record<PartyRole, string>> = {
   consultant: { lead: 'Lead / Design', mep: 'MEP', both: 'Lead and MEP' },
@@ -102,7 +102,7 @@ export function PartyPicker({ kind, role, rel, vertical, verticals, list, select
                 {p.level === null && <span className="tag norel">No relationship</span>}
               </span>
               <span className="plist-meta">
-                {roleLabel(kind, p.role)} · {count(m.n)} projects{vName ? ` on ${vName}` : ''} · AED {aedm(m.value)} m
+                {roleLabel(kind, p.role)} · {count(m.n)} projects{vName ? ` on ${vName}` : ''} · {aedLabel(m.value)}
               </span>
             </button>
           </li>

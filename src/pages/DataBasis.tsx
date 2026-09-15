@@ -4,7 +4,7 @@ import type { Reconciliation, Rollup } from '../../data/schema';
 import { BUCKETS } from '../../data/schema';
 import { useJson } from '../lib/data';
 import { validateReconciliation, validateRollup } from '../lib/validate';
-import { aedm, count, cx, pct } from '../lib/format';
+import { aedLabel, aedm, count, cx, pct } from '../lib/format';
 import { Masthead } from '../components/Masthead';
 import { Section } from '../components/Section';
 import { Strip } from '../components/Strip';
@@ -37,7 +37,7 @@ export default function DataBasis() {
         <p className="page-basis">
           Register as of {meta.dataAsOfLabel}, seed {meta.seed}
           <br />
-          Synthetic data; nothing here is a real project, firm or person
+          BNC market data with an illustrative internal commercial layer
         </p>
       </motion.div>
 
@@ -52,7 +52,7 @@ export default function DataBasis() {
             { label: 'Failing', value: rec.data.failed, f: count, sub: rec.data.failed === 0 ? 'the tables agree' : 'listed first below', bad: rec.data.failed > 0, id: 'rec-failed' },
             { label: 'Projects reconciled', value: data.kpis.projects, f: count, sub: `${count(data.parties.consultants + data.parties.contractors)} firms, ${data.engineers.length} engineers, ${count(data.matrix.length)} matrix rows`, id: 'rec-projects' },
             { label: 'Published files', value: data.shards.length + 5, f: count, sub: `${data.shards.length} project shards, 3 party files, the rollup and this reconciliation; byte-stable across runs`, id: 'rec-files' },
-            { label: 'Source shape', value: data.shape.filter((s) => s.pass).length, f: (n) => `${count(n)} of ${count(data.shape.length)}`, text: true, sub: data.shape.every((s) => s.pass) ? 'declared ranges met' : `${count(data.shape.filter((s) => !s.pass).length)} declared ranges missed`, bad: !data.shape.every((s) => s.pass), to: '#shape', id: 'rec-shape' },
+            { label: 'Quality gates', value: data.shape.filter((s) => s.pass).length, f: (n) => `${count(n)} of ${count(data.shape.length)}`, text: true, sub: data.shape.every((s) => s.pass) ? 'declared checks met' : `${count(data.shape.filter((s) => !s.pass).length)} declared checks missed`, bad: !data.shape.every((s) => s.pass), to: '#shape', id: 'rec-shape' },
           ]}
         />
       )}
@@ -62,18 +62,18 @@ export default function DataBasis() {
           <div>
             <dt>Company</dt>
             <dd>
-              {meta.company}, {meta.division}. A fictional group; all data is synthetic.
+              {meta.company}, {meta.division}. The project, location, value and company fields come from the three supplied BNC workbooks. The Halvard team, relevance, ownership, relationships, workload and activity are illustrative demo data.
             </dd>
           </div>
           <div>
             <dt>Register</dt>
             <dd>
-              {count(data.kpis.projects)} projects worth AED {aedm(total)} m, stated as of {meta.dataAsOfLabel}; {count(data.parties.consultants)} consultants, {count(data.parties.contractors)} contractors and {count(data.parties.owners)} developers appear on at least one project.
+              {count(data.kpis.projects)} projects worth {aedLabel(total)}, stated as of {meta.dataAsOfLabel}; {count(data.parties.consultants)} consultants, {count(data.parties.contractors)} contractors and {count(data.parties.owners)} developers appear on at least one project.
             </dd>
           </div>
           <div>
             <dt>Units</dt>
-            <dd>Money in AED million to one decimal. Percentages to one decimal. Scores 0.0 to 8.0. Counts whole.</dd>
+            <dd>Source money remains in USD and is stored as USD million to one decimal; the interface selects a readable million, billion or trillion label automatically. Percentages are to one decimal, scores 0.0 to 8.0, and counts whole.</dd>
           </div>
           <div>
             <dt>Time</dt>
@@ -84,7 +84,7 @@ export default function DataBasis() {
 
       <Section id="grades" title="The relevance grade scale" note="How a project gets its ten scores" defs={['relevance', 'overall']} definitions={definitions}>
         <p>
-          The relevance matrix has one row per sector, industry and project type ({count(data.matrix.length)} rows) and one column per vertical. Each cell is High, Medium, Low or none. Grades convert to numbers: High {gradeScore.High.toFixed(1)}, Medium {gradeScore.Medium.toFixed(1)}, Low {gradeScore.Low.toFixed(1)}, none blank. A project's score for a vertical is looked up by its project type when it enters the register and never changes with stage or location. About eight percent of rows carry a hand-adjusted score between the grades, shown to one decimal and marked on the project page. Overall relevance is the highest of the ten.
+          The relevance matrix has one row per BNC sector, industry and project type ({count(data.matrix.length)} rows) and one column per vertical. Each cell is High, Medium, Low or none. Grades convert to numbers: High {gradeScore.High.toFixed(1)}, Medium {gradeScore.Medium.toFixed(1)}, Low {gradeScore.Low.toFixed(1)}, none blank. This relevance layer is illustrative: BNC project types are mapped to the nearest demo taxonomy type, then scored consistently across the register. Overall relevance is the highest of the ten.
         </p>
       </Section>
 
@@ -139,11 +139,11 @@ export default function DataBasis() {
           ))}
         </ol>
         <p>
-          Result: {count(data.partySummary.consultants.noRelationship)} of {count(data.partySummary.consultants.total)} consultants and {count(data.partySummary.contractors.noRelationship)} of {count(data.partySummary.contractors.total)} contractors have no relationship yet, on AED {aedm(Math.round((data.partySummary.consultants.noRelationshipValue + data.partySummary.contractors.noRelationshipValue) * 10) / 10)} m of projects.
+          Result: {count(data.partySummary.consultants.noRelationship)} of {count(data.partySummary.consultants.total)} consultants and {count(data.partySummary.contractors.noRelationship)} of {count(data.partySummary.contractors.total)} contractors have no relationship yet, on {aedLabel(Math.round((data.partySummary.consultants.noRelationshipValue + data.partySummary.contractors.noRelationshipValue) * 10) / 10)} of projects.
         </p>
       </Section>
 
-      <Section id="shape" title="Declared source shape" note="The magnitudes the synthetic register is meant to resemble, each a declared range with its basis; measured by the generator before it writes, re-measured here from the written files">
+      <Section id="shape" title="Declared quality and demo checks" note="Data-quality and operating ranges measured before publication and re-measured from the written files">
         <div className="scroll-x">
           <table className="mis compact" id="shape-table" style={{ maxWidth: 1100 }}>
             <thead>
@@ -190,7 +190,7 @@ export default function DataBasis() {
         </ul>
       </Section>
 
-      <Section id="assumptions" title="Synthetic assumptions" note="What the generator chose, stated so nothing is mistaken for a survey">
+      <Section id="assumptions" title="Sources and demo assumptions" note="What comes from BNC and what the internal demo layer generates">
         <ul className="policy">
           {assumptions.map((a, i) => (
             <li key={i}>{a}</li>

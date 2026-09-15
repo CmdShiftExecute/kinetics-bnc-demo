@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { gradeOf } from '../../data/rules';
 import type { Project } from '../../data/schema';
 import type { SortDir, SortKey } from '../lib/filters';
-import { aedm, count, cx, dateLabel, pct, score } from '../lib/format';
+import { aedCompact, count, cx, dateLabel, pct, score } from '../lib/format';
 import { SortTh } from './SortTh';
 
 export interface Column {
@@ -21,7 +21,7 @@ export const COLUMNS: Column[] = [
   { key: 'name', label: 'Project', natural: 'asc', width: 260 },
   { key: 'stage', label: 'Stage', natural: 'asc', width: 170 },
   { key: 'completionPct', label: 'Done', natural: 'desc', width: 70, num: true },
-  { key: 'value', label: 'AED m', natural: 'desc', width: 100, num: true },
+  { key: 'value', label: 'Value', natural: 'desc', width: 100, num: true },
   { key: 'overall', label: 'Relev.', natural: 'desc', width: 70, num: true },
   /* shown automatically whenever a vertical is chosen in the rail, never from the column menu */
   { key: 'score', label: 'Score', natural: 'desc', width: 70, num: true },
@@ -98,7 +98,7 @@ export function VirtualTable({ rows, sort, onSort, shown, engineerName, scoreInd
       case 'completionPct':
         return p.completionPct == null ? '' : pct(p.completionPct);
       case 'value':
-        return aedm(p.value);
+        return aedCompact(p.value);
       case 'overall':
         return score(p.overall);
       case 'score':
@@ -141,7 +141,7 @@ export function VirtualTable({ rows, sort, onSort, shown, engineerName, scoreInd
           {slice.map((p) => (
             <tr key={p.ref} className={cx('hov', 'vt-row', p.overall != null && gradeOf(p.overall) === 'High' && 'hi')} style={{ height: ROW_H }} data-ref={p.ref}>
               {cols.map((c) => (
-                <td key={c.key} className={cx(c.num ? 'num' : 'left', 'vt-cell')}>
+                <td key={c.key} className={cx(c.num ? 'num' : 'left', 'vt-cell')} data-value={c.key === 'value' ? p.value : undefined}>
                   {cell(p, c)}
                 </td>
               ))}

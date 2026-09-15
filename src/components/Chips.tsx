@@ -32,7 +32,7 @@ export function chipsFor(f: Filters, rollup: Rollup, consultants: Party[], contr
   if (f.chase) out.push({ key: 'chase', label: 'Worth chasing: all qualifying projects', clear: { chase: false } });
   if (f.omin !== null) out.push({ key: 'omin', label: `Overall relevance at least ${f.omin.toFixed(1)}`, clear: { omin: null } });
   if (f.cmin != null || f.cmax != null) out.push({ key: 'completion', label: `Completion ${f.cmin ?? 0}% to ${f.cmax ?? 100}%`, clear: { cmin: null, cmax: null } });
-  if (f.vmin != null || f.vmax != null) out.push({ key: 'value', label: `Value AED ${f.vmin ?? 0} m to ${f.vmax != null ? `${f.vmax} m` : 'any'}`, clear: { vmin: null, vmax: null } });
+  if (f.vmin != null || f.vmax != null) out.push({ key: 'value', label: `Value USD ${f.vmin ?? 0} m to ${f.vmax != null ? `${f.vmax} m` : 'any'}`, clear: { vmin: null, vmax: null } });
   if (f.engineer) out.push({ key: 'engineer', label: `Owner: ${rollup.engineers.find((e) => e.slug === f.engineer)?.name ?? f.engineer}`, clear: { engineer: null } });
   if (f.consultant != null) out.push({ key: 'consultant', label: `Consultant: ${consultants.find((c) => c.id === f.consultant)?.name ?? f.consultant}`, clear: { consultant: null } });
   if (f.nocon) out.push({ key: 'nocon', label: 'No consultant recorded', clear: { nocon: false } });

@@ -154,7 +154,7 @@ export function FilterRail({ rollup, projects, consultants, contractors, filters
             <input type="number" id="omin" min={0} max={8} step={0.5} value={s(f.omin)} placeholder="any" aria-label="Minimum overall relevance" onChange={(e) => set({ omin: numOrNull(e.target.value) }, false)} />
           </label>
         </fieldset>
-        <Range id="value" title="Value, AED million" lo={s(f.vmin)} hi={s(f.vmax)} setLo={(v) => set({ vmin: numOrNull(v) }, false)} setHi={(v) => set({ vmax: numOrNull(v) }, false)} step={0.1} />
+        <Range id="value" title="Value, USD million" lo={s(f.vmin)} hi={s(f.vmax)} setLo={(v) => set({ vmin: numOrNull(v) }, false)} setHi={(v) => set({ vmax: numOrNull(v) }, false)} step={0.1} />
         <Range id="completion" title="Completion, percent" lo={s(f.cmin)} hi={s(f.cmax)} setLo={(v) => set({ cmin: numOrNull(v) }, false)} setHi={(v) => set({ cmax: numOrNull(v) }, false)} step={0.1} />
         <Facet id="city" title="City" options={CITIES} selected={f.city} counts={cityCounts} onChange={(v) => set({ city: v })} />
         <Facet id="category" title="Category" options={CATEGORIES} selected={f.category} counts={catCounts} onChange={(v) => set({ category: v })} />

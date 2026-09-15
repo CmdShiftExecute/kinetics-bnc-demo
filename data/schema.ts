@@ -1,7 +1,7 @@
 /**
  * The one data contract every screen, the generator and the reconciliation read from.
  *
- * Money is AED million to one decimal. Percentages are plain numbers to one decimal
+ * Money is source USD million to one decimal. Percentages are plain numbers to one decimal
  * (0.0 to 100.0). Scores are 0 to 8 to one decimal, or null where the matrix has no grade.
  * Counts are whole. No published file carries a timestamp: the data-as-of date is one
  * constant in the generator, so a re-run writes byte-identical files.
@@ -101,15 +101,19 @@ export interface Project {
   stage: Stage;
   /** 0 to 100, one decimal; null unless under construction. */
   completionPct: number | null;
-  /** ISO date, expected finish. */
-  completionDate: string;
-  /** AED million, one decimal. */
+  /** ISO date, expected finish; null where the source workbook has no date. */
+  completionDate: string | null;
+  /** USD million, one decimal. Zero means the source workbook did not record a value. */
   value: number;
   city: City;
   sector: Sector;
   category: Category;
   industry: string;
   type: string;
+  /** Source location text, which is more specific than city where recorded. */
+  location: string;
+  /** The supplied workbook this row came from. */
+  source: 'urban_industrial' | 'other_sectors' | 'brownfield';
   attributes: Attribute[];
   /** Owner (client or developer) ids, 0 to 2. */
   owners: number[];
@@ -145,7 +149,7 @@ export interface Shard {
   file: string;
   sector: Sector;
   count: number;
-  /** AED million, one decimal: the sum of the shard's project values. */
+  /** USD million, one decimal: the sum of the shard's project values. */
   value: number;
 }
 
@@ -166,7 +170,7 @@ export interface Party {
   role: PartyRole;
   /** Per vertical, in vertical order: projects of this firm graded Medium or High (score 3.5 or more) on that vertical. */
   verticalCounts: number[];
-  /** Per vertical, in vertical order: AED million of those projects. */
+  /** Per vertical, in vertical order: USD million of those projects. */
   verticalValues: number[];
   /** Null when Halvard holds no relationship with the firm. */
   level: RelationshipLevel | null;
@@ -175,7 +179,7 @@ export interface Party {
   /** Relationship owner, an engineer slug; null when no relationship. */
   owner: Slug | null;
   projectCount: number;
-  /** AED million, one decimal. */
+  /** USD million, one decimal. */
   projectValue: number;
   /** Project references. */
   projects: string[];
@@ -189,7 +193,7 @@ export interface Owner {
 export interface KpiStrip {
   projects: number;
   owned: number;
-  /** AED million. */
+  /** USD million. */
   ownedValue: number;
   /** (project, vertical) pairs in Enquiry generated or Quote sent. */
   openEnquiriesAndQuotes: number;

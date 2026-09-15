@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import type { Rollup } from '../../data/schema';
 import { useJson } from '../lib/data';
 import { validateRollup } from '../lib/validate';
-import { aedm, count, cx, pct } from '../lib/format';
+import { aedLabel, count, cx, pct } from '../lib/format';
 import { HIGH_FLOOR } from '../lib/filters';
 import { Masthead } from '../components/Masthead';
 import { Footer } from '../components/Footer';
@@ -44,7 +44,7 @@ export default function RelevancePage() {
                 { key: 'l', label: 'Low', value: r.rowsLow, cls: 'ink3' as const },
               ],
         end: mode === 'projects' ? count(r.projectsHigh + r.projectsMedium + r.projectsLow) : count(r.rowsHigh + r.rowsMedium + r.rowsLow),
-        endNote: mode === 'projects' ? `AED ${aedm(r.valueHigh)} m at High` : `of ${count(data.matrix.length)} rows`,
+        endNote: mode === 'projects' ? `${aedLabel(r.valueHigh)} at High` : `of ${count(data.matrix.length)} rows`,
       }));
   const legend = [
     { cls: 'spot' as const, label: 'High' },
@@ -72,7 +72,7 @@ export default function RelevancePage() {
         cols={6}
         items={[
           { label: 'Cells graded', value: ms.cellsGraded, f: count, sub: `of ${count(ms.cellsTotal)}, ${pct((ms.cellsGraded / ms.cellsTotal) * 100)} of the matrix`, id: 'mk-cells' },
-          { label: 'Projects reading High', value: ms.projectsOverallHigh, f: count, sub: `${pct((ms.projectsOverallHigh / data.kpis.projects) * 100)} of the register, AED ${aedm(ms.valueOverallHigh)} m`, to: `/projects?omin=${HIGH_FLOOR}&sort=overall`, id: 'mk-high' },
+          { label: 'Projects reading High', value: ms.projectsOverallHigh, f: count, sub: `${pct((ms.projectsOverallHigh / data.kpis.projects) * 100)} of the register, ${aedLabel(ms.valueOverallHigh)}`, to: `/projects?omin=${HIGH_FLOOR}&sort=overall`, id: 'mk-high' },
           { label: 'Widest vertical', value: ms.widestVertical.rowsHigh, f: (n) => `${count(n)} High rows`, text: true, sub: ms.widestVertical.name, to: `/projects?v=${ms.widestVertical.slug}&floor=6.5`, id: 'mk-widest' },
           { label: 'Most relevant type', value: ms.topType.cellsHigh, f: (n) => `${count(n)} of ${data.verticals.length} High`, text: true, sub: `${ms.topType.type}, ${count(ms.topType.projects)} projects`, to: `/projects?type=${encodeURIComponent(ms.topType.type)}`, id: 'mk-type' },
           { label: 'Hand-adjusted scores', value: ms.projectsAdjusted, f: count, sub: `projects, ${pct((ms.projectsAdjusted / data.kpis.projects) * 100)} of the register`, id: 'mk-adjusted' },

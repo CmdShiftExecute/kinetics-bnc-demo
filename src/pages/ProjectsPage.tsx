@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router';
 import { useRegister } from '../lib/register';
 import type { Filters, SortDir, SortKey } from '../lib/filters';
 import { EMPTY, activeCount, countPairs, matches, parseFilters, serialiseFilters, sortProjects } from '../lib/filters';
-import { aedm, count, cx, dateLabel, pct, score } from '../lib/format';
+import { aedCompact, aedLabel, count, cx, dateLabel, pct, score } from '../lib/format';
 import { toCsv, download } from '../lib/csv';
 import { Masthead } from '../components/Masthead';
 import { Footer } from '../components/Footer';
@@ -76,8 +76,8 @@ export default function ProjectsPage() {
   const chips = chipsFor(filters, rollup, reg.data.consultants, reg.data.contractors);
   const onSort = (key: SortKey, natural: SortDir) => set({ sort: key, dir: filters.sort === key ? (filters.dir === 'asc' ? 'desc' : 'asc') : natural }, false);
   const exportCsv = () => {
-    const header = ['Reference', 'Project', 'Stage', 'Completion %', 'Value AED m', 'City', 'Sector', 'Industry', 'Type', 'Category', 'Overall relevance', ...rollup.verticals.map((v) => `${v.name} score`), 'Owner vertical', 'Owner engineer', ...rollup.verticals.map((v) => `${v.name} activity`), 'Last updated'];
-    const body = rows.map((p) => [p.ref, p.name, p.stage, p.completionPct, p.value, p.city, p.sector, p.industry, p.type, p.category, p.overall, ...p.scores, p.ownerVertical == null ? '' : rollup.verticals[p.ownerVertical]!.name, p.ownerEngineer ? (engineerName.get(p.ownerEngineer) ?? '') : '', ...p.buckets.map((b) => BUCKETS[b]!), dateLabel(p.lastUpdated)]);
+    const header = ['Reference', 'Project', 'Stage', 'Completion %', 'Value USD m', 'City', 'Location', 'Sector', 'Industry', 'Type', 'Category', 'BNC source', 'Overall relevance', ...rollup.verticals.map((v) => `${v.name} score`), 'Owner vertical', 'Owner engineer', ...rollup.verticals.map((v) => `${v.name} activity`), 'Last updated'];
+    const body = rows.map((p) => [p.ref, p.name, p.stage, p.completionPct, p.value, p.city, p.location, p.sector, p.industry, p.type, p.category, p.source, p.overall, ...p.scores, p.ownerVertical == null ? '' : rollup.verticals[p.ownerVertical]!.name, p.ownerEngineer ? (engineerName.get(p.ownerEngineer) ?? '') : '', ...p.buckets.map((b) => BUCKETS[b]!), dateLabel(p.lastUpdated)]);
     download(`halvard-projects-${rows.length}.csv`, toCsv(header, body));
   };
   const toggleCol = (key: SortKey) => {
@@ -110,8 +110,8 @@ export default function ProjectsPage() {
         cols={6}
         items={[
           { label: 'Projects in view', value: rows.length, f: count, sub: `of ${count(reg.data.projects.length)} in the register`, id: 'vk-count' },
-          { label: 'Value in view', value: total, sub: `AED million, ${pct(reg.data.projects.length ? (total / (reg.data.rollup.sectorStage.reduce((a, c) => a + Math.round(c.value * 10), 0) / 10)) * 100 : 0)} of the register`, id: 'vk-value' },
-          { label: 'Owned', value: view.owned, f: count, sub: `${rows.length ? pct((view.owned / rows.length) * 100) : '0.0%'} of the view, AED ${aedm(view.ownedValue)} m`, id: 'vk-owned' },
+          { label: 'Value in view', value: total, f: aedLabel, sub: `${pct(reg.data.projects.length ? (total / (reg.data.rollup.sectorStage.reduce((a, c) => a + Math.round(c.value * 10), 0) / 10)) * 100 : 0)} of the register`, id: 'vk-value' },
+          { label: 'Owned', value: view.owned, f: count, sub: `${rows.length ? pct((view.owned / rows.length) * 100) : '0.0%'} of the view, ${aedLabel(view.ownedValue)}`, id: 'vk-owned' },
           { label: 'Reading High overall', value: view.high, f: count, sub: `${rows.length ? pct((view.high / rows.length) * 100) : '0.0%'} of the view`, id: 'vk-high' },
           { label: 'Open enquiries and quotes', value: view.open, f: count, sub: `${view.vi != null ? `on ${scoreName}` : 'project and vertical pairs'}${filters.year !== null ? `, dated ${filters.year}` : ''}`, id: 'vk-open' },
           { label: filters.year !== null ? `Orders received ${filters.year}` : 'Orders received', value: view.orders, f: count, sub: `${view.vi != null ? `on ${scoreName}` : 'project and vertical pairs'}${filters.year !== null ? `, dated ${filters.year}` : ''}`, id: 'vk-orders' },
@@ -122,7 +122,7 @@ export default function ProjectsPage() {
           id="view-chart"
           views={[
             { key: 'count', label: 'Projects', render: () => <StackedColumns id="view-columns" categories={STAGES.map((st) => ({ key: st, label: st, short: STAGE_SHORT[st] }))} series={[{ key: 'owned', label: 'Owned', cls: 'spot' }, { key: 'unowned', label: 'No owner', cls: 'ink3' }]} values={view.byStage.map((b) => b.count)} format={count} unit="projects" height={240} ariaLabel={`Projects in view by stage. ${STAGES.map((st, i) => `${st}: ${count(view.byStage[i]!.count[0]! + view.byStage[i]!.count[1]!)}`).join('. ')}.`} /> },
-            { key: 'value', label: 'Value, AED m', render: () => <StackedColumns id="view-columns" categories={STAGES.map((st) => ({ key: st, label: st, short: STAGE_SHORT[st] }))} series={[{ key: 'owned', label: 'Owned', cls: 'spot' }, { key: 'unowned', label: 'No owner', cls: 'ink3' }]} values={view.byStage.map((b) => b.value)} format={aedm} unit="AED m" height={240} ariaLabel={`Value in view by stage. ${STAGES.map((st, i) => `${st}: AED ${aedm(view.byStage[i]!.value[0]! + view.byStage[i]!.value[1]!)} million`).join('. ')}.`} /> },
+            { key: 'value', label: 'Project value', render: () => <StackedColumns id="view-columns" categories={STAGES.map((st) => ({ key: st, label: st, short: STAGE_SHORT[st] }))} series={[{ key: 'owned', label: 'Owned', cls: 'spot' }, { key: 'unowned', label: 'No owner', cls: 'ink3' }]} values={view.byStage.map((b) => b.value)} format={aedCompact} unit="" height={240} ariaLabel={`Value in view by stage. ${STAGES.map((st, i) => `${st}: ${aedLabel(view.byStage[i]!.value[0]! + view.byStage[i]!.value[1]!)}`).join('. ')}.`} /> },
           ]}
         />
       </Section>
@@ -135,7 +135,7 @@ export default function ProjectsPage() {
               {railOpen ? 'Hide filters' : `Filters${activeCount(filters) ? ` (${activeCount(filters)})` : ''}`}
             </button>
             <p className="tally" id="tally" data-count={rows.length} data-value={total}>
-              <strong id="match-count">{count(rows.length)}</strong> of {count(reg.data.projects.length)} projects, <strong id="match-value">AED {aedm(total)} m</strong>
+              <strong id="match-count">{count(rows.length)}</strong> of {count(reg.data.projects.length)} projects, <strong id="match-value">{aedLabel(total)}</strong>
             </p>
             <details className="menu" id="cols-menu">
               <summary className="btn press">Columns</summary>

@@ -3,5 +3,7 @@ dist
 screenshots
 .DS_Store
 *.local
+.private/
+__pycache__/
 # Written by the estate code-graph job (~/server-ops/bin/codegraph-build.sh) into every repo; not part of this demo
 CLAUDE.md

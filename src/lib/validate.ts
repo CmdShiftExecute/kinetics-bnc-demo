@@ -58,7 +58,7 @@ function needNullableInt(file: string, v: unknown, path: string, lo: number, hi 
 }
 
 /** Keys that may legitimately be null. */
-const NULLABLE = new Set(['completionPct', 'mepConsultant', 'mepContractor', 'overall', 'ownerVertical', 'ownerEngineer', 'door', 'tieRule', 'level', 'rating', 'owner']);
+const NULLABLE = new Set(['completionPct', 'completionDate', 'mepConsultant', 'mepContractor', 'overall', 'ownerVertical', 'ownerEngineer', 'door', 'tieRule', 'level', 'rating', 'owner']);
 /** Walks a subtree: every leaf must be a finite number, a string or a boolean; null only under a nullable key or inside a scores vector. */
 function needFiniteLeaves(file: string, v: unknown, path: string, nullOk = false) {
   if (v === null || v === undefined) {
@@ -137,7 +137,7 @@ export function validateRollup(file: string, v: unknown) {
   needFiniteLeaves(file, v.partySummary, 'partySummary');
 }
 
-const PROJECT_KEYS = ['ref', 'name', 'stage', 'completionPct', 'completionDate', 'value', 'city', 'sector', 'category', 'industry', 'type', 'attributes', 'owners', 'leadConsultants', 'mepConsultant', 'mainContractors', 'mepContractor', 'description', 'lastUpdated', 'scores', 'adjusted', 'overall', 'ownerVertical', 'ownerEngineer', 'why', 'buckets', 'bucketDates'];
+const PROJECT_KEYS = ['ref', 'name', 'stage', 'completionPct', 'completionDate', 'value', 'city', 'sector', 'category', 'industry', 'type', 'location', 'source', 'attributes', 'owners', 'leadConsultants', 'mepConsultant', 'mainContractors', 'mepContractor', 'description', 'lastUpdated', 'scores', 'adjusted', 'overall', 'ownerVertical', 'ownerEngineer', 'why', 'buckets', 'bucketDates'];
 const GATES = ['specification', 'buying', 'appointed', 'held', 'none'];
 
 /**
@@ -154,21 +154,23 @@ export function validateShard(file: string, v: unknown, V: number) {
     const at = `projects[${i}]`;
     need(file, p, PROJECT_KEYS, at);
     needString(file, p.ref, `${at}.ref`);
-    if (!/^HV-\d{2}-\d{5}$/.test(p.ref)) throw new DataShapeError(file, `${at}.ref "${p.ref}" is not a project reference`);
+    if (!/^PRJAE\d+$/.test(p.ref)) throw new DataShapeError(file, `${at}.ref "${p.ref}" is not a BNC project reference`);
     if (refs.has(p.ref)) throw new DataShapeError(file, `${at}.ref "${p.ref}" appears twice`);
     refs.add(p.ref);
     needString(file, p.name, `${at}.name`);
     needOneOf(file, p.stage, `${at}.stage`, STAGES);
     if (p.completionPct !== null) needNumber(file, p.completionPct, `${at}.completionPct`, 0, 100);
-    if (p.stage === 'Under Construction' ? p.completionPct === null : p.completionPct !== null) throw new DataShapeError(file, `${at}.completionPct must be recorded for Under Construction only`);
-    needDate(file, p.completionDate, `${at}.completionDate`);
+    if (p.stage !== 'Under Construction' && p.completionPct !== null) throw new DataShapeError(file, `${at}.completionPct must be recorded for Under Construction only`);
+    if (p.completionDate !== null) needDate(file, p.completionDate, `${at}.completionDate`);
     needNumber(file, p.value, `${at}.value`, 0);
-    if (!oneDecimal(p.value)) throw new DataShapeError(file, `${at}.value is not AED million to one decimal`);
+    if (!oneDecimal(p.value)) throw new DataShapeError(file, `${at}.value is not USD million to one decimal`);
     needOneOf(file, p.city, `${at}.city`, CITIES);
     if (p.sector !== v.sector) throw new DataShapeError(file, `${at}.sector differs from the shard's sector`);
     needOneOf(file, p.category, `${at}.category`, CATEGORIES);
     needString(file, p.industry, `${at}.industry`);
     needString(file, p.type, `${at}.type`);
+    needString(file, p.location, `${at}.location`, false);
+    needOneOf(file, p.source, `${at}.source`, ['urban_industrial', 'other_sectors', 'brownfield']);
     needArray(file, p.attributes, `${at}.attributes`);
     p.attributes.forEach((a, j) => needString(file, a, `${at}.attributes[${j}]`));
     needIdList(file, p.owners, `${at}.owners`, 2);

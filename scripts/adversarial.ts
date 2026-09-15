@@ -58,7 +58,7 @@ for(const [width,height] of [[1280,720],[1440,900],[390,844]]){
 }
 await page.setViewportSize({width:1280,height:720});await page.goto(base);await page.locator('#kpi-chase a').click();await page.waitForTimeout(500);await page.evaluate(()=>scrollTo(0,0));await page.locator('#kpi-chase a').click();await page.waitForTimeout(500);
 check(await page.locator('#chase').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.top<innerHeight/2;}),'Repeated chase headline link scrolls to its section again');
-await page.goto(base+'/projects');await page.locator('#tally').waitFor();await page.locator('#q').scrollIntoViewIfNeeded();const y=await page.evaluate(()=>scrollY);await page.locator('#q').fill('HV-26');await page.waitForTimeout(200);
+await page.goto(base+'/projects');await page.locator('#tally').waitFor();await page.locator('#q').scrollIntoViewIfNeeded();const y=await page.evaluate(()=>scrollY);await page.locator('#q').fill('PRJAE');await page.waitForTimeout(200);
 check(Math.abs(await page.evaluate(()=>scrollY)-y)<2,'Search-only URL update preserves scroll position');
 writeFileSync(`${out}/checks.json`,JSON.stringify(records,null,2));console.log(`${records.length} audit regression checks passed`);
 } finally { await b.close(); }

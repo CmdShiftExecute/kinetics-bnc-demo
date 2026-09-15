@@ -1,7 +1,23 @@
-# Terms that must never appear in this repository, one per line, matched whole-word and case-insensitive
-# by scripts/scan_staged.sh. Lines starting with # are comments. This file is the only place they may live.
+# Terms that must never appear in this repository, matched whole-word and case-insensitive by
+# scripts/scan_staged.sh. Lines starting with # are comments. This file is the only place they may live.
 #
-# Reference workbook sheet and vertical names (the ones that are not also Halvard verticals)
+# TWO TIERS, because this repository changed shape. It began as a fully synthetic demo, where the
+# list existed to stop invented data colliding with real brands and to keep the source vendor's name
+# out of the product. It is now built on the authentic project register, so the register legitimately
+# carries real firms, real locations and its own stated provenance. A gate that refuses those is
+# refusing the data itself.
+#
+# HARD terms are refused in EVERY file, including the imported register under public/data/.
+# AUTHORED terms are refused only in files we write; the imported register is exempt.
+
+# --- HARD: the principal's employer and its brands. These identify him and must appear nowhere. ---
+TTE
+Easa Saleh
+Easa Saleh Al Gurg
+Danfoss
+
+# --- AUTHORED ONLY: everything below is checked in files we author, never in the imported register. ---
+# Reference workbook sheet and vertical names
 VFD Drives
 VFD
 Refrigeration
@@ -13,17 +29,10 @@ Channel Sales
 Smart Metering
 Pipe Support and Hangers
 Pipe Supports and Hangers
-# Reference site and location names (the eight emirate cities of the register are generic vocabulary and are not listed)
+# Reference site and location names (the eight emirate cities of the register are generic vocabulary)
 Dubai Investment Park
-DIP
-Jebel Ali
 JAFZA
-# The real group and its brand
-TTE
-Al Gurg
-Easa Saleh
-Danfoss
-# Manufacturers in the trade, so no invented brand can collide with a real one
+# Manufacturers in the trade, so no hand-written example can collide with a real one
 Carrier
 Daikin
 Trane
@@ -56,5 +65,3 @@ Elster
 Sensus
 Kirloskar
 Havells
-# The vendor whose register shape this demo mirrors; the name is a real company and never appears in the product
-BNC

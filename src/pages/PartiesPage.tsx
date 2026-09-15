@@ -4,7 +4,7 @@ import { Link, useSearchParams } from 'react-router';
 import type { Party, PartyKind, PartyRole } from '../../data/schema';
 import { STAGES } from '../../data/schema';
 import { useRegister } from '../lib/register';
-import { aedm, count, cx, pct } from '../lib/format';
+import { aedCompact, aedLabel, count, cx, pct } from '../lib/format';
 import { Masthead } from '../components/Masthead';
 import { Footer } from '../components/Footer';
 import { PageError, PageLoading } from '../components/PageState';
@@ -95,8 +95,8 @@ export default function PartiesPage() {
       key: String(p.id),
       name: p.name,
       segments: [{ key: 'v', label: mode === 'value' ? (vName ? `Value on ${vName}` : 'Project value') : vName ? `Projects on ${vName}` : 'Projects', value: mode === 'value' ? m.value : m.n, cls: (kind === 'consultant' ? 'spot' : 'spot2') as 'spot' | 'spot2' }],
-      end: mode === 'value' ? aedm(m.value) : count(m.n),
-      endNote: mode === 'value' ? `${count(m.n)} projects, ${p.level ? p.level.replace(' management', '') : 'no relationship'}` : `AED ${aedm(m.value)} m`,
+      end: mode === 'value' ? aedCompact(m.value) : count(m.n),
+      endNote: mode === 'value' ? `${count(m.n)} projects, ${p.level ? p.level.replace(' management', '') : 'no relationship'}` : aedLabel(m.value),
     }));
   const stageMix = party ? STAGES.map((s) => ({ stage: s, n: projects.filter((p) => p.stage === s).length })).filter((x) => x.n > 0) : [];
   const roleOn = (p: (typeof projects)[number]): string => {
@@ -135,8 +135,8 @@ export default function PartiesPage() {
         items={[
           { label: 'Consultants', value: ps.consultants.total, f: count, sub: `${count(ps.consultants.senior)} at senior management, rating ${ps.consultants.averageRating.toFixed(1)} of 10`, to: '/parties?kind=consultant', id: 'pk-consultants' },
           { label: 'Contractors', value: ps.contractors.total, f: count, sub: `${count(ps.contractors.senior)} at senior management, rating ${ps.contractors.averageRating.toFixed(1)} of 10`, to: '/parties?kind=contractor', id: 'pk-contractors' },
-          { label: 'No relationship yet', value: noRel, f: count, sub: <><Link className="vlink" to="/parties?kind=consultant&rel=none">{count(ps.consultants.noRelationship)} consultants</Link>{' · '}<Link className="vlink" to="/parties?kind=contractor&rel=none">{count(ps.contractors.noRelationship)} contractors</Link><br />AED {aedm(noRelValue)} m summed across firm books; shared projects counted more than once.</>, id: 'pk-norel' },
-          { label: 'Largest book', value: largest?.projectValue ?? 0, sub: `AED m, ${largest?.name ?? ''}`, to: `/parties?kind=${kind}&id=${largest?.id ?? ''}`, id: 'pk-largest' },
+          { label: 'No relationship yet', value: noRel, f: count, sub: <><Link className="vlink" to="/parties?kind=consultant&rel=none">{count(ps.consultants.noRelationship)} consultants</Link>{' · '}<Link className="vlink" to="/parties?kind=contractor&rel=none">{count(ps.contractors.noRelationship)} contractors</Link><br />{aedLabel(noRelValue)} summed across firm books; shared projects counted more than once.</>, id: 'pk-norel' },
+          { label: 'Largest book', value: largest?.projectValue ?? 0, f: aedLabel, sub: largest?.name ?? '', to: `/parties?kind=${kind}&id=${largest?.id ?? ''}`, id: 'pk-largest' },
           { label: 'Projects with no consultant', value: ps.projectsNoConsultant, f: count, sub: `${pct((ps.projectsNoConsultant / rollup.kpis.projects) * 100)} of the register`, to: '/projects?nocon=1', id: 'pk-nocon' },
           { label: 'Open, no contractor yet', value: ps.openProjectsNoContractor, f: count, sub: `at Tender or early construction: still open to win`, to: OPEN_NO_CONTRACTOR_LINK, id: 'pk-open', bad: false },
         ]}
@@ -145,7 +145,7 @@ export default function PartiesPage() {
         <ChartSwitch
           id={`top-${kind}`}
           views={[
-            { key: 'value', label: 'Value, AED m', render: () => <HBars id="top-firms-chart" rows={topRows('value')} format={aedm} unit="AED m" onPick={(k) => put({ id: k })} activeKey={party ? String(party.id) : null} ariaLabel={`Top twenty ${kind}s by project value${vName ? ` on ${vName}` : ''}.`} /> },
+            { key: 'value', label: 'Project value', render: () => <HBars id="top-firms-chart" rows={topRows('value')} format={aedCompact} unit="" onPick={(k) => put({ id: k })} activeKey={party ? String(party.id) : null} ariaLabel={`Top twenty ${kind}s by project value${vName ? ` on ${vName}` : ''}.`} /> },
             { key: 'count', label: 'Projects', render: () => <HBars id="top-firms-chart" rows={topRows('count')} format={count} unit="projects" onPick={(k) => put({ id: k })} activeKey={party ? String(party.id) : null} ariaLabel={`Top twenty ${kind}s by project count${vName ? ` on ${vName}` : ''}.`} /> },
           ]}
         />
@@ -191,7 +191,7 @@ export default function PartiesPage() {
                   <div>
                     <dt>Projects</dt>
                     <dd className="big">{count(party.projectCount)}</dd>
-                    <dd className="sub">AED {aedm(party.projectValue)} m</dd>
+                    <dd className="sub">{aedLabel(party.projectValue)}</dd>
                   </div>
                 </dl>
               ) : (
@@ -214,7 +214,7 @@ export default function PartiesPage() {
                   <div>
                     <dt>Projects</dt>
                     <dd className="big">{count(party.projectCount)}</dd>
-                    <dd className="sub">AED {aedm(party.projectValue)} m</dd>
+                    <dd className="sub">{aedLabel(party.projectValue)}</dd>
                   </div>
                 </dl>
               )}
@@ -239,7 +239,7 @@ export default function PartiesPage() {
                 </p>
                 {onV && vName && (
                   <p className="muted" id="party-on-vertical" style={{ marginTop: 'var(--s-sm)' }}>
-                    On {vName}: {count(onV.n)} of {count(party.projectCount)} projects, AED {aedm(onV.value)} m.
+                    On {vName}: {count(onV.n)} of {count(party.projectCount)} projects, {aedLabel(onV.value)}.
                   </p>
                 )}
                 <p className="muted" style={{ marginTop: 'var(--s-sm)' }}>
@@ -271,7 +271,7 @@ export default function PartiesPage() {
                         <th scope="col" className="left">
                           Stage
                         </th>
-                        <th scope="col">AED m</th>
+                        <th scope="col">Project value</th>
                         <th scope="col" className="left">
                           Owner
                         </th>
@@ -287,7 +287,7 @@ export default function PartiesPage() {
                           </th>
                           <td className="left">{roleOn(p)}</td>
                           <td className="left nowrap">{p.stage}</td>
-                          <td className="num">{aedm(p.value)}</td>
+                          <td className="num">{aedCompact(p.value)}</td>
                           <td className="left">{p.ownerEngineer ? engName.get(p.ownerEngineer) : <span className="muted">none</span>}</td>
                         </motion.tr>
                       ))}

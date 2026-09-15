@@ -1,14 +1,14 @@
 import type { ReactNode } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
-import { aedm, cx } from '../lib/format';
+import { aedLabel, cx } from '../lib/format';
 import { useRise } from './Reveal';
 
 export interface StripItem {
   label: string;
   /** The figure, unformatted; the component applies the formatter. */
   value: number;
-  /** Formatter, defaults to AED million to one decimal. */
+  /** Formatter, defaults to an adaptive plain-English AED value. */
   f?: (n: number) => string;
   sub?: ReactNode;
   /** Where the context line leads. */
@@ -27,7 +27,7 @@ export function Strip({ items, cols, id, label }: { items: StripItem[]; cols?: n
       {items.map((it) => (
         <div key={it.label} id={it.id}>
           <dt>{it.label}</dt>
-          <dd className={cx('big', it.text && 'text', it.bad && 'bad')}>{(it.f ?? aedm)(it.value)}</dd>
+          <dd className={cx('big', it.text && 'text', it.bad && 'bad')} data-value={it.value}>{(it.f ?? aedLabel)(it.value)}</dd>
           {it.sub && (
             <dd className="sub">
               {it.to ? (

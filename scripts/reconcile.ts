@@ -59,13 +59,13 @@ for (const { shard, body } of shardFiles) {
 /* ---------- 2. precision and shape ---------- */
 const C2 = 'Precision policy';
 for (const { shard, body } of shardFiles) {
-  ok(C2, `precision-${shard.file}-values`, `${shard.file}: every value is AED million to one decimal`, body.projects.every((p) => oneDecimal(p.value) && p.value > 0));
+  ok(C2, `precision-${shard.file}-values`, `${shard.file}: every value is USD million to one decimal; zero is the explicit source-missing state`, body.projects.every((p) => oneDecimal(p.value) && p.value >= 0));
   ok(C2, `precision-${shard.file}-scores`, `${shard.file}: every score is null or 0.0 to 8.0 to one decimal`, body.projects.every((p) => p.scores.length === V && p.scores.every((s) => s === null || (oneDecimal(s) && s >= 0 && s <= 8))));
-  ok(C2, `precision-${shard.file}-completion`, `${shard.file}: completion is one decimal 0.0 to 100.0 under construction, null elsewhere`, body.projects.every((p) => (p.stage === 'Under Construction' ? p.completionPct !== null && oneDecimal(p.completionPct) && p.completionPct >= 0 && p.completionPct <= 100 : p.completionPct === null)));
-  ok(C2, `precision-${shard.file}-dates`, `${shard.file}: every date is a calendar date`, body.projects.every((p) => isoDate(p.completionDate) && isoDate(p.lastUpdated) && p.bucketDates.length === V && p.bucketDates.every(isoDate)));
+  ok(C2, `precision-${shard.file}-completion`, `${shard.file}: completion is null or one decimal 0.0 to 100.0 under construction, null elsewhere`, body.projects.every((p) => (p.stage === 'Under Construction' ? p.completionPct === null || (oneDecimal(p.completionPct) && p.completionPct >= 0 && p.completionPct <= 100) : p.completionPct === null)));
+  ok(C2, `precision-${shard.file}-dates`, `${shard.file}: every recorded date is a calendar date`, body.projects.every((p) => (p.completionDate === null || isoDate(p.completionDate)) && isoDate(p.lastUpdated) && p.bucketDates.length === V && p.bucketDates.every(isoDate)));
   ok(C2, `precision-${shard.file}-buckets`, `${shard.file}: every bucket code is one of the ${BUCKETS.length}`, body.projects.every((p) => p.buckets.length === V && p.buckets.every((b) => Number.isInteger(b) && b >= 0 && b < BUCKETS.length)));
 }
-ok(C2, 'precision-parties-values', 'Every party value is AED million to one decimal and every rating null or a whole number 1 to 10', [...consultants, ...contractors].every((p) => oneDecimal(p.projectValue) && p.verticalValues.every(oneDecimal) && (p.rating === null || (Number.isInteger(p.rating) && p.rating >= 1 && p.rating <= 10))));
+ok(C2, 'precision-parties-values', 'Every party value is USD million to one decimal and every rating null or a whole number 1 to 10', [...consultants, ...contractors].every((p) => oneDecimal(p.projectValue) && p.verticalValues.every(oneDecimal) && (p.rating === null || (Number.isInteger(p.rating) && p.rating >= 1 && p.rating <= 10))));
 ok(C2, 'precision-no-timestamps', 'No published file carries a generation timestamp', !['rollup.json', 'parties/consultants.json', ...rollup.shards.map((s) => s.file)].some((f) => /generatedAt|checkedAt|importedAt/.test(raw(f))));
 ok(C2, 'precision-no-utc', 'No published file carries a UTC marker', !['rollup.json', 'parties/consultants.json', ...rollup.shards.map((s) => s.file)].some((f) => /\d{2}:\d{2}:\d{2}Z/.test(raw(f))));
 
@@ -153,7 +153,7 @@ ok(C4b, 'desc-mep-consultant', 'Every project with an MEP consultant names it in
 ok(C4b, 'desc-lead-consultant', 'Every project with a lead consultant names the first one in its description', projects.every((p) => p.leadConsultants.length === 0 || p.description.includes(`Lead consultant ${consultantsById(p.leadConsultants[0]!)}`)));
 ok(C4b, 'desc-no-contractor', 'A description says "No contractor appointed" exactly when the project has neither a main nor an MEP contractor', projects.every((p) => p.description.includes('No contractor appointed') === (p.mainContractors.length === 0 && p.mepContractor === null)));
 ok(C4b, 'desc-mep-contractor', 'Every project with an MEP contractor names it in its description', projects.every((p) => p.mepContractor === null || p.description.includes(`MEP contractor ${contractorsById(p.mepContractor)}`)));
-ok(C4b, 'desc-value', 'Every description states the project value to one decimal', projects.every((p) => p.description.includes(`AED ${p.value.toFixed(1)} million`)));
+ok(C4b, 'desc-value', 'Every project with a recorded value states the USD amount to one decimal; missing values say so', projects.every((p) => p.value > 0 ? p.description.includes(`USD ${p.value.toFixed(1)} million`) : p.description.includes('no value recorded')));
 
 /* ---------- 5. engineers ---------- */
 const C5 = 'Engineers';
@@ -266,7 +266,7 @@ function partyCheck(kind: 'consultant' | 'contractor', list: Party[]) {
     const refs = [...(links.get(party.id) ?? [])].sort();
     const value = sum1(refs.map((r) => byRef.get(r)!.value));
     const same = refs.join() === party.projects.join() && refs.length === party.projectCount;
-    ok(C11, `${kind}-${party.id}`, `${party.name}: ${party.projectCount} projects and AED ${party.projectValue.toFixed(1)} m equal the register`, same && tenths(value) === tenths(party.projectValue), party.projectValue, value);
+    ok(C11, `${kind}-${party.id}`, `${party.name}: ${party.projectCount} projects and USD ${party.projectValue.toFixed(1)} m equal the register`, same && tenths(value) === tenths(party.projectValue), party.projectValue, value);
   }
   ok(C11, `${kind}s-owner`, `Every ${kind} relationship owner is an engineer, or null where there is no relationship`, list.every((p) => p.owner === null || rollup.engineers.some((e) => e.slug === p.owner)));
   ok(C11, `${kind}s-relationship-whole`, `Every ${kind}'s relationship is whole or absent: level, rating and owner all set, or all null`, list.every((p) => (p.level === null) === (p.rating === null) && (p.level === null) === (p.owner === null)));
@@ -275,7 +275,7 @@ function partyCheck(kind: 'consultant' | 'contractor', list: Party[]) {
     for (const r of party.projects) byRef.get(r)!.scores.forEach((s, i) => (s !== null && s >= 3.5 ? counts[i]!++ : 0));
     return counts.join() === party.verticalCounts.join();
   }));
-  ok(C11, `${kind}s-vertical-values`, `Every ${kind}'s ten vertical values are the AED million of those projects`, list.every((party) => {
+  ok(C11, `${kind}s-vertical-values`, `Every ${kind}'s ten vertical values are the USD million of those projects`, list.every((party) => {
     const t = rollup.verticals.map(() => 0);
     for (const r of party.projects) {
       const p = byRef.get(r)!;

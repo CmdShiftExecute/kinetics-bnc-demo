@@ -5,7 +5,7 @@ import { STAGES } from '../../data/schema';
 import { useRegister } from '../lib/register';
 import type { SortDir, SortKey } from '../lib/filters';
 import { EMPTY, sortProjects } from '../lib/filters';
-import { aedm, count, pct } from '../lib/format';
+import { aedCompact, aedLabel, count, pct } from '../lib/format';
 import { Crumbs, Masthead } from '../components/Masthead';
 import { Footer } from '../components/Footer';
 import { PageError, PageLoading } from '../components/PageState';
@@ -69,7 +69,7 @@ export default function EngineerPage() {
             Open this book in Projects with filters
           </Link>
           <br />
-          {count(summary.owned)} projects, AED {aedm(summary.ownedValue)} m
+          {count(summary.owned)} projects, {aedLabel(summary.ownedValue)}
         </p>
       </motion.div>
       <Strip
@@ -78,11 +78,11 @@ export default function EngineerPage() {
         label="Engineer figures"
         items={[
           { label: 'Projects owned', value: summary.owned, f: count, sub: `${pct((summary.owned / Math.max(1, rollup.verticalSummary[vi]!.owned)) * 100)} of the ${count(rollup.verticalSummary[vi]!.owned)} on ${vertical.name}`, to: `/projects?eng=${engineer.slug}`, id: 'eng-owned' },
-          { label: 'Pipeline value', value: summary.ownedValue, sub: `AED million, ${pct((summary.ownedValue / Math.max(0.1, rollup.kpis.ownedValue)) * 100)} of all owned value`, id: 'eng-value' },
+          { label: 'Pipeline value', value: summary.ownedValue, f: aedLabel, sub: `${pct((summary.ownedValue / Math.max(0.1, rollup.kpis.ownedValue)) * 100)} of all owned value`, id: 'eng-value' },
           { label: 'Workload', value: summary.loadPct, f: (n) => pct(n, 0), sub: `${count(summary.workload)} points against ${count(summary.capacity)}, ${summary.overloaded ? 'over capacity' : 'within capacity'}`, bad: summary.overloaded, id: 'eng-load' },
           { label: 'Enquiries and quotes', value: summary.funnel[1]! + summary.funnel[2]!, f: count, sub: `on ${vertical.name}, of ${count(summary.owned)} owned`, to: `/projects?eng=${engineer.slug}&v=${vertical.slug}&bucket=1|2`, id: 'eng-open' },
           { label: 'Orders received', value: summary.funnel[0]!, f: count, sub: `${count(summary.funnel[4]!)} closed`, to: `/projects?eng=${engineer.slug}&v=${vertical.slug}&bucket=0`, id: 'eng-orders' },
-          { label: 'Largest project', value: largest?.value ?? 0, sub: largest ? `AED m, ${largest.name}` : 'none owned', to: largest ? `/p/${largest.ref}` : undefined, id: 'eng-largest' },
+          { label: 'Largest project', value: largest?.value ?? 0, f: aedLabel, sub: largest ? largest.name : 'none owned', to: largest ? `/p/${largest.ref}` : undefined, id: 'eng-largest' },
         ]}
       />
       <Section id="eng-visual" title="This book at a glance" note={`Every owned project's ${vertical.name} bucket, or the book along the lifecycle with the active projects picked out`} defs={['bucket', 'workload']} definitions={definitions}>
@@ -91,7 +91,7 @@ export default function EngineerPage() {
           views={[
             { key: 'funnel', label: 'Activity funnel', render: () => <FunnelChart funnel={summary.funnel} id="eng-funnel-chart" unit="projects" /> },
             { key: 'stage', label: 'Book by stage', render: () => <StackedColumns id="eng-stage-chart" categories={categories} series={series} values={byStage.map((b) => b.count)} format={count} unit="projects" height={240} ariaLabel={`${engineer.name}'s book by stage. ${STAGES.map((st, i) => `${st}: ${count(byStage[i]!.count[0]! + byStage[i]!.count[1]!)}`).join('. ')}.`} /> },
-            { key: 'stage-value', label: 'Value by stage', render: () => <StackedColumns id="eng-stage-chart" categories={categories} series={series} values={byStage.map((b) => b.value)} format={aedm} unit="AED m" height={240} ariaLabel={`${engineer.name}'s pipeline value by stage.`} /> },
+            { key: 'stage-value', label: 'Value by stage', render: () => <StackedColumns id="eng-stage-chart" categories={categories} series={series} values={byStage.map((b) => b.value)} format={aedCompact} unit="" height={240} ariaLabel={`${engineer.name}'s pipeline value by stage.`} /> },
           ]}
         />
       </Section>

@@ -15,6 +15,10 @@ mode=${1:-staged}
 fail=0
 say() { printf '%s\n' "$*"; }
 
+# The imported register: data copied verbatim from the supplied workbooks rather than authored
+# here. Two of the four checks below are about text we write and do not apply to it.
+is_imported() { case "$1" in public/data/*|dist/data/*) return 0;; *) return 1;; esac; }
+
 if [ "$mode" = "--message" ]; then
   msg=$(cat "$2")
   if printf '%s' "$msg" | grep -q -e $'\xe2\x80\x94' -e $'\xe2\x80\x93'; then say "REFUSED: commit message contains an em or en dash"; fail=1; fi
@@ -39,7 +43,10 @@ while IFS= read -r f; do
   if printf '%s' "$c" | grep -nE 'AKIA[0-9A-Z]{16}|sk-[A-Za-z0-9]{20,}|gh[pous]_[A-Za-z0-9]{20,}|xox[baprs]-|BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|(api[_-]?key|secret|token|password)\s*[:=]\s*["'"'"'][^"'"'"']{8,}' | head -3 | grep -q .; then
     say "REFUSED: credential shape in $f"; printf '%s' "$c" | grep -nE 'AKIA[0-9A-Z]{16}|sk-[A-Za-z0-9]{20,}|gh[pous]_[A-Za-z0-9]{20,}|BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|(api[_-]?key|secret|token|password)\s*[:=]\s*["'"'"'][^"'"'"']{8,}' | head -3; fail=1
   fi
-  if printf '%s' "$c" | grep -n -e $'\xe2\x80\x94' -e $'\xe2\x80\x93' | head -3 | grep -q .; then
+  # The dash rule is a typography rule for prose WE write. The imported register under
+  # public/data/ is copied verbatim from the source workbooks, where a dash sits inside a real
+  # project or company name; rewriting one would falsify the record, so the register is exempt.
+  if ! is_imported "$f" && printf '%s' "$c" | grep -n -e $'\xe2\x80\x94' -e $'\xe2\x80\x93' | head -3 | grep -q .; then
     say "REFUSED: em or en dash in $f"; printf '%s' "$c" | grep -n -e $'\xe2\x80\x94' -e $'\xe2\x80\x93' | head -3; fail=1
   fi
   if [ "$f" != "scripts/scan_staged.sh" ] && printf '%s' "$c" | grep -niE 'co-authored-by|generated with \[?claude|anthropic\.com|written by (claude|an ai)' | head -3 | grep -q .; then
@@ -48,13 +55,21 @@ while IFS= read -r f; do
 done <<< "$files"
 
 # 4. forbidden terms, whole word, case-insensitive, every file except the list and this script
-pattern=$(grep -v '^#' "$TERMS" | grep -v '^\s*$' | sed 's/[.[\*^$\/]/\\&/g' | paste -sd'|' -)
+# Two tiers, split by the '--- AUTHORED ONLY' marker in the terms file. HARD terms (above the
+# marker) are the principal's employer and its brands: they identify him, and are refused in every
+# file including the imported register. AUTHORED terms (below it) guard hand-written examples from
+# colliding with real brands, a concern that does not apply to a register of genuine firms.
+esc() { sed 's/[.[\*^$\/]/\\&/g'; }
+hard_pattern=$(sed -n '1,/--- AUTHORED ONLY/p' "$TERMS" | grep -v '^#' | grep -v '^\s*$' | esc | paste -sd'|' -)
+authored_pattern=$(sed -n '/--- AUTHORED ONLY/,$p' "$TERMS" | grep -v '^#' | grep -v '^\s*$' | esc | paste -sd'|' -)
+[ -n "$hard_pattern" ] || { say "REFUSED: terms file has no HARD section - refusing to run a gate that checks nothing"; exit 1; }
 while IFS= read -r f; do
   [ -f "$f" ] || continue
   case "$f" in "$TERMS"|scripts/scan_staged.sh|*.png|*.jpg|*.woff|*.woff2|*.lock) continue;; esac
   # The repository slug is a path token chosen outside this repo (the directory, the nginx site,
   # the remote) and carries the vendor shorthand; it is masked before the term check so the
   # bare term is still refused everywhere else.
+  if is_imported "$f"; then pattern="$hard_pattern"; else pattern="$hard_pattern|$authored_pattern"; fi
   hits=$(content "$f" | sed 's/kinetics-bnc-demo/REPO-SLUG/g' | grep -noiE "\b($pattern)\b" | head -5)
   if [ -n "$hits" ]; then say "REFUSED: forbidden term in $f:"; say "$hits" | sed 's/^/    /'; fail=1; fi
 done <<< "$files"

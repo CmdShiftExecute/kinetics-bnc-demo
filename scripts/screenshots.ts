@@ -34,7 +34,7 @@ const pages = [
   { path: '/engineers/rohan-pillai', name: 'engineer-rohan-pillai', wait: '.vt-row' },
   { path: '/parties', name: 'parties', wait: '#plist' },
   { path: '/parties?kind=contractor&id=1', name: 'parties-contractor-1', wait: '#party-name' },
-  { path: '/p/HV-26-00001', name: 'project-hv-26-00001', wait: '#score-strip' },
+  { path: '/p/PRJAE25284478', name: 'project-bnc-largest', wait: '#score-strip' },
   { path: '/data-basis', name: 'data-basis', wait: '#rec-categories' },
 ];
 

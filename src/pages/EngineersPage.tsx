@@ -4,7 +4,7 @@ import type { Rollup } from '../../data/schema';
 import { ACTIVITY_BANDS, WORKLOAD_WEIGHTS } from '../../data/rules';
 import { useJson } from '../lib/data';
 import { validateRollup } from '../lib/validate';
-import { aedm, count, pct } from '../lib/format';
+import { aedCompact, aedLabel, count, pct } from '../lib/format';
 import { Masthead } from '../components/Masthead';
 import { Footer } from '../components/Footer';
 import { PageError, PageLoading } from '../components/PageState';
@@ -58,8 +58,8 @@ export default function EngineersPage() {
                     { key: 'quiet', label: 'Waiting or quiet', value: bands[2]!, cls: 'ink3' as const },
                     { key: 'closed', label: 'Closed', value: bands[3]!, cls: 'hz' as const },
                   ],
-        end: mode === 'value' ? aedm(e.ownedValue) : mode === 'load' ? count(e.workload) : count(e.owned),
-        endNote: mode === 'value' ? `${count(e.owned)} projects` : mode === 'count' ? `AED ${aedm(e.ownedValue)} m` : mode === 'load' ? `${pct(e.loadPct, 0)} of capacity${e.overloaded ? ', over' : ''}` : `${count(bands[1]!)} active`,
+        end: mode === 'value' ? aedCompact(e.ownedValue) : mode === 'load' ? count(e.workload) : count(e.owned),
+        endNote: mode === 'value' ? `${count(e.owned)} projects` : mode === 'count' ? aedLabel(e.ownedValue) : mode === 'load' ? `${pct(e.loadPct, 0)} of capacity${e.overloaded ? ', over' : ''}` : `${count(bands[1]!)} active`,
       };
     });
   return (
@@ -82,7 +82,7 @@ export default function EngineersPage() {
         label="Engineer headline figures"
         items={[
           { label: 'Projects owned', value: data.kpis.owned, f: count, sub: `${pct((data.kpis.owned / data.kpis.projects) * 100)} of ${count(data.kpis.projects)} in the register`, to: '/projects?owned=1', id: 'ek-owned' },
-          { label: 'Pipeline value owned', value: data.kpis.ownedValue, sub: 'AED million across every book', to: '/projects?owned=1&sort=value', id: 'ek-value' },
+          { label: 'Pipeline value owned', value: data.kpis.ownedValue, f: aedLabel, sub: 'Whole-project value across every book', to: '/projects?owned=1&sort=value', id: 'ek-value' },
           { label: 'Largest book', value: largest.owned, f: count, sub: `${largest.name}, ${vName(largest.vertical)}`, to: `/engineers/${largest.slug}`, id: 'ek-largest' },
           { label: 'Over capacity', value: over.length, f: count, sub: `of ${data.engineers.length} engineers above ${count(data.engineerCapacity)} workload points`, to: '#books', id: 'ek-over' },
           { label: 'Heaviest load', value: heaviest.loadPct, f: (n) => pct(n, 0), sub: `${heaviest.name}, ${count(heaviest.workload)} points against ${count(heaviest.capacity)}`, to: `/engineers/${heaviest.slug}`, id: 'ek-heaviest' },
@@ -94,7 +94,7 @@ export default function EngineersPage() {
         <ChartSwitch
           id="books"
           views={[
-            { key: 'value', label: 'Value, AED m', render: () => <HBars id="books-chart" rows={rows('value')} format={aedm} unit="AED m" ariaLabel={`Pipeline value by engineer. ${ordered.map((e) => `${e.name}: AED ${aedm(e.ownedValue)} million`).join('. ')}.`} /> },
+            { key: 'value', label: 'Project value', render: () => <HBars id="books-chart" rows={rows('value')} format={aedCompact} unit="" ariaLabel={`Pipeline value by engineer. ${ordered.map((e) => `${e.name}: ${aedLabel(e.ownedValue)}`).join('. ')}.`} /> },
             { key: 'count', label: 'Projects', render: () => <HBars id="books-chart" rows={rows('count')} format={count} unit="projects" ariaLabel={`Projects owned by engineer. ${ordered.map((e) => `${e.name}: ${count(e.owned)}`).join('. ')}.`} /> },
             { key: 'mix', label: 'Activity mix', render: () => <HBars id="books-chart" rows={rows('mix')} format={count} unit="projects" mode="share" legend={[{ cls: 'ink', label: 'Orders' }, { cls: 'spot', label: 'Active' }, { cls: 'ink3', label: 'Waiting or quiet' }, { cls: 'hz', label: 'Closed' }]} ariaLabel="Activity mix of each engineer's book." /> },
             { key: 'load', label: 'Workload', render: () => <HBars id="books-chart" rows={rows('load')} format={count} unit="points" marker={{ value: data.engineerCapacity, label: `Capacity ${count(data.engineerCapacity)}` }} legend={[{ cls: 'spot', label: `Active, ${WORKLOAD_WEIGHTS.active} points each` }, { cls: 'ink', label: `Orders, ${WORKLOAD_WEIGHTS.won} each` }, { cls: 'ink3', label: `Waiting or quiet, ${WORKLOAD_WEIGHTS.quiet} each` }]} ariaLabel={`Workload points by engineer against a capacity of ${data.engineerCapacity}. ${ordered.map((e) => `${e.name}: ${e.workload} points, ${e.overloaded ? 'over capacity' : 'within capacity'}`).join('. ')}.`} /> },
@@ -112,7 +112,7 @@ export default function EngineersPage() {
                   {v.name}
                 </h2>
                 <p className="sec-note">
-                  Sells through {v.channel === 'both' ? 'consultants and contractors' : v.channel}. {count(v.owned)} projects owned, AED {aedm(v.ownedValue)} m, {v.engineers} engineer{v.engineers === 1 ? '' : 's'}.
+                  Sells through {v.channel === 'both' ? 'consultants and contractors' : v.channel}. {count(v.owned)} projects owned, {aedLabel(v.ownedValue)}, {v.engineers} engineer{v.engineers === 1 ? '' : 's'}.
                 </p>
               </div>
               <Link to={`/projects?v=${v.slug}&floor=4`} className="sec-link press">
@@ -134,8 +134,8 @@ export default function EngineersPage() {
                       <dd className="num">{count(e.owned)}</dd>
                     </div>
                     <div>
-                      <dt>AED m</dt>
-                      <dd className="num">{aedm(e.ownedValue)}</dd>
+                      <dt>Project value</dt>
+                      <dd className="num">{aedCompact(e.ownedValue)}</dd>
                     </div>
                     <div>
                       <dt>Workload</dt>
@@ -149,7 +149,7 @@ export default function EngineersPage() {
                         <Link to={`/p/${t.ref}`} className="elink">
                           {t.name}
                         </Link>
-                        <span className="num muted">{aedm(t.value)}</span>
+                        <span className="num muted">{aedCompact(t.value)}</span>
                       </li>
                     ))}
                   </ol>

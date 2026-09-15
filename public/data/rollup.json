@@ -3,10 +3,10 @@
   "company": "Halvard Engineering Group",
   "division": "Building Technologies Division",
   "system": "Project Intelligence System",
-  "dataAsOf": "2026-09-12",
-  "dataAsOfLabel": "12 Sep 2026",
+  "dataAsOf": "2026-05-04",
+  "dataAsOfLabel": "04 May 2026",
   "fiscalYear": 2026,
-  "currency": "AED",
+  "currency": "USD",
   "unit": "million",
   "seed": 20260913,
   "registerName": "the market register"
@@ -188,6 +188,125 @@
  "matrix": [
   {
    "sector": "Urban Construction",
+   "industry": "Hospitality",
+   "type": "Resort",
+   "cells": [
+    "Medium",
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "Medium",
+    "Low",
+    "Low",
+    "Medium",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Downstream: Oil & Gas Processing Facility",
+   "type": "Petrochemical Plant",
+   "cells": [
+    "High",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "High"
+   ]
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Downstream: Oil & Gas Processing Facility",
+   "type": "Natural Gas Processing / Treatment Unit",
+   "cells": [
+    "High",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "High"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Hospitality",
+   "type": "Hotel",
+   "cells": [
+    "High",
+    "High",
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "Medium",
+    "Low",
+    "Medium",
+    "High"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Mega Urban Development",
+   "type": "Mega Urban Development",
+   "cells": [
+    "High",
+    "High",
+    "High",
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "Medium",
+    "Low",
+    "High"
+   ]
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Upstream: Oil & Gas Exploration and Production",
+   "type": "Oil Field Development",
+   "cells": [
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Medium",
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Hospitality",
+   "type": "Hotel Apartments",
+   "cells": [
+    "Medium",
+    "High",
+    "High",
+    "Medium",
+    "High",
+    "High",
+    "Medium",
+    "Low",
+    "High",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
    "industry": "Buildings",
    "type": "High Rise (15+)",
    "cells": [
@@ -201,6 +320,23 @@
     "Medium",
     "Medium",
     "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Retail Facilities",
+   "type": "Shopping Mall",
+   "cells": [
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "High",
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High"
    ]
   },
   {
@@ -238,433 +374,59 @@
    ]
   },
   {
-   "sector": "Urban Construction",
-   "industry": "Buildings",
-   "type": "Data Center",
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Midstream: Oil & Gas Transfer",
+   "type": "Oil & Gas Pipeline",
+   "cells": [
+    "Medium",
+    "Low",
+    "Low",
+    "Medium",
+    null,
+    "Low",
+    "Medium",
+    "High",
+    "Low",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Industrial",
+   "industry": "Manufacturing / Processing Facility",
+   "type": "Factory / Plant / Farm",
    "cells": [
     "High",
-    "High",
-    "High",
-    "Medium",
     "Medium",
     "High",
     "High",
     "Medium",
+    "Medium",
+    "High",
+    "High",
     "Medium",
     "High"
    ]
   },
   {
-   "sector": "Urban Construction",
-   "industry": "Buildings",
-   "type": "Showroom",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
-    "Low",
-    "Low",
-    "Low",
-    "High",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Buildings",
-   "type": "Service Centre",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
-    "Low",
-    "Low",
-    "Low",
-    "High",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Hospitality",
-   "type": "Hotel",
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Downstream: Oil & Gas Processing Facility",
+   "type": "Oil Refinery",
    "cells": [
     "High",
-    "High",
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
-    "High"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Hospitality",
-   "type": "Resort",
-   "cells": [
-    "Medium",
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "Low",
-    "Low",
-    "Medium",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Hospitality",
-   "type": "Hotel Apartments",
-   "cells": [
-    "Medium",
-    "High",
-    "High",
-    "Medium",
-    "High",
-    "High",
-    "Medium",
-    "Low",
-    "High",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Hospitality",
-   "type": "Serviced Apartments",
-   "cells": [
-    "Medium",
-    "High",
-    "Medium",
     "Medium",
     "High",
     "High",
     "Low",
-    "Low",
-    "High",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Education",
-   "type": "School",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Low",
-    "High",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Education",
-   "type": "University / College",
-   "cells": [
-    "High",
-    "High",
-    "High",
     "Medium",
     "High",
     "High",
-    "Medium",
-    "Low",
-    "Medium",
-    "High"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Education",
-   "type": "Library",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
-    "Low",
-    "Low",
-    null,
-    "Medium",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Education",
-   "type": "Training Centre",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
-    "Low",
-    "Low",
-    null,
-    "Medium",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Healthcare",
-   "type": "Hospital",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "High",
-    "Medium",
-    "Medium",
-    "High"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Healthcare",
-   "type": "Medical / Research center",
-   "cells": [
-    "Medium",
-    "High",
-    "High",
-    "Medium",
-    "High",
-    "Medium",
-    "Low",
-    "Low",
-    "Medium",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Healthcare",
-   "type": "Clinic",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Low",
-    "High",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Retail Facilities",
-   "type": "Shopping Mall",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Retail Facilities",
-   "type": "Showroom",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
-    "Low",
-    "Low",
-    "Low",
-    "High",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Leisure & Recreation Facilities",
-   "type": "Park",
-   "cells": [
-    "Low",
-    "Low",
-    "Low",
-    "High",
-    "Low",
-    "Low",
-    "Low",
-    null,
-    "Medium",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Leisure & Recreation Facilities",
-   "type": "Sports Club & Facilities",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Low",
-    "Medium",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Leisure & Recreation Facilities",
-   "type": "Stadium",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
     "Low",
     "High"
    ]
   },
   {
-   "sector": "Urban Construction",
-   "industry": "Leisure & Recreation Facilities",
-   "type": "Landmark, Museum & Galleries",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
-    "Medium",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Leisure & Recreation Facilities",
-   "type": "Golf Course",
-   "cells": [
-    "Low",
-    "Low",
-    "Low",
-    "High",
-    "Low",
-    "Low",
-    "Low",
-    null,
-    "Medium",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Leisure & Recreation Facilities",
-   "type": "Theme Park",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "High",
-    "Medium",
-    "Medium",
-    "Low",
-    "Low",
-    "Medium",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Mega Urban Development",
-   "type": "Mega Urban Development",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "Low",
-    "High"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Religious Buildings",
-   "type": "Mosque",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Low",
-    "Low",
-    "High",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Infrastructure",
-   "type": "Road",
-   "cells": [
-    "Medium",
-    null,
-    null,
-    "Medium",
-    null,
-    null,
-    null,
-    "Low",
-    null,
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Infrastructure",
+   "sector": "Transport",
+   "industry": "Road",
    "type": "Bridge",
    "cells": [
     "Medium",
@@ -680,349 +442,77 @@
    ]
   },
   {
-   "sector": "Urban Construction",
-   "industry": "Infrastructure",
-   "type": "Sewerage / Drainage Network",
-   "cells": [
-    "Medium",
-    null,
-    "Low",
-    "High",
-    null,
-    "High",
-    "Low",
-    "Low",
-    "Low",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Infrastructure",
-   "type": "Pumping Station",
+   "sector": "Utilities",
+   "industry": "Power Plants",
+   "type": "Fossil-Fuel Power Plants",
    "cells": [
     "High",
     "Low",
     "Medium",
-    "High",
+    "Medium",
     "Low",
     "High",
     "High",
-    "Medium",
-    "Medium",
+    "High",
+    "Low",
     "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Infrastructure",
-   "type": "Canal / Waterway",
-   "cells": [
-    "Low",
-    null,
-    null,
-    "High",
-    null,
-    null,
-    "Low",
-    "Low",
-    null,
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Service Facility",
-   "type": "Service Centre",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
-    "Low",
-    "Low",
-    "Low",
-    "High",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Service Facility",
-   "type": "Data Center",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "High"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Storage Facility",
-   "type": "Warehouse / Tankages / Silos",
-   "cells": [
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High",
-    "High",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Urban Construction",
-   "industry": "Storage Facility",
-   "type": "Logistics Hub / Center",
-   "cells": [
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High",
-    "High",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Manufacturing / Processing Facility",
-   "type": "Factory / Plant / Farm",
-   "cells": [
-    "High",
-    "Medium",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "High",
-    "High",
-    "Medium",
-    "High"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Manufacturing / Processing Facility",
-   "type": "Light Industrial/Workshop",
-   "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
-    "Low",
-    "Medium",
-    "High",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Manufacturing / Processing Facility",
-   "type": "Food Processing Plant",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "High",
-    "Low",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Manufacturing / Processing Facility",
-   "type": "Cold Store",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "Low",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Storage Facility",
-   "type": "Warehouse / Tankages / Silos",
-   "cells": [
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High",
-    "High",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Storage Facility",
-   "type": "Logistics Hub / Center",
-   "cells": [
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High",
-    "High",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Storage Facility",
-   "type": "Cold Store",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "Low",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Mega Industrial Development",
-   "type": "Mega Industrial Development",
-   "cells": [
-    "High",
-    "Medium",
-    "High",
-    "High",
-    "Medium",
-    "High",
-    "High",
-    "High",
-    "Low",
-    "High"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Service Facility",
-   "type": "Research Centre",
-   "cells": [
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Industrial",
-   "industry": "Service Facility",
-   "type": "Data Center",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "High"
    ]
   },
   {
    "sector": "Oil, Gas and Fuels",
-   "industry": "Downstream: Oil & Gas Infrastructure",
-   "type": "Gas / Petrol Station",
+   "industry": "Upstream: Oil & Gas Exploration and Production",
+   "type": "Gas Field Development",
    "cells": [
+    "High",
     "Medium",
-    "Low",
-    "Low",
-    "Low",
-    "Low",
-    "Low",
+    "Medium",
+    "Medium",
+    "Medium",
     "Low",
     "Medium",
     "High",
-    "Low"
+    "Low",
+    "Medium"
    ]
   },
   {
-   "sector": "Oil, Gas and Fuels",
-   "industry": "Downstream: Oil & Gas Infrastructure",
-   "type": "Pipeline",
+   "sector": "Utilities",
+   "industry": "Power Plants",
+   "type": "Nuclear Power Plant",
    "cells": [
-    "Medium",
-    "Low",
-    "Low",
-    "Medium",
-    null,
-    "Low",
+    "High",
     "Medium",
     "High",
+    "High",
+    "Medium",
+    "Medium",
+    "High",
+    "High",
     "Low",
-    "Low"
+    "High"
    ]
   },
   {
-   "sector": "Oil, Gas and Fuels",
-   "industry": "Downstream: Oil & Gas Infrastructure",
-   "type": "Refinery",
+   "sector": "Transport",
+   "industry": "Rail",
+   "type": "Metro & Subway",
    "cells": [
     "High",
+    "High",
+    "High",
     "Medium",
     "High",
-    "High",
-    "Low",
     "Medium",
     "High",
-    "High",
+    "Medium",
     "Low",
     "High"
    ]
   },
   {
    "sector": "Oil, Gas and Fuels",
-   "industry": "Downstream: Oil & Gas Infrastructure",
-   "type": "Warehouse / Tankages / Silos",
+   "industry": "Midstream: Oil & Gas Storage Facility",
+   "type": "Oil Terminal / Storage Tank / Tank Farm",
    "cells": [
     "High",
     "Medium",
@@ -1039,7 +529,7 @@
   {
    "sector": "Oil, Gas and Fuels",
    "industry": "Downstream: Oil & Gas Infrastructure",
-   "type": "Factory / Plant / Farm",
+   "type": "Offsites & Utilities",
    "cells": [
     "High",
     "Medium",
@@ -1056,7 +546,7 @@
   {
    "sector": "Oil, Gas and Fuels",
    "industry": "Upstream: Oil & Gas Exploration and Production",
-   "type": "Factory / Plant / Farm",
+   "type": "Gas & Oil Separation Units (GOSP)",
    "cells": [
     "High",
     "Medium",
@@ -1071,60 +561,26 @@
    ]
   },
   {
-   "sector": "Oil, Gas and Fuels",
-   "industry": "Upstream: Oil & Gas Exploration and Production",
-   "type": "Offshore Platform",
+   "sector": "Utilities",
+   "industry": "Infrastructure",
+   "type": "Infrastructure",
    "cells": [
     "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Medium",
     "High",
+    "High",
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "Medium",
     "Low",
-    "Medium"
+    "High"
    ]
   },
   {
    "sector": "Oil, Gas and Fuels",
    "industry": "Upstream: Oil & Gas Exploration and Production",
-   "type": "Research Centre",
-   "cells": [
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Oil, Gas and Fuels",
-   "industry": "Fuel Plants",
-   "type": "Hydrogen Plants",
-   "cells": [
-    "High",
-    "Low",
-    "High",
-    "High",
-    "Low",
-    "Medium",
-    "High",
-    "High",
-    "Low",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Oil, Gas and Fuels",
-   "industry": "Fuel Plants",
-   "type": "Factory / Plant / Farm",
+   "type": "Central Processing facilities (CPF)",
    "cells": [
     "High",
     "Medium",
@@ -1156,26 +612,26 @@
    ]
   },
   {
-   "sector": "Transport",
-   "industry": "Aviation",
-   "type": "Hangar facility",
+   "sector": "Industrial",
+   "industry": "Storage Facility",
+   "type": "Warehouse / Tankages / Silos",
    "cells": [
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Low",
-    "Low",
-    "Low",
     "High",
     "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "High",
     "Medium"
    ]
   },
   {
-   "sector": "Transport",
-   "industry": "Aviation",
-   "type": "Air Cargo Terminal",
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Midstream: Oil & Gas Storage Facility",
+   "type": "Gas Terminal",
    "cells": [
     "High",
     "Medium",
@@ -1185,59 +641,8 @@
     "Medium",
     "Medium",
     "High",
-    "Medium",
+    "High",
     "Medium"
-   ]
-  },
-  {
-   "sector": "Transport",
-   "industry": "Marine",
-   "type": "Port & Harbor",
-   "cells": [
-    "High",
-    "Medium",
-    "Medium",
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High",
-    "Low",
-    "High"
-   ]
-  },
-  {
-   "sector": "Transport",
-   "industry": "Marine",
-   "type": "Shipyard",
-   "cells": [
-    "Medium",
-    "Low",
-    "Low",
-    "Medium",
-    "Low",
-    "Low",
-    "Low",
-    "High",
-    "Low",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Transport",
-   "industry": "Marine",
-   "type": "Canal / Waterway",
-   "cells": [
-    "Low",
-    null,
-    null,
-    "High",
-    null,
-    null,
-    "Low",
-    "Low",
-    null,
-    "Low"
    ]
   },
   {
@@ -1259,40 +664,6 @@
   },
   {
    "sector": "Transport",
-   "industry": "Rail",
-   "type": "Metro Station",
-   "cells": [
-    "High",
-    "High",
-    "High",
-    "Medium",
-    "High",
-    "Medium",
-    "High",
-    "Medium",
-    "Low",
-    "High"
-   ]
-  },
-  {
-   "sector": "Transport",
-   "industry": "Rail",
-   "type": "Rail Depot",
-   "cells": [
-    "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High",
-    "Medium",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Transport",
    "industry": "Road",
    "type": "Road",
    "cells": [
@@ -1309,36 +680,257 @@
    ]
   },
   {
-   "sector": "Transport",
-   "industry": "Road",
-   "type": "Bridge",
+   "sector": "Utilities",
+   "industry": "Distribution Network",
+   "type": "Electricity / Power Network",
+   "cells": [
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Education",
+   "type": "University / College",
+   "cells": [
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "High",
+    "High",
+    "Medium",
+    "Low",
+    "Medium",
+    "High"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Healthcare",
+   "type": "Medical / Research center",
    "cells": [
     "Medium",
-    null,
-    null,
+    "High",
+    "High",
+    "Medium",
+    "High",
+    "Medium",
+    "Low",
+    "Low",
+    "Medium",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Education",
+   "type": "School",
+   "cells": [
     "Medium",
     "Medium",
-    null,
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Low",
+    "High",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Leisure & Recreation Facilities",
+   "type": "Zoo and Animal Reserve",
+   "cells": [
+    "Low",
+    "Low",
+    "Low",
+    "High",
+    "Low",
+    "Low",
+    "Low",
     null,
     "Medium",
-    null,
     "Low"
    ]
   },
   {
-   "sector": "Transport",
-   "industry": "Road",
-   "type": "Tunnel",
+   "sector": "Utilities",
+   "industry": "Other Utility Plants",
+   "type": "District Cooling Plant",
    "cells": [
     "High",
+    "Medium",
+    "High",
+    "High",
+    "Medium",
+    "Medium",
+    "High",
+    "High",
+    "Medium",
+    "High"
+   ]
+  },
+  {
+   "sector": "Utilities",
+   "industry": "Other Utility Plants",
+   "type": "Sewerage / Solid Waste Treatment Plant",
+   "cells": [
+    "High",
+    "Low",
+    "High",
+    "High",
+    "Low",
+    "High",
+    "High",
+    "High",
+    "Low",
+    "High"
+   ]
+  },
+  {
+   "sector": "Transport",
+   "industry": "Marine",
+   "type": "Port & Harbor",
+   "cells": [
+    "High",
+    "Medium",
+    "Medium",
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "Low",
+    "High"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Leisure & Recreation Facilities",
+   "type": "Theme Park & Water Park",
+   "cells": [
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "Medium",
+    "Medium",
+    "Low",
+    "Low",
+    "Medium",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Religious Buildings",
+   "type": "Mosque",
+   "cells": [
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Low",
+    "Low",
+    "High",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Utilities",
+   "industry": "Distribution Network",
+   "type": "Water Distribution Network",
+   "cells": [
+    "Medium",
     null,
-    "Medium",
-    "High",
-    "Medium",
     "Low",
     "High",
+    null,
+    "High",
+    "Low",
+    "Low",
+    "Low",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Utilities",
+   "industry": "Distribution Network",
+   "type": "Sewerage / Drainage Network",
+   "cells": [
+    "Medium",
+    null,
+    "Low",
+    "High",
+    null,
+    "High",
+    "Low",
+    "Low",
+    "Low",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Retail Facilities",
+   "type": "Showroom",
+   "cells": [
+    "Medium",
+    "Medium",
     "Medium",
     "Low",
+    "Medium",
+    "Low",
+    "Low",
+    "Low",
+    "High",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Retail Facilities",
+   "type": "Super Market",
+   "cells": [
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "High",
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Leisure & Recreation Facilities",
+   "type": "Landmark, Museum & Galleries",
+   "cells": [
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Medium",
+    "Medium",
     "Medium"
    ]
   },
@@ -1360,16 +952,33 @@
    ]
   },
   {
+   "sector": "Transport",
+   "industry": "Rail",
+   "type": "Monorail",
+   "cells": [
+    "High",
+    null,
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "Medium",
+    "Low",
+    "High"
+   ]
+  },
+  {
    "sector": "Utilities",
-   "industry": "Power Plants",
-   "type": "Nuclear Power Plant",
+   "industry": "Other Utility Plants",
+   "type": "Water Desalination Plant",
    "cells": [
     "High",
     "Medium",
     "High",
     "High",
-    "Medium",
-    "Medium",
+    "Low",
+    "High",
     "High",
     "High",
     "Low",
@@ -1377,88 +986,37 @@
    ]
   },
   {
-   "sector": "Utilities",
-   "industry": "Power Plants",
-   "type": "Substation",
+   "sector": "Industrial",
+   "industry": "Service Facility",
+   "type": "Light Industrial/Workshop",
    "cells": [
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Medium",
+    "Low",
+    "Medium",
     "High",
-    "Medium",
-    "Medium",
-    "Medium",
-    "Medium",
-    "High",
-    "High",
-    "High",
-    "Medium",
     "Medium"
    ]
   },
   {
-   "sector": "Utilities",
-   "industry": "Power Plants",
-   "type": "Factory / Plant / Farm",
+   "sector": "Urban Construction",
+   "industry": "Healthcare",
+   "type": "Hospital",
    "cells": [
     "High",
-    "Medium",
+    "High",
+    "High",
     "High",
     "High",
     "Medium",
+    "High",
     "Medium",
-    "High",
-    "High",
     "Medium",
     "High"
-   ]
-  },
-  {
-   "sector": "Utilities",
-   "industry": "Distribution Network",
-   "type": "Sewerage / Drainage Network",
-   "cells": [
-    "Medium",
-    null,
-    "Low",
-    "High",
-    null,
-    "High",
-    "Low",
-    "Low",
-    "Low",
-    "Low"
-   ]
-  },
-  {
-   "sector": "Utilities",
-   "industry": "Distribution Network",
-   "type": "Pumping Station",
-   "cells": [
-    "High",
-    "Low",
-    "Medium",
-    "High",
-    "Low",
-    "High",
-    "High",
-    "Medium",
-    "Medium",
-    "Medium"
-   ]
-  },
-  {
-   "sector": "Utilities",
-   "industry": "Distribution Network",
-   "type": "Water Network",
-   "cells": [
-    "Medium",
-    null,
-    "Low",
-    "High",
-    null,
-    "High",
-    "Low",
-    "Low",
-    "Low",
-    "Low"
    ]
   },
   {
@@ -1479,15 +1037,100 @@
    ]
   },
   {
+   "sector": "Urban Construction",
+   "industry": "Leisure & Recreation Facilities",
+   "type": "Park",
+   "cells": [
+    "Low",
+    "Low",
+    "Low",
+    "High",
+    "Low",
+    "Low",
+    "Low",
+    null,
+    "Medium",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Education",
+   "type": "Research Centre",
+   "cells": [
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Transport",
+   "industry": "Road",
+   "type": "Terminal",
+   "cells": [
+    "High",
+    "High",
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "High",
+    "Medium",
+    "Low",
+    "High"
+   ]
+  },
+  {
    "sector": "Utilities",
-   "industry": "Other Utility Plants",
-   "type": "Desalination Plant",
+   "industry": "Distribution Network",
+   "type": "Natural Gas Distribution Network",
+   "cells": [
+    "Medium",
+    "Low",
+    "Low",
+    "Medium",
+    null,
+    "Low",
+    "Medium",
+    "High",
+    "Low",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Upstream: Oil & Gas Exploration and Production",
+   "type": "Drilling & Exploration works",
+   "cells": [
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Medium",
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Industrial",
+   "industry": "Mega Industrial Development",
+   "type": "Mega Industrial Development",
    "cells": [
     "High",
     "Medium",
     "High",
     "High",
-    "Low",
+    "Medium",
     "High",
     "High",
     "High",
@@ -1496,36 +1139,53 @@
    ]
   },
   {
-   "sector": "Utilities",
-   "industry": "Other Utility Plants",
-   "type": "Water Treatment Plant",
+   "sector": "Industrial",
+   "industry": "Storage Facility",
+   "type": "Data Center",
    "cells": [
     "High",
-    "Low",
     "High",
     "High",
-    "Low",
+    "Medium",
+    "Medium",
     "High",
     "High",
-    "High",
-    "Low",
+    "Medium",
+    "Medium",
     "High"
    ]
   },
   {
-   "sector": "Utilities",
-   "industry": "Other Utility Plants",
-   "type": "Waste to Energy Plant",
+   "sector": "Transport",
+   "industry": "Aviation",
+   "type": "Hangar facility",
    "cells": [
-    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Low",
     "Low",
     "High",
-    "High",
+    "Medium",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Leisure & Recreation Facilities",
+   "type": "Sports Club & Facilities",
+   "cells": [
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
     "Low",
     "Medium",
-    "High",
-    "High",
-    "Low",
     "Medium"
    ]
   },
@@ -1545,875 +1205,1222 @@
     "Medium",
     "Medium"
    ]
+  },
+  {
+   "sector": "Industrial",
+   "industry": "Storage Facility",
+   "type": "Logistics Hub / Center",
+   "cells": [
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "High",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Religious Buildings",
+   "type": "Other Religious Building",
+   "cells": [
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Low",
+    "Low",
+    "High",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Utilities",
+   "industry": "Fuel Plants",
+   "type": "Hydrogen Plants",
+   "cells": [
+    "High",
+    "Low",
+    "High",
+    "High",
+    "Low",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Utilities",
+   "industry": "Fuel Plants",
+   "type": "Ammonia Plants",
+   "cells": [
+    "High",
+    "Low",
+    "High",
+    "High",
+    "Low",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Industrial",
+   "industry": "Service Facility",
+   "type": "Service Centre",
+   "cells": [
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Medium",
+    "Low",
+    "Low",
+    "Low",
+    "High",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Fuel Plants",
+   "type": "Hydrogen Plants",
+   "cells": [
+    "High",
+    "Low",
+    "High",
+    "High",
+    "Low",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Retail Facilities",
+   "type": "Gas / Petrol Station",
+   "cells": [
+    "Medium",
+    "Low",
+    "Low",
+    "Low",
+    "Low",
+    "Low",
+    "Low",
+    "Medium",
+    "High",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Education",
+   "type": "Library",
+   "cells": [
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Medium",
+    "Low",
+    "Low",
+    null,
+    "Medium",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Leisure & Recreation Facilities",
+   "type": "Cinema / Theatre / Auditorium",
+   "cells": [
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "Medium",
+    "Medium",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Fuel Plants",
+   "type": "Ammonia Plants",
+   "cells": [
+    "High",
+    "Low",
+    "High",
+    "High",
+    "Low",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Utilities",
+   "industry": "Distribution Network",
+   "type": "Telecommunications Network",
+   "cells": [
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Transport",
+   "industry": "Marine",
+   "type": "Canal / Waterway",
+   "cells": [
+    "Low",
+    null,
+    null,
+    "High",
+    null,
+    null,
+    "Low",
+    "Low",
+    null,
+    "Low"
+   ]
+  },
+  {
+   "sector": "Transport",
+   "industry": "Rail",
+   "type": "Tram",
+   "cells": [
+    "High",
+    null,
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "Medium",
+    "Low",
+    "High"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Leisure & Recreation Facilities",
+   "type": "Golf Course",
+   "cells": [
+    "Low",
+    "Low",
+    "Low",
+    "High",
+    "Low",
+    "Low",
+    "Low",
+    null,
+    "Medium",
+    "Low"
+   ]
+  },
+  {
+   "sector": "Urban Construction",
+   "industry": "Leisure & Recreation Facilities",
+   "type": "Stadium",
+   "cells": [
+    "High",
+    "High",
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Low",
+    "High"
+   ]
+  },
+  {
+   "sector": "Utilities",
+   "industry": "Infrastructure",
+   "type": "Water Storage Tanks",
+   "cells": [
+    "High",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "Medium",
+    "High",
+    "High",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Industrial",
+   "industry": "Fuel Plants",
+   "type": "Hydrogen Plants",
+   "cells": [
+    "High",
+    "Low",
+    "High",
+    "High",
+    "Low",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Utilities",
+   "industry": "Fuel Plants",
+   "type": "Synthetic Fuel Plants",
+   "cells": [
+    "High",
+    "Low",
+    "High",
+    "High",
+    "Low",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "industry": "Fuel Plants",
+   "type": "Biogas/Biofuel Plants",
+   "cells": [
+    "High",
+    "Low",
+    "High",
+    "High",
+    "Low",
+    "Medium",
+    "High",
+    "High",
+    "Low",
+    "Medium"
+   ]
+  },
+  {
+   "sector": "Transport",
+   "industry": "Aviation",
+   "type": "Runway & Ancilliary Facilities",
+   "cells": [
+    "High",
+    "High",
+    "High",
+    "High",
+    "High",
+    "Medium",
+    "High",
+    "Medium",
+    "Low",
+    "High"
+   ]
+  },
+  {
+   "sector": "Utilities",
+   "industry": "Distribution Network",
+   "type": "District Cooling Network",
+   "cells": [
+    "Medium",
+    null,
+    "Low",
+    "High",
+    null,
+    "High",
+    "Low",
+    "Low",
+    "Low",
+    "Low"
+   ]
   }
  ],
  "matrixRows": [
   {
-   "count": 361,
-   "value": 136024.7
-  },
-  {
-   "count": 402,
-   "value": 54993.3
-  },
-  {
-   "count": 311,
-   "value": 32195.6
-  },
-  {
-   "count": 48,
-   "value": 9896.2
-  },
-  {
-   "count": 38,
-   "value": 2503.3
-  },
-  {
-   "count": 61,
-   "value": 2094.2
-  },
-  {
-   "count": 121,
-   "value": 44081.7
-  },
-  {
-   "count": 60,
-   "value": 23771.8
-  },
-  {
-   "count": 43,
-   "value": 13968
-  },
-  {
-   "count": 30,
-   "value": 5638.2
-  },
-  {
-   "count": 103,
-   "value": 10727.9
-  },
-  {
-   "count": 44,
-   "value": 9200
-  },
-  {
-   "count": 13,
-   "value": 403.3
-  },
-  {
-   "count": 21,
-   "value": 2272.5
-  },
-  {
-   "count": 82,
-   "value": 27497.4
-  },
-  {
-   "count": 55,
-   "value": 16935.5
-  },
-  {
-   "count": 34,
-   "value": 2510.8
-  },
-  {
-   "count": 91,
-   "value": 44364.1
-  },
-  {
-   "count": 48,
-   "value": 1241.5
-  },
-  {
-   "count": 59,
-   "value": 2343.5
-  },
-  {
-   "count": 50,
-   "value": 8098.7
-  },
-  {
-   "count": 17,
-   "value": 12381.6
-  },
-  {
-   "count": 30,
-   "value": 14836.5
-  },
-  {
-   "count": 14,
-   "value": 9196.5
-  },
-  {
-   "count": 24,
-   "value": 17822.1
-  },
-  {
-   "count": 163,
-   "value": 334449.3
-  },
-  {
-   "count": 86,
-   "value": 5127.7
-  },
-  {
    "count": 64,
-   "value": 22396
-  },
-  {
-   "count": 27,
-   "value": 5512.2
-  },
-  {
-   "count": 32,
-   "value": 5460.5
-  },
-  {
-   "count": 12,
-   "value": 1004.2
-  },
-  {
-   "count": 6,
-   "value": 7445.7
-  },
-  {
-   "count": 31,
-   "value": 787.8
-  },
-  {
-   "count": 19,
-   "value": 7542
-  },
-  {
-   "count": 34,
-   "value": 4211.3
-  },
-  {
-   "count": 16,
-   "value": 1000.7
-  },
-  {
-   "count": 92,
-   "value": 16876.3
-  },
-  {
-   "count": 47,
-   "value": 2981.9
-  },
-  {
-   "count": 28,
-   "value": 4159.6
+   "value": 44343.9
   },
   {
    "count": 13,
-   "value": 1531.6
+   "value": 8170
   },
   {
-   "count": 53,
-   "value": 7681.5
+   "count": 20,
+   "value": 42845.4
   },
   {
-   "count": 28,
-   "value": 6314.5
+   "count": 254,
+   "value": 28399.5
   },
   {
-   "count": 13,
-   "value": 775
+   "count": 77,
+   "value": 163633.5
+  },
+  {
+   "count": 48,
+   "value": 50032.8
+  },
+  {
+   "count": 164,
+   "value": 20321.5
+  },
+  {
+   "count": 511,
+   "value": 92009.4
   },
   {
    "count": 39,
-   "value": 92049.5
+   "value": 8670.7
   },
   {
-   "count": 10,
-   "value": 4389.6
+   "count": 927,
+   "value": 48790.3
   },
   {
-   "count": 12,
-   "value": 3416.4
-  },
-  {
-   "count": 38,
-   "value": 1065.1
-  },
-  {
-   "count": 20,
-   "value": 7278.8
-  },
-  {
-   "count": 5,
-   "value": 7942.7
-  },
-  {
-   "count": 20,
-   "value": 2316.4
-  },
-  {
-   "count": 8,
-   "value": 1069.7
-  },
-  {
-   "count": 21,
-   "value": 3212.7
-  },
-  {
-   "count": 12,
-   "value": 10242.5
-  },
-  {
-   "count": 4,
-   "value": 196.9
-  },
-  {
-   "count": 22,
-   "value": 22149.3
-  },
-  {
-   "count": 10,
-   "value": 2143.9
-  },
-  {
-   "count": 25,
-   "value": 28162.6
-  },
-  {
-   "count": 23,
-   "value": 1327.7
-  },
-  {
-   "count": 6,
-   "value": 1100
-  },
-  {
-   "count": 21,
-   "value": 38467.6
-  },
-  {
-   "count": 10,
-   "value": 2859.3
-  },
-  {
-   "count": 6,
-   "value": 6429.9
-  },
-  {
-   "count": 16,
-   "value": 5778.7
-  },
-  {
-   "count": 7,
-   "value": 545
-  },
-  {
-   "count": 4,
-   "value": 1004.4
-  },
-  {
-   "count": 43,
-   "value": 12102.6
-  },
-  {
-   "count": 19,
-   "value": 2118.2
-  },
-  {
-   "count": 10,
-   "value": 3357.2
-  },
-  {
-   "count": 26,
-   "value": 15834
-  },
-  {
-   "count": 3,
-   "value": 14320.9
-  },
-  {
-   "count": 11,
-   "value": 1550.6
-  },
-  {
-   "count": 17,
-   "value": 2703.6
-  },
-  {
-   "count": 12,
-   "value": 3103.8
+   "count": 959,
+   "value": 67137.1
   },
   {
    "count": 24,
-   "value": 1156.1
+   "value": 5386.9
   },
   {
-   "count": 12,
-   "value": 2562.8
+   "count": 154,
+   "value": 24326.3
+  },
+  {
+   "count": 17,
+   "value": 37080
+  },
+  {
+   "count": 21,
+   "value": 14609.9
+  },
+  {
+   "count": 11,
+   "value": 10735.2
   },
   {
    "count": 26,
-   "value": 26406.2
+   "value": 66231
   },
   {
-   "count": 13,
-   "value": 10499.3
+   "count": 3,
+   "value": 60650
+  },
+  {
+   "count": 7,
+   "value": 11983
+  },
+  {
+   "count": 74,
+   "value": 10090.3
+  },
+  {
+   "count": 23,
+   "value": 8410
+  },
+  {
+   "count": 2,
+   "value": 1110
+  },
+  {
+   "count": 62,
+   "value": 6242.2
   },
   {
    "count": 8,
-   "value": 2402.5
+   "value": 7637.3
+  },
+  {
+   "count": 15,
+   "value": 19415
+  },
+  {
+   "count": 195,
+   "value": 1078.4
+  },
+  {
+   "count": 2,
+   "value": 1314
+  },
+  {
+   "count": 14,
+   "value": 13370.5
+  },
+  {
+   "count": 129,
+   "value": 10749.7
+  },
+  {
+   "count": 82,
+   "value": 1469.3
+  },
+  {
+   "count": 9,
+   "value": 1694.1
+  },
+  {
+   "count": 14,
+   "value": 417.3
+  },
+  {
+   "count": 67,
+   "value": 1501.8
+  },
+  {
+   "count": 8,
+   "value": 508
   },
   {
    "count": 5,
-   "value": 7304.5
+   "value": 220
+  },
+  {
+   "count": 10,
+   "value": 1107.5
+  },
+  {
+   "count": 19,
+   "value": 2021
+  },
+  {
+   "count": 6,
+   "value": 7238.5
+  },
+  {
+   "count": 69,
+   "value": 256.5
+  },
+  {
+   "count": 21,
+   "value": 2293.5
+  },
+  {
+   "count": 37,
+   "value": 34638.4
+  },
+  {
+   "count": 24,
+   "value": 258.9
+  },
+  {
+   "count": 14,
+   "value": 117
+  },
+  {
+   "count": 11,
+   "value": 2493
+  },
+  {
+   "count": 21,
+   "value": 13187.2
   },
   {
    "count": 8,
-   "value": 263.4
+   "value": 27380
+  },
+  {
+   "count": 8,
+   "value": 4239
+  },
+  {
+   "count": 7,
+   "value": 32.5
+  },
+  {
+   "count": 24,
+   "value": 2833.9
+  },
+  {
+   "count": 4,
+   "value": 899
+  },
+  {
+   "count": 15,
+   "value": 701.2
+  },
+  {
+   "count": 14,
+   "value": 556.6
+  },
+  {
+   "count": 9,
+   "value": 1098
+  },
+  {
+   "count": 2,
+   "value": 70
+  },
+  {
+   "count": 1,
+   "value": 80
+  },
+  {
+   "count": 8,
+   "value": 11652.2
+  },
+  {
+   "count": 9,
+   "value": 2226.5
+  },
+  {
+   "count": 16,
+   "value": 1826
+  },
+  {
+   "count": 22,
+   "value": 246.5
+  },
+  {
+   "count": 13,
+   "value": 513
+  },
+  {
+   "count": 26,
+   "value": 2667.3
+  },
+  {
+   "count": 1,
+   "value": 20
+  },
+  {
+   "count": 3,
+   "value": 350
+  },
+  {
+   "count": 4,
+   "value": 6000
+  },
+  {
+   "count": 6,
+   "value": 131
+  },
+  {
+   "count": 2,
+   "value": 2000
+  },
+  {
+   "count": 17,
+   "value": 94
+  },
+  {
+   "count": 1,
+   "value": 35
+  },
+  {
+   "count": 6,
+   "value": 1627
+  },
+  {
+   "count": 2,
+   "value": 500
+  },
+  {
+   "count": 4,
+   "value": 1206
+  },
+  {
+   "count": 1,
+   "value": 10
+  },
+  {
+   "count": 1,
+   "value": 55
+  },
+  {
+   "count": 4,
+   "value": 268
+  },
+  {
+   "count": 8,
+   "value": 2645
+  },
+  {
+   "count": 1,
+   "value": 5
+  },
+  {
+   "count": 1,
+   "value": 150
+  },
+  {
+   "count": 1,
+   "value": 50
+  },
+  {
+   "count": 1,
+   "value": 300
+  },
+  {
+   "count": 4,
+   "value": 625
+  },
+  {
+   "count": 2,
+   "value": 438.4
   }
  ],
  "shards": [
   {
    "file": "projects/urban-construction-1.json",
    "sector": "Urban Construction",
-   "count": 663,
-   "value": 186364.3
+   "count": 666,
+   "value": 84306.2
   },
   {
    "file": "projects/urban-construction-2.json",
    "sector": "Urban Construction",
-   "count": 663,
-   "value": 191164.1
+   "count": 666,
+   "value": 60829
   },
   {
    "file": "projects/urban-construction-3.json",
    "sector": "Urban Construction",
-   "count": 663,
-   "value": 310555.8
+   "count": 666,
+   "value": 100022.8
   },
   {
    "file": "projects/urban-construction-4.json",
    "sector": "Urban Construction",
-   "count": 661,
-   "value": 211852.1
+   "count": 666,
+   "value": 100643.9
+  },
+  {
+   "file": "projects/urban-construction-5.json",
+   "sector": "Urban Construction",
+   "count": 665,
+   "value": 151016.3
   },
   {
    "file": "projects/industrial.json",
    "sector": "Industrial",
-   "count": 335,
-   "value": 140175.9
+   "count": 406,
+   "value": 42264.2
   },
   {
    "file": "projects/oil-gas-and-fuels.json",
    "sector": "Oil, Gas and Fuels",
-   "count": 160,
-   "value": 57618
+   "count": 263,
+   "value": 241187.7
   },
   {
    "file": "projects/transport.json",
    "sector": "Transport",
-   "count": 190,
-   "value": 103253.2
+   "count": 244,
+   "value": 103143.1
   },
   {
    "file": "projects/utilities.json",
    "sector": "Utilities",
-   "count": 165,
-   "value": 88107.7
+   "count": 294,
+   "value": 144313.7
   }
  ],
  "kpis": {
-  "projects": 3500,
-  "owned": 2966,
-  "ownedValue": 1104456.3,
-  "openEnquiriesAndQuotes": 2771,
-  "ordersThisYear": 722,
-  "unowned": 534
+  "projects": 4536,
+  "owned": 4187,
+  "ownedValue": 838727.7,
+  "openEnquiriesAndQuotes": 3641,
+  "ordersThisYear": 501,
+  "unowned": 349
  },
  "sectorStage": [
   {
    "sector": "Urban Construction",
    "stage": "Concept",
-   "count": 309,
-   "value": 144086.2
+   "count": 195,
+   "value": 147347.1
   },
   {
    "sector": "Urban Construction",
    "stage": "Design",
-   "count": 476,
-   "value": 145321.7
+   "count": 486,
+   "value": 136156.1
   },
   {
    "sector": "Urban Construction",
    "stage": "Tender",
-   "count": 285,
-   "value": 171534.6
+   "count": 664,
+   "value": 60769.4
   },
   {
    "sector": "Urban Construction",
    "stage": "Under Construction",
-   "count": 902,
-   "value": 268059.1
+   "count": 1014,
+   "value": 89420.4
   },
   {
    "sector": "Urban Construction",
    "stage": "Completed (3 months)",
-   "count": 131,
-   "value": 25717.8
-  },
-  {
-   "sector": "Urban Construction",
-   "stage": "Completed (1 year)",
-   "count": 196,
-   "value": 57113
-  },
-  {
-   "sector": "Urban Construction",
-   "stage": "Completed (3 years)",
-   "count": 178,
-   "value": 47375.9
-  },
-  {
-   "sector": "Urban Construction",
-   "stage": "Completed (above 3 years)",
-   "count": 173,
-   "value": 40728
-  },
-  {
-   "sector": "Industrial",
-   "stage": "Concept",
-   "count": 26,
-   "value": 4317.8
-  },
-  {
-   "sector": "Industrial",
-   "stage": "Design",
-   "count": 49,
-   "value": 12528.9
-  },
-  {
-   "sector": "Industrial",
-   "stage": "Tender",
-   "count": 46,
-   "value": 23008.9
-  },
-  {
-   "sector": "Industrial",
-   "stage": "Under Construction",
-   "count": 127,
-   "value": 67351.4
-  },
-  {
-   "sector": "Industrial",
-   "stage": "Completed (3 months)",
-   "count": 26,
-   "value": 20253
-  },
-  {
-   "sector": "Industrial",
-   "stage": "Completed (1 year)",
    "count": 20,
-   "value": 3456.5
+   "value": 685
   },
   {
-   "sector": "Industrial",
-   "stage": "Completed (3 years)",
-   "count": 24,
-   "value": 6025.9
-  },
-  {
-   "sector": "Industrial",
-   "stage": "Completed (above 3 years)",
-   "count": 17,
-   "value": 3233.5
-  },
-  {
-   "sector": "Oil, Gas and Fuels",
-   "stage": "Concept",
-   "count": 9,
-   "value": 5122.2
-  },
-  {
-   "sector": "Oil, Gas and Fuels",
-   "stage": "Design",
-   "count": 35,
-   "value": 14423.8
-  },
-  {
-   "sector": "Oil, Gas and Fuels",
-   "stage": "Tender",
-   "count": 22,
-   "value": 5594.6
-  },
-  {
-   "sector": "Oil, Gas and Fuels",
-   "stage": "Under Construction",
-   "count": 55,
-   "value": 22886.5
-  },
-  {
-   "sector": "Oil, Gas and Fuels",
-   "stage": "Completed (3 months)",
-   "count": 6,
-   "value": 1062.3
-  },
-  {
-   "sector": "Oil, Gas and Fuels",
+   "sector": "Urban Construction",
    "stage": "Completed (1 year)",
-   "count": 14,
-   "value": 2103.6
+   "count": 30,
+   "value": 768.2
   },
   {
-   "sector": "Oil, Gas and Fuels",
+   "sector": "Urban Construction",
    "stage": "Completed (3 years)",
-   "count": 10,
-   "value": 4012.4
+   "count": 496,
+   "value": 10286
+  },
+  {
+   "sector": "Urban Construction",
+   "stage": "Completed (above 3 years)",
+   "count": 424,
+   "value": 51386
+  },
+  {
+   "sector": "Industrial",
+   "stage": "Concept",
+   "count": 132,
+   "value": 33705.4
+  },
+  {
+   "sector": "Industrial",
+   "stage": "Design",
+   "count": 27,
+   "value": 3035.7
+  },
+  {
+   "sector": "Industrial",
+   "stage": "Tender",
+   "count": 51,
+   "value": 2908.9
+  },
+  {
+   "sector": "Industrial",
+   "stage": "Under Construction",
+   "count": 65,
+   "value": 2077.4
+  },
+  {
+   "sector": "Industrial",
+   "stage": "Completed (3 months)",
+   "count": 2,
+   "value": 6
+  },
+  {
+   "sector": "Industrial",
+   "stage": "Completed (1 year)",
+   "count": 4,
+   "value": 32
+  },
+  {
+   "sector": "Industrial",
+   "stage": "Completed (3 years)",
+   "count": 124,
+   "value": 494.8
+  },
+  {
+   "sector": "Industrial",
+   "stage": "Completed (above 3 years)",
+   "count": 1,
+   "value": 4
   },
   {
    "sector": "Oil, Gas and Fuels",
-   "stage": "Completed (above 3 years)",
-   "count": 9,
-   "value": 2412.6
-  },
-  {
-   "sector": "Transport",
    "stage": "Concept",
    "count": 18,
-   "value": 12077.2
+   "value": 8506.2
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "stage": "Design",
+   "count": 16,
+   "value": 28594.8
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "stage": "Tender",
+   "count": 30,
+   "value": 48150
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "stage": "Under Construction",
+   "count": 8,
+   "value": 6351.2
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "stage": "Completed (3 months)",
+   "count": 0,
+   "value": 0
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "stage": "Completed (1 year)",
+   "count": 0,
+   "value": 0
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "stage": "Completed (3 years)",
+   "count": 7,
+   "value": 19990
+  },
+  {
+   "sector": "Oil, Gas and Fuels",
+   "stage": "Completed (above 3 years)",
+   "count": 184,
+   "value": 129595.5
+  },
+  {
+   "sector": "Transport",
+   "stage": "Concept",
+   "count": 73,
+   "value": 36363.3
   },
   {
    "sector": "Transport",
    "stage": "Design",
-   "count": 25,
-   "value": 9627.3
+   "count": 21,
+   "value": 19653.6
   },
   {
    "sector": "Transport",
    "stage": "Tender",
-   "count": 25,
-   "value": 4689.4
+   "count": 99,
+   "value": 33772.6
   },
   {
    "sector": "Transport",
    "stage": "Under Construction",
-   "count": 69,
-   "value": 27210.3
+   "count": 31,
+   "value": 6883.8
   },
   {
    "sector": "Transport",
    "stage": "Completed (3 months)",
-   "count": 8,
-   "value": 2621.9
+   "count": 1,
+   "value": 12
   },
   {
    "sector": "Transport",
    "stage": "Completed (1 year)",
-   "count": 15,
-   "value": 3638.3
+   "count": 3,
+   "value": 300.6
   },
   {
    "sector": "Transport",
    "stage": "Completed (3 years)",
    "count": 16,
-   "value": 41487
+   "value": 6157.2
   },
   {
    "sector": "Transport",
    "stage": "Completed (above 3 years)",
-   "count": 14,
-   "value": 1901.8
+   "count": 0,
+   "value": 0
   },
   {
    "sector": "Utilities",
    "stage": "Concept",
-   "count": 15,
-   "value": 1795.4
+   "count": 64,
+   "value": 46442.8
   },
   {
    "sector": "Utilities",
    "stage": "Design",
-   "count": 32,
-   "value": 8671.8
+   "count": 12,
+   "value": 667
   },
   {
    "sector": "Utilities",
    "stage": "Tender",
-   "count": 20,
-   "value": 20056.5
+   "count": 156,
+   "value": 42602.3
   },
   {
    "sector": "Utilities",
    "stage": "Under Construction",
-   "count": 50,
-   "value": 18261.1
+   "count": 22,
+   "value": 3927.1
   },
   {
    "sector": "Utilities",
    "stage": "Completed (3 months)",
-   "count": 6,
-   "value": 17861.4
+   "count": 3,
+   "value": 164
   },
   {
    "sector": "Utilities",
    "stage": "Completed (1 year)",
-   "count": 11,
-   "value": 7954.1
+   "count": 4,
+   "value": 380
   },
   {
    "sector": "Utilities",
    "stage": "Completed (3 years)",
-   "count": 14,
-   "value": 6356.4
+   "count": 31,
+   "value": 49100.5
   },
   {
    "sector": "Utilities",
    "stage": "Completed (above 3 years)",
-   "count": 17,
-   "value": 7151
+   "count": 2,
+   "value": 1030
   }
  ],
  "chase": [
   {
-   "ref": "HV-26-02240",
-   "name": "Joumlai Waterfront",
+   "ref": "PRJAE24260451",
+   "name": "Passenger Terminal Building - Expansion of Al Maktoum International Airport - Phase 2",
    "stage": "Tender",
    "completionPct": null,
-   "value": 53688.4,
+   "value": 10500,
    "city": "Dubai",
-   "type": "Mega Urban Development",
+   "type": "Airport",
    "overall": 8,
-   "ownerVertical": 9,
-   "ownerEngineer": "ziad-abdel-rahman",
+   "ownerVertical": 6,
+   "ownerEngineer": "nadia-zaki",
    "door": {
-    "kind": "contractor",
-    "id": 14,
-    "name": "Kedoun Engineering and Contracting"
+    "kind": "consultant",
+    "id": 475,
+    "name": "Coop Himmelb (L) Au, Coop Himmelb (L) Au Architectural Prospective Drawings Services LLC, Dar Al Handasah Consultants (Shair & Partners) (Dubai), Leslie Jones Architecture"
    }
   },
   {
-   "ref": "HV-26-03115",
-   "name": "Kulousais Nuclear Plant Phase 4",
+   "ref": "PRJAE24257495",
+   "name": "Jebel Ali Sewerage Links (Package Links) -Phase 2 - Dubai Strategic Sewerage Tunnels",
    "stage": "Tender",
    "completionPct": null,
-   "value": 11773.8,
-   "city": "Al Ain",
-   "type": "Nuclear Power Plant",
+   "value": 9000,
+   "city": "Dubai",
+   "type": "Sewerage / Drainage Network",
+   "overall": 8,
+   "ownerVertical": 3,
+   "ownerEngineer": "omar-nasser",
+   "door": {
+    "kind": "consultant",
+    "id": 1053,
+    "name": "Parsons International Limited - Dubai"
+   }
+  },
+  {
+   "ref": "PRJAE18154439",
+   "name": "Umm Shaif Gas Cap Offshore Development (Phase 1)",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 6600,
+   "city": "Abu Dhabi",
+   "type": "Gas Field Development",
    "overall": 8,
    "ownerVertical": 7,
    "ownerEngineer": "rami-aziz",
-   "door": {
-    "kind": "contractor",
-    "id": 518,
-    "name": "Feetou Engineering and Construction"
-   }
+   "door": null
   },
   {
-   "ref": "HV-26-00842",
-   "name": "Braisrabem Hotel",
+   "ref": "PRJAE0400183",
+   "name": "ADNOC Refining - Naphtha Upgradation",
    "stage": "Tender",
    "completionPct": null,
-   "value": 9834.9,
-   "city": "Dubai",
-   "type": "Hotel",
+   "value": 3200,
+   "city": "Abu Dhabi",
+   "type": "Petrochemical Plant",
+   "overall": 8,
+   "ownerVertical": 0,
+   "ownerEngineer": "rohan-pillai",
+   "door": null
+  },
+  {
+   "ref": "PRJAE21200182",
+   "name": "Project Volta - TAZIZ Derivatives Park Complex",
+   "stage": "Under Construction",
+   "completionPct": 1,
+   "value": 3000,
+   "city": "Abu Dhabi",
+   "type": "Infrastructure",
    "overall": 8,
    "ownerVertical": 9,
    "ownerEngineer": "ziad-abdel-rahman",
    "door": {
     "kind": "contractor",
-    "id": 126,
-    "name": "Theeqadrem Contracting"
+    "id": 422,
+    "name": "Alghanim International General Trading & Contracting, Water & Environment Technologies Company ( WETICO )"
    }
   },
   {
-   "ref": "HV-26-00464",
-   "name": "Bajommaa Hydrogen Plant Phase 3",
+   "ref": "PRJAE0942338",
+   "name": "Dubai Metro Green Line Extension - Blue Line",
    "stage": "Under Construction",
-   "completionPct": 0,
-   "value": 9573.8,
+   "completionPct": null,
+   "value": 2829,
    "city": "Dubai",
-   "type": "Hydrogen Plants",
+   "type": "Metro & Subway",
+   "overall": 8,
+   "ownerVertical": 6,
+   "ownerEngineer": "nadia-zaki",
+   "door": {
+    "kind": "contractor",
+    "id": 684,
+    "name": "CRRC Corporation, Limak Holding Inc., Mapa Construction Company"
+   }
+  },
+  {
+   "ref": "PRJAE1395353",
+   "name": "Dubai Metro Red Line Extension - Blue Line",
+   "stage": "Under Construction",
+   "completionPct": null,
+   "value": 2829,
+   "city": "Dubai",
+   "type": "Metro & Subway",
+   "overall": 8,
+   "ownerVertical": 6,
+   "ownerEngineer": "nadia-zaki",
+   "door": {
+    "kind": "contractor",
+    "id": 684,
+    "name": "CRRC Corporation, Limak Holding Inc., Mapa Construction Company"
+   }
+  },
+  {
+   "ref": "PRJAE16119252",
+   "name": "Dubai Square Mall - Dubai Creek Harbor",
+   "stage": "Under Construction",
+   "completionPct": 3,
+   "value": 2700,
+   "city": "Dubai",
+   "type": "Shopping Mall",
+   "overall": 8,
+   "ownerVertical": 9,
+   "ownerEngineer": "priya-kulkarni",
+   "door": {
+    "kind": "contractor",
+    "id": 748,
+    "name": "Dutco Balfour Beatty (Dutco Construction Co. Llc)"
+   }
+  },
+  {
+   "ref": "PRJAE25276902",
+   "name": "Al Nouf Combined Cycle Gas Turbine (CCGT) Plant",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 2500,
+   "city": "Abu Dhabi",
+   "type": "Fossil-Fuel Power Plants",
    "overall": 8,
    "ownerVertical": 6,
    "ownerEngineer": "vikram-fernandes",
-   "door": {
-    "kind": "contractor",
-    "id": 166,
-    "name": "Qouhoum Engineering and Construction"
-   }
+   "door": null
   },
   {
-   "ref": "HV-26-00020",
-   "name": "Shejeevan Golf Club",
-   "stage": "Under Construction",
-   "completionPct": 0,
-   "value": 7264.6,
-   "city": "Dubai",
-   "type": "Golf Course",
+   "ref": "PRJAE25275471",
+   "name": "Umm Shaif Gas Cap Offshore Development (Phase 1) (Package 4)",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 2200,
+   "city": "Abu Dhabi",
+   "type": "Gas Field Development",
    "overall": 8,
-   "ownerVertical": 3,
-   "ownerEngineer": "omar-nasser",
+   "ownerVertical": 7,
+   "ownerEngineer": "rami-aziz",
    "door": {
-    "kind": "contractor",
-    "id": 529,
-    "name": "Zeerulther Civil Works"
+    "kind": "consultant",
+    "id": 1280,
+    "name": "Worley - Abu Dhabi (Formerly Worley Parsons)"
    }
   },
   {
-   "ref": "HV-26-00640",
-   "name": "Razam Residences",
+   "ref": "PRJAE19168839",
+   "name": "Umm Shaif Long-Term Development Plan 2",
    "stage": "Under Construction",
-   "completionPct": 0,
-   "value": 6391.4,
-   "city": "Dubai",
-   "type": "High Rise (15+)",
+   "completionPct": 4,
+   "value": 2000,
+   "city": "Abu Dhabi",
+   "type": "Oil Field Development",
    "overall": 8,
-   "ownerVertical": 0,
-   "ownerEngineer": "farah-haddad",
+   "ownerVertical": 7,
+   "ownerEngineer": "rami-aziz",
    "door": {
     "kind": "contractor",
-    "id": 453,
-    "name": "Krupraanis Construction"
+    "id": 1097,
+    "name": "McDermott Middle East Inc."
    }
   },
   {
-   "ref": "HV-26-02836",
-   "name": "Dofaidron Masterplan",
-   "stage": "Under Construction",
-   "completionPct": 0,
-   "value": 6035,
+   "ref": "PRJAE24261320",
+   "name": "Raha Island by RAK Properties - Mina Al Arab",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 2000,
+   "city": "Ras Al Khaimah",
+   "type": "Mega Urban Development",
+   "overall": 8,
+   "ownerVertical": 9,
+   "ownerEngineer": "ziad-abdel-rahman",
+   "door": null
+  },
+  {
+   "ref": "PRJAE24270779",
+   "name": "DAMAC Islands - Dubailand",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 2000,
    "city": "Dubai",
    "type": "Mega Urban Development",
    "overall": 8,
    "ownerVertical": 9,
    "ownerEngineer": "ziad-abdel-rahman",
-   "door": {
-    "kind": "contractor",
-    "id": 177,
-    "name": "Jeethleed Civil Works"
-   }
+   "door": null
   },
   {
-   "ref": "HV-26-01227",
-   "name": "Zaitrismod Waterway Phase 3",
-   "stage": "Under Construction",
-   "completionPct": 0,
-   "value": 5218.1,
-   "city": "Dubai",
-   "type": "Canal / Waterway",
-   "overall": 8,
-   "ownerVertical": 3,
-   "ownerEngineer": "meera-dsouza",
-   "door": {
-    "kind": "contractor",
-    "id": 43,
-    "name": "Zeepraal Builders"
-   }
-  },
-  {
-   "ref": "HV-26-02797",
-   "name": "Shekravee City",
+   "ref": "PRJAE24258613",
+   "name": "The Alba Residences by Omniyat - Palm Jumeirah",
    "stage": "Tender",
    "completionPct": null,
-   "value": 5202.1,
+   "value": 1900,
    "city": "Dubai",
-   "type": "Mega Urban Development",
+   "type": "Hotel Apartments",
    "overall": 8,
-   "ownerVertical": 9,
-   "ownerEngineer": "priya-kulkarni",
+   "ownerVertical": 8,
+   "ownerEngineer": "faisal-reyes",
    "door": {
-    "kind": "contractor",
-    "id": 76,
-    "name": "Mimbrun Civil Works"
+    "kind": "consultant",
+    "id": 1297,
+    "name": "Zaha Hadid Architects (Dubai),P & T Architects & Engineers Ltd. (Dubai),P & T Architects & Engineers Ltd. (Dubai),Engineering Design Consultancy Group (Edcg)"
    }
   },
   {
-   "ref": "HV-26-01539",
-   "name": "Qeefaanain Industrial Zone Phase 4",
-   "stage": "Tender",
-   "completionPct": null,
-   "value": 5053.3,
-   "city": "Dubai",
-   "type": "Mega Industrial Development",
-   "overall": 8,
-   "ownerVertical": 7,
-   "ownerEngineer": "rami-aziz",
-   "door": {
-    "kind": "contractor",
-    "id": 109,
-    "name": "Kibroum Contracting and Electromechanical"
-   }
-  },
-  {
-   "ref": "HV-26-02567",
-   "name": "Thevous Waterfront",
-   "stage": "Tender",
-   "completionPct": null,
-   "value": 4596.1,
-   "city": "Dubai",
-   "type": "Mega Urban Development",
-   "overall": 8,
-   "ownerVertical": 9,
-   "ownerEngineer": "priya-kulkarni",
-   "door": {
-    "kind": "contractor",
-    "id": 581,
-    "name": "Kaatokraal Construction"
-   }
-  },
-  {
-   "ref": "HV-26-03144",
-   "name": "Taazouth Hospital",
+   "ref": "PRJAE1286287",
+   "name": "Burj Azizi - Sheikh Zayed Road",
    "stage": "Under Construction",
    "completionPct": 0,
-   "value": 4577,
-   "city": "Abu Dhabi",
-   "type": "Hospital",
-   "overall": 8,
-   "ownerVertical": 6,
-   "ownerEngineer": "nadia-zaki",
-   "door": {
-    "kind": "contractor",
-    "id": 485,
-    "name": "Bradeekra Engineering and Contracting"
-   }
-  },
-  {
-   "ref": "HV-26-00573",
-   "name": "Zihaish Industrial Park",
-   "stage": "Tender",
-   "completionPct": null,
-   "value": 4068.1,
-   "city": "Dubai",
-   "type": "Mega Industrial Development",
-   "overall": 8,
-   "ownerVertical": 6,
-   "ownerEngineer": "nadia-zaki",
-   "door": {
-    "kind": "contractor",
-    "id": 347,
-    "name": "Prideetor Contracting and Electromechanical"
-   }
-  },
-  {
-   "ref": "HV-26-00437",
-   "name": "Privid Court",
-   "stage": "Under Construction",
-   "completionPct": 0,
-   "value": 3659.1,
-   "city": "Fujairah",
-   "type": "Mid Rise (4 - 14)",
-   "overall": 8,
-   "ownerVertical": 0,
-   "ownerEngineer": "kavya-nair",
-   "door": {
-    "kind": "contractor",
-    "id": 137,
-    "name": "Vaabrai Engineering and Construction"
-   }
-  },
-  {
-   "ref": "HV-26-03204",
-   "name": "Dutrou Tower",
-   "stage": "Under Construction",
-   "completionPct": 0,
-   "value": 3502.6,
+   "value": 1500,
    "city": "Dubai",
    "type": "High Rise (15+)",
    "overall": 8,
@@ -2421,93 +2428,81 @@
    "ownerEngineer": "meera-dsouza",
    "door": {
     "kind": "contractor",
-    "id": 457,
-    "name": "Priledus General Contracting"
+    "id": 875,
+    "name": "Gardinia Contracting Llc"
    }
   },
   {
-   "ref": "HV-26-00017",
-   "name": "Prohain Industrial Park",
-   "stage": "Under Construction",
-   "completionPct": 2.3,
-   "value": 3455.8,
-   "city": "Dubai",
-   "type": "Mega Industrial Development",
+   "ref": "PRJAE23252776",
+   "name": "Expansion of North East Bab Onshore Oilfield - On-Plot Facilities",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 1500,
+   "city": "Abu Dhabi",
+   "type": "Oil Field Development",
    "overall": 8,
    "ownerVertical": 7,
    "ownerEngineer": "rami-aziz",
-   "door": {
-    "kind": "contractor",
-    "id": 519,
-    "name": "Railel Contracting"
-   }
+   "door": null
   },
   {
-   "ref": "HV-26-01540",
-   "name": "Jusaameeth Towers",
+   "ref": "PRJAE24271777",
+   "name": "Bahria Mixed-Use Development - Dubai South",
    "stage": "Tender",
    "completionPct": null,
-   "value": 3104.8,
-   "city": "Ajman",
-   "type": "High Rise (15+)",
+   "value": 1500,
+   "city": "Dubai",
+   "type": "Mega Urban Development",
    "overall": 8,
-   "ownerVertical": 3,
-   "ownerEngineer": "meera-dsouza",
-   "door": {
-    "kind": "contractor",
-    "id": 151,
-    "name": "Lebom Contracting"
-   }
+   "ownerVertical": 9,
+   "ownerEngineer": "priya-kulkarni",
+   "door": null
   },
   {
-   "ref": "HV-26-02153",
-   "name": "Dasaahoul Arena Phase 3",
-   "stage": "Under Construction",
-   "completionPct": 0,
-   "value": 3041.6,
+   "ref": "PRJAE25278448",
+   "name": "Waada by Bahria Town",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 1400,
    "city": "Dubai",
-   "type": "Stadium",
+   "type": "Mega Urban Development",
+   "overall": 8,
+   "ownerVertical": 9,
+   "ownerEngineer": "priya-kulkarni",
+   "door": null
+  },
+  {
+   "ref": "PRJAE23251776",
+   "name": "JW Marriott Residence & JW Marriott Resort - Al Marjan Island",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 1306.6,
+   "city": "Ras Al Khaimah",
+   "type": "Hotel",
    "overall": 8,
    "ownerVertical": 9,
    "ownerEngineer": "priya-kulkarni",
    "door": {
-    "kind": "contractor",
-    "id": 4,
-    "name": "Likrusza Construction"
+    "kind": "consultant",
+    "id": 335,
+    "name": "Ashai Design Corporation International,Architectural Design Unit (Adu)"
    }
   },
   {
-   "ref": "HV-26-01566",
-   "name": "Kropror Theme Park",
-   "stage": "Under Construction",
-   "completionPct": 2.7,
-   "value": 2903.1,
+   "ref": "PRJAE24271590",
+   "name": "Mirfa to Liwa Water Transmission System",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 1225.1,
    "city": "Abu Dhabi",
-   "type": "Theme Park",
+   "type": "Water Distribution Network",
    "overall": 8,
    "ownerVertical": 3,
    "ownerEngineer": "omar-nasser",
    "door": {
-    "kind": "contractor",
-    "id": 209,
-    "name": "Bishaid Builders"
-   }
-  },
-  {
-   "ref": "HV-26-03328",
-   "name": "Nindro Industrial City",
-   "stage": "Tender",
-   "completionPct": null,
-   "value": 2818.4,
-   "city": "Dubai",
-   "type": "Mega Industrial Development",
-   "overall": 8,
-   "ownerVertical": 7,
-   "ownerEngineer": "rami-aziz",
-   "door": {
-    "kind": "contractor",
-    "id": 293,
-    "name": "Keepridun Construction Group"
+    "kind": "consultant",
+    "id": 1052,
+    "name": "Parsons International Limited - Abu Dhabi"
    }
   }
  ],
@@ -2517,20 +2512,20 @@
    "name": "Electrical Distribution",
    "channel": "contractors",
    "engineers": 5,
-   "owned": 368,
-   "ownedValue": 83681.5,
+   "owned": 831,
+   "ownedValue": 37820.4,
    "funnel": [
-    108,
-    124,
-    199,
-    280,
-    358,
-    215,
-    264,
-    606,
-    233,
-    135,
-    978
+    160,
+    236,
+    278,
+    300,
+    458,
+    275,
+    422,
+    716,
+    281,
+    355,
+    1055
    ]
   },
   {
@@ -2538,20 +2533,20 @@
    "name": "Cooling",
    "channel": "consultants",
    "engineers": 3,
-   "owned": 226,
-   "ownedValue": 80580.1,
+   "owned": 236,
+   "ownedValue": 107278.5,
    "funnel": [
-    100,
-    130,
-    214,
-    216,
-    306,
-    196,
-    319,
-    515,
-    227,
-    141,
-    1136
+    143,
+    170,
+    239,
+    307,
+    435,
+    224,
+    343,
+    704,
+    287,
+    299,
+    1385
    ]
   },
   {
@@ -2559,20 +2554,20 @@
    "name": "Mechanical Systems",
    "channel": "consultants",
    "engineers": 3,
-   "owned": 226,
-   "ownedValue": 82236.4,
+   "owned": 237,
+   "ownedValue": 173932.9,
    "funnel": [
-    105,
-    149,
-    183,
-    230,
-    324,
-    212,
-    301,
-    508,
-    230,
-    136,
-    1122
+    151,
+    135,
+    220,
+    280,
+    399,
+    260,
+    389,
+    685,
+    302,
+    350,
+    1365
    ]
   },
   {
@@ -2580,20 +2575,20 @@
    "name": "Pumps and Water",
    "channel": "both",
    "engineers": 2,
-   "owned": 369,
-   "ownedValue": 144248.4,
+   "owned": 623,
+   "ownedValue": 122169,
    "funnel": [
-    99,
     121,
-    201,
-    244,
-    326,
-    216,
-    309,
-    579,
-    251,
-    148,
-    1006
+    169,
+    270,
+    308,
+    463,
+    255,
+    377,
+    746,
+    306,
+    350,
+    1171
    ]
   },
   {
@@ -2601,20 +2596,20 @@
    "name": "Vertical Transport",
    "channel": "consultants",
    "engineers": 3,
-   "owned": 226,
-   "ownedValue": 74915.5,
+   "owned": 235,
+   "ownedValue": 54153.1,
    "funnel": [
-    104,
-    110,
-    172,
-    227,
-    341,
-    193,
-    304,
-    531,
-    248,
-    128,
-    1142
+    158,
+    181,
+    225,
+    283,
+    414,
+    244,
+    401,
+    716,
+    291,
+    358,
+    1265
    ]
   },
   {
@@ -2622,20 +2617,20 @@
    "name": "Metering",
    "channel": "consultants",
    "engineers": 2,
-   "owned": 225,
-   "ownedValue": 81228.4,
+   "owned": 237,
+   "ownedValue": 59683.2,
    "funnel": [
-    71,
-    87,
-    173,
-    234,
-    353,
-    195,
-    304,
-    549,
-    258,
-    137,
-    1139
+    142,
+    182,
+    248,
+    282,
+    430,
+    207,
+    387,
+    721,
+    310,
+    358,
+    1269
    ]
   },
   {
@@ -2643,20 +2638,20 @@
    "name": "Automation",
    "channel": "both",
    "engineers": 2,
-   "owned": 256,
-   "ownedValue": 141255.9,
+   "owned": 245,
+   "ownedValue": 133370,
    "funnel": [
-    49,
-    59,
+    51,
+    74,
     96,
-    225,
-    307,
-    142,
-    300,
-    464,
-    273,
-    177,
-    1408
+    245,
+    371,
+    169,
+    377,
+    587,
+    330,
+    382,
+    1854
    ]
   },
   {
@@ -2664,20 +2659,20 @@
    "name": "Fabrication",
    "channel": "contractors",
    "engineers": 1,
-   "owned": 258,
-   "ownedValue": 100049.7,
+   "owned": 268,
+   "ownedValue": 54779.3,
    "funnel": [
-    60,
-    63,
-    104,
-    218,
-    291,
-    132,
-    321,
-    432,
-    235,
-    147,
-    1497
+    61,
+    68,
+    90,
+    236,
+    328,
+    157,
+    364,
+    539,
+    322,
+    383,
+    1988
    ]
   },
   {
@@ -2685,20 +2680,20 @@
    "name": "Trading",
    "channel": "contractors",
    "engineers": 1,
-   "owned": 494,
-   "ownedValue": 30497,
+   "owned": 1008,
+   "ownedValue": 57191.7,
    "funnel": [
-    81,
-    141,
-    185,
-    243,
-    326,
-    181,
-    294,
-    512,
-    260,
-    146,
-    1131
+    152,
+    222,
+    252,
+    328,
+    422,
+    261,
+    421,
+    644,
+    277,
+    354,
+    1203
    ]
   },
   {
@@ -2706,20 +2701,20 @@
    "name": "Services",
    "channel": "contractors",
    "engineers": 2,
-   "owned": 318,
-   "ownedValue": 285763.4,
+   "owned": 267,
+   "ownedValue": 38349.6,
    "funnel": [
-    77,
-    106,
-    154,
-    214,
-    321,
-    192,
-    322,
-    552,
-    233,
-    157,
-    1172
+    91,
+    112,
+    174,
+    313,
+    441,
+    191,
+    361,
+    609,
+    315,
+    383,
+    1546
    ]
   }
  ],
@@ -2728,136 +2723,542 @@
    "slug": "rohan-pillai",
    "name": "Rohan Pillai",
    "vertical": "electrical-distribution",
-   "owned": 52,
-   "ownedValue": 16005.5,
+   "owned": 132,
+   "ownedValue": 7564.6,
    "funnel": [
+    3,
+    23,
+    10,
+    14,
+    10,
+    20,
+    17,
+    18,
+    7,
     1,
-    5,
-    6,
-    8,
-    5,
-    4,
-    8,
-    9,
-    2,
-    1,
-    3
+    9
    ],
-   "workload": 109,
+   "workload": 290,
    "capacity": 320,
-   "loadPct": 34.1,
+   "loadPct": 90.6,
    "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-01359",
-     "name": "Jilhotrou Residences",
-     "value": 5524.7,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-00586",
-     "name": "Houpredir Corridor",
-     "value": 3047.1,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-01039",
-     "name": "Qokrouth Apartments",
-     "value": 1327.4,
+     "ref": "PRJAE0400183",
+     "name": "ADNOC Refining - Naphtha Upgradation",
+     "value": 3200,
      "stage": "Tender"
     },
     {
-     "ref": "HV-26-02588",
-     "name": "Vuszoutu Gardens",
-     "value": 1083.9,
+     "ref": "PRJAE22214989",
+     "name": "Dubai Police Academy - Al Ruwayyah 1",
+     "value": 528.1,
      "stage": "Under Construction"
     },
     {
-     "ref": "HV-26-00372",
-     "name": "Vlailoum Residences",
-     "value": 958.2,
-     "stage": "Completed (1 year)"
+     "ref": "PRJAE25274087",
+     "name": "Flora Isle Beachfront Living - Dubai Islands",
+     "value": 284.6,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE24268511",
+     "name": "Mamsha Garden - Mamsha Al Saadiyat",
+     "value": 200,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE23248372",
+     "name": "Clearpoint Rashid Yachts & Marina - Mina Rashid",
+     "value": 190,
+     "stage": "Under Construction"
     }
    ],
-   "consultants": 70,
-   "contractors": 60
+   "consultants": 110,
+   "contractors": 105
   },
   {
    "slug": "farah-haddad",
    "name": "Farah Haddad",
    "vertical": "electrical-distribution",
-   "owned": 64,
-   "ownedValue": 16089.1,
+   "owned": 167,
+   "ownedValue": 7563.3,
    "funnel": [
-    3,
-    4,
     8,
-    8,
+    13,
+    11,
+    14,
+    20,
+    15,
+    26,
+    24,
     6,
-    5,
-    10,
-    16,
-    1,
-    1,
-    2
+    6,
+    24
    ],
-   "workload": 128,
+   "workload": 305,
    "capacity": 320,
-   "loadPct": 40,
+   "loadPct": 95.3,
    "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-00640",
-     "name": "Razam Residences",
-     "value": 6391.4,
+     "ref": "PRJAE24269258",
+     "name": "Maysan - Phase 1 - Reem Island",
+     "value": 500,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE1390684",
+     "name": "The Address Residence Sky View - Downtown Dubai",
+     "value": 489,
+     "stage": "Completed (above 3 years)"
+    },
+    {
+     "ref": "PRJAE22225043",
+     "name": "One Canal - Dubai Water Canal",
+     "value": 450,
      "stage": "Under Construction"
     },
     {
-     "ref": "HV-26-00286",
-     "name": "Haijin Road",
-     "value": 878.9,
-     "stage": "Under Construction"
+     "ref": "PRJAE1056070",
+     "name": "Uniestate Living Bay - Al Marjan Island",
+     "value": 300,
+     "stage": "Completed (above 3 years)"
     },
     {
-     "ref": "HV-26-02117",
-     "name": "Zeelkith Tower",
-     "value": 768,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-02312",
-     "name": "Huruth Training Centre Phase 2",
-     "value": 759.5,
-     "stage": "Completed (3 years)"
-    },
-    {
-     "ref": "HV-26-02629",
-     "name": "Matoun Court",
-     "value": 724.3,
+     "ref": "PRJAE23252287",
+     "name": "Hillside Residences - Wasl Gate",
+     "value": 300,
      "stage": "Tender"
     }
    ],
-   "consultants": 75,
-   "contractors": 71
+   "consultants": 131,
+   "contractors": 138
   },
   {
    "slug": "dinesh-iyer",
    "name": "Dinesh Iyer",
    "vertical": "electrical-distribution",
-   "owned": 86,
-   "ownedValue": 19252.6,
+   "owned": 211,
+   "ownedValue": 7558.2,
+   "funnel": [
+    11,
+    27,
+    18,
+    24,
+    16,
+    21,
+    32,
+    28,
+    7,
+    8,
+    19
+   ],
+   "workload": 439,
+   "capacity": 320,
+   "loadPct": 137.2,
+   "overloaded": true,
+   "top": [
+    {
+     "ref": "PRJAE1498435",
+     "name": "Dubai Design District - Phase 2 - Business Bay",
+     "value": 750,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "PRJAE0727345",
+     "name": "Sky Hills Residences 4 - Dubai Science Park",
+     "value": 325,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "PRJAE0944017",
+     "name": "Rosewood Hotel & Residence - Sowwah Square",
+     "value": 270,
+     "stage": "Completed (above 3 years)"
+    },
+    {
+     "ref": "PRJAE14101565",
+     "name": "Extension Of Sheikh Zayed Bin Sultan Street - Al Reem Island",
+     "value": 250,
+     "stage": "Completed (3 years)"
+    },
+    {
+     "ref": "PRJAE24270611",
+     "name": "SAAS Hills - Dubai Science Park",
+     "value": 250,
+     "stage": "Tender"
+    }
+   ],
+   "consultants": 169,
+   "contractors": 179
+  },
+  {
+   "slug": "marwan-saleh",
+   "name": "Marwan Saleh",
+   "vertical": "electrical-distribution",
+   "owned": 155,
+   "ownedValue": 7569.1,
    "funnel": [
     4,
-    5,
+    19,
+    18,
+    15,
     12,
+    19,
+    23,
+    17,
+    9,
+    4,
+    15
+   ],
+   "workload": 331,
+   "capacity": 320,
+   "loadPct": 103.4,
+   "overloaded": true,
+   "top": [
+    {
+     "ref": "PRJAE1393610",
+     "name": "Uptown Tower - Burj 2020 District",
+     "value": 1200,
+     "stage": "Completed (3 years)"
+    },
+    {
+     "ref": "PRJAE0835488",
+     "name": "One Za'abeel Tower - Dubai World Trade Center",
+     "value": 817,
+     "stage": "Completed (3 years)"
+    },
+    {
+     "ref": "PRJAE24270150",
+     "name": "Monaco Mansions - Azizi Venice",
+     "value": 545,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "PRJAE0726288",
+     "name": "W Hotel & Alef Residence - The Palm Jumeirah",
+     "value": 272.2,
+     "stage": "Completed (above 3 years)"
+    },
+    {
+     "ref": "PRJAE18144499",
+     "name": "Azizi Riviera - Phase 3 - Meydan One",
+     "value": 272.2,
+     "stage": "Completed (3 years)"
+    }
+   ],
+   "consultants": 118,
+   "contractors": 139
+  },
+  {
+   "slug": "kavya-nair",
+   "name": "Kavya Nair",
+   "vertical": "electrical-distribution",
+   "owned": 166,
+   "ownedValue": 7565.2,
+   "funnel": [
+    14,
     10,
+    24,
+    20,
+    14,
+    15,
+    23,
+    17,
+    9,
+    4,
+    16
+   ],
+   "workload": 336,
+   "capacity": 320,
+   "loadPct": 105,
+   "overloaded": true,
+   "top": [
+    {
+     "ref": "PRJAE24267746",
+     "name": "Olfah Residences by Alef Group",
+     "value": 681,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE1279076",
+     "name": "Fashion Hotel - Habtoor Palace - Phase 2",
+     "value": 545,
+     "stage": "Completed (above 3 years)"
+    },
+    {
+     "ref": "PRJAE22223096",
+     "name": "Cavalli Couture - Al Wasl",
+     "value": 420,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "PRJAE0942762",
+     "name": "Sofitel Hotel & Residential Towers - Downtown Dubai",
+     "value": 381.2,
+     "stage": "Completed (above 3 years)"
+    },
+    {
+     "ref": "PRJAE1499821",
+     "name": "Dubai Digital Park - Dubai Silicon Oasis (DSO)",
+     "value": 354,
+     "stage": "Completed (above 3 years)"
+    }
+   ],
+   "consultants": 127,
+   "contractors": 132
+  },
+  {
+   "slug": "joseph-villanueva",
+   "name": "Joseph Villanueva",
+   "vertical": "cooling",
+   "owned": 50,
+   "ownedValue": 33733.7,
+   "funnel": [
+    0,
+    2,
+    6,
+    2,
+    3,
+    8,
+    6,
+    8,
+    0,
+    9,
+    6
+   ],
+   "workload": 95,
+   "capacity": 320,
+   "loadPct": 29.7,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "PRJAE24258455",
+     "name": "The Heights Country Club & Wellness - Al Yalayis",
+     "value": 14976.5,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE21206507",
+     "name": "Hartland Sanctuary - MBR City",
+     "value": 4000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE25279760",
+     "name": "Sobha Central",
+     "value": 3600,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE25283399",
+     "name": "Masaar 3 - Rowdat District",
+     "value": 2300,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE0719176",
+     "name": "Sharjah Sports City - Sharjah Central Route",
+     "value": 2000,
+     "stage": "Design"
+    }
+   ],
+   "consultants": 15,
+   "contractors": 2
+  },
+  {
+   "slug": "lina-khoury",
+   "name": "Lina Khoury",
+   "vertical": "cooling",
+   "owned": 146,
+   "ownedValue": 33681.3,
+   "funnel": [
+    2,
+    3,
     11,
-    12,
-    6,
-    12,
-    6,
+    19,
+    11,
+    14,
+    21,
+    17,
+    11,
+    19,
+    18
+   ],
+   "workload": 271,
+   "capacity": 320,
+   "loadPct": 84.7,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "PRJAE22220206",
+     "name": "MOON Dubai",
+     "value": 5000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE25277315",
+     "name": "17,080 Affordable Housing Units - Dubai",
+     "value": 2628,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE25279832",
+     "name": "Central Park - The Next Chapter",
+     "value": 2500,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE24265134",
+     "name": "Umm Shaif Long-Term Development Plan 2.1 & 2.2",
+     "value": 2000,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE25279632",
+     "name": "Disneyland Resort - Yas Island",
+     "value": 2000,
+     "stage": "Design"
+    }
+   ],
+   "consultants": 50,
+   "contractors": 0
+  },
+  {
+   "slug": "arjun-sethi",
+   "name": "Arjun Sethi",
+   "vertical": "cooling",
+   "owned": 40,
+   "ownedValue": 39863.5,
+   "funnel": [
+    0,
     1,
+    7,
+    7,
+    3,
+    4,
+    3,
+    5,
+    1,
+    2,
     7
+   ],
+   "workload": 81,
+   "capacity": 320,
+   "loadPct": 25.3,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "PRJAE25278626",
+     "name": "Azizi Milan",
+     "value": 20419.3,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE24258457",
+     "name": "Grand Polo Club & Resort - Dubai Investment Park 2",
+     "value": 11164.3,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE1389898",
+     "name": "Dubai Metro (LRT) - Phase 4 (Gold Line)",
+     "value": 5500,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE23248758",
+     "name": "Umm Al-Dalkh Offshore Oil Field Development",
+     "value": 300,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE23240466",
+     "name": "Le Méridien Resort & Spa- Marjan Island",
+     "value": 232,
+     "stage": "Design"
+    }
+   ],
+   "consultants": 16,
+   "contractors": 4
+  },
+  {
+   "slug": "bassem-farouk",
+   "name": "Bassem Farouk",
+   "vertical": "mechanical-systems",
+   "owned": 102,
+   "ownedValue": 45263.1,
+   "funnel": [
+    0,
+    6,
+    11,
+    13,
+    6,
+    8,
+    10,
+    12,
+    5,
+    18,
+    13
+   ],
+   "workload": 192,
+   "capacity": 320,
+   "loadPct": 60,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "PRJAE25279628",
+     "name": "Disneyland - Yas Island",
+     "value": 10000,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE1061272",
+     "name": "Bab Onshore Gas Cap Development",
+     "value": 8200,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE19171557",
+     "name": "Non-Ferrous Metals Processing Facilities (Phase 3) - Khalifa Industrial Zone (KIZAD)",
+     "value": 5000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE23233622",
+     "name": "Brooge Energy - Green Hydrogen & Ammonia Plant (Phase 1) - Khalifa Industrial Zone Abu Dhabi (KIZAD)",
+     "value": 1500,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE25275681",
+     "name": "Corinthia Dubai - Sheikh Zayed Road",
+     "value": 1500,
+     "stage": "Design"
+    }
+   ],
+   "consultants": 23,
+   "contractors": 1
+  },
+  {
+   "slug": "sneha-menon",
+   "name": "Sneha Menon",
+   "vertical": "mechanical-systems",
+   "owned": 86,
+   "ownedValue": 58242.9,
+   "funnel": [
+    1,
+    3,
+    11,
+    4,
+    3,
+    14,
+    9,
+    9,
+    5,
+    14,
+    13
    ],
    "workload": 165,
    "capacity": 320,
@@ -2865,231 +3266,347 @@
    "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-03372",
-     "name": "Boutraam Residences",
-     "value": 3915.9,
-     "stage": "Completed (1 year)"
-    },
-    {
-     "ref": "HV-26-01854",
-     "name": "Tromnen Heights Phase 4",
-     "value": 2868.3,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-00610",
-     "name": "Laaren Residences",
-     "value": 1537.2,
-     "stage": "Tender"
-    },
-    {
-     "ref": "HV-26-00012",
-     "name": "Kraibeefou Masterplan",
-     "value": 1278.3,
-     "stage": "Completed (3 years)"
-    },
-    {
-     "ref": "HV-26-01229",
-     "name": "Reemaim Towers",
-     "value": 818.3,
-     "stage": "Tender"
-    }
-   ],
-   "consultants": 95,
-   "contractors": 102
-  },
-  {
-   "slug": "marwan-saleh",
-   "name": "Marwan Saleh",
-   "vertical": "electrical-distribution",
-   "owned": 91,
-   "ownedValue": 16232.2,
-   "funnel": [
-    5,
-    8,
-    14,
-    8,
-    7,
-    10,
-    8,
-    13,
-    7,
-    2,
-    9
-   ],
-   "workload": 180,
-   "capacity": 320,
-   "loadPct": 56.3,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-00026",
-     "name": "Preehainun City",
-     "value": 2038.6,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-01961",
-     "name": "Kidneel Research Centre",
-     "value": 1549.9,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-00600",
-     "name": "Bruvli Tower",
-     "value": 1498.5,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-03202",
-     "name": "Jeesohu Gardens",
-     "value": 1393.4,
-     "stage": "Completed (3 months)"
-    },
-    {
-     "ref": "HV-26-01702",
-     "name": "Raasvletir Residences",
-     "value": 923.2,
-     "stage": "Tender"
-    }
-   ],
-   "consultants": 90,
-   "contractors": 112
-  },
-  {
-   "slug": "kavya-nair",
-   "name": "Kavya Nair",
-   "vertical": "electrical-distribution",
-   "owned": 75,
-   "ownedValue": 16102.1,
-   "funnel": [
-    3,
-    5,
-    8,
-    10,
-    5,
-    8,
-    8,
-    12,
-    8,
-    1,
-    7
-   ],
-   "workload": 148,
-   "capacity": 320,
-   "loadPct": 46.3,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-00437",
-     "name": "Privid Court",
-     "value": 3659.1,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-02077",
-     "name": "Tribrair Residences",
-     "value": 2071.8,
-     "stage": "Tender"
-    },
-    {
-     "ref": "HV-26-03308",
-     "name": "Fuvlouma Gardens",
-     "value": 994.2,
-     "stage": "Completed (3 years)"
-    },
-    {
-     "ref": "HV-26-01692",
-     "name": "Naithain Gardens",
-     "value": 654.8,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-01255",
-     "name": "Balshou Tower",
-     "value": 588.9,
-     "stage": "Completed (3 years)"
-    }
-   ],
-   "consultants": 77,
-   "contractors": 79
-  },
-  {
-   "slug": "joseph-villanueva",
-   "name": "Joseph Villanueva",
-   "vertical": "cooling",
-   "owned": 42,
-   "ownedValue": 27075.5,
-   "funnel": [
-    0,
-    0,
-    8,
-    3,
-    2,
-    6,
-    4,
-    11,
-    1,
-    4,
-    3
-   ],
-   "workload": 82,
-   "capacity": 320,
-   "loadPct": 25.6,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-00205",
-     "name": "Fuqai Waterfront Phase 4",
-     "value": 9036.8,
+     "ref": "PRJAE25712046",
+     "name": "Full Scale Small City by Mira Developments",
+     "value": 15000,
      "stage": "Concept"
     },
     {
-     "ref": "HV-26-02033",
-     "name": "Thuqath Cultural Centre Phase 2",
-     "value": 6666.5,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-03077",
-     "name": "Trukuhee City",
-     "value": 4904.1,
+     "ref": "PRJAE19171554",
+     "name": "Khalifa Industrial Zone Expansion",
+     "value": 10000,
      "stage": "Concept"
     },
     {
-     "ref": "HV-26-02698",
-     "name": "Nodris Data Campus",
-     "value": 2115.4,
+     "ref": "PRJAE25280394",
+     "name": "Binghatti Master-Planned Community",
+     "value": 6800,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE25278423",
+     "name": "Habshan Long-Term Gas Processing Facilities",
+     "value": 5000,
      "stage": "Design"
     },
     {
-     "ref": "HV-26-02571",
-     "name": "Bosusaish Cold Chain Facility Phase 4",
-     "value": 983.7,
+     "ref": "PRJAE25279729",
+     "name": "Jebel Ali Racecourse Development",
+     "value": 5000,
      "stage": "Design"
     }
    ],
-   "consultants": 50,
-   "contractors": 35
+   "consultants": 24,
+   "contractors": 0
   },
   {
-   "slug": "lina-khoury",
-   "name": "Lina Khoury",
-   "vertical": "cooling",
-   "owned": 108,
-   "ownedValue": 26549.3,
+   "slug": "tarek-hamdan",
+   "name": "Tarek Hamdan",
+   "vertical": "mechanical-systems",
+   "owned": 49,
+   "ownedValue": 70426.9,
    "funnel": [
     0,
-    6,
-    16,
-    16,
+    1,
     9,
     6,
+    3,
+    9,
+    3,
+    3,
+    2,
+    8,
+    5
+   ],
+   "workload": 102,
+   "capacity": 320,
+   "loadPct": 31.9,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "PRJAE25284478",
+     "name": "Emaar Hills",
+     "value": 27200,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE24260467",
+     "name": "MOE - Second Nuclear Power Plant",
+     "value": 24000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE19171555",
+     "name": "Alumina Refinery (Phase 1) - Khalifa Industrial Zone (KIZAD)",
+     "value": 3000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE14102078",
+     "name": "Mamzar Beachfront Development",
+     "value": 2720,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE19171556",
+     "name": "Red Mud Research Center & Recycling Plant (Phase 2) - Khalifa Industrial Zone (KIZAD)",
+     "value": 2000,
+     "stage": "Concept"
+    }
+   ],
+   "consultants": 6,
+   "contractors": 0
+  },
+  {
+   "slug": "omar-nasser",
+   "name": "Omar Nasser",
+   "vertical": "pumps-and-water",
+   "owned": 354,
+   "ownedValue": 60919.9,
+   "funnel": [
     10,
+    30,
+    34,
+    49,
+    36,
+    35,
+    50,
+    50,
     15,
-    6,
     13,
-    11
+    32
+   ],
+   "workload": 714,
+   "capacity": 320,
+   "loadPct": 223.1,
+   "overloaded": true,
+   "top": [
+    {
+     "ref": "PRJAE24257495",
+     "name": "Jebel Ali Sewerage Links (Package Links) -Phase 2 - Dubai Strategic Sewerage Tunnels",
+     "value": 9000,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE25279631",
+     "name": "Disneyland Theme Park - Yas Island",
+     "value": 5000,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE24271590",
+     "name": "Mirfa to Liwa Water Transmission System",
+     "value": 1225.1,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE25276602",
+     "name": "Trio Isle Interiors by Missoni - Al Marjan Island",
+     "value": 1200,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE1392129",
+     "name": "FIVE Palm Jumeirah Hotel",
+     "value": 1170,
+     "stage": "Completed (above 3 years)"
+    }
+   ],
+   "consultants": 198,
+   "contractors": 224
+  },
+  {
+   "slug": "meera-dsouza",
+   "name": "Meera Dsouza",
+   "vertical": "pumps-and-water",
+   "owned": 269,
+   "ownedValue": 61249.1,
+   "funnel": [
+    11,
+    22,
+    27,
+    27,
+    25,
+    24,
+    34,
+    39,
+    16,
+    16,
+    28
+   ],
+   "workload": 512,
+   "capacity": 320,
+   "loadPct": 160,
+   "overloaded": true,
+   "top": [
+    {
+     "ref": "PRJAE17136651",
+     "name": "Dubai Strategic Sewerage Tunnels",
+     "value": 22000,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE24271872",
+     "name": "Dubai Walk",
+     "value": 3500,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE0511351",
+     "name": "Gate Towers (Gate District) - Shams Abu Dhabi",
+     "value": 1700,
+     "stage": "Completed (above 3 years)"
+    },
+    {
+     "ref": "PRJAE25276376",
+     "name": "Infrastructure Enhancements Works for Dubai Holding Developments",
+     "value": 1633.7,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE1286287",
+     "name": "Burj Azizi - Sheikh Zayed Road",
+     "value": 1500,
+     "stage": "Under Construction"
+    }
+   ],
+   "consultants": 159,
+   "contractors": 143
+  },
+  {
+   "slug": "hana-qureshi",
+   "name": "Hana Qureshi",
+   "vertical": "vertical-transport",
+   "owned": 73,
+   "ownedValue": 18027,
+   "funnel": [
+    0,
+    1,
+    7,
+    9,
+    2,
+    6,
+    8,
+    12,
+    2,
+    18,
+    8
+   ],
+   "workload": 133,
+   "capacity": 320,
+   "loadPct": 41.6,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "PRJAE25279732",
+     "name": "Mixed-Use Community - Jebel Ali Racecourse Development",
+     "value": 2000,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE24264785",
+     "name": "Mira Coral Bay - Al Mairid - Al Marjan Island",
+     "value": 1500,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE22213287",
+     "name": "Neutron Therapy Hospital",
+     "value": 1200,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE24260668",
+     "name": "Sora Beach Residences - Al Marjan Island",
+     "value": 1100,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE24269749",
+     "name": "The Cliffs - Dubai Water Canal",
+     "value": 1100,
+     "stage": "Design"
+    }
+   ],
+   "consultants": 21,
+   "contractors": 1
+  },
+  {
+   "slug": "yusuf-rahman",
+   "name": "Yusuf Rahman",
+   "vertical": "vertical-transport",
+   "owned": 48,
+   "ownedValue": 17964,
+   "funnel": [
+    1,
+    1,
+    3,
+    5,
+    7,
+    3,
+    6,
+    3,
+    4,
+    8,
+    7
+   ],
+   "workload": 77,
+   "capacity": 320,
+   "loadPct": 24.1,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "PRJAE23236551",
+     "name": "Sustainable Smart City - Ghantoot",
+     "value": 7000,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE25279212",
+     "name": "Downtown UAQ",
+     "value": 3000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE19180361",
+     "name": "MAG City - Phase 2 - MAG Eye",
+     "value": 816,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE25282853",
+     "name": "Cheval Blanc Maison - Naia Island",
+     "value": 600,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE25282192",
+     "name": "The S Tower - Sobha Hartland II",
+     "value": 545,
+     "stage": "Design"
+    }
+   ],
+   "consultants": 16,
+   "contractors": 2
+  },
+  {
+   "slug": "divya-bhatt",
+   "name": "Divya Bhatt",
+   "vertical": "vertical-transport",
+   "owned": 114,
+   "ownedValue": 18162.1,
+   "funnel": [
+    0,
+    6,
+    10,
+    6,
+    5,
+    11,
+    16,
+    16,
+    4,
+    24,
+    16
    ],
    "workload": 207,
    "capacity": 320,
@@ -3097,1056 +3614,534 @@
    "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-02131",
-     "name": "Vloukaibar Waterfront",
-     "value": 10642.9,
+     "ref": "PRJAE24263105",
+     "name": "Dubai Car Market",
+     "value": 2000,
      "stage": "Design"
     },
     {
-     "ref": "HV-26-00461",
-     "name": "Lufeed District",
-     "value": 1380.3,
+     "ref": "PRJAE25282528",
+     "name": "Four Seasons Private Residences - Saadiyat Beach",
+     "value": 2000,
      "stage": "Design"
     },
     {
-     "ref": "HV-26-03469",
-     "name": "Keevlaajaa Offshore Platform",
-     "value": 1210.6,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-03484",
-     "name": "Brunikra Hotel and Residences",
-     "value": 1087.9,
+     "ref": "PRJAE24255318",
+     "name": "3004 Housing Units",
+     "value": 1500,
      "stage": "Concept"
     },
     {
-     "ref": "HV-26-00757",
-     "name": "Foudo Institute",
-     "value": 739.8,
-     "stage": "Design"
-    }
-   ],
-   "consultants": 107,
-   "contractors": 87
-  },
-  {
-   "slug": "arjun-sethi",
-   "name": "Arjun Sethi",
-   "vertical": "cooling",
-   "owned": 76,
-   "ownedValue": 26955.3,
-   "funnel": [
-    1,
-    1,
-    12,
-    7,
-    6,
-    9,
-    13,
-    9,
-    5,
-    6,
-    7
-   ],
-   "workload": 154,
-   "capacity": 320,
-   "loadPct": 48.1,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-01653",
-     "name": "Praamku Heights",
-     "value": 3909.2,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-03273",
-     "name": "Bofaas Masterplan",
-     "value": 3848.1,
+     "ref": "PRJAE24266366",
+     "name": "The National University of Dubai",
+     "value": 1230,
      "stage": "Concept"
     },
     {
-     "ref": "HV-26-02739",
-     "name": "Naadeebrun City",
-     "value": 3257.6,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-02612",
-     "name": "Qaatodoun Specialty Hospital",
-     "value": 1820.6,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-02285",
-     "name": "Vladroush Beach Resort",
-     "value": 1796.4,
+     "ref": "PRJAE25281497",
+     "name": "Hayat by Dubai South",
+     "value": 1200,
      "stage": "Concept"
     }
    ],
-   "consultants": 77,
-   "contractors": 55
-  },
-  {
-   "slug": "bassem-farouk",
-   "name": "Bassem Farouk",
-   "vertical": "mechanical-systems",
-   "owned": 56,
-   "ownedValue": 27216.6,
-   "funnel": [
-    0,
-    3,
-    7,
-    9,
-    4,
-    4,
-    9,
-    6,
-    3,
-    2,
-    9
-   ],
-   "workload": 116,
-   "capacity": 320,
-   "loadPct": 36.3,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-00786",
-     "name": "Rarotem Masterplan",
-     "value": 11323.4,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-02692",
-     "name": "Mesjostrai District",
-     "value": 3293.8,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-01369",
-     "name": "Vlila Community",
-     "value": 1825.9,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-02186",
-     "name": "Zukijis Island Resort",
-     "value": 1407,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-02043",
-     "name": "Deeded Shopping Centre",
-     "value": 1048.2,
-     "stage": "Design"
-    }
-   ],
-   "consultants": 55,
-   "contractors": 43
-  },
-  {
-   "slug": "sneha-menon",
-   "name": "Sneha Menon",
-   "vertical": "mechanical-systems",
-   "owned": 76,
-   "ownedValue": 27620.9,
-   "funnel": [
-    0,
-    4,
-    6,
-    11,
-    4,
-    9,
-    7,
-    9,
-    7,
-    4,
-    15
-   ],
-   "workload": 146,
-   "capacity": 320,
-   "loadPct": 45.6,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-01281",
-     "name": "Bounaa Plant",
-     "value": 4081.6,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-00943",
-     "name": "Vubreevos Green Fuels Plant",
-     "value": 3896.6,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-00323",
-     "name": "Prefus Green Fuels Plant",
-     "value": 3370.2,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-02633",
-     "name": "Zenkree District",
-     "value": 3020.9,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-00792",
-     "name": "Baarith Works",
-     "value": 2004.2,
-     "stage": "Design"
-    }
-   ],
-   "consultants": 87,
-   "contractors": 58
-  },
-  {
-   "slug": "tarek-hamdan",
-   "name": "Tarek Hamdan",
-   "vertical": "mechanical-systems",
-   "owned": 94,
-   "ownedValue": 27398.9,
-   "funnel": [
-    0,
-    5,
-    15,
-    10,
-    11,
-    6,
-    10,
-    12,
-    5,
-    6,
-    14
-   ],
-   "workload": 175,
-   "capacity": 320,
-   "loadPct": 54.7,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-01924",
-     "name": "Kritraim Island Resort",
-     "value": 3647.4,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-00807",
-     "name": "Neevlaim Processing Complex Phase 3",
-     "value": 3238.3,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-00647",
-     "name": "Qutis Tower",
-     "value": 1877.3,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-01306",
-     "name": "Sukeebruth Offshore Platform",
-     "value": 1730.3,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-02491",
-     "name": "Dupraitren Waterfront",
-     "value": 1644.9,
-     "stage": "Design"
-    }
-   ],
-   "consultants": 93,
-   "contractors": 76
-  },
-  {
-   "slug": "omar-nasser",
-   "name": "Omar Nasser",
-   "vertical": "pumps-and-water",
-   "owned": 162,
-   "ownedValue": 74057.1,
-   "funnel": [
-    7,
-    11,
-    19,
-    22,
-    14,
-    13,
-    19,
-    23,
-    12,
-    4,
-    18
-   ],
-   "workload": 316,
-   "capacity": 320,
-   "loadPct": 98.8,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-00020",
-     "name": "Shejeevan Golf Club",
-     "value": 7264.6,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-03466",
-     "name": "Qouson Waterway",
-     "value": 6892,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-03070",
-     "name": "Brines Port",
-     "value": 5712.8,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-01923",
-     "name": "Joukeenoun Container Terminal",
-     "value": 3599.5,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-01566",
-     "name": "Kropror Theme Park",
-     "value": 2903.1,
-     "stage": "Under Construction"
-    }
-   ],
-   "consultants": 138,
-   "contractors": 161
-  },
-  {
-   "slug": "meera-dsouza",
-   "name": "Meera Dsouza",
-   "vertical": "pumps-and-water",
-   "owned": 207,
-   "ownedValue": 70191.3,
-   "funnel": [
-    7,
-    21,
-    22,
-    19,
-    15,
-    23,
-    28,
-    37,
-    15,
-    8,
-    12
-   ],
-   "workload": 418,
-   "capacity": 320,
-   "loadPct": 130.6,
-   "overloaded": true,
-   "top": [
-    {
-     "ref": "HV-26-01753",
-     "name": "Deejodo Theme Park",
-     "value": 5338.5,
-     "stage": "Completed (above 3 years)"
-    },
-    {
-     "ref": "HV-26-01227",
-     "name": "Zaitrismod Waterway Phase 3",
-     "value": 5218.1,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-03204",
-     "name": "Dutrou Tower",
-     "value": 3502.6,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-01540",
-     "name": "Jusaameeth Towers",
-     "value": 3104.8,
-     "stage": "Tender"
-    },
-    {
-     "ref": "HV-26-00963",
-     "name": "Leri Highway",
-     "value": 2909.4,
-     "stage": "Design"
-    }
-   ],
-   "consultants": 178,
-   "contractors": 190
-  },
-  {
-   "slug": "hana-qureshi",
-   "name": "Hana Qureshi",
-   "vertical": "vertical-transport",
-   "owned": 89,
-   "ownedValue": 24927,
-   "funnel": [
-    0,
-    3,
-    14,
-    6,
-    4,
-    10,
-    7,
-    13,
-    8,
-    8,
-    16
-   ],
-   "workload": 165,
-   "capacity": 320,
-   "loadPct": 51.6,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-01340",
-     "name": "Fopre Villas Phase 3",
-     "value": 5264.7,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-02363",
-     "name": "Kruntrath District",
-     "value": 1920.8,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-03205",
-     "name": "Kraishin City",
-     "value": 1837.5,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-00359",
-     "name": "Dreeziner Stadium",
-     "value": 1815.7,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-02665",
-     "name": "Dothbraam Suites",
-     "value": 1517.7,
-     "stage": "Concept"
-    }
-   ],
-   "consultants": 106,
-   "contractors": 76
-  },
-  {
-   "slug": "yusuf-rahman",
-   "name": "Yusuf Rahman",
-   "vertical": "vertical-transport",
-   "owned": 49,
-   "ownedValue": 25096,
-   "funnel": [
-    0,
-    1,
-    7,
-    5,
-    2,
-    4,
-    6,
-    10,
-    3,
-    4,
-    7
-   ],
-   "workload": 93,
-   "capacity": 320,
-   "loadPct": 29.1,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-01228",
-     "name": "Vlabolbeem Grand Hotel",
-     "value": 5179.5,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-01844",
-     "name": "Baimehu District",
-     "value": 4674.9,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-00257",
-     "name": "Thouvlee Towers",
-     "value": 2928.3,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-02401",
-     "name": "Jeehevaith Community",
-     "value": 2444.7,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-01032",
-     "name": "Jeebrouqaa Residences",
-     "value": 1145.4,
-     "stage": "Concept"
-    }
-   ],
-   "consultants": 56,
-   "contractors": 37
-  },
-  {
-   "slug": "divya-bhatt",
-   "name": "Divya Bhatt",
-   "vertical": "vertical-transport",
-   "owned": 88,
-   "ownedValue": 24892.5,
-   "funnel": [
-    1,
-    2,
-    10,
-    10,
-    9,
-    7,
-    8,
-    16,
-    6,
-    7,
-    12
-   ],
-   "workload": 153,
-   "capacity": 320,
-   "loadPct": 47.8,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "HV-26-02832",
-     "name": "Bronour Compound",
-     "value": 4099.7,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-01980",
-     "name": "Praason Hospital",
-     "value": 2498,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-00773",
-     "name": "Fedree School",
-     "value": 2479.5,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-02354",
-     "name": "Trorain Waterfront Phase 2",
-     "value": 1527.5,
-     "stage": "Concept"
-    },
-    {
-     "ref": "HV-26-02561",
-     "name": "Foutazain Apartments Phase 3",
-     "value": 1297.6,
-     "stage": "Concept"
-    }
-   ],
-   "consultants": 98,
-   "contractors": 69
+   "consultants": 46,
+   "contractors": 4
   },
   {
    "slug": "karim-mansour",
    "name": "Karim Mansour",
    "vertical": "metering",
-   "owned": 110,
-   "ownedValue": 40586.8,
+   "owned": 119,
+   "ownedValue": 29647.5,
    "funnel": [
-    2,
-    2,
-    21,
+    1,
+    3,
+    13,
     10,
-    7,
-    11,
-    18,
-    15,
-    8,
     6,
+    13,
+    15,
+    16,
+    5,
+    27,
     10
    ],
-   "workload": 227,
+   "workload": 221,
    "capacity": 320,
-   "loadPct": 70.9,
+   "loadPct": 69.1,
    "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-01787",
-     "name": "Libreel Waterfront",
-     "value": 6466,
+     "ref": "PRJAE25280357",
+     "name": "Keturah Ardh",
+     "value": 6000,
      "stage": "Concept"
     },
     {
-     "ref": "HV-26-01465",
-     "name": "Vlaakron City",
-     "value": 4248.7,
+     "ref": "PRJAE24271578",
+     "name": "EDF - 5GW Pumped-Storage Hydropower Plant",
+     "value": 3300,
      "stage": "Concept"
     },
     {
-     "ref": "HV-26-01209",
-     "name": "Kubrouth Waterfront Phase 4",
-     "value": 3658.4,
+     "ref": "PRJAE25278875",
+     "name": "Ardee Al Marjan Island",
+     "value": 2500,
      "stage": "Design"
     },
     {
-     "ref": "HV-26-00865",
-     "name": "Laabos District",
-     "value": 2428.8,
-     "stage": "Design"
+     "ref": "PRJAE21204452",
+     "name": "MOEI - Water Desalination Plants - Abu Dhabi, Dubai & Umm Al Quwain",
+     "value": 2080,
+     "stage": "Concept"
     },
     {
-     "ref": "HV-26-02237",
-     "name": "Tofeerun Towers",
-     "value": 2397.5,
-     "stage": "Design"
+     "ref": "PRJAE1278804",
+     "name": "Shahama & Bahia Revitalization Districts",
+     "value": 2000,
+     "stage": "Concept"
     }
    ],
-   "consultants": 104,
-   "contractors": 99
+   "consultants": 25,
+   "contractors": 2
   },
   {
    "slug": "ananya-kapoor",
    "name": "Ananya Kapoor",
    "vertical": "metering",
-   "owned": 115,
-   "ownedValue": 40641.6,
+   "owned": 118,
+   "ownedValue": 30035.7,
    "funnel": [
     0,
-    6,
-    15,
+    0,
     11,
+    18,
     10,
-    15,
-    16,
-    16,
-    6,
-    8,
-    12
+    12,
+    11,
+    19,
+    10,
+    18,
+    9
    ],
-   "workload": 231,
+   "workload": 212,
    "capacity": 320,
-   "loadPct": 72.2,
+   "loadPct": 66.3,
    "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-01902",
-     "name": "Vahamin District Phase 2",
-     "value": 9836,
-     "stage": "Design"
-    },
-    {
-     "ref": "HV-26-01422",
-     "name": "Theedmi Galleria",
-     "value": 7542.8,
+     "ref": "PRJAE25279831",
+     "name": "The Next Chapter - Jumeirah Golf Estates",
+     "value": 6000,
      "stage": "Concept"
     },
     {
-     "ref": "HV-26-03164",
-     "name": "Reezeeth Solar Park",
-     "value": 2849.5,
+     "ref": "PRJAE25279223",
+     "name": "Bayn by ORA",
+     "value": 3000,
      "stage": "Design"
     },
     {
-     "ref": "HV-26-01799",
-     "name": "Faakruvaa Mall",
-     "value": 1808.3,
+     "ref": "PRJAE24260867",
+     "name": "Dunes Heights - Arabian Hills Estates",
+     "value": 2500,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE19177053",
+     "name": "FEWA/EWEC - Umm Al Quwain Gas-Fired Power Plant",
+     "value": 1500,
      "stage": "Concept"
     },
     {
-     "ref": "HV-26-00815",
-     "name": "Zaikree Masterplan",
-     "value": 1770.2,
-     "stage": "Design"
+     "ref": "PRJAE1287664",
+     "name": "Hospitality District - Mall of the World",
+     "value": 1000,
+     "stage": "Concept"
     }
    ],
-   "consultants": 120,
-   "contractors": 99
+   "consultants": 32,
+   "contractors": 0
   },
   {
    "slug": "nadia-zaki",
    "name": "Nadia Zaki",
    "vertical": "automation",
-   "owned": 50,
-   "ownedValue": 69753.1,
+   "owned": 162,
+   "ownedValue": 67047.1,
    "funnel": [
-    2,
-    3,
-    7,
-    5,
-    3,
-    7,
-    5,
-    7,
-    2,
-    2,
-    7
+    9,
+    10,
+    15,
+    17,
+    15,
+    15,
+    19,
+    20,
+    8,
+    15,
+    19
    ],
-   "workload": 101,
+   "workload": 299,
    "capacity": 320,
-   "loadPct": 31.6,
+   "loadPct": 93.4,
    "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-01308",
-     "name": "Trutoth Industrial Park",
-     "value": 41758.7,
-     "stage": "Under Construction"
+     "ref": "PRJAE17129415",
+     "name": "UAE Nuclear Power Plant - Phase 2",
+     "value": 12200,
+     "stage": "Completed (3 years)"
     },
     {
-     "ref": "HV-26-00712",
-     "name": "Thouvaith Industrial Park Phase 2",
-     "value": 5017.6,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-03144",
-     "name": "Taazouth Hospital",
-     "value": 4577,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-00573",
-     "name": "Zihaish Industrial Park",
-     "value": 4068.1,
+     "ref": "PRJAE24260451",
+     "name": "Passenger Terminal Building - Expansion of Al Maktoum International Airport - Phase 2",
+     "value": 10500,
      "stage": "Tender"
     },
     {
-     "ref": "HV-26-00395",
-     "name": "Veedaavlu Energy Recovery Facility",
-     "value": 3351.4,
-     "stage": "Under Construction"
+     "ref": "PRJAE25712347",
+     "name": "Bab Onshore Gas Cap Development (Package 1)",
+     "value": 6200,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE16127633",
+     "name": "Dubai - Abu Dhabi Hyperloop",
+     "value": 4800,
+     "stage": "Design"
+    },
+    {
+     "ref": "PRJAE25279690",
+     "name": "Underground Train System - Al Maktoum International Airport Expansion",
+     "value": 3000,
+     "stage": "Design"
     }
    ],
-   "consultants": 58,
-   "contractors": 50
+   "consultants": 76,
+   "contractors": 51
   },
   {
    "slug": "vikram-fernandes",
    "name": "Vikram Fernandes",
    "vertical": "automation",
-   "owned": 206,
-   "ownedValue": 71502.8,
+   "owned": 83,
+   "ownedValue": 66322.9,
    "funnel": [
-    11,
-    13,
-    21,
-    26,
-    20,
-    19,
-    31,
-    22,
-    18,
+    0,
     2,
-    23
+    11,
+    10,
+    7,
+    9,
+    13,
+    15,
+    7,
+    4,
+    5
    ],
-   "workload": 406,
+   "workload": 166,
    "capacity": 320,
-   "loadPct": 126.9,
-   "overloaded": true,
+   "loadPct": 51.9,
+   "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-00464",
-     "name": "Bajommaa Hydrogen Plant Phase 3",
-     "value": 9573.8,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-03057",
-     "name": "Sailthid Processing Complex",
-     "value": 3271.4,
+     "ref": "PRJAE23244755",
+     "name": "Upgrade of Das Island, Asab, Bu Hasa, Habshan & Habshan 5 Onshore Gas Facilities",
+     "value": 9900,
      "stage": "Tender"
     },
     {
-     "ref": "HV-26-03422",
-     "name": "Nishsilai Industrial City",
-     "value": 2951.4,
-     "stage": "Tender"
+     "ref": "PRJAE18149020",
+     "name": "Dubai - Riyadh Hyperloop",
+     "value": 9000,
+     "stage": "Concept"
     },
     {
-     "ref": "HV-26-02047",
-     "name": "Juzaa General Hospital",
-     "value": 2628.5,
-     "stage": "Under Construction"
+     "ref": "PRJAE16128586",
+     "name": "Abu Dhabi - Al Ain Hyperloop",
+     "value": 6000,
+     "stage": "Concept"
     },
     {
-     "ref": "HV-26-00783",
-     "name": "Virmothaim Data Centre",
-     "value": 2354.7,
-     "stage": "Completed (3 months)"
+     "ref": "PRJAE18149019",
+     "name": "Dubai - Fujairah Hyperloop",
+     "value": 6000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "PRJAE16121536",
+     "name": "Noor Energy 1 CSP/PV 950 MW Hybrid Solar Plant - Mohammad Bin Rashid Al Maktoum Solar Park - Phase 4",
+     "value": 4296.2,
+     "stage": "Completed (3 years)"
     }
    ],
-   "consultants": 180,
-   "contractors": 186
+   "consultants": 34,
+   "contractors": 28
   },
   {
    "slug": "rami-aziz",
    "name": "Rami Aziz",
    "vertical": "fabrication",
-   "owned": 258,
-   "ownedValue": 100049.7,
+   "owned": 268,
+   "ownedValue": 54779.3,
    "funnel": [
-    12,
-    20,
-    24,
-    36,
-    28,
-    30,
-    33,
-    35,
-    11,
+    15,
+    25,
+    19,
+    29,
+    25,
+    23,
+    46,
+    39,
+    17,
     5,
-    24
+    25
    ],
-   "workload": 516,
+   "workload": 527,
    "capacity": 320,
-   "loadPct": 161.3,
+   "loadPct": 164.7,
    "overloaded": true,
    "top": [
     {
-     "ref": "HV-26-03115",
-     "name": "Kulousais Nuclear Plant Phase 4",
-     "value": 11773.8,
+     "ref": "PRJAE0830320",
+     "name": "UAE-Qatar Causeway (West Link)",
+     "value": 13000,
      "stage": "Tender"
     },
     {
-     "ref": "HV-26-03417",
-     "name": "Krolvou Industrial Park Phase 2",
-     "value": 10389.5,
-     "stage": "Completed (3 months)"
-    },
-    {
-     "ref": "HV-26-01539",
-     "name": "Qeefaanain Industrial Zone Phase 4",
-     "value": 5053.3,
+     "ref": "PRJAE18154439",
+     "name": "Umm Shaif Gas Cap Offshore Development (Phase 1)",
+     "value": 6600,
      "stage": "Tender"
     },
     {
-     "ref": "HV-26-00248",
-     "name": "Droteehais Desalination Plant",
-     "value": 4935.7,
-     "stage": "Completed (1 year)"
+     "ref": "PRJAE1397447",
+     "name": "Hassyan Gas-Fired Power Plant - Phase 1 & 2",
+     "value": 3400,
+     "stage": "Completed (3 years)"
     },
     {
-     "ref": "HV-26-01325",
-     "name": "Konir Distribution Centre",
-     "value": 3683.1,
-     "stage": "Completed (3 months)"
+     "ref": "PRJAE25281302",
+     "name": "Expansion of Upper Zakum Offshore Oilfield Development (UZ 1.5MMBD)",
+     "value": 2400,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE25274085",
+     "name": "Umm Shaif Gas Cap Offshore Development (Phase 1) (Package 1)",
+     "value": 2200,
+     "stage": "Tender"
     }
    ],
-   "consultants": 217,
-   "contractors": 234
+   "consultants": 149,
+   "contractors": 177
   },
   {
    "slug": "faisal-reyes",
    "name": "Faisal Reyes",
    "vertical": "trading",
-   "owned": 494,
-   "ownedValue": 30497,
+   "owned": 1008,
+   "ownedValue": 57191.7,
    "funnel": [
-    20,
-    64,
-    41,
-    59,
-    46,
-    55,
-    59,
-    67,
-    31,
-    5,
-    47
+    58,
+    107,
+    79,
+    122,
+    95,
+    80,
+    122,
+    156,
+    48,
+    29,
+    112
    ],
-   "workload": 1004,
+   "workload": 1933,
    "capacity": 320,
-   "loadPct": 313.8,
+   "loadPct": 604.1,
    "overloaded": true,
    "top": [
     {
-     "ref": "HV-26-03397",
-     "name": "Qovail Serviced Residences",
-     "value": 1619.6,
+     "ref": "PRJAE23242989",
+     "name": "Balghaiylam - Yas Island",
+     "value": 2178,
      "stage": "Under Construction"
     },
     {
-     "ref": "HV-26-01198",
-     "name": "Vaikral Mosque",
-     "value": 827.3,
+     "ref": "PRJAE24258613",
+     "name": "The Alba Residences by Omniyat - Palm Jumeirah",
+     "value": 1900,
      "stage": "Tender"
     },
     {
-     "ref": "HV-26-00044",
-     "name": "Saadail Motor Showroom",
-     "value": 766.8,
+     "ref": "PRJAE24259236",
+     "name": "Al Naseem Villas - Hudayriyat Island",
+     "value": 1462.8,
      "stage": "Under Construction"
     },
     {
-     "ref": "HV-26-00481",
-     "name": "Qaakesh Workshops",
-     "value": 718.2,
+     "ref": "PRJAE0722096",
+     "name": "Six Senses Residences Dubai Marina",
+     "value": 1200,
      "stage": "Under Construction"
     },
     {
-     "ref": "HV-26-00268",
-     "name": "Krudrou Townhouses",
-     "value": 583.1,
-     "stage": "Under Construction"
+     "ref": "PRJAE0719195",
+     "name": "Damac Towers By Paramount - Business Bay",
+     "value": 1000,
+     "stage": "Completed (above 3 years)"
     }
    ],
-   "consultants": 338,
-   "contractors": 374
+   "consultants": 535,
+   "contractors": 636
   },
   {
    "slug": "ziad-abdel-rahman",
    "name": "Ziad Abdel-Rahman",
    "vertical": "services",
-   "owned": 118,
-   "ownedValue": 139779.1,
+   "owned": 142,
+   "ownedValue": 19048.6,
    "funnel": [
-    5,
-    12,
-    12,
-    14,
-    9,
+    8,
+    10,
+    16,
+    21,
+    18,
     13,
-    14,
-    15,
-    6,
+    20,
+    10,
+    9,
     3,
-    15
+    14
    ],
-   "workload": 239,
+   "workload": 284,
    "capacity": 320,
-   "loadPct": 74.7,
+   "loadPct": 88.8,
    "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-02240",
-     "name": "Joumlai Waterfront",
-     "value": 53688.4,
-     "stage": "Tender"
-    },
-    {
-     "ref": "HV-26-03128",
-     "name": "Bitreth City",
-     "value": 10694.9,
-     "stage": "Completed (1 year)"
-    },
-    {
-     "ref": "HV-26-00842",
-     "name": "Braisrabem Hotel",
-     "value": 9834.9,
-     "stage": "Tender"
-    },
-    {
-     "ref": "HV-26-01382",
-     "name": "Zutrukraa City",
-     "value": 6788.2,
+     "ref": "PRJAE21200182",
+     "name": "Project Volta - TAZIZ Derivatives Park Complex",
+     "value": 3000,
      "stage": "Under Construction"
     },
     {
-     "ref": "HV-26-02836",
-     "name": "Dofaidron Masterplan",
-     "value": 6035,
+     "ref": "PRJAE24261320",
+     "name": "Raha Island by RAK Properties - Mina Al Arab",
+     "value": 2000,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE24270779",
+     "name": "DAMAC Islands - Dubailand",
+     "value": 2000,
+     "stage": "Tender"
+    },
+    {
+     "ref": "PRJAE17132392",
+     "name": "The Island - Umm Suqeim 2",
+     "value": 1200,
      "stage": "Under Construction"
+    },
+    {
+     "ref": "PRJAE24259725",
+     "name": "Yas Canal Residential Development - Al Raha Beach",
+     "value": 953,
+     "stage": "Tender"
     }
    ],
-   "consultants": 121,
-   "contractors": 118
+   "consultants": 99,
+   "contractors": 87
   },
   {
    "slug": "priya-kulkarni",
    "name": "Priya Kulkarni",
    "vertical": "services",
-   "owned": 200,
-   "ownedValue": 145984.3,
+   "owned": 125,
+   "ownedValue": 19301,
    "funnel": [
-    10,
+    3,
+    5,
+    12,
+    12,
+    11,
+    11,
     17,
     21,
-    25,
-    13,
-    23,
-    22,
-    34,
-    9,
-    3,
+    8,
+    2,
     23
    ],
-   "workload": 403,
+   "workload": 228,
    "capacity": 320,
-   "loadPct": 125.9,
-   "overloaded": true,
+   "loadPct": 71.3,
+   "overloaded": false,
    "top": [
     {
-     "ref": "HV-26-02296",
-     "name": "Hiteeshle City",
-     "value": 18577.3,
+     "ref": "PRJAE16119252",
+     "name": "Dubai Square Mall - Dubai Creek Harbor",
+     "value": 2700,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "PRJAE24260093",
+     "name": "The Wilds by Aldaar",
+     "value": 2000,
      "stage": "Tender"
     },
     {
-     "ref": "HV-26-03189",
-     "name": "Fishava Masterplan",
-     "value": 9374.5,
+     "ref": "PRJAE23241153",
+     "name": "1500 Residential Villas - West Baniyas",
+     "value": 1715.5,
      "stage": "Under Construction"
     },
     {
-     "ref": "HV-26-01285",
-     "name": "Thoufos Waterfront",
-     "value": 8674.7,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "HV-26-02384",
-     "name": "Shavlou Medical Centre",
-     "value": 7507.8,
+     "ref": "PRJAE24271777",
+     "name": "Bahria Mixed-Use Development - Dubai South",
+     "value": 1500,
      "stage": "Tender"
     },
     {
-     "ref": "HV-26-03390",
-     "name": "Kafoutair District",
-     "value": 7492.5,
-     "stage": "Under Construction"
+     "ref": "PRJAE25278448",
+     "name": "Waada by Bahria Town",
+     "value": 1400,
+     "stage": "Tender"
     }
    ],
-   "consultants": 193,
-   "contractors": 199
+   "consultants": 88,
+   "contractors": 73
   }
  ],
  "funnel": [
-  854,
-  1090,
-  1681,
-  2331,
-  3253,
-  1874,
-  3038,
-  5248,
-  2448,
-  1452,
-  11731
+  1230,
+  1549,
+  2092,
+  2882,
+  4161,
+  2243,
+  3842,
+  6667,
+  3021,
+  3572,
+  14101
  ],
  "funnelProjects": [
-  719,
-  719,
-  786,
-  649,
-  405,
-  113,
-  79,
-  27,
-  3,
-  0,
+  1030,
+  1010,
+  962,
+  780,
+  498,
+  111,
+  102,
+  37,
+  5,
+  1,
   0
  ],
  "parties": {
-  "consultants": 807,
-  "contractors": 676,
-  "owners": 1013
+  "consultants": 1309,
+  "contractors": 1569,
+  "owners": 2336
  },
  "gradeScore": {
   "High": 8,
@@ -4186,7 +4181,7 @@
   "pipeline": {
    "key": "pipeline",
    "term": "Pipeline value owned",
-   "text": "The sum of the values of every project with an owner, in AED million."
+   "text": "The sum of the BNC whole-project values assigned to an engineer, in USD million. It is opportunity coverage, not booked revenue."
   },
   "bucket": {
    "key": "bucket",
@@ -4236,28 +4231,28 @@
   "value": {
    "key": "value",
    "term": "Value",
-   "text": "The project value in AED million to one decimal, as recorded on the register."
+   "text": "The project value in source USD million to one decimal. Zero means the BNC source workbook did not record a value."
   },
   "completion": {
    "key": "completion",
    "term": "Completion",
-   "text": "Percent complete, recorded for projects under construction only; most under-construction rows carry 0.0 until a site report arrives."
+   "text": "Percent complete from the BNC workbook, shown for projects under construction when recorded."
   }
  },
  "precisionPolicy": [
-  "Money is AED million to one decimal at the project level, rounded once; every rollup is a sum of those one-decimal figures, carried in tenths, so tables that show the same figure tie exactly.",
+  "Money remains in source USD and is stored as USD million to one decimal at project level; every rollup sums those same one-decimal figures, so tables that show the same figure tie exactly.",
   "Relevance scores are 0.0 to 8.0 to one decimal. Grades convert to 8.0, 5.0 and 2.0; a hand-adjusted score keeps one decimal.",
   "Percentages are one decimal from the underlying sums, never from other percentages.",
   "Counts are whole numbers. Ratings are whole numbers from 1 to 10.",
-  "Dates are calendar dates. The register is stated as of the data-as-of date, and nothing published carries a generation timestamp."
+  "Dates are calendar dates. Where the Other Sectors workbook has no per-project update date, its March 2026 workbook snapshot date is used and disclosed here."
  ],
  "assumptions": [
-  "3,500 projects, drawn over 80 sector, industry and project-type rows with Urban Construction about three quarters of the register, Industrial about a tenth, and Oil, Gas and Fuels, Transport and Utilities sharing the rest.",
-  "Project values follow a wide log-normal in AED million, scaled by project type (a fuel station is small, a metro line is large), capped at AED 60,000.0 million.",
-  "Stages weight toward Under Construction (about a third) and Design; four completed bands cover a quarter. Completion percent is recorded for under-construction rows only, and most of those carry 0.0.",
-  "Parties: 807 consultants and 676 contractors appear on at least one project, drawn with a heavy tail so a few firms sit on many projects. MEP consultants are recorded on 24.3 percent of rows, a main contractor on 67.3 percent and an MEP contractor on 17.1 percent; the contractor record is fullest at Tender and under construction and thins on the older completed rows.",
-  "Every name other than the ten verticals and the 24 engineers is built from invented syllables and checked against a list of terms that must never appear.",
-  "Relationship level and rating are drawn per firm, with larger books leaning senior; the relationship owner is the engineer owning most of that firm's projects. 12.3 percent of firms are a synthetic no-relationship cohort with no level, rating or owner.",
+  "4,568 supplied BNC rows resolve to 4,536 unique project references. 32 newer-source overlaps are de-duplicated by BNC reference: Urban & Industrial first, Other Sectors next, Brownfield last.",
+  "Source rows: 3-BNC-Urban-Ind.-Greenfield-Projects-Master-File.xlsx (3,327); 2-BNC_Other_Sectors_Master_File.xlsx (568); 1-Raw-Data-BNC-Brownfield-All-Sectors.xlsx (673). Project references, names, values, stages, locations, sectors, industries, types, owners, consultants and contractors come from these workbooks.",
+  "Money is kept in the source USD currency. No AED conversion, scaling, capping or synthetic value generation is applied. Two source rows without a positive value remain in the register at 0.0 and are described as not recorded.",
+  "Company cells are preserved as written. Because BNC uses commas both inside legal company names and between multiple companies, an ambiguous multi-company cell is shown as one source label rather than split incorrectly.",
+  "Individual contact names, telephone numbers, email addresses and workbook assignee fields are deliberately excluded; project and company identities are retained.",
+  "The 24 sales engineers are fictional. Relevance scores, internal ownership, activity, workload, relationship level, rating and relationship owner are deterministic illustrative demo fields because the supplied BNC workbooks do not contain those internal records. 19.4 percent of firms form the illustrative no-relationship cohort.",
   "Workload is a synthetic measure, 3 points per active project on the engineer's own vertical and 1 per order or quiet project, against a capacity of 320 points chosen so a few of the 24 books exceed it."
  ],
  "cascade": [
@@ -4296,32 +4291,32 @@
  "shape": [
   {
    "key": "ownedShare",
-   "label": "Projects owned, share of the register",
-   "lo": 78,
-   "hi": 88,
+   "label": "Projects assigned in the demo layer",
+   "lo": 88,
+   "hi": 96,
    "unit": "percent",
-   "basis": "Source shape: 2,605 of 3,183 projects assigned, 81.8 percent",
-   "measured": 84.7,
+   "basis": "Operating check: the internal ownership cascade should leave a visible but limited unassigned cohort",
+   "measured": 92.3,
    "pass": true
   },
   {
    "key": "smallestBook",
    "label": "Smallest engineer book",
-   "lo": 15,
-   "hi": 50,
+   "lo": 20,
+   "hi": 100,
    "unit": "projects",
-   "basis": "Source shape: 20, across 22 engineers; Halvard has 24",
-   "measured": 42,
+   "basis": "Operating check: every fictional engineer should have a useful drill-down book",
+   "measured": 40,
    "pass": true
   },
   {
    "key": "largestBook",
    "label": "Largest engineer book",
-   "lo": 430,
-   "hi": 600,
+   "lo": 700,
+   "hi": 1200,
    "unit": "projects",
-   "basis": "Source shape: 536",
-   "measured": 494,
+   "basis": "Operating check: the authentic project mix is allowed to concentrate in a high-relevance vertical",
+   "measured": 1008,
    "pass": true
   },
   {
@@ -4330,8 +4325,8 @@
    "lo": 40,
    "hi": 60,
    "unit": "percent",
-   "basis": "Source shape: about half",
-   "measured": 48.5,
+   "basis": "Illustrative activity layer: about half of project-vertical pairs are quiet or awaiting follow-up",
+   "measured": 45.8,
    "pass": true
   },
   {
@@ -4340,8 +4335,8 @@
    "lo": 0,
    "hi": 5,
    "unit": "percent",
-   "basis": "Source shape: under 5 percent",
-   "measured": 2.4,
+   "basis": "Illustrative activity layer: orders remain a small minority of all project-vertical pairs",
+   "measured": 2.7,
    "pass": true
   },
   {
@@ -4350,78 +4345,78 @@
    "lo": 6,
    "hi": 14,
    "unit": "percent",
-   "basis": "Source shape: about a tenth",
-   "measured": 9.3,
+   "basis": "Illustrative activity layer: about a tenth of project-vertical pairs are closed",
+   "measured": 9.2,
    "pass": true
   },
   {
    "key": "mepConsultantFill",
-   "label": "Rows with an MEP consultant",
-   "lo": 20,
-   "hi": 28,
+   "label": "BNC rows with an MEP consultant",
+   "lo": 25,
+   "hi": 35,
    "unit": "percent",
-   "basis": "Source shape: about 24 percent",
-   "measured": 24.3,
+   "basis": "Import regression guard for the supplied workbooks",
+   "measured": 27.8,
    "pass": true
   },
   {
    "key": "mainContractorFill",
-   "label": "Rows with a main or EPC contractor",
-   "lo": 62,
-   "hi": 82,
+   "label": "BNC rows with an appointed main or EPC contractor",
+   "lo": 32,
+   "hi": 45,
    "unit": "percent",
-   "basis": "Source shape: about 80 percent; held lower at completed stages so the ownership cascade leaves the source share unassigned",
-   "measured": 67.3,
+   "basis": "Import regression guard after treating “Not Yet Awarded” and “See Sub-Projects” as absent, not as company names",
+   "measured": 38.2,
    "pass": true
   },
   {
    "key": "mepContractorFill",
-   "label": "Rows with an MEP contractor",
-   "lo": 14,
-   "hi": 24,
+   "label": "BNC rows with an MEP contractor",
+   "lo": 20,
+   "hi": 32,
    "unit": "percent",
-   "basis": "Source shape: about 19 percent",
-   "measured": 17.1,
+   "basis": "Import regression guard for the supplied workbooks",
+   "measured": 23.2,
    "pass": true
   },
   {
    "key": "consultantMedian",
-   "label": "Consultant book, median projects",
-   "lo": 3,
-   "hi": 6,
+   "label": "Consultant source-label book, median",
+   "lo": 1,
+   "hi": 2,
    "unit": "projects",
-   "basis": "About 900 consultants over 3,500 projects with at most two lead and one MEP consultant each is about 4,500 links, so a median of 3 to 4 follows by arithmetic; the source median of 11 counts a firm once per engineer workbook before dedup and is not comparable",
-   "measured": 3,
+   "basis": "BNC company cells are preserved intact; many labels occur on one project",
+   "measured": 1,
    "pass": true
   },
   {
    "key": "consultantMax",
-   "label": "Consultant book, largest",
-   "lo": 80,
-   "hi": 140,
+   "label": "Consultant source-label book, largest",
+   "lo": 70,
+   "hi": 120,
    "unit": "projects",
-   "basis": "Source shape: 4 to 120",
-   "measured": 102,
+   "basis": "Import regression guard for the most frequently repeated genuine consultant label",
+   "measured": 88,
    "pass": true
   },
   {
    "key": "contractorMedian",
-   "label": "Contractor book, median projects",
-   "lo": 3,
-   "hi": 6,
+   "label": "Contractor source-label book, median",
+   "lo": 1,
+   "hi": 2,
    "unit": "projects",
-   "basis": "Source shape: median 4",
-   "measured": 4,
+   "basis": "BNC company cells are preserved intact; many labels occur on one project",
+   "measured": 1,
    "pass": true
   },
   {
    "key": "contractorMax",
-   "label": "Contractor book, largest",
-   "lo": 18,
+   "label": "Contractor source-label book, largest",
+   "lo": 10,
    "hi": 30,
    "unit": "projects",
-   "basis": "Source shape: 2 to 25",
-   "measured": 28,
+   "basis": "Import regression guard for the most frequently repeated genuine contractor label after placeholders are excluded",
+   "measured": 17,
    "pass": true
   },
   {
@@ -4431,7 +4426,7 @@
    "hi": 25,
    "unit": "percent",
    "basis": "Synthetic control cohort, so the \"where do we have no relationship\" question has a real answer",
-   "measured": 12.3,
+   "measured": 19.4,
    "pass": true
   }
  ],
@@ -4439,665 +4434,665 @@
   "stages": [
    {
     "stage": "Concept",
-    "count": 377
+    "count": 482
    },
    {
     "stage": "Design",
-    "count": 617
+    "count": 562
    },
    {
     "stage": "Tender",
-    "count": 398
+    "count": 1000
    },
    {
     "stage": "Under Construction",
-    "count": 1203
+    "count": 1140
    },
    {
     "stage": "Completed (3 months)",
-    "count": 177
+    "count": 26
    },
    {
     "stage": "Completed (1 year)",
-    "count": 256
+    "count": 41
    },
    {
     "stage": "Completed (3 years)",
-    "count": 242
+    "count": 674
    },
    {
     "stage": "Completed (above 3 years)",
-    "count": 230
+    "count": 611
    }
   ],
   "sectors": [
    {
     "sector": "Urban Construction",
-    "count": 2650
+    "count": 3329
    },
    {
     "sector": "Industrial",
-    "count": 335
+    "count": 406
    },
    {
     "sector": "Oil, Gas and Fuels",
-    "count": 160
+    "count": 263
    },
    {
     "sector": "Transport",
-    "count": 190
+    "count": 244
    },
    {
     "sector": "Utilities",
-    "count": 165
+    "count": 294
    }
   ],
   "cities": [
    {
     "city": "Abu Dhabi",
-    "count": 1043
+    "count": 1072
    },
    {
     "city": "Ajman",
-    "count": 130
+    "count": 359
    },
    {
     "city": "Al Ain",
-    "count": 111
+    "count": 71
    },
    {
     "city": "Dubai",
-    "count": 1577
+    "count": 2085
    },
    {
     "city": "Fujairah",
-    "count": 110
+    "count": 99
    },
    {
     "city": "Ras Al Khaimah",
-    "count": 185
+    "count": 232
    },
    {
     "city": "Sharjah",
-    "count": 267
+    "count": 528
    },
    {
     "city": "Umm Al Quwain",
-    "count": 77
+    "count": 90
    }
   ]
  },
  "matrixSummary": {
-  "cellsGraded": 752,
-  "cellsTotal": 800,
-  "projectsOverallHigh": 3234,
-  "valueOverallHigh": 1221388.9,
+  "cellsGraded": 776,
+  "cellsTotal": 810,
+  "projectsOverallHigh": 4346,
+  "valueOverallHigh": 997965.8,
   "projectsBelowFloor": 0,
-  "projectsAdjusted": 293,
+  "projectsAdjusted": 0,
   "widestVertical": {
    "slug": "electrical-distribution",
    "name": "Electrical Distribution",
-   "rowsHigh": 46
+   "rowsHigh": 52
   },
   "topType": {
    "type": "Mega Urban Development",
    "industry": "Mega Urban Development",
    "sector": "Urban Construction",
    "cellsHigh": 7,
-   "projects": 163
+   "projects": 77
   },
   "reach": [
    {
     "slug": "electrical-distribution",
     "name": "Electrical Distribution",
-    "rowsHigh": 46,
-    "rowsMedium": 30,
+    "rowsHigh": 52,
+    "rowsMedium": 25,
     "rowsLow": 4,
     "rowsNone": 0,
-    "projectsHigh": 2003,
-    "projectsMedium": 1410,
-    "projectsLow": 87,
-    "valueHigh": 1004650.7
+    "projectsHigh": 2814,
+    "projectsMedium": 1694,
+    "projectsLow": 28,
+    "valueHigh": 809173.4
    },
    {
     "slug": "cooling",
     "name": "Cooling",
-    "rowsHigh": 20,
+    "rowsHigh": 18,
     "rowsMedium": 36,
-    "rowsLow": 12,
-    "rowsNone": 12,
-    "projectsHigh": 1636,
-    "projectsMedium": 1343,
-    "projectsLow": 248,
-    "valueHigh": 779506.2
+    "rowsLow": 17,
+    "rowsNone": 10,
+    "projectsHigh": 2211,
+    "projectsMedium": 1948,
+    "projectsLow": 139,
+    "valueHigh": 455465.8
    },
    {
     "slug": "mechanical-systems",
     "name": "Mechanical Systems",
-    "rowsHigh": 30,
-    "rowsMedium": 35,
-    "rowsLow": 9,
-    "rowsNone": 6,
-    "projectsHigh": 1446,
-    "projectsMedium": 1665,
-    "projectsLow": 224,
-    "valueHigh": 897334.1
+    "rowsHigh": 36,
+    "rowsMedium": 32,
+    "rowsLow": 10,
+    "rowsNone": 3,
+    "projectsHigh": 1569,
+    "projectsMedium": 2682,
+    "projectsLow": 134,
+    "valueHigh": 623473.2
    },
    {
     "slug": "pumps-and-water",
     "name": "Pumps and Water",
-    "rowsHigh": 34,
-    "rowsMedium": 39,
-    "rowsLow": 7,
+    "rowsHigh": 40,
+    "rowsMedium": 37,
+    "rowsLow": 4,
     "rowsNone": 0,
-    "projectsHigh": 1367,
-    "projectsMedium": 1879,
-    "projectsLow": 254,
-    "valueHigh": 908670.4
+    "projectsHigh": 1443,
+    "projectsMedium": 3045,
+    "projectsLow": 48,
+    "valueHigh": 627572.1
    },
    {
     "slug": "vertical-transport",
     "name": "Vertical Transport",
-    "rowsHigh": 13,
-    "rowsMedium": 40,
-    "rowsLow": 18,
-    "rowsNone": 9,
-    "projectsHigh": 1445,
-    "projectsMedium": 1461,
-    "projectsLow": 373,
-    "valueHigh": 728527.3
+    "rowsHigh": 16,
+    "rowsMedium": 36,
+    "rowsLow": 21,
+    "rowsNone": 8,
+    "projectsHigh": 2138,
+    "projectsMedium": 1984,
+    "projectsLow": 194,
+    "valueHigh": 408895.4
    },
    {
     "slug": "metering",
     "name": "Metering",
-    "rowsHigh": 21,
-    "rowsMedium": 38,
+    "rowsHigh": 20,
+    "rowsMedium": 43,
     "rowsLow": 15,
-    "rowsNone": 6,
-    "projectsHigh": 1411,
-    "projectsMedium": 1440,
-    "projectsLow": 484,
-    "valueHigh": 754366
+    "rowsNone": 3,
+    "projectsHigh": 2029,
+    "projectsMedium": 2094,
+    "projectsLow": 262,
+    "valueHigh": 425184.9
    },
    {
     "slug": "automation",
     "name": "Automation",
-    "rowsHigh": 25,
-    "rowsMedium": 22,
-    "rowsLow": 29,
-    "rowsNone": 4,
-    "projectsHigh": 545,
-    "projectsMedium": 1121,
-    "projectsLow": 1681,
-    "valueHigh": 287962.8
+    "rowsHigh": 33,
+    "rowsMedium": 21,
+    "rowsLow": 25,
+    "rowsNone": 2,
+    "projectsHigh": 507,
+    "projectsMedium": 1570,
+    "projectsLow": 2309,
+    "valueHigh": 322895.3
    },
    {
     "slug": "fabrication",
     "name": "Fabrication",
-    "rowsHigh": 26,
-    "rowsMedium": 26,
-    "rowsLow": 23,
+    "rowsHigh": 35,
+    "rowsMedium": 23,
+    "rowsLow": 18,
     "rowsNone": 5,
-    "projectsHigh": 528,
-    "projectsMedium": 1150,
-    "projectsLow": 1404,
-    "valueHigh": 292538.9
+    "projectsHigh": 837,
+    "projectsMedium": 895,
+    "projectsLow": 1817,
+    "valueHigh": 384198.1
    },
    {
     "slug": "trading",
     "name": "Trading",
-    "rowsHigh": 18,
-    "rowsMedium": 34,
-    "rowsLow": 22,
-    "rowsNone": 6,
-    "projectsHigh": 1425,
-    "projectsMedium": 1404,
-    "projectsLow": 506,
-    "valueHigh": 159216.3
+    "rowsHigh": 15,
+    "rowsMedium": 27,
+    "rowsLow": 36,
+    "rowsNone": 3,
+    "projectsHigh": 2539,
+    "projectsMedium": 1332,
+    "projectsLow": 514,
+    "valueHigh": 153698.6
    },
    {
     "slug": "services",
     "name": "Services",
-    "rowsHigh": 26,
-    "rowsMedium": 31,
-    "rowsLow": 23,
+    "rowsHigh": 29,
+    "rowsMedium": 33,
+    "rowsLow": 19,
     "rowsNone": 0,
-    "projectsHigh": 937,
-    "projectsMedium": 1569,
-    "projectsLow": 994,
-    "valueHigh": 734570
+    "projectsHigh": 844,
+    "projectsMedium": 2347,
+    "projectsLow": 1345,
+    "valueHigh": 499857.6
    }
   ]
  },
  "partySummary": {
   "consultants": {
-   "total": 807,
-   "senior": 106,
-   "middle": 284,
-   "junior": 307,
-   "noRelationship": 110,
-   "noRelationshipValue": 104297.2,
-   "averageRating": 4.4,
-   "onTenPlus": 94,
-   "bookValue": 1727271,
+   "total": 1309,
+   "senior": 133,
+   "middle": 381,
+   "junior": 550,
+   "noRelationship": 245,
+   "noRelationshipValue": 40847,
+   "averageRating": 4.2,
+   "onTenPlus": 57,
+   "bookValue": 404770.3,
    "top": [
     {
-     "id": 53,
-     "name": "Vlaikrim Design Studio",
+     "id": 1280,
+     "name": "Worley - Abu Dhabi (Formerly Worley Parsons)",
      "role": "lead",
-     "level": "Senior management",
-     "rating": 7,
-     "owner": "meera-dsouza",
-     "projectCount": 14,
-     "projectValue": 76180.5
+     "level": "Middle management",
+     "rating": 3,
+     "owner": "rami-aziz",
+     "projectCount": 9,
+     "projectValue": 17550
     },
     {
-     "id": 41,
-     "name": "Qaiqin Engineering Consultants",
+     "id": 882,
+     "name": "KOPEC (Korea Power Engineering Company Inc.)",
      "role": "lead",
      "level": "Middle management",
      "rating": 6,
-     "owner": "faisal-reyes",
-     "projectCount": 16,
-     "projectValue": 55495
+     "owner": "nadia-zaki",
+     "projectCount": 1,
+     "projectValue": 12200
     },
     {
-     "id": 1,
-     "name": "Kradeemam Building Services Consultants",
-     "role": "mep",
+     "id": 1275,
+     "name": "Wood Group (Formerly Amec Foster Wheeler) - Abu Dhabi",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 3,
+     "owner": "nadia-zaki",
+     "projectCount": 4,
+     "projectValue": 11800
+    },
+    {
+     "id": 1053,
+     "name": "Parsons International Limited - Dubai",
+     "role": "both",
+     "level": "Junior management",
+     "rating": 2,
+     "owner": "meera-dsouza",
+     "projectCount": 14,
+     "projectValue": 11775.1
+    },
+    {
+     "id": 475,
+     "name": "Coop Himmelb (L) Au, Coop Himmelb (L) Au Architectural Prospective Drawings Services LLC, Dar Al Handasah Consultants (Shair & Partners) (Dubai), Leslie Jones Architecture",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 7,
+     "owner": "nadia-zaki",
+     "projectCount": 1,
+     "projectValue": 10500
+    },
+    {
+     "id": 505,
+     "name": "Dar Al Handasah Consultants (Shair & Partners) (Dubai)",
+     "role": "both",
      "level": "Senior management",
-     "rating": 8,
-     "owner": "faisal-reyes",
-     "projectCount": 94,
-     "projectValue": 42416
+     "rating": 3,
+     "owner": "omar-nasser",
+     "projectCount": 18,
+     "projectValue": 8373.3
     },
     {
-     "id": 808,
-     "name": "Rouprum Design Studio",
+     "id": 1264,
+     "name": "Walt Disney Imagineering,Walt Disney Imagineering",
      "role": "lead",
      "level": "Junior management",
      "rating": 3,
-     "owner": "faisal-reyes",
-     "projectCount": 4,
-     "projectValue": 41908
+     "owner": "lina-khoury",
+     "projectCount": 2,
+     "projectValue": 7000
     },
     {
-     "id": 8,
-     "name": "Vekith Engineering Consultants",
+     "id": 34,
+     "name": "AECOM (Dubai)",
+     "role": "both",
+     "level": null,
+     "rating": null,
+     "owner": null,
+     "projectCount": 6,
+     "projectValue": 5938.6
+    },
+    {
+     "id": 1074,
+     "name": "Pnc Architects",
+     "role": "both",
+     "level": "Middle management",
+     "rating": 5,
+     "owner": "omar-nasser",
+     "projectCount": 26,
+     "projectValue": 5918.9
+    },
+    {
+     "id": 1282,
+     "name": "Wsp Middle East (Dubai)",
      "role": "both",
      "level": "Senior management",
      "rating": 8,
-     "owner": "faisal-reyes",
-     "projectCount": 102,
-     "projectValue": 34735.6
+     "owner": "marwan-saleh",
+     "projectCount": 12,
+     "projectValue": 5305.6
     },
     {
-     "id": 2,
-     "name": "Tretrol Architecture",
+     "id": 25,
+     "name": "Advisian (Madrid), Empresarios Agrupados",
      "role": "lead",
+     "level": "Junior management",
+     "rating": 2,
+     "owner": "vikram-fernandes",
+     "projectCount": 1,
+     "projectValue": 4296.2
+    },
+    {
+     "id": 769,
+     "name": "Ian Banham & Associates Consulting Engineers (Dubai)",
+     "role": "mep",
      "level": "Middle management",
-     "rating": 3,
-     "owner": "faisal-reyes",
-     "projectCount": 88,
-     "projectValue": 33879.4
+     "rating": 7,
+     "owner": "kavya-nair",
+     "projectCount": 17,
+     "projectValue": 4016
     },
     {
-     "id": 6,
-     "name": "Ridra Architects and Engineers",
-     "role": "lead",
+     "id": 888,
+     "name": "Lacasa Architects & Engineering Consultants",
+     "role": "both",
      "level": "Senior management",
      "rating": 7,
      "owner": "faisal-reyes",
-     "projectCount": 66,
-     "projectValue": 28439.6
+     "projectCount": 30,
+     "projectValue": 3953.2
     },
     {
-     "id": 5,
-     "name": "Zoumshir Design Consultancy",
+     "id": 30,
+     "name": "Ae7 Consultant (Dubai)",
+     "role": "both",
+     "level": "Middle management",
+     "rating": 5,
+     "owner": "omar-nasser",
+     "projectCount": 14,
+     "projectValue": 3888.5
+    },
+    {
+     "id": 1164,
+     "name": "Silver Stone Engineering Consultants",
+     "role": "both",
+     "level": "Senior management",
+     "rating": 4,
+     "owner": "meera-dsouza",
+     "projectCount": 15,
+     "projectValue": 3680.2
+    },
+    {
+     "id": 995,
+     "name": "National Engineering Bureau (Neb) (Dubai)",
+     "role": "both",
+     "level": "Senior management",
+     "rating": 4,
+     "owner": "faisal-reyes",
+     "projectCount": 34,
+     "projectValue": 3404.1
+    },
+    {
+     "id": 826,
+     "name": "Jawda Engineering Consultants",
      "role": "lead",
      "level": "Middle management",
      "rating": 3,
-     "owner": "faisal-reyes",
-     "projectCount": 89,
-     "projectValue": 28049.2
-    },
-    {
-     "id": 7,
-     "name": "Sakrivlash Design Studio",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 2,
-     "owner": "faisal-reyes",
-     "projectCount": 66,
-     "projectValue": 26241.9
+     "owner": "rami-aziz",
+     "projectCount": 1,
+     "projectValue": 3400
     },
     {
      "id": 3,
-     "name": "Moubi Design Studio",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 7,
-     "owner": "faisal-reyes",
-     "projectCount": 96,
-     "projectValue": 23101.7
-    },
-    {
-     "id": 35,
-     "name": "Maarozith Design and Engineering",
+     "name": "360 Degrees Architectural Design Consultancy",
      "role": "both",
-     "level": "Middle management",
-     "rating": 3,
-     "owner": "faisal-reyes",
-     "projectCount": 37,
-     "projectValue": 21519.9
-    },
-    {
-     "id": 4,
-     "name": "Vanailte Planning and Design",
-     "role": "lead",
      "level": "Junior management",
-     "rating": 6,
-     "owner": "rami-aziz",
-     "projectCount": 89,
-     "projectValue": 20026.2
-    },
-    {
-     "id": 24,
-     "name": "Deqi Design Studio",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 4,
-     "owner": "dinesh-iyer",
-     "projectCount": 29,
-     "projectValue": 19857.9
-    },
-    {
-     "id": 836,
-     "name": "Thosobin Engineering Consultants",
-     "role": "both",
-     "level": "Middle management",
-     "rating": 6,
-     "owner": "hana-qureshi",
-     "projectCount": 4,
-     "projectValue": 19355.5
-    },
-    {
-     "id": 468,
-     "name": "Bezaid Consulting Engineers",
-     "role": "lead",
-     "level": null,
-     "rating": null,
-     "owner": null,
-     "projectCount": 5,
-     "projectValue": 18987
-    },
-    {
-     "id": 169,
-     "name": "Qaitres MEP Consultants",
-     "role": "mep",
-     "level": "Junior management",
-     "rating": 1,
+     "rating": 2,
      "owner": "faisal-reyes",
-     "projectCount": 3,
-     "projectValue": 18916
+     "projectCount": 7,
+     "projectValue": 3314
     },
     {
-     "id": 47,
-     "name": "Nouko Engineering Consultants",
+     "id": 296,
+     "name": "Arif & Bintoak - Consulting Architects & Engineers (Dubai)",
      "role": "both",
      "level": "Senior management",
-     "rating": 8,
-     "owner": "rami-aziz",
-     "projectCount": 25,
-     "projectValue": 18773.8
-    },
-    {
-     "id": 70,
-     "name": "Mofaajoum Engineering Consultants",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 5,
-     "owner": "rami-aziz",
-     "projectCount": 11,
-     "projectValue": 18084.9
-    },
-    {
-     "id": 434,
-     "name": "Laahaid Design Studio",
-     "role": "lead",
-     "level": null,
-     "rating": null,
-     "owner": null,
-     "projectCount": 4,
-     "projectValue": 16932.8
-    },
-    {
-     "id": 32,
-     "name": "Tredthi MEP Consultants",
-     "role": "mep",
-     "level": "Middle management",
-     "rating": 5,
+     "rating": 7,
      "owner": "faisal-reyes",
-     "projectCount": 20,
-     "projectValue": 16673.9
+     "projectCount": 32,
+     "projectValue": 3144
+    },
+    {
+     "id": 768,
+     "name": "Ian Banham & Associates Consulting Engineers (Abu Dhabi)",
+     "role": "mep",
+     "level": "Senior management",
+     "rating": 6,
+     "owner": "faisal-reyes",
+     "projectCount": 10,
+     "projectValue": 3136.2
     }
    ]
   },
   "contractors": {
-   "total": 676,
-   "senior": 96,
-   "middle": 248,
-   "junior": 260,
-   "noRelationship": 72,
-   "noRelationshipValue": 78542.1,
-   "averageRating": 4.5,
-   "onTenPlus": 45,
-   "bookValue": 1180371.5,
+   "total": 1569,
+   "senior": 122,
+   "middle": 447,
+   "junior": 686,
+   "noRelationship": 314,
+   "noRelationshipValue": 33272.6,
+   "averageRating": 4.1,
+   "onTenPlus": 9,
+   "bookValue": 246689.8,
    "top": [
     {
-     "id": 14,
-     "name": "Kedoun Engineering and Contracting",
-     "role": "both",
-     "level": "Senior management",
-     "rating": 6,
-     "owner": "faisal-reyes",
-     "projectCount": 23,
-     "projectValue": 73230.8
-    },
-    {
-     "id": 538,
-     "name": "Betrer Builders",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 4,
-     "owner": "faisal-reyes",
-     "projectCount": 6,
-     "projectValue": 43284.7
-    },
-    {
-     "id": 4,
-     "name": "Likrusza Construction",
+     "id": 966,
+     "name": "Hyundai Engineering & Construction Co. Ltd. (Abu Dhabi), Korea Electric Power Corporation (KEPCO), Samsung C&T Corporation (Abu Dhabi)",
      "role": "lead",
      "level": "Junior management",
-     "rating": 4,
-     "owner": "faisal-reyes",
-     "projectCount": 28,
-     "projectValue": 13882.5
+     "rating": 3,
+     "owner": "nadia-zaki",
+     "projectCount": 1,
+     "projectValue": 12200
     },
     {
-     "id": 151,
-     "name": "Lebom Contracting",
+     "id": 684,
+     "name": "CRRC Corporation, Limak Holding Inc., Mapa Construction Company",
+     "role": "lead",
+     "level": "Junior management",
+     "rating": 6,
+     "owner": "nadia-zaki",
+     "projectCount": 2,
+     "projectValue": 5658
+    },
+    {
+     "id": 892,
+     "name": "Ginco General Contracting Llc",
+     "role": "both",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "faisal-reyes",
+     "projectCount": 17,
+     "projectValue": 4297.1
+    },
+    {
+     "id": 1356,
+     "name": "Shanghai Electric Group Co Ltd",
      "role": "lead",
      "level": "Middle management",
-     "rating": 8,
-     "owner": "meera-dsouza",
-     "projectCount": 5,
-     "projectValue": 12886.5
+     "rating": 6,
+     "owner": "vikram-fernandes",
+     "projectCount": 1,
+     "projectValue": 4296.2
     },
     {
-     "id": 60,
-     "name": "Tekaid Engineering and Construction",
+     "id": 1395,
+     "name": "Sobha Constructions Llc (Sobha Hartland Contracting)",
+     "role": "both",
+     "level": "Senior management",
+     "rating": 7,
+     "owner": "omar-nasser",
+     "projectCount": 16,
+     "projectValue": 3778.3
+    },
+    {
+     "id": 901,
+     "name": "Granada Europe Engineering Construction Llc",
+     "role": "both",
+     "level": "Middle management",
+     "rating": 4,
+     "owner": "meera-dsouza",
+     "projectCount": 15,
+     "projectValue": 3645.2
+    },
+    {
+     "id": 879,
+     "name": "GE Power (Alstom Power Service Arabia FZE) (Dubai), Harbin Electric International Company Limited (Dubai)",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 6,
+     "owner": "rami-aziz",
+     "projectCount": 1,
+     "projectValue": 3400
+    },
+    {
+     "id": 748,
+     "name": "Dutco Balfour Beatty (Dutco Construction Co. Llc)",
      "role": "lead",
      "level": "Senior management",
-     "rating": 6,
-     "owner": "lina-khoury",
-     "projectCount": 6,
-     "projectValue": 12761.8
+     "rating": 8,
+     "owner": "faisal-reyes",
+     "projectCount": 5,
+     "projectValue": 3308
     },
     {
-     "id": 319,
-     "name": "Kraifeqo Civil Works",
+     "id": 1303,
+     "name": "Royal Advance Electro-Mechanical Co. (Trojan Contracting)",
+     "role": "mep",
+     "level": "Middle management",
+     "rating": 5,
+     "owner": "faisal-reyes",
+     "projectCount": 4,
+     "projectValue": 3158
+    },
+    {
+     "id": 422,
+     "name": "Alghanim International General Trading & Contracting, Water & Environment Technologies Company ( WETICO )",
      "role": "lead",
      "level": null,
      "rating": null,
      "owner": null,
-     "projectCount": 8,
-     "projectValue": 12640.2
+     "projectCount": 1,
+     "projectValue": 3000
     },
     {
-     "id": 5,
-     "name": "Prasrouth Construction Group",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 5,
-     "owner": "faisal-reyes",
-     "projectCount": 22,
-     "projectValue": 12331.6
-    },
-    {
-     "id": 518,
-     "name": "Feetou Engineering and Construction",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 4,
-     "owner": "rami-aziz",
-     "projectCount": 3,
-     "projectValue": 12198.8
-    },
-    {
-     "id": 485,
-     "name": "Bradeekra Engineering and Contracting",
-     "role": "both",
-     "level": "Middle management",
-     "rating": 5,
-     "owner": "rami-aziz",
-     "projectCount": 14,
-     "projectValue": 11016.5
-    },
-    {
-     "id": 39,
-     "name": "Qidraid Engineering and Construction",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 6,
-     "owner": "faisal-reyes",
-     "projectCount": 13,
-     "projectValue": 10867.6
-    },
-    {
-     "id": 547,
-     "name": "Vleepraish Builders",
-     "role": "lead",
-     "level": "Junior management",
-     "rating": 3,
-     "owner": "lina-khoury",
-     "projectCount": 3,
-     "projectValue": 10744.9
-    },
-    {
-     "id": 539,
-     "name": "Prevlajaa Construction and Services",
-     "role": "both",
-     "level": "Junior management",
-     "rating": 6,
-     "owner": "lina-khoury",
-     "projectCount": 8,
-     "projectValue": 10423.6
-    },
-    {
-     "id": 126,
-     "name": "Theeqadrem Contracting",
-     "role": "lead",
-     "level": "Senior management",
-     "rating": 6,
-     "owner": "dinesh-iyer",
-     "projectCount": 5,
-     "projectValue": 10208.4
-    },
-    {
-     "id": 453,
-     "name": "Krupraanis Construction",
-     "role": "lead",
-     "level": "Junior management",
-     "rating": 3,
-     "owner": "meera-dsouza",
-     "projectCount": 10,
-     "projectValue": 9910.8
-    },
-    {
-     "id": 12,
-     "name": "Madous Construction Group",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 6,
-     "owner": "faisal-reyes",
-     "projectCount": 17,
-     "projectValue": 9653.6
-    },
-    {
-     "id": 166,
-     "name": "Qouhoum Engineering and Construction",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 2,
-     "owner": "vikram-fernandes",
-     "projectCount": 4,
-     "projectValue": 9634.7
-    },
-    {
-     "id": 115,
-     "name": "Neekeevesh Construction Group",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 5,
-     "owner": "rami-aziz",
-     "projectCount": 10,
-     "projectValue": 9469.8
-    },
-    {
-     "id": 305,
-     "name": "Braasuqid Construction",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 7,
-     "owner": "ananya-kapoor",
-     "projectCount": 4,
-     "projectValue": 9464.3
-    },
-    {
-     "id": 283,
-     "name": "Futrushoun Civil Works",
-     "role": "lead",
-     "level": "Middle management",
-     "rating": 6,
-     "owner": "faisal-reyes",
-     "projectCount": 3,
-     "projectValue": 9422.9
-    },
-    {
-     "id": 235,
-     "name": "Shibourbra Electromechanical",
+     "id": 977,
+     "name": "Innovative Water Applications",
      "role": "mep",
      "level": "Junior management",
+     "rating": 5,
+     "owner": "ziad-abdel-rahman",
+     "projectCount": 1,
+     "projectValue": 3000
+    },
+    {
+     "id": 432,
+     "name": "Alpha Dhabi Holding (formerly Trojan Holding), Bk Gulf LLC (DBBG) (Dubai)",
+     "role": "mep",
+     "level": "Middle management",
+     "rating": 8,
+     "owner": "vikram-fernandes",
+     "projectCount": 1,
+     "projectValue": 2940
+    },
+    {
+     "id": 433,
+     "name": "Alpha Dhabi Holding (formerly Trojan Holding), Carlisle Technical Services",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 8,
+     "owner": "vikram-fernandes",
+     "projectCount": 1,
+     "projectValue": 2940
+    },
+    {
+     "id": 980,
+     "name": "Innovo Build Llc",
+     "role": "both",
+     "level": "Middle management",
+     "rating": 6,
+     "owner": "faisal-reyes",
+     "projectCount": 7,
+     "projectValue": 2764.2
+    },
+    {
+     "id": 574,
+     "name": "Bk Gulf Llc (Dbbg) (Dubai)",
+     "role": "mep",
+     "level": "Middle management",
+     "rating": 7,
+     "owner": "priya-kulkarni",
+     "projectCount": 1,
+     "projectValue": 2700
+    },
+    {
+     "id": 633,
+     "name": "China State Construction Engineering Corporation Ltd. Middle East Llc (Cscec)",
+     "role": "both",
+     "level": "Junior management",
      "rating": 2,
-     "owner": "arjun-sethi",
-     "projectCount": 2,
-     "projectValue": 9085.2
+     "owner": "omar-nasser",
+     "projectCount": 4,
+     "projectValue": 2688
+    },
+    {
+     "id": 1515,
+     "name": "United Engineering Construction (Unec)",
+     "role": "both",
+     "level": "Middle management",
+     "rating": 5,
+     "owner": "faisal-reyes",
+     "projectCount": 7,
+     "projectValue": 2675.8
+    },
+    {
+     "id": 634,
+     "name": "China State Construction Engineering Corporation Ltd. Middle East LLC (CSCEC)",
+     "role": "both",
+     "level": "Middle management",
+     "rating": 10,
+     "owner": "ziad-abdel-rahman",
+     "projectCount": 8,
+     "projectValue": 2591.7
+    },
+    {
+     "id": 1495,
+     "name": "Trojan General Contracting Llc (Alpha Dhabi Holding)",
+     "role": "both",
+     "level": "Middle management",
+     "rating": 6,
+     "owner": "faisal-reyes",
+     "projectCount": 6,
+     "projectValue": 2510.5
+    },
+    {
+     "id": 464,
+     "name": "Arabian Construction Company (Acc) (Dubai)",
+     "role": "lead",
+     "level": "Middle management",
+     "rating": 5,
+     "owner": "dinesh-iyer",
+     "projectCount": 4,
+     "projectValue": 2287.6
     }
    ]
   },
-  "projectsNoConsultant": 219,
-  "projectsNoContractor": 984,
-  "openProjectsNoContractor": 148
+  "projectsNoConsultant": 1485,
+  "projectsNoContractor": 2388,
+  "openProjectsNoContractor": 1008
  }
 }

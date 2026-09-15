@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { FocusEvent, PointerEvent } from 'react';
-import { aedm } from '../lib/format';
+import { aedLabel } from '../lib/format';
 import { useNavigate } from 'react-router';
 import type { Grade, MatrixRow, Rollup } from '../../data/schema';
 import { GRADES, SECTORS } from '../../data/schema';
@@ -216,7 +216,7 @@ export function Heatmap({ rollup, rolled, colour }: { rollup: Rollup; rolled: bo
             </div>
             <div>
               <dt>Value</dt>
-              <dd>AED {aedm(tip.info.value)} m</dd>
+              <dd>{aedLabel(tip.info.value)}</dd>
             </div>
           </dl>
           <p className="tip-hint">Click to open these projects</p>

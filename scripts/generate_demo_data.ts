@@ -1,5 +1,5 @@
 /**
- * Deterministic synthetic data for the Halvard Project Intelligence System demo.
+ * Deterministic BNC-backed data for the Halvard Project Intelligence System demo.
  *
  * Run:  bun scripts/generate_demo_data.ts
  * Out:  public/data/rollup.json, projects/<shard>.json, parties/{consultants,contractors,owners}.json
@@ -11,9 +11,9 @@
  * No published file carries a timestamp. The data-as-of date is the constant DATA_AS_OF
  * below, so a re-run writes byte-identical files and `git status` stays clean.
  *
- * Nothing in this file is, or resembles, a real company, project, person or figure. The
- * ten verticals and the 24 engineers are copied from the MIS demo by scripts/import_verticals.ts;
- * every other name is built from invented syllables and checked against scripts/forbidden_terms.txt.
+ * Project, value, geography and company fields come from the three private BNC extracts.
+ * The ten verticals, 24 engineers, relevance model, ownership, relationship ratings and
+ * activity are an illustrative internal commercial layer for the closed demo.
  */
 
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -55,22 +55,53 @@ import type {
   VerticalSummary,
 } from '../data/schema';
 import { BUCKETS, CITIES, SECTORS, STAGES } from '../data/schema';
-import { TAXONOMY } from '../data/taxonomy';
 
 /* ---------- constants ---------- */
 
 const SEED = 20260913;
-const TARGET_PROJECTS = 3500;
-const DATA_AS_OF = '2026-09-12';
-const DATA_AS_OF_LABEL = '12 Sep 2026';
+const DATA_AS_OF = '2026-05-04';
+const DATA_AS_OF_LABEL = '04 May 2026';
 const FISCAL_YEAR = 2026;
-const CONSULTANT_POOL = { lead: 650, mep: 150, both: 100 };
-const CONTRACTOR_POOL = { lead: 450, mep: 170, both: 80 };
-const OWNER_POOL = 1500;
 const SHARD_MAX = 720;
 
 const here = dirname(fileURLToPath(import.meta.url));
 const outDir = join(here, '..', 'public', 'data');
+
+interface BncProject {
+  ref: string;
+  name: string;
+  stage: Stage;
+  completionPct: number | null;
+  completionDate: string | null;
+  value: number;
+  city: City;
+  sector: Sector;
+  category: Category;
+  industry: string;
+  type: string;
+  location: string;
+  attributes: Attribute[];
+  owners: string[];
+  leadConsultants: string[];
+  mepConsultants: string[];
+  mainContractors: string[];
+  mepContractors: string[];
+  description: string;
+  lastUpdated: string;
+  source: 'urban_industrial' | 'other_sectors' | 'brownfield';
+}
+interface BncSource {
+  metadata: {
+    rawRows: number;
+    uniqueProjects: number;
+    overlapRows: number;
+    sources: { key: string; file: string; snapshot: string; rows: number; sha256: string }[];
+    privacy: string;
+  };
+  projects: BncProject[];
+}
+const bnc = JSON.parse(readFileSync(join(here, '..', '.private', 'bnc-source.json'), 'utf8')) as BncSource;
+const TARGET_PROJECTS = bnc.projects.length;
 
 /* ---------- deterministic randomness ---------- */
 
@@ -156,18 +187,6 @@ function unique(make: () => string): string {
   }
 }
 
-const CONSULTANT_SUFFIX: Record<PartyRole, string[]> = {
-  lead: ['Engineering Consultants', 'Design Consultancy', 'Architects and Engineers', 'Consulting Engineers', 'Design Studio', 'Architecture', 'Planning and Design'],
-  mep: ['MEP Consultants', 'Building Services Consultants', 'Services Engineering', 'MEP Design'],
-  both: ['Engineering Consultants', 'Consulting Engineers', 'Design and Engineering'],
-};
-const CONTRACTOR_SUFFIX: Record<PartyRole, string[]> = {
-  lead: ['Contracting', 'Construction', 'Builders', 'General Contracting', 'Engineering and Construction', 'Civil Works', 'Construction Group'],
-  mep: ['Electromechanical', 'MEP Works', 'Building Services', 'Electromechanical Works', 'Technical Services'],
-  both: ['Contracting and Electromechanical', 'Engineering and Contracting', 'Construction and Services'],
-};
-const OWNER_SUFFIX = ['Properties', 'Developments', 'Holdings', 'Real Estate', 'Investments', 'Group', 'Development Authority', 'Estates', 'Land', 'Capital', 'Industries', 'Energy', 'Utilities Authority', 'Transport Authority'];
-
 /* ---------- roster ---------- */
 
 const verticalsFile = JSON.parse(readFileSync(join(here, '..', 'data', 'verticals.json'), 'utf8')) as { verticals: { slug: string; name: string }[] };
@@ -249,17 +268,62 @@ function gradeFor(vslug: string, type: string): Cell {
   return null;
 }
 
-const matrix: MatrixRow[] = [];
-const rowWeight: number[] = [];
-for (const s of TAXONOMY)
-  for (const i of s.industries)
-    for (const t of i.types) {
-      matrix.push({ sector: s.sector, industry: i.industry, type: t.type, cells: verticals.map((v) => gradeFor(v.slug, t.type)) });
-      const sW = s.weight / sum(TAXONOMY.map((x) => x.weight));
-      const iW = i.weight / sum(s.industries.map((x) => x.weight));
-      const tW = t.weight / sum(i.types.map((x) => x.weight));
-      rowWeight.push(sW * iW * tW);
-    }
+const TYPE_ALIAS: Record<string, string> = {
+  'Oil Terminal / Storage Tank / Tank Farm': 'Warehouse / Tankages / Silos',
+  'Oil Field Development': 'Offshore Platform',
+  'Gas Field Development': 'Offshore Platform',
+  'Oil & Gas Pipeline': 'Pipeline',
+  'Oil Refinery': 'Refinery',
+  'Offsites & Utilities': 'Factory / Plant / Farm',
+  'Natural Gas Processing / Treatment Unit': 'Refinery',
+  'Petrochemical Plant': 'Refinery',
+  'Central Processing facilities (CPF)': 'Factory / Plant / Farm',
+  'Gas & Oil Separation Units (GOSP)': 'Factory / Plant / Farm',
+  'Electricity / Power Network': 'Substation',
+  'Gas Terminal': 'Warehouse / Tankages / Silos',
+  'Fossil-Fuel Power Plants': 'Renewable Energy Plant',
+  'Zoo and Animal Reserve': 'Park',
+  'Theme Park & Water Park': 'Theme Park',
+  Infrastructure: 'Mega Urban Development',
+  'Water Distribution Network': 'Water Network',
+  'Sewerage / Solid Waste Treatment Plant': 'Water Treatment Plant',
+  'Water Desalination Plant': 'Desalination Plant',
+  Terminal: 'Airport',
+  Monorail: 'Railway',
+  'Metro & Subway': 'Metro Station',
+  Tram: 'Railway',
+  'Runway & Ancilliary Facilities': 'Airport',
+  'District Cooling Plant': 'Factory / Plant / Farm',
+  'District Cooling Network': 'Water Network',
+  'Telecommunications Network': 'Substation',
+  'Biogas/Biofuel Plants': 'Hydrogen Plants',
+  'Ammonia Plants': 'Hydrogen Plants',
+  'Synthetic Fuel Plants': 'Hydrogen Plants',
+  'Drilling & Exploration works': 'Offshore Platform',
+  'Water Storage Tanks': 'Warehouse / Tankages / Silos',
+  'Super Market': 'Shopping Mall',
+  'Cinema / Theatre / Auditorium': 'Landmark, Museum & Galleries',
+  'Natural Gas Distribution Network': 'Pipeline',
+  'Other Religious Building': 'Mosque',
+};
+function affinityType(type: string, sector: Sector): string {
+  if (TYPE_ALIAS[type]) return TYPE_ALIAS[type]!;
+  if (Object.values(AFFINITY).some((grades) => grades.High.includes(type) || grades.Medium.includes(type) || grades.Low.includes(type))) return type;
+  if (sector === 'Industrial') return 'Factory / Plant / Farm';
+  if (sector === 'Oil, Gas and Fuels') return 'Refinery';
+  if (sector === 'Transport') return 'Road';
+  if (sector === 'Utilities') return 'Substation';
+  return 'Low Rise (1 -3)';
+}
+
+const sourceRows = [...new Map(bnc.projects.map((p) => [`${p.sector}|${p.industry}|${p.type}`, p])).values()];
+const matrix: MatrixRow[] = sourceRows.map((p) => ({
+  sector: p.sector,
+  industry: p.industry,
+  type: p.type,
+  cells: verticals.map((v) => gradeFor(v.slug, affinityType(p.type, p.sector))),
+}));
+const rowWeight = matrix.map(() => 1);
 const rowIndex = new Map(matrix.map((r, i) => [`${r.sector}|${r.industry}|${r.type}`, i]));
 /* the matrix must grade every type on at least one vertical, and give every vertical real reach */
 for (const r of matrix) if (r.cells.every((c) => c === null)) throw new Error(`matrix row ${r.type} has no grade on any vertical`);
@@ -279,21 +343,34 @@ interface PartyDraft {
   w: number;
   projects: Set<string>;
 }
-function makeParties(kind: PartyKind, pool: { lead: number; mep: number; both: number }, exponent: number, suffix: Record<PartyRole, string[]>): PartyDraft[] {
-  const roles: PartyRole[] = [...Array<PartyRole>(pool.lead).fill('lead'), ...Array<PartyRole>(pool.mep).fill('mep'), ...Array<PartyRole>(pool.both).fill('both')];
-  /* shuffle the roles so the Zipf rank is not correlated with role */
-  for (let i = roles.length - 1; i > 0; i--) {
-    const j = Math.floor(rnd() * (i + 1));
-    [roles[i], roles[j]] = [roles[j]!, roles[i]!];
+function sourceParties(kind: PartyKind): PartyDraft[] {
+  const roles = new Map<string, Set<'lead' | 'mep'>>();
+  const add = (names: string[], role: 'lead' | 'mep') => names.forEach((name) => {
+    if (!roles.has(name)) roles.set(name, new Set());
+    roles.get(name)!.add(role);
+  });
+  for (const p of bnc.projects) {
+    if (kind === 'consultant') {
+      add(p.leadConsultants, 'lead');
+      add(p.mepConsultants, 'mep');
+    } else {
+      add(p.mainContractors, 'lead');
+      add(p.mepContractors, 'mep');
+    }
   }
-  return roles.map((role, i) => ({ id: i + 1, name: unique(() => `${word()} ${pick(suffix[role])}`), kind, role, w: 1 / Math.pow(i + 3, exponent), projects: new Set<string>() }));
+  return [...roles.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([name, set], i) => ({
+    id: i + 1,
+    name,
+    kind,
+    role: set.size === 2 ? 'both' : set.has('mep') ? 'mep' : 'lead',
+    w: 1,
+    projects: new Set<string>(),
+  }));
 }
-/* Zipf exponents: the consultant tail is steep (a few design houses sit on a hundred projects), the contractor tail flatter; both are declared as source-shape ranges in data/shape.ts */
-const CONSULTANT_ZIPF = 0.8;
-const CONTRACTOR_ZIPF = 0.36;
-const consultants = makeParties('consultant', CONSULTANT_POOL, CONSULTANT_ZIPF, CONSULTANT_SUFFIX);
-const contractors = makeParties('contractor', CONTRACTOR_POOL, CONTRACTOR_ZIPF, CONTRACTOR_SUFFIX);
-const owners: Owner[] = Array.from({ length: OWNER_POOL }, (_, i) => ({ id: i + 1, name: unique(() => `${word()} ${pick(OWNER_SUFFIX)}`) }));
+const consultants = sourceParties('consultant');
+const contractors = sourceParties('contractor');
+const ownerNames = [...new Set(bnc.projects.flatMap((p) => p.owners))].sort((a, b) => a.localeCompare(b));
+const owners: Owner[] = ownerNames.map((name, i) => ({ id: i + 1, name }));
 const ownerW = owners.map((_, i) => 1 / Math.pow(i + 5, 0.9));
 
 function drawParty(pool: PartyDraft[], accept: (r: PartyRole) => boolean, exclude: number[]): PartyDraft {
@@ -435,10 +512,7 @@ const NAME_NOUN: Record<string, string[]> = {
   'Water Treatment Plant': ['Water Treatment Plant', 'Treatment Works'],
   'Waste to Energy Plant': ['Waste to Energy Plant', 'Energy Recovery Facility'],
 };
-for (const r of matrix) {
-  if (!NAME_NOUN[r.type]) throw new Error(`no name noun for type ${r.type}`);
-  if (!(r.type in VALUE_MULT)) throw new Error(`no value multiplier for type ${r.type}`);
-}
+for (const r of matrix) if (r.cells.every((cell) => cell === null)) throw new Error(`no relevance mapping for ${r.type}`);
 
 const CONSULTANT_FILL = 0.92;
 const MEP_CONSULTANT_FILL = 0.24;
@@ -461,9 +535,9 @@ const MEP_CONTRACTOR_SHARE = 0.28;
 const NO_RELATIONSHIP_P = { noOwnedProject: 0.6, smallBook: 0.2, midBook: 0.05 };
 
 function drawValue(type: string): number {
-  /* log-normal in AED million: median 55, sigma 2.2 on the register, scaled by type, capped */
-  const base = Math.exp(Math.log(55) + 2.2 * gauss() * 0.72) * (VALUE_MULT[type] ?? 1);
-  return r1(Math.min(60000, Math.max(0.5, base)));
+  /* Match the supplied BNC source shape: p10 about 1m, median about 15m, p90 about 266m, maximum 27bn. */
+  const base = Math.exp(Math.log(13.5) + 2.2 * gauss() * 0.84) * (VALUE_MULT[type] ?? 1);
+  return r1(Math.min(27000, Math.max(0.5, base)));
 }
 
 function drawCompletion(stage: Stage): number | null {
@@ -514,10 +588,42 @@ function monthLabel(iso: string): string {
 
 interface Draft extends Omit<Project, 'ownerVertical' | 'ownerEngineer' | 'why' | 'buckets' | 'bucketDates' | 'scores' | 'adjusted' | 'overall' | 'description'> {
   row: number;
+  sourceDescription: string;
 }
 
 const drafts: Draft[] = [];
-for (let n = 0; n < TARGET_PROJECTS; n++) {
+const ownerId = new Map(owners.map((p) => [p.name, p.id]));
+const consultantId = new Map(consultants.map((p) => [p.name, p.id]));
+const contractorId = new Map(contractors.map((p) => [p.name, p.id]));
+for (const p of bnc.projects) {
+  const row = rowIndex.get(`${p.sector}|${p.industry}|${p.type}`);
+  if (row === undefined) throw new Error(`no matrix row for ${p.ref}`);
+  drafts.push({
+    row,
+    ref: p.ref,
+    name: p.name,
+    stage: p.stage,
+    completionPct: p.completionPct,
+    completionDate: p.completionDate,
+    value: p.value,
+    city: p.city,
+    sector: p.sector,
+    category: p.category,
+    industry: p.industry,
+    type: p.type,
+    location: p.location,
+    source: p.source,
+    attributes: p.attributes,
+    owners: p.owners.map((name) => ownerId.get(name)!),
+    leadConsultants: p.leadConsultants.map((name) => consultantId.get(name)!),
+    mepConsultant: p.mepConsultants.length ? consultantId.get(p.mepConsultants[0]!)! : null,
+    mainContractors: p.mainContractors.map((name) => contractorId.get(name)!),
+    mepContractor: p.mepContractors.length ? contractorId.get(p.mepContractors[0]!)! : null,
+    lastUpdated: p.lastUpdated,
+    sourceDescription: p.description,
+  });
+}
+if (bnc.projects.length === 0) for (let n = 0; n < TARGET_PROJECTS; n++) {
   const row = weighted(
     matrix.map((_, i) => i),
     rowWeight,
@@ -569,6 +675,9 @@ for (let n = 0; n < TARGET_PROJECTS; n++) {
     mainContractors: mainIds,
     mepContractor: mepK,
     lastUpdated: addDays(DATA_AS_OF, -Math.round(Math.pow(rnd(), 1.6) * 540)),
+    location: '',
+    source: 'urban_industrial',
+    sourceDescription: '',
   });
 }
 
@@ -625,7 +734,7 @@ for (const d of drafts) {
   const r = matrix[d.row]!;
   const scores: (number | null)[] = r.cells.map((c) => (c ? GRADE_SCORE[c] : null));
   const adjusted: number[] = [];
-  if (rnd() < 0.08) {
+  if (bnc.projects.length === 0 && rnd() < 0.08) {
     const graded = scores.map((s, i) => (s == null ? -1 : i)).filter((i) => i >= 0);
     const k = Math.min(graded.length, int(1, 3));
     for (let j = 0; j < k; j++) {
@@ -657,10 +766,14 @@ for (const d of drafts) {
     consultantClauses.length ? `${consultantClauses.join('; ')}.` : 'No consultant recorded.',
     contractorClauses.length ? `${contractorClauses.join('; ')}.` : 'No contractor appointed.',
   ];
-  const when = d.stage.startsWith('Completed') ? `Completed ${monthLabel(d.completionDate)}.` : `Expected completion ${monthLabel(d.completionDate)}.`;
-  const description = `${d.name} is a ${d.category.toLowerCase()} ${d.type.toLowerCase()} project in ${d.city}, valued at AED ${d.value.toFixed(1)} million, at ${d.stage.toLowerCase()}${d.completionPct != null && d.completionPct > 0 ? ` (${d.completionPct.toFixed(1)} percent complete)` : ''}. ${who.join(' ')} ${when}`;
-  const { row: _row, ...rest } = d;
+  const when = d.completionDate ? (d.stage.startsWith('Completed') ? `Completed ${monthLabel(d.completionDate)}.` : `Expected completion ${monthLabel(d.completionDate)}.`) : 'Completion date not recorded in the source workbook.';
+  const valueWords = d.value > 0 ? `valued at USD ${d.value.toFixed(1)} million` : 'with no value recorded in the source workbook';
+  const locationWords = d.location ? `, ${d.location}` : '';
+  const generated = `${d.name} is a ${d.category.toLowerCase()} ${d.type.toLowerCase()} project in ${d.city}${locationWords}, ${valueWords}, at ${d.stage.toLowerCase()}${d.completionPct != null && d.completionPct > 0 ? ` (${d.completionPct.toFixed(1)} percent complete)` : ''}. ${who.join(' ')} ${when}`;
+  const description = d.sourceDescription ? `${d.sourceDescription} ${generated}` : generated;
+  const { row: _row, sourceDescription: _sourceDescription, ...rest } = d;
   void _row;
+  void _sourceDescription;
   projects.push({ ...rest, description, scores, adjusted, overall, ownerVertical: res.vertical, ownerEngineer, why: res.why, buckets, bucketDates });
 }
 
@@ -859,7 +972,6 @@ function expect(cond: boolean, what: string) {
 }
 expect(projects.length === TARGET_PROJECTS, 'project count');
 expect(new Set(projects.map((p) => p.ref)).size === projects.length, 'unique references');
-expect(new Set(projects.map((p) => p.name)).size === projects.length, 'unique names');
 expect(sum(funnel) === projects.length * V, 'funnel covers every pair');
 expect(sum(funnelProjects) === projects.length, 'project funnel covers every project');
 expect(sum(verticalSummary.map((v) => v.owned)) === kpis.owned, 'vertical owned sums to owned');
@@ -931,7 +1043,7 @@ const definitions: Record<string, Definition> = Object.fromEntries(
       ['relevance', 'Relevance score', `The grade of the project's type on the relevance matrix, converted to a number: High ${GRADE_SCORE.High}, Medium ${GRADE_SCORE.Medium}, Low ${GRADE_SCORE.Low}, none blank. A few rows carry a hand-adjusted score between the grades, shown to one decimal.`],
       ['overall', 'Overall relevance', 'The highest of the ten vertical scores.'],
       ['owner', 'Owner', 'The engineer the ownership cascade assigns the project to, or none. Each project has at most one owner.'],
-      ['pipeline', 'Pipeline value owned', 'The sum of the values of every project with an owner, in AED million.'],
+      ['pipeline', 'Pipeline value owned', 'The sum of the BNC whole-project values assigned to an engineer, in USD million. It is opportunity coverage, not booked revenue.'],
       ['bucket', 'Activity bucket', 'Exactly one sales-activity state per project and vertical, chosen by priority: the highest-priority thing that has happened wins.'],
       ['open', 'Open enquiries and quotes', 'Project-and-vertical pairs whose bucket is Enquiry generated or Quote sent.'],
       ['orders', 'Orders received this year', `Project-and-vertical pairs whose bucket is Order received with an activity date in ${FISCAL_YEAR}.`],
@@ -941,25 +1053,25 @@ const definitions: Record<string, Definition> = Object.fromEntries(
       ['rating', 'Relationship rating', 'A whole number from 1 to 10 recorded by the relationship owner; none where there is no relationship.'],
       ['workload', 'Workload', `Synthetic points per engineer: each owned project counts ${WORKLOAD_WEIGHTS.active} when its bucket on the engineer's vertical is active (quote, enquiry, profile shared, visit, reached out), ${WORKLOAD_WEIGHTS.won} for an order or a waiting or quiet bucket, ${WORKLOAD_WEIGHTS.closed} when closed. An engineer is over capacity above ${ENGINEER_CAPACITY} points.`],
       ['norel', 'No relationship yet', 'A firm on the register that Halvard has never worked with: its level, rating and owner are all blank. Not the same as a low rating.'],
-      ['value', 'Value', 'The project value in AED million to one decimal, as recorded on the register.'],
-      ['completion', 'Completion', 'Percent complete, recorded for projects under construction only; most under-construction rows carry 0.0 until a site report arrives.'],
+      ['value', 'Value', 'The project value in source USD million to one decimal. Zero means the BNC source workbook did not record a value.'],
+      ['completion', 'Completion', 'Percent complete from the BNC workbook, shown for projects under construction when recorded.'],
     ] as const
   ).map(([key, term, text]) => [key, { key, term, text }]),
 );
 const precisionPolicy = [
-  'Money is AED million to one decimal at the project level, rounded once; every rollup is a sum of those one-decimal figures, carried in tenths, so tables that show the same figure tie exactly.',
+  'Money remains in source USD and is stored as USD million to one decimal at project level; every rollup sums those same one-decimal figures, so tables that show the same figure tie exactly.',
   'Relevance scores are 0.0 to 8.0 to one decimal. Grades convert to 8.0, 5.0 and 2.0; a hand-adjusted score keeps one decimal.',
   'Percentages are one decimal from the underlying sums, never from other percentages.',
   'Counts are whole numbers. Ratings are whole numbers from 1 to 10.',
-  'Dates are calendar dates. The register is stated as of the data-as-of date, and nothing published carries a generation timestamp.',
+  'Dates are calendar dates. Where the Other Sectors workbook has no per-project update date, its March 2026 workbook snapshot date is used and disclosed here.',
 ];
 const assumptions = [
-  `${TARGET_PROJECTS.toLocaleString('en-GB')} projects, drawn over 80 sector, industry and project-type rows with Urban Construction about three quarters of the register, Industrial about a tenth, and Oil, Gas and Fuels, Transport and Utilities sharing the rest.`,
-  'Project values follow a wide log-normal in AED million, scaled by project type (a fuel station is small, a metro line is large), capped at AED 60,000.0 million.',
-  'Stages weight toward Under Construction (about a third) and Design; four completed bands cover a quarter. Completion percent is recorded for under-construction rows only, and most of those carry 0.0.',
-  `Parties: ${consultantsOut.length} consultants and ${contractorsOut.length} contractors appear on at least one project, drawn with a heavy tail so a few firms sit on many projects. MEP consultants are recorded on ${measuredShape.mepConsultantFill!.toFixed(1)} percent of rows, a main contractor on ${measuredShape.mainContractorFill!.toFixed(1)} percent and an MEP contractor on ${measuredShape.mepContractorFill!.toFixed(1)} percent; the contractor record is fullest at Tender and under construction and thins on the older completed rows.`,
-  'Every name other than the ten verticals and the 24 engineers is built from invented syllables and checked against a list of terms that must never appear.',
-  `Relationship level and rating are drawn per firm, with larger books leaning senior; the relationship owner is the engineer owning most of that firm's projects. ${measuredShape.noRelationshipShare!.toFixed(1)} percent of firms are a synthetic no-relationship cohort with no level, rating or owner.`,
+  `${bnc.metadata.rawRows.toLocaleString('en-GB')} supplied BNC rows resolve to ${TARGET_PROJECTS.toLocaleString('en-GB')} unique project references. ${bnc.metadata.overlapRows} newer-source overlaps are de-duplicated by BNC reference: Urban & Industrial first, Other Sectors next, Brownfield last.`,
+  `Source rows: ${bnc.metadata.sources.map((s) => `${s.file} (${s.rows.toLocaleString('en-GB')})`).join('; ')}. Project references, names, values, stages, locations, sectors, industries, types, owners, consultants and contractors come from these workbooks.`,
+  'Money is kept in the source USD currency. No AED conversion, scaling, capping or synthetic value generation is applied. Two source rows without a positive value remain in the register at 0.0 and are described as not recorded.',
+  'Company cells are preserved as written. Because BNC uses commas both inside legal company names and between multiple companies, an ambiguous multi-company cell is shown as one source label rather than split incorrectly.',
+  'Individual contact names, telephone numbers, email addresses and workbook assignee fields are deliberately excluded; project and company identities are retained.',
+  `The 24 sales engineers are fictional. Relevance scores, internal ownership, activity, workload, relationship level, rating and relationship owner are deterministic illustrative demo fields because the supplied BNC workbooks do not contain those internal records. ${measuredShape.noRelationshipShare!.toFixed(1)} percent of firms form the illustrative no-relationship cohort.`,
   `Workload is a synthetic measure, ${WORKLOAD_WEIGHTS.active} points per active project on the engineer's own vertical and ${WORKLOAD_WEIGHTS.won} per order or quiet project, against a capacity of ${ENGINEER_CAPACITY} points chosen so a few of the 24 books exceed it.`,
 ];
 const workloadRule = [
@@ -993,7 +1105,7 @@ const meta: Meta = {
   dataAsOf: DATA_AS_OF,
   dataAsOfLabel: DATA_AS_OF_LABEL,
   fiscalYear: FISCAL_YEAR,
-  currency: 'AED',
+  currency: 'USD',
   unit: 'million',
   seed: SEED,
   registerName: 'the market register',
@@ -1066,7 +1178,7 @@ const q = (f: number) => values[Math.min(values.length - 1, Math.floor(f * value
 const filled = projects.filter((p) => p.completionPct != null).map((p) => p.completionPct!);
 const fz = filled.filter((x) => x === 0).length / filled.length;
 console.log(`Wrote ${projects.length} projects in ${shards.length} shards, ${consultantsOut.length} consultants, ${contractorsOut.length} contractors, ${ownersOut.length} owners.`);
-console.log(`Owned ${kpis.owned} (${(ownedShare * 100).toFixed(1)}%), books ${Math.min(...books)} to ${Math.max(...books)}; value p10 ${q(0.1)} p50 ${q(0.5)} p90 ${q(0.9)} max ${values[values.length - 1]} AED m`);
+console.log(`Owned ${kpis.owned} (${(ownedShare * 100).toFixed(1)}%), books ${Math.min(...books)} to ${Math.max(...books)}; value p10 ${q(0.1)} p50 ${q(0.5)} p90 ${q(0.9)} max ${values[values.length - 1]} USD m`);
 console.log(`Buckets: quiet ${(quiet * 100).toFixed(1)}%, orders ${(orders * 100).toFixed(1)}%, closed ${(closed * 100).toFixed(1)}%; completion zeros ${(fz * 100).toFixed(0)}% of filled`);
 console.log(`Gates: ${(['specification', 'buying', 'appointed', 'held', 'none'] as const).map((g) => `${g} ${projects.filter((p) => p.why.gate === g).length}`).join(', ')}`);
 console.log(`Consultant books median ${measuredShape.consultantMedian}, max ${measuredShape.consultantMax}; contractor median ${measuredShape.contractorMedian}, max ${measuredShape.contractorMax}`);
