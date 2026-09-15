@@ -35,6 +35,8 @@ export default function Overview() {
   const { meta, kpis, definitions } = data;
   const engName = new Map(data.engineers.map((e) => [e.slug, e.name]));
   const registerValue = data.sectorStage.reduce((a, c) => a + Math.round(c.value * 10), 0) / 10;
+  const chaseValue = data.chase.reduce((sum, project) => sum + Math.round(project.value * 10), 0) / 10;
+  const overCapacity = data.engineerSummary.filter(engineer => engineer.overloaded);
   const maxOwned = Math.max(1, ...data.verticalSummary.map((v) => v.ownedValue));
   const sectorRows = SECTORS.map((sector) => {
     const cs = data.sectorStage.filter((c) => c.sector === sector);
@@ -49,17 +51,15 @@ export default function Overview() {
   const byValue = STAGES.map((st) => SECTORS.map((se) => cell(st, se).value));
   const byCount = STAGES.map((st) => SECTORS.map((se) => cell(st, se).count));
   return (
-    <div className="wrap">
+    <div className="wrap overview">
       <Masthead meta={meta} />
       <motion.div className="page-head" {...rise()}>
         <div>
           <h1 className="display page-title">Overview</h1>
-          <p className="page-sub">The market register, scored for Halvard, as of {meta.dataAsOfLabel}</p>
+          <p className="page-sub">Market coverage and the next conversations to pursue</p>
         </div>
         <p className="page-basis">
-          Amounts in AED million to one decimal
-          <br />
-          {count(kpis.projects)} projects, AED {aedm(registerValue)} m in the register
+          Register as of {meta.dataAsOfLabel}<br />Amounts in AED million to one decimal
         </p>
       </motion.div>
 
@@ -68,16 +68,32 @@ export default function Overview() {
         label="Headline figures"
         cols={6}
         items={[
-          { label: 'Projects in register', value: kpis.projects, f: count, sub: `AED ${aedm(registerValue)} m across ${count(data.matrix.length)} type rows`, to: '/projects', id: 'kpi-projects' },
-          { label: 'Projects owned', value: kpis.owned, f: count, sub: `${pct((kpis.owned / kpis.projects) * 100)} of the register, ${data.engineers.length} engineers`, to: '/projects?owned=1', id: 'kpi-owned' },
-          { label: 'Pipeline value owned', value: kpis.ownedValue, sub: `AED million, ${pct((kpis.ownedValue / registerValue) * 100)} of register value`, to: '/projects?owned=1&sort=value', id: 'kpi-value' },
-          { label: 'Open enquiries and quotes', value: kpis.openEnquiriesAndQuotes, f: count, sub: 'project and vertical pairs live now', to: '/projects?bucket=1|2', id: 'kpi-open' },
-          { label: `Orders received ${meta.fiscalYear}`, value: kpis.ordersThisYear, f: count, sub: `of ${count(data.funnel[0]!)} orders on record`, to: `/projects?bucket=0&year=${meta.fiscalYear}`, id: 'kpi-orders' },
-          { label: 'Worth chasing now', value: data.chase.length, f: count, sub: `AED ${aedm(data.chase.reduce((a, c) => a + Math.round(c.value * 10), 0) / 10)} m, top twenty by value`, to: '#chase', id: 'kpi-chase' },
+          { label: 'Projects in register', value: kpis.projects, f: count, sub: `AED ${aedm(registerValue)} m · ${count(data.matrix.length)} type rows`, to: '/projects', id: 'kpi-projects' },
+          { label: 'Owned project value · AED m', value: kpis.ownedValue, sub: `${pct((kpis.ownedValue / registerValue) * 100)} of register value`, to: '/projects?owned=1&sort=value', id: 'kpi-value' },
+          { label: 'Worth chasing now', value: data.chase.length, f: count, sub: `Top twenty by value · AED ${aedm(chaseValue)} m`, to: '#chase', id: 'kpi-chase' },
+          { label: 'Projects owned', value: kpis.owned, f: count, sub: `${pct((kpis.owned / kpis.projects) * 100)} coverage · ${data.engineers.length} engineers`, to: '/projects?owned=1', id: 'kpi-owned' },
+          { label: 'Open enquiries and quotes', value: kpis.openEnquiriesAndQuotes, f: count, sub: 'project and vertical pairs', to: '/projects?bucket=1|2', id: 'kpi-open' },
+          { label: `Orders received ${meta.fiscalYear}`, value: kpis.ordersThisYear, f: count, sub: `pairs · ${count(data.funnel[0]!)} orders across all years`, to: `/projects?bucket=0&year=${meta.fiscalYear}`, id: 'kpi-orders' },
         ]}
       />
 
-      <Section id="sector-stage" title="Where the value sits" note="Register value by stage of the project lifecycle, stacked by sector. Concept on the left, completed on the right." link={{ to: '/projects', label: 'All projects' }} defs={['register', 'value']} definitions={definitions}>
+      <p className="value-context">Values describe whole projects, not Halvard revenue or addressable contract value. Ownership assigns a relationship; it does not indicate an order win.</p>
+
+      <motion.aside className="management-attention" aria-labelledby="attention-title" {...rise(0.15)}>
+        <h2 className="label" id="attention-title">Management attention</h2>
+        <div className="attention-items">
+          <Link className="attention-item" id="attention-unowned" to="/projects?owned=0">
+            <strong>{count(kpis.unowned)} projects without an owner <span aria-hidden="true">↗</span></strong>
+            <span>Review assignment gaps under the published cascade.</span>
+          </Link>
+          <Link className="attention-item" id="attention-capacity" to="/engineers#books">
+            <strong>{overCapacity.length} of {data.engineers.length} engineers over capacity <span aria-hidden="true">↗</span></strong>
+            <span>Review books against the {count(data.engineerCapacity)}-point workload limit.</span>
+          </Link>
+        </div>
+      </motion.aside>
+
+      <Section id="sector-stage" title="Where the value sits" note="Whole-project value across the lifecycle, by sector." link={{ to: '/projects', label: 'All projects' }} defs={['register', 'value']} definitions={definitions}>
         <ChartSwitch
           id="sector-stage"
           views={[

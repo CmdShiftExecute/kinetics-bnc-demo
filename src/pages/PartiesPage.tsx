@@ -120,7 +120,7 @@ export default function PartiesPage() {
       <motion.div className="page-head" {...rise()}>
         <div>
           <h1 className="display page-title">Consultants and contractors</h1>
-          <p className="page-sub">Who is the door in: the relationship Halvard holds with each firm, or has yet to build, and the projects it sits on</p>
+          <p className="page-sub">Relationships that open the door to projects</p>
         </div>
         <p className="page-basis">
           {count(rollup.parties.consultants)} consultants, {count(rollup.parties.contractors)} contractors

@@ -68,7 +68,7 @@ export default function EngineersPage() {
       <motion.div className="page-head" {...rise()}>
         <div>
           <h1 className="display page-title">Engineers</h1>
-          <p className="page-sub">Who owns which projects, by vertical, how far each book has moved, and who is over capacity</p>
+          <p className="page-sub">Ownership, activity and capacity across the sales desk</p>
         </div>
         <p className="page-basis">
           {data.engineers.length} engineers on {data.verticals.length} verticals

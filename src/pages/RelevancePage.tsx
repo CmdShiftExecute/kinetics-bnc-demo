@@ -57,7 +57,7 @@ export default function RelevancePage() {
       <motion.div className="page-head" {...rise()}>
         <div>
           <h1 className="display page-title">Relevance matrix</h1>
-          <p className="page-sub">How much each vertical has to sell into each kind of project</p>
+          <p className="page-sub">How closely each project type fits a Halvard vertical</p>
         </div>
         <p className="page-basis">
           {count(data.matrix.length)} rows by {data.verticals.length} verticals, {count(ms.cellsGraded)} graded cells

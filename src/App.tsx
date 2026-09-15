@@ -26,14 +26,19 @@ function Fallback() {
 function ScrollManager() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
-    if (hash) {
+    if (!hash) { window.scrollTo({ top: 0 }); return; }
+    // A direct anchor can precede lazy route and JSON loading. Resolve only on the destination.
+    const scroll = () => {
       const el = document.getElementById(hash.slice(1));
-      if (el) {
-        el.scrollIntoView({ block: 'start' });
-        return;
-      }
-    }
-    window.scrollTo({ top: 0 });
+      if (!el || el.closest('main')?.dataset.page !== pathname) return false;
+      el.scrollIntoView({ block: 'start' });
+      return true;
+    };
+    if (scroll()) return;
+    const observer = new MutationObserver(() => { if (scroll()) observer.disconnect(); });
+    observer.observe(document.getElementById('root')!, { childList: true, subtree: true });
+    const timeout = window.setTimeout(() => observer.disconnect(), 10000);
+    return () => { observer.disconnect(); window.clearTimeout(timeout); };
   }, [pathname, hash]);
   return null;
 }
@@ -46,7 +51,7 @@ function Pages() {
   // every motion component beneath it on first load (measured on the siblings, 13 Sep 2026).
   return (
     <AnimatePresence mode="wait">
-      <motion.main key={location.pathname} {...page}>
+      <motion.main data-page={location.pathname} key={location.pathname} {...page}>
         {!reduce && <motion.div key={`rule-${location.pathname}`} className="entry-rule" aria-hidden="true" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }} />}
         <ErrorBoundary key={location.pathname}>
           <Suspense fallback={<Fallback />}>

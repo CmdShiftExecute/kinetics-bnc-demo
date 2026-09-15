@@ -180,7 +180,7 @@ try {
   const chaseFirst = (await page.locator('#chase-table tbody tr').first().locator('th').innerText()).trim();
   check(chaseRows === rollup.chase.length && chaseFirst === rollup.chase[0]!.name, `Worth chasing lists ${chaseRows} rows, largest first (${chaseFirst})`);
   const sizes = await page.evaluate(() => [getComputedStyle(document.querySelector('.mast-system')!).fontSize, getComputedStyle(document.querySelector('.page-title')!).fontSize]);
-  check(sizes[0] === sizes[1], `Masthead system title is set at the page-title size (${sizes[0]}), as on the MIS and WMS`);
+  check(sizes[0] === '16px' && parseFloat(sizes[1]!) > parseFloat(sizes[0]!), `Masthead uses the finalized MIS contextual title (16px), subordinate to the page heading (${sizes[1]})`);
   const vtRow = await rowHover(page, '#vertical-table tbody tr.hov');
   check(vtRow.shifted && vtRow.marked && vtRow.steady, `Hovering an overview row changes its tone from ${vtRow.before} to ${vtRow.after}, marks its first cell, and does not move it`);
   await breakCss(page, 'table.mis tr.hov:hover td, table.mis tr.hov:hover th { background: var(--paper) !important; box-shadow: none !important; }');
@@ -198,7 +198,7 @@ try {
   await page.waitForTimeout(150);
   const ssKey = ((await page.locator('svg#sector-stage-chart .readbox text').first().textContent()) ?? '').trim();
   const tenderUrban = rollup.sectorStage.find((c) => c.stage === 'Tender' && c.sector === 'Urban Construction')!;
-  check(/^TENDER, URBAN CONSTRUCTION/.test(ssKey) && ssKey.includes(aedmUp(tenderUrban.value)), `Arrow keys walk the columns and segments: "${ssKey.slice(0, 70)}" matches the published cell (AED ${tenderUrban.value} m)`);
+  check(ssKey.startsWith('TENDER, URBAN CONSTRUCTION') && ssKey.includes(aedmUp(tenderUrban.value)), `Arrow keys walk the columns and segments: "${ssKey.slice(0, 70)}" matches the published cell (AED ${tenderUrban.value} m)`);
   await page.keyboard.press('Escape');
   await page.locator('#sector-stage-views button[data-view="count"]').click();
   await page.waitForTimeout(400);
@@ -229,16 +229,16 @@ try {
   await page.waitForSelector('#chase-table tbody tr');
   const seq: string[] = [];
   await page.locator('nav.nav a').first().focus();
-  for (let i = 0; i < 22; i++) {
+  for (let i = 0; i < 26; i++) {
     seq.push(await page.evaluate(() => {
       const el = document.activeElement as HTMLElement;
-      return `${el.tagName.toLowerCase()}:${(el.innerText || el.getAttribute('aria-label') || '').trim().slice(0, 30)}`;
+      return `${el.tagName.toLowerCase()}:${(el.innerText || el.getAttribute('aria-label') || '').trim().slice(0, 30)}|${el.closest('[id^="kpi-"]')?.id ?? ''}`;
     }));
     await page.keyboard.press('Tab');
   }
   writeFileSync(join(out, 'tab-sequence.json'), JSON.stringify(seq, null, 1));
   const idx = (re: RegExp) => seq.findIndex((s) => re.test(s));
-  const order = [idx(/^a:Relevance matrix/), idx(/^a:Data basis/), idx(/^a:.*type rows|^a:.*of the register/), idx(/^a:All projects/i)];
+  const order = [idx(/^a:Relevance matrix/), idx(/^a:Data basis/), idx(/\|kpi-projects$/), idx(/^a:All projects/i)];
   check(order.every((v, i) => v >= 0 && (i === 0 || v > order[i - 1]!)), `Tab reaches the nav, the KPI links and the section links in reading order (${seq.filter((s) => s !== 'body:').length} stops)`);
   const ring = await page.evaluate(() => {
     const a = document.querySelector('nav.nav a') as HTMLElement;
@@ -277,7 +277,7 @@ try {
   await page.waitForTimeout(150);
   const vcRead = ((await page.locator('svg#view-columns .readbox text').first().textContent()) ?? '').trim();
   const vcOther = await page.locator('svg#view-columns .readbox').count();
-  check(/^TENDER: /.test(vcRead) && vcRead.includes(`${tenderRows.length.toLocaleString('en-GB')} PROJECTS`), `The view chart re-shapes with the filter: Tender column reads "${vcRead.slice(0, 60)}" (${vcOther} readout)`);
+  check(vcRead.startsWith('TENDER: ') && vcRead.includes(`${tenderRows.length.toLocaleString('en-GB')} PROJECTS`), `The view chart re-shapes with the filter: Tender column reads "${vcRead.slice(0, 60)}" (${vcOther} readout)`);
   await page.keyboard.press('Escape');
   const chips1 = Number(await page.locator('#chips').getAttribute('data-count'));
   check(chips1 === 1 && /Stage: Tender/.test(await page.locator('#chips').innerText()), `One chip shows the active filter (${chips1})`);
@@ -562,6 +562,8 @@ try {
       const strip = document.querySelector('dl.strip') as HTMLElement | null;
       if (!strip) return { cards: 0, visual: false, ratio: 0 };
       let next = strip.nextElementSibling as HTMLElement | null;
+      // Approved overview hierarchy inserts value semantics and management attention before its visual.
+      if (strip.id === 'kpis') next = document.querySelector('#sector-stage');
       /* the first SECTION after the strip must carry the visual; anything else (a grid, a text block) is not one */
       const svg = next && next.tagName === 'SECTION' ? (next.querySelector('svg.chart') as SVGElement | null) : null;
       const sw = next ? next.getBoundingClientRect().width : 0;
@@ -575,7 +577,7 @@ try {
     await page.waitForSelector('dl.strip');
     await page.waitForTimeout(500);
     const l = await layoutOf(r);
-    check(l.cards === 6 && l.visual && l.ratio >= 0.9, `${r} carries six headline cards and a full-width visual directly beneath them (${l.cards} cards, visual ${l.visual}, ${Math.round(l.ratio * 100)}% of the section)`);
+    check(l.cards === 6 && l.visual && l.ratio >= 0.9, `${r} carries six headline cards and a full-width primary visual (${l.cards} cards, visual ${l.visual}, ${Math.round(l.ratio * 100)}% of the section)`);
   }
   await page.goto(`${base}/data-basis`, { waitUntil: 'networkidle' });
   await page.waitForSelector('#rec-strip');

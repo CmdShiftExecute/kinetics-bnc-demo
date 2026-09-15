@@ -32,7 +32,7 @@ export default function DataBasis() {
       <motion.div className="page-head" {...rise()}>
         <div>
           <h1 className="display page-title">Data basis</h1>
-          <p className="page-sub">Where every figure comes from, the rules that produce it, and the machine's own check that the tables agree</p>
+          <p className="page-sub">The data, definitions and checks behind every figure</p>
         </div>
         <p className="page-basis">
           Register as of {meta.dataAsOfLabel}, seed {meta.seed}

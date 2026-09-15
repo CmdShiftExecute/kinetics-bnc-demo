@@ -95,7 +95,7 @@ export default function ProjectsPage() {
       <motion.div className="page-head" {...rise()}>
         <div>
           <h1 className="display page-title">Projects</h1>
-          <p className="page-sub">The market register, every project, with the filters on the left and the view in the address bar</p>
+          <p className="page-sub">Explore the register by relevance, ownership and activity</p>
         </div>
         <p className="page-basis">
           {count(reg.data.projects.length)} projects in the register

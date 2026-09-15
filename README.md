@@ -10,7 +10,7 @@ The system answers one question a sales desk actually asks: of everything being 
 
 | Route | Description |
 |---|---|
-| `/` | Overview: the headline strip (projects in register, projects owned, pipeline value owned, open enquiries and quotes, orders received this year, no-owner count), then where the value sits by sector and stage, who owns what by vertical, the top twenty worth-chasing projects, and the full activity funnel across every project-and-vertical pair. |
+| `/` | Overview: six figures in primary/supporting bands (register, owned value, chase shortlist, owned count, open pairs and current-year order pairs), then management attention, then where the value sits by sector and stage, who owns what by vertical, the top twenty worth-chasing projects, and the full activity funnel across every project-and-vertical pair. |
 | `/relevance` | The relevance matrix as a heatmap: 80 rows of sector, industry and project type down the side, the ten verticals across the top, a side panel that explains the grade scale and reads the cell under the pointer. Clicking a cell opens the Projects page filtered to it. |
 | `/projects` | The full register with a filter rail, removable chips, an always-visible count and value, sortable columns, a column chooser and CSV export. All filter state lives in the URL, so any view is a shareable link. Alongside the taxonomy, stage, city, value and activity keys it carries `owned` (1 for owned, 0 for no owner), `omin` (an overall relevance floor, 6.5 being the point at which a project reads High), `year` (activity pairs dated in that calendar year, and with `bucket` the pair must be in the bucket and in the year), `nocon` (no lead and no MEP consultant recorded) and `nokon` (no main and no MEP contractor appointed). |
 | `/engineers` | Six cards over the whole desk, among them "Over capacity" (5 of the 24 engineers) and "Heaviest load", then every book on one full-width chart with a workload view that draws the capacity line across it, then one block per engineer, grouped by vertical, ruled like a printed ledger: their owned count, pipeline value, activity funnel, and an over-capacity tag on any book past the line. |
@@ -20,9 +20,17 @@ The system answers one question a sales desk actually asks: of everything being 
 | `/data-basis` | Data basis: six cards (assertions checked, passing, failing, projects reconciled, published files, source shape met) and no visual, by the principal's exemption; then the reporting basis, the relevance grade scale, the ownership cascade, the activity buckets, workload and capacity, relationships and their absence, the declared source shape measured against declared, the precision policy, the synthetic assumptions, the machine's own reconciliation result, and the definitions. |
 | `*` | Not found. |
 
-## The executive layer
+## Reading hierarchy and suite
 
-Every page carries a band of six headline figures and, directly beneath it, one full-width chart, so the first screen answers the question before the tables do. That includes the two drills: the engineer drill and the project drill each carry six cards and a full-width visual of their own. Data basis is the single exception, and a deliberate one: it carries the same six cards and no visual, by the principal's exemption, so it stays a statement of method rather than another chart page. The Overview stacks register value by stage and sector (with a value, projects or sector-share reading); the Relevance matrix shows how far each vertical reaches across the register, then the matrix itself at full width with a tooltip beside the cursor and the grade scale below the table; Projects carries six figures and a stage chart of the current view that re-shapes as the filters change; Engineers puts every book on one chart grouped by vertical, with a workload view that draws the capacity line straight across it; Consultants and contractors charts the twenty largest firms of whatever ranking is selected, by value or by count, over the whole book or on one vertical, and clicking a bar opens that firm's card. Charts use the family's second print ink (`--spot`, identical to the MIS and WMS) with the ramp ink, spot, ink-2, spot-2, ink-3, and hazard red only for a closed project. Every chart answers a plain pointer move, walks with the arrow keys, tweens when its data changes, and carries a view switch where a second reading helps. Every card figure is published by the generator (`matrixSummary`, `partySummary`, the rollups) and reconciled; the Projects cards are the one exception, computed in the browser from the filtered rows with the same predicate the table uses, and the interaction gate predicts them from the data.
+The Overview prioritizes three answers: register size, the value of owned projects, and the top-twenty chase shortlist. A quieter supporting band retains ownership coverage, open enquiry/quote pairs and current-year order pairs. Management attention exposes the published no-owner population and engineers above workload capacity. All six figures retain their exact populations and drill paths. Full project value is explicitly distinguished from Halvard revenue and addressable contract value.
+
+The sector-stage visual retains value, project-count and sector-share views. Vertical ownership, sector concentration, the complete twenty-project shortlist, the pair-based activity funnel and the distinct unique-project explanation remain below it. Every other analytical route retains six headline figures and its full-width chart; Data basis deliberately has no chart.
+
+A persistent Halvard masthead now shares the finalized MIS circular Module and Theme menus. Names and selected states live inside the menus. Module browsing requires explicit activation; keyboard arrows, Enter/Space, Escape, outside dismissal and Tab exit are supported. Parchment, Light and Dark cover all routes, charts, heatmaps, tooltips and error states. The `halvard-pis-theme` preference restores in the HTML head before application mounting and tolerates invalid or denied storage. Preferences are per browser origin; ports 926, 927 and 928 do not synchronize storage.
+
+The semantic palettes and controls follow MIS at commit `227629042371be9db44a9fae7a8972aa78d7cde4`. The PIS grade and value heatmaps add sequential theme-specific ramps with unchanged grade meanings, data-driven steps and text polarity. Relevance measures fit; ownership assigns a relationship; neither represents an order win.
+
+See [the refinement design and analytical preservation map](docs/REFINEMENT.md). No fixture, ownership rule, ranking rule, filter predicate, export calculation or virtual-table row height changed in this refinement.
 
 ## Run it
 
@@ -35,7 +43,7 @@ Every page carries a band of six headline figures and, directly beneath it, one 
 7. `bun run lint` runs oxlint.
 8. `bun run build` runs the typecheck and then the Vite production build.
 9. `bun run preview` serves the built site at `127.0.0.1:4182`.
-10. `bun run contrast` measures the WCAG contrast of every text and surface pair the stylesheet defines, reading the tokens directly from `src/styles/index.css`.
+10. `bun run contrast` measures the same text, surface, heatmap, chart and hover contrast floors across all three themes, reading the tokens directly from `src/styles/index.css`.
 11. `bun scripts/interactions.ts --base <origin> [--insecure]` runs the interaction, keyboard, structure and resilience gate against a served build. `--insecure` skips certificate checks when the origin is self-signed.
 12. `bun run screenshots` captures every route at desktop, laptop and phone widths, plus the Projects page filtered and the matrix rolled up to sector level.
 13. `bun scripts/perf_probe.ts [--base <origin>] [--path /projects]` loads the Projects page (3,500 windowed rows), measures time to first drawn row, then scrolls for four seconds in a real Chromium and records frame timing. It is run directly, not through a package script.
@@ -130,3 +138,9 @@ The build output is a static `dist` folder; any static host that falls back to `
 ## Synthetic data statement
 
 Every project, party, score, owner and activity state in this repository is generated by a seeded script. No real project, company, person or figure is represented, referenced or implied anywhere in this demo, its data or its documentation. The generator checks every invented name against a forbidden-terms list before writing it, and `scripts/scan_staged.sh` checks every commit for the same before it reaches version control.
+
+## Refinement review verification
+
+`OUT=/tmp/pis-review BASE=http://100.100.228.66:4182 node scripts/refinement.mjs` runs the suite/theme/browser gate and writes screenshots and checks. Use Node for the Firefox screenshot path. The existing `interactions` gate retains all analytical, motion and deliberately corrupt-data controls. Its presentation checks now recognize the compact MIS masthead and the overview attention band before the chart.
+
+The original staging build at HTTPS port 928 is separate from the isolated review runtime. Promotion requires the refinement's own explicit approval; the original source/build archives are retained until deletion is expressly approved.
