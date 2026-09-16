@@ -1,0 +1,27 @@
+# Publish to Vercel on every push to main: the durable half of the two-host arrangement.
+# node-ss serves the same build on the tailnet; this keeps the public copy equal to main
+# without anyone running a command on the box. The token is the repository secret
+# VERCEL_TOKEN, set from node-ss on 16 Sep 2026. deploy/vercel-publish.sh does the
+# upload and refuses to report success unless the live origin serves the build it made.
+name: Publish to Vercel
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: bash deploy/vercel-publish.sh kinetics-pis-demo
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
