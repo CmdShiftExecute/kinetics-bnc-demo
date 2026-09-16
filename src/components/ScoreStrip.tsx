@@ -11,13 +11,27 @@ import { useWidth } from './useWidth';
  * The ten vertical scores of one project as a bar strip: one column per vertical,
  * height by score out of 8, the grade under it, the owning vertical outlined in ink,
  * a hand-adjusted score marked. Drawn at the full width of its section (a narrow
- * viewport keeps a 700px floor and scrolls). Hover-driven with keyboard parity.
+ * viewport keeps a 760px floor and scrolls: ten columns of 76px, enough for the
+ * longest single word, DISTRIBUTION, at 10px mono). A name breaks into one word
+ * per line past twelve characters, so no label runs past the strip's left edge;
+ * "ELECTRICAL DISTRIBUTION" centred on the first column used to start 19px outside
+ * it, measured 16 Sep 2026. Hover-driven with keyboard parity.
  */
+/** "Pumps and Water" reads PUMPS AND / WATER; a part past twelve characters breaks at its spaces. */
+const labelLines = (name: string): string[] =>
+  name
+    .toUpperCase()
+    .split(' AND ')
+    .flatMap((part, i, all) => {
+      const line = i < all.length - 1 ? `${part} AND` : part;
+      return line.length > 12 ? line.split(' ') : [line];
+    });
+
 export function ScoreStrip({ verticals, scores, adjusted, owner, id }: { verticals: Vertical[]; scores: (number | null)[]; adjusted: number[]; owner: number | null; id: string }) {
   const reduce = useReducedMotion();
   const [hover, setHover] = useState<number | null>(null);
-  const { ref, width: measured } = useWidth(1000, 700);
-  const width = Math.max(700, measured);
+  const { ref, width: measured } = useWidth(1000, 760);
+  const width = Math.max(760, measured);
   const colW = width / verticals.length;
   const barW = Math.min(36, Math.max(20, colW * 0.3));
   const plotH = 96;
@@ -48,14 +62,11 @@ export function ScoreStrip({ verticals, scores, adjusted, owner, id }: { vertica
                 {adjusted.includes(i) ? '*' : ''}
               </text>
               <text x={colW / 2} y={plotH + 16} textAnchor="middle" className="ink" style={{ fontSize: 10 }}>
-                {v.name
-                  .toUpperCase()
-                  .split(' AND ')
-                  .map((part, li, all) => (
-                    <tspan key={li} x={colW / 2} dy={li === 0 ? 0 : 12}>
-                      {li < all.length - 1 ? `${part} AND` : part}
-                    </tspan>
-                  ))}
+                {labelLines(v.name).map((line, li) => (
+                  <tspan key={li} x={colW / 2} dy={li === 0 ? 0 : 12}>
+                    {line}
+                  </tspan>
+                ))}
               </text>
               <text x={colW / 2} y={plotH + 44} textAnchor="middle" style={{ fontSize: 10 }}>
                 {g ? g.toUpperCase() : 'NONE'}

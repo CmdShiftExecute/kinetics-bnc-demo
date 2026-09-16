@@ -5,6 +5,7 @@ import type { SectorStageCell } from '../../data/schema';
 import { SECTORS, STAGES } from '../../data/schema';
 import { aedCompact, aedLabel, count, cx, pct } from '../lib/format';
 import { keyStep, readboxAt } from './charts';
+import { mark, useChartEntry } from './ChartMotion';
 import { useWidth } from './useWidth';
 
 /**
@@ -18,6 +19,7 @@ export function SectorStageChart({ cells, id }: { cells: SectorStageCell[]; id: 
   const { ref, width } = useWidth(800);
   const reduce = useReducedMotion();
   const [hover, setHover] = useState<number | null>(null);
+  const grp = useChartEntry(ref, reduce);
   const labelW = width < 560 ? 96 : 170;
   const m = { left: labelW, right: 92, top: 6, bottom: 6 };
   const rowH = 30;
@@ -69,6 +71,7 @@ export function SectorStageChart({ cells, id }: { cells: SectorStageCell[]; id: 
         onKeyDown={(e) => keyStep(e, flat.length, hover, setHover)}
       >
         <rect x={0} y={0} width={width} height={height} fill="transparent" />
+        <motion.g {...grp}>
         {rows.map((r, ri) => (
           <g key={r.sector} transform={`translate(0 ${m.top + ri * rowH})`}>
             {hover != null && flat[hover]!.ri === ri && <rect className="rowhi" x={0} y={0} width={width} height={rowH} />}
@@ -84,7 +87,7 @@ export function SectorStageChart({ cells, id }: { cells: SectorStageCell[]; id: 
                 width={Math.max(0, s.w - 1)}
                 height={barH}
                 style={{ transformOrigin: `${m.left}px 0px` }}
-                {...(reduce ? {} : { initial: { scaleX: 0 }, whileInView: { scaleX: 1 }, viewport: { once: true }, transition: { duration: 0.5, delay: ri * 0.05, ease: [0.16, 1, 0.3, 1] } })}
+                {...(reduce ? {} : mark({ scaleX: 0 }, { scaleX: 1 }, ri * 0.05))}
               />
             ))}
             <text x={m.left + plotW + 8} y={rowH / 2 + 4} className="ink num-t">
@@ -92,6 +95,7 @@ export function SectorStageChart({ cells, id }: { cells: SectorStageCell[]; id: 
             </text>
           </g>
         ))}
+        </motion.g>
         {h && box && (
           <g className="readbox">
             <rect x={box.x} y={box.y} width={box.w} height={box.h} />

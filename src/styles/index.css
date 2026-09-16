@@ -471,6 +471,12 @@ p {
   -webkit-overflow-scrolling: touch;
   max-width: 100%;
 }
+/* A chart inside a scroller keeps its drawn width and scrolls, rather than taking the
+   generic 100% and being scaled down: at 390px the 760px score strip was rendering at
+   47%, its 10px labels at under 5px, measured 16 Sep 2026. */
+.scroll-x > .chart {
+  width: auto;
+}
 
 /* ---------- disclosures ---------- */
 details.defs,
@@ -2242,8 +2248,16 @@ table.mis.heat tr.hov:focus-within td.hv-5 {
   .ledger {
     grid-template-columns: minmax(0, 1fr);
   }
+  /* the cell's one track is the cell's width, never the widest child's; the figures share it three ways */
+  .ledger-cell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ledger-cell > * {
+    min-width: 0;
+  }
   .ledger-figs {
-    gap: var(--s-md);
+    grid-template-columns: repeat(3, minmax(0, auto));
+    gap: var(--s-sm);
   }
   table.mis.heat th.heat-h,
   table.mis.heat td.heat-c {
@@ -2647,7 +2661,7 @@ section.sec, [id] { scroll-margin-top: 8px; }
  .mast-tools { order: 2; }
  .mast-identity { order: 3; grid-column: 1 / -1; border: 0; padding: 0; }
  .mast-identity .mast-system { display: none; }
- .mast-identity .stamp { font-size: 9px; }
+ .mast-identity .stamp { font-size: 10px; }
  .nav { margin-top: 10px; gap: 6px; padding: 8px 0; }
  .nav-reports { width: 100%; flex-wrap: nowrap; overflow-x: auto; gap: 18px; padding: 4px 2px 8px; scrollbar-width: thin; }
  .nav-reports > * { flex-shrink: 0; white-space: nowrap; }
@@ -2669,7 +2683,7 @@ section.sec, [id] { scroll-margin-top: 8px; }
  .sec-head { flex-wrap: wrap; gap: 12px; }
  .rail { max-height: none; }
  .wordmark { font-size: 24px; }
- .mast-division { font-size: 9px; }
+ .mast-division { font-size: 10px; }
 }
 
 :root { --readbox-hazard: #ff9a9a; --stage-1: #cfccc3; --stage-3: #7d7a71; --stage-4: #5e5b54; --stage-5: #45433d; --stage-6: #2f2e2a; }
@@ -2689,4 +2703,22 @@ section.sec, [id] { scroll-margin-top: 8px; }
 @media (max-width: 760px) {
  .overview #kpis #kpi-owned { padding-left: 0 !important; }
  .overview #kpis #kpi-open { padding-left: 12px !important; }
+}
+
+/* ---------- touch: every target a finger can hit, without moving the print layout ----------
+   Bound to the pointer, not the width: a phone is coarse-pointer at any width, and a narrow
+   desktop window with a mouse needs none of this. Inline links keep their line box; the
+   block padding only widens what a finger can hit. Measured 16 Sep 2026 at 390px: sort
+   buttons were 15px tall, links 17px, calculator checkboxes 13px, against the 24px floor. */
+@media (pointer: coarse) {
+  .vlink, .elink, .sec-link, .drill-link, .sec-note a, td a, dd a, p a, li a { padding-block: 6px; }
+  button.sort { min-height: 28px; padding-block: 4px; align-items: center; }
+  summary { padding-block: 6px; }
+  .nav-reports > a { min-height: 36px; padding-block: 8px; display: inline-flex; align-items: center; }
+  .section-select, .nav-action, .press, .mast-icon { min-height: 36px; }
+  /* block and flex links grow by their padding, which is the point on a phone */
+  .strip dt a, .strip dd a, .vnav a, details a, .netting-box a { padding-block: 6px; }
+  button.disc { min-height: 28px; padding-block: 4px; }
+  input[type='checkbox'] { width: 24px; height: 24px; }
+  table.mis.calc input { min-height: 28px; }
 }

@@ -17,6 +17,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { chromium } from 'playwright';
 import type { Page } from 'playwright';
+import { phoneChecks } from './phone';
 import type { Party, Project, Reconciliation, Rollup } from '../data/schema';
 import { BUCKETS } from '../data/schema';
 import { EMPTY, matches, parseFilters } from '../src/lib/filters';
@@ -903,6 +904,9 @@ try {
   check(errors.length === 0, `No console errors (${errors.length})`);
   for (const e of errors) console.log('   ' + e);
   void EMPTY;
+
+  /* ---------- 12. the phone pass: every route at 390px, real motion, coarse pointer ---------- */
+  await phoneChecks({ browser, base, insecure, check, routes: [...routesWithVisual, '/data-basis'] });
 } finally {
   await browser.close();
 }

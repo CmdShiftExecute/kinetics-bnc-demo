@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import { BUCKETS } from '../../data/schema';
 import { count, cx, pct } from '../lib/format';
 import { keyStep, readboxAt } from './charts';
+import { mark, useChartEntry } from './ChartMotion';
 import { useWidth } from './useWidth';
 
 /**
@@ -16,6 +17,7 @@ export function FunnelChart({ funnel, id, unit = 'pairs' }: { funnel: number[]; 
   const { ref, width } = useWidth(800);
   const reduce = useReducedMotion();
   const [hover, setHover] = useState<number | null>(null);
+  const grp = useChartEntry(ref, reduce);
   const labelW = width < 560 ? 150 : 250;
   const m = { left: labelW, right: 70, top: 6, bottom: 8 };
   const rowH = 22;
@@ -36,6 +38,7 @@ export function FunnelChart({ funnel, id, unit = 'pairs' }: { funnel: number[]; 
     <div className="chart-wrap" ref={ref}>
       <svg id={id} className="chart" width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`Activity funnel. ${BUCKETS.map((b, i) => `${b}: ${count(funnel[i]!)}`).join('. ')}.`} tabIndex={0} onPointerMove={onMove} onPointerLeave={() => setHover(null)} onKeyDown={(e) => keyStep(e, funnel.length, hover, setHover)}>
         <rect x={0} y={0} width={width} height={height} fill="transparent" />
+        <motion.g {...grp}>
         {funnel.map((n, i) => {
           const label = BUCKETS[i]!;
           const short = width < 560 && label.length > 20 ? label.slice(0, 19) + '.' : label;
@@ -45,13 +48,14 @@ export function FunnelChart({ funnel, id, unit = 'pairs' }: { funnel: number[]; 
               <text x={m.left - 10} y={rowH / 2 + 4} textAnchor="end" className="ink">
                 {short}
               </text>
-              <motion.rect className={cx('fbar', i === 4 && 'hz', hover === i && 'mk-on')} x={m.left} y={(rowH - barH) / 2} width={Math.max(1, (plotW * n) / max)} height={barH} style={{ transformOrigin: `${m.left}px 0px` }} {...(reduce ? {} : { initial: { scaleX: 0 }, whileInView: { scaleX: 1 }, viewport: { once: true }, transition: { duration: 0.45, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] } })} />
+              <motion.rect className={cx('fbar', i === 4 && 'hz', hover === i && 'mk-on')} x={m.left} y={(rowH - barH) / 2} width={Math.max(1, (plotW * n) / max)} height={barH} style={{ transformOrigin: `${m.left}px 0px` }} {...(reduce ? {} : mark({ scaleX: 0 }, { scaleX: 1 }, i * 0.03, 0.45))} />
               <text x={m.left + Math.max(1, (plotW * n) / max) + 6} y={rowH / 2 + 4} className="ink num-t">
                 {count(n)}
               </text>
             </g>
           );
         })}
+        </motion.g>
         {h != null && box && (
           <g className="readbox">
             <rect x={box.x} y={box.y} width={box.w} height={box.h} />
