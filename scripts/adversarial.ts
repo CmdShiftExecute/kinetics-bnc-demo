@@ -4,7 +4,7 @@ import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { chromium } from 'playwright';
 import type { Project, Rollup } from '../data/schema';
 import { parseFilters, serialiseFilters, matches, sortProjects } from '../src/lib/filters';
-const base = process.env.BASE ?? 'http://node-ss.tail640a1e.ts.net:4182';
+const base = process.env.BASE ?? 'http://127.0.0.1:4182';
 const out = process.env.OUT ?? '/tmp/pis-adversarial';
 mkdirSync(out, { recursive: true });
 const r: Rollup = JSON.parse(readFileSync('public/data/rollup.json', 'utf8'));

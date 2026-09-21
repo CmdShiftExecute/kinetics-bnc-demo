@@ -16,7 +16,8 @@ import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
 const i = args.indexOf('--from');
-const from = i >= 0 && args[i + 1] ? args[i + 1]! : '/home/sharmas0910/code/kinetics-mis-demo/public/data/index.json';
+// Default: a sibling checkout of the MIS demo beside this one. Override with --from.
+const from = i >= 0 && args[i + 1] ? args[i + 1]! : join(here, '..', '..', 'kinetics-mis-demo', 'public', 'data', 'index.json');
 
 interface Entry {
   slug: string;

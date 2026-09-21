@@ -6,11 +6,17 @@
 #   bash scripts/scan_staged.sh --message <file>   # scans a commit message (commit-msg hook)
 #
 # Refuses: credential shapes, em and en dashes, AI attribution, and any term in
-# scripts/forbidden_terms.txt (whole word, case-insensitive). The terms file
+# .private/forbidden_terms.txt (whole word, case-insensitive). The terms file
 # itself and this script are excluded from the terms check, and only from that check.
+#
+# The terms file is NOT in the repository and must never be: it is the list of real employer and
+# vendor names this tree may not mention, so shipping it would publish exactly what it hides.
+# It lives in .private/ (gitignored). When it is absent - a fresh clone, or CI - the other three
+# checks still run and this one is skipped with a warning, so an outside build is not blocked by
+# a file it cannot have. Anyone can restore the gate by writing their own list at that path.
 set -uo pipefail
 cd "$(dirname "$0")/.."
-TERMS=scripts/forbidden_terms.txt
+TERMS=${FORBIDDEN_TERMS:-.private/forbidden_terms.txt}
 mode=${1:-staged}
 fail=0
 say() { printf '%s\n' "$*"; }
@@ -60,6 +66,12 @@ done <<< "$files"
 # file including the imported register. AUTHORED terms (below it) guard hand-written examples from
 # colliding with real brands, a concern that does not apply to a register of genuine firms.
 esc() { sed 's/[.[\*^$\/]/\\&/g'; }
+if [ ! -f "$TERMS" ]; then
+  say "scan: WARNING - no terms file at $TERMS, so the employer and vendor name check is SKIPPED."
+  say "scan: the credential, dash and attribution checks above still ran."
+  if [ $fail -eq 0 ]; then say "scan: clean ($(printf '%s\n' "$files" | grep -c .) files, mode $mode, name check skipped)"; fi
+  exit $fail
+fi
 hard_pattern=$(sed -n '1,/--- AUTHORED ONLY/p' "$TERMS" | grep -v '^#' | grep -v '^\s*$' | esc | paste -sd'|' -)
 authored_pattern=$(sed -n '/--- AUTHORED ONLY/,$p' "$TERMS" | grep -v '^#' | grep -v '^\s*$' | esc | paste -sd'|' -)
 [ -n "$hard_pattern" ] || { say "REFUSED: terms file has no HARD section - refusing to run a gate that checks nothing"; exit 1; }

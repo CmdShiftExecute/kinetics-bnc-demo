@@ -2,7 +2,7 @@
 import { chromium, firefox } from 'playwright';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-const base = process.env.BASE ?? 'http://node-ss.tail640a1e.ts.net:4182';
+const base = process.env.BASE ?? 'http://127.0.0.1:4182';
 const out = process.env.OUT ?? '/tmp/halvard-pis-refinement';
 mkdirSync(out,{recursive:true});
 const data = JSON.parse(readFileSync('public/data/rollup.json','utf8'));
@@ -36,7 +36,10 @@ for(const name of ['Module','Theme']){
 await page.getByRole('button',{name:'Module',exact:true}).click();
 check(await page.getByRole('menuitem',{name:'Project Intelligence'}).getAttribute('aria-current')==='true','Current module is marked inside menu');
 const moduleLinks=await page.locator('[aria-label="Module options"] a').evaluateAll(es=>es.map(e=>e.getAttribute('href')));
-check(JSON.stringify(moduleLinks)===JSON.stringify(['https://node-ss.tail640a1e.ts.net:926/','https://node-ss.tail640a1e.ts.net:927/','/']),'Suite destinations are exact HTTPS ports',moduleLinks);
+// The masthead's destinations are a build flag (src/lib/suite.ts), so the expected pair is one too.
+const suiteMis=process.env.VITE_SUITE_MIS??'https://kinetics-mis-demo.vercel.app/';
+const suiteWms=process.env.VITE_SUITE_WMS??'https://kinetics-wms-demo.vercel.app/';
+check(JSON.stringify(moduleLinks)===JSON.stringify([suiteMis,suiteWms,'/']),'Suite destinations match the build flags',moduleLinks);
 // Intercept only the probe's activation to prove Space dispatch without leaving the preview.
 await page.getByRole('menuitem',{name:'Central Store'}).evaluate(e=>e.addEventListener('click',ev=>{ev.preventDefault();window.__moduleActivated=true;},{once:true}));
 await page.getByRole('menuitem',{name:'Central Store'}).focus();await page.keyboard.press('Space');

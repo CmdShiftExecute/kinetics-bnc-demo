@@ -16,7 +16,7 @@
  * activity are an illustrative internal commercial layer for the closed demo.
  */
 
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CHANNELS } from '../data/channels';
@@ -153,8 +153,15 @@ const addDays = (iso: string, days: number) => fromT(toT(iso) + days * dayMs);
 
 /* ---------- invented names ---------- */
 
+/* The list of real employer and vendor names an invented word may never collide with. It is not
+   in the repository (it would publish the names it exists to keep out) and lives in .private/,
+   which is gitignored. Absent, the generator still runs: the invented vocabulary is synthetic
+   and a collision is improbable, so a fresh clone gets a warning rather than a failure. */
+const termsPath = process.env.FORBIDDEN_TERMS ?? join(here, '..', '.private', 'forbidden_terms.txt');
 const forbidden = new Set(
-  readFileSync(join(here, 'forbidden_terms.txt'), 'utf8')
+  (existsSync(termsPath)
+    ? readFileSync(termsPath, 'utf8')
+    : (console.warn(`WARNING: no terms file at ${termsPath}; the invented-name collision check is skipped.`), ''))
     .split('\n')
     .filter((l) => l.trim() && !l.startsWith('#'))
     .map((l) => l.trim().toLowerCase()),

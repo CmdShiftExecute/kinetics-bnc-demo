@@ -3,7 +3,7 @@
 # run it after any change to deploy/kinetics-bnc-demo.nginx or after a rebuild that needs nothing more
 # than a reload (a rebuild alone needs no reload, nginx serves dist/ as static files).
 #
-#   bash /home/sharmas0910/code/kinetics-bnc-demo/deploy/install-site.sh
+#   bash "$(git rev-parse --show-toplevel)/deploy/install-site.sh"
 #
 # What it does, every time: writes the site file to sites-available when it differs, makes sure the
 # sites-enabled symlink points at it, runs sudo nginx -t, reloads only on
@@ -11,11 +11,28 @@
 # touches any other site file, including the MIS demo on 926.
 set -euo pipefail
 
-REPO=/home/sharmas0910/code/kinetics-bnc-demo
-SRC="$REPO/deploy/kinetics-bnc-demo.nginx"
+REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+TEMPLATE="$REPO/deploy/kinetics-bnc-demo.nginx"
 DST=/etc/nginx/sites-available/kinetics-bnc-demo
 LINK=/etc/nginx/sites-enabled/kinetics-bnc-demo
 say() { printf '%s %s\n' "$(date '+%H:%M:%S')" "$*"; }
+
+# The site file is a template; nothing host-specific is committed. Every value below can be
+# overridden by exporting it, and each default is read from the machine this runs on.
+SITE_HOST="${SITE_HOST:-$(tailscale status --json | python3 -c 'import json,sys;print(json.load(sys.stdin)["Self"]["DNSName"].rstrip("."))')}"
+SITE_ADDR="${SITE_ADDR:-$(tailscale ip -4 | head -1)}"
+SITE_ROOT="${SITE_ROOT:-$REPO/dist}"
+SSL_CERT="${SSL_CERT:-/etc/nginx/ssl/${SITE_HOST%%.*}.crt}"
+SSL_KEY="${SSL_KEY:-/etc/nginx/ssl/${SITE_HOST%%.*}.key}"
+SRC=$(mktemp -t kinetics-bnc-site.XXXXXX)
+trap 'rm -f "$SRC"' EXIT
+sed -e "s|__SITE_ADDR__|$SITE_ADDR|g" \
+    -e "s|__SITE_HOST__|$SITE_HOST|g" \
+    -e "s|__SITE_ROOT__|$SITE_ROOT|g" \
+    -e "s|__SSL_CERT__|$SSL_CERT|g" \
+    -e "s|__SSL_KEY__|$SSL_KEY|g" "$TEMPLATE" > "$SRC"
+grep -q '__SITE_\|__SSL_' "$SRC" && { say "a placeholder was left unrendered in $SRC"; exit 1; }
+say "site file rendered for $SITE_HOST ($SITE_ADDR), root $SITE_ROOT"
 
 [ -f "$REPO/dist/index.html" ] || { say "dist/index.html is missing; run bun run build first"; exit 1; }
 
@@ -42,7 +59,7 @@ fi
 # asynchronous, so the probe retries for up to five seconds before it judges.
 code=000
 for _ in $(seq 1 10); do
-  code=$(curl -sk -o /tmp/pis-index.html -w '%{http_code}' --resolve node-ss.tail640a1e.ts.net:928:100.100.228.66 https://node-ss.tail640a1e.ts.net:928/ || true)
+  code=$(curl -sk -o /tmp/pis-index.html -w '%{http_code}' --resolve "$SITE_HOST:928:$SITE_ADDR" "https://$SITE_HOST:928/" || true)
   [ "$code" = 200 ] && break
   sleep 0.5
 done
@@ -50,6 +67,6 @@ title=$(grep -o '<title>[^<]*' /tmp/pis-index.html | head -1)
 say "928 answers $code, $title"
 [ "$code" = 200 ] || exit 1
 grep -q 'Halvard Project Intelligence System' /tmp/pis-index.html || { say "928 did not serve the PIS index"; exit 1; }
-mis=$(curl -sk -o /dev/null -w '%{http_code}' --resolve node-ss.tail640a1e.ts.net:926:100.100.228.66 https://node-ss.tail640a1e.ts.net:926/ || true)
-wms=$(curl -sk -o /dev/null -w '%{http_code}' --resolve node-ss.tail640a1e.ts.net:927:100.100.228.66 https://node-ss.tail640a1e.ts.net:927/ || true)
+mis=$(curl -sk -o /dev/null -w '%{http_code}' --resolve "$SITE_HOST:926:$SITE_ADDR" "https://$SITE_HOST:926/" || true)
+wms=$(curl -sk -o /dev/null -w '%{http_code}' --resolve "$SITE_HOST:927:$SITE_ADDR" "https://$SITE_HOST:927/" || true)
 say "926 (MIS demo, untouched) answers $mis; 927 (WMS demo, untouched) answers $wms"
