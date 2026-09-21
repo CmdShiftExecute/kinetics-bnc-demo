@@ -37,7 +37,7 @@ export default function DataBasis() {
         <p className="page-basis">
           Register as of {meta.dataAsOfLabel}, seed {meta.seed}
           <br />
-          BNC market data with an illustrative internal commercial layer
+          Licensed market-register data with an illustrative internal commercial layer
         </p>
       </motion.div>
 
@@ -62,7 +62,7 @@ export default function DataBasis() {
           <div>
             <dt>Company</dt>
             <dd>
-              {meta.company}, {meta.division}. The project, location, value and company fields come from the three supplied BNC workbooks. The Halvard team, relevance, ownership, relationships, workload and activity are illustrative demo data.
+              {meta.company}, {meta.division}. The project, location, value and company fields come from the three supplied register workbooks. The Halvard team, relevance, ownership, relationships, workload and activity are illustrative demo data.
             </dd>
           </div>
           <div>
@@ -84,7 +84,7 @@ export default function DataBasis() {
 
       <Section id="grades" title="The relevance grade scale" note="How a project gets its ten scores" defs={['relevance', 'overall']} definitions={definitions}>
         <p>
-          The relevance matrix has one row per BNC sector, industry and project type ({count(data.matrix.length)} rows) and one column per vertical. Each cell is High, Medium, Low or none. Grades convert to numbers: High {gradeScore.High.toFixed(1)}, Medium {gradeScore.Medium.toFixed(1)}, Low {gradeScore.Low.toFixed(1)}, none blank. This relevance layer is illustrative: BNC project types are mapped to the nearest demo taxonomy type, then scored consistently across the register. Overall relevance is the highest of the ten.
+          The relevance matrix has one row per source sector, industry and project type ({count(data.matrix.length)} rows) and one column per vertical. Each cell is High, Medium, Low or none. Grades convert to numbers: High {gradeScore.High.toFixed(1)}, Medium {gradeScore.Medium.toFixed(1)}, Low {gradeScore.Low.toFixed(1)}, none blank. This relevance layer is illustrative: source project types are mapped to the nearest demo taxonomy type, then scored consistently across the register. Overall relevance is the highest of the ten.
         </p>
       </Section>
 
@@ -190,7 +190,7 @@ export default function DataBasis() {
         </ul>
       </Section>
 
-      <Section id="assumptions" title="Sources and demo assumptions" note="What comes from BNC and what the internal demo layer generates">
+      <Section id="assumptions" title="Sources and demo assumptions" note="What comes from the market register and what the internal demo layer generates">
         <ul className="policy">
           {assumptions.map((a, i) => (
             <li key={i}>{a}</li>

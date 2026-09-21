@@ -17,9 +17,10 @@ class ImportBncDataTest(unittest.TestCase):
         self.assertEqual(self.data["metadata"]["rawRows"], 4568)
         self.assertEqual(self.data["metadata"]["overlapRows"], 32)
 
-    def test_preserves_a_known_bnc_record_in_source_usd_millions(self):
-        project = next(p for p in self.data["projects"] if p["ref"] == "PRJAE0615645")
-        self.assertEqual(project["name"], "Marina 101 - Marsa")
+    def test_preserves_a_known_record_in_source_usd_millions(self):
+        # Looked up by name: the real source reference is private and must not appear in this tree.
+        project = next(p for p in self.data["projects"] if p["name"] == "Marina 101 - Marsa")
+        self.assertTrue(project["ref"].startswith("PRJ"))
         self.assertEqual(project["valueUsd"], 700_000_000)
         self.assertEqual(project["value"], 700.0)
         self.assertEqual(project["source"], "brownfield")

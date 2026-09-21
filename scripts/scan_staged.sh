@@ -5,7 +5,8 @@
 #   bash scripts/scan_staged.sh --tree     # scans every tracked file instead (used before a push)
 #   bash scripts/scan_staged.sh --message <file>   # scans a commit message (commit-msg hook)
 #
-# Refuses: credential shapes, em and en dashes, AI attribution, and any term in
+# Refuses: credential shapes, em and en dashes, AI attribution, real source register
+# references (the masked register's private originals), and any term in
 # .private/forbidden_terms.txt (whole word, case-insensitive). The terms file
 # itself and this script are excluded from the terms check, and only from that check.
 #
@@ -57,6 +58,12 @@ while IFS= read -r f; do
   fi
   if [ "$f" != "scripts/scan_staged.sh" ] && printf '%s' "$c" | grep -niE 'co-authored-by|generated with \[?claude|anthropic\.com|written by (claude|an ai)' | head -3 | grep -q .; then
     say "REFUSED: AI attribution in $f"; fail=1
+  fi
+  # The licensed market register's own project reference numbers are masked by the generator and
+  # kept only in .private/ref-map.json. One reaching a tracked file means the published view was
+  # restored (bun run refs:restore) and not masked again, or a real reference was pasted by hand.
+  if printf '%s' "$c" | grep -nE '\bPRJ[A-Z]{2}[0-9]{3,}\b' | head -3 | grep -q .; then
+    say "REFUSED: real source reference in $f (run: bun run refs:mask)"; printf '%s' "$c" | grep -nE '\bPRJ[A-Z]{2}[0-9]{3,}\b' | head -3; fail=1
   fi
 done <<< "$files"
 

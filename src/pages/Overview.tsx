@@ -59,7 +59,7 @@ export default function Overview() {
           <p className="page-sub">Market coverage and the next conversations to pursue</p>
         </div>
         <p className="page-basis">
-          BNC source register as of {meta.dataAsOfLabel}<br />USD shown in million, billion or trillion as appropriate
+          Source: {meta.registerName} as of {meta.dataAsOfLabel}<br />USD shown in million, billion or trillion as appropriate
         </p>
       </motion.div>
 

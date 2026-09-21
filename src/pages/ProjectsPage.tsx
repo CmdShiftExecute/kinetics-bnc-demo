@@ -76,7 +76,7 @@ export default function ProjectsPage() {
   const chips = chipsFor(filters, rollup, reg.data.consultants, reg.data.contractors);
   const onSort = (key: SortKey, natural: SortDir) => set({ sort: key, dir: filters.sort === key ? (filters.dir === 'asc' ? 'desc' : 'asc') : natural }, false);
   const exportCsv = () => {
-    const header = ['Reference', 'Project', 'Stage', 'Completion %', 'Value USD m', 'City', 'Location', 'Sector', 'Industry', 'Type', 'Category', 'BNC source', 'Overall relevance', ...rollup.verticals.map((v) => `${v.name} score`), 'Owner vertical', 'Owner engineer', ...rollup.verticals.map((v) => `${v.name} activity`), 'Last updated'];
+    const header = ['Reference', 'Project', 'Stage', 'Completion %', 'Value USD m', 'City', 'Location', 'Sector', 'Industry', 'Type', 'Category', 'Source register', 'Overall relevance', ...rollup.verticals.map((v) => `${v.name} score`), 'Owner vertical', 'Owner engineer', ...rollup.verticals.map((v) => `${v.name} activity`), 'Last updated'];
     const body = rows.map((p) => [p.ref, p.name, p.stage, p.completionPct, p.value, p.city, p.location, p.sector, p.industry, p.type, p.category, p.source, p.overall, ...p.scores, p.ownerVertical == null ? '' : rollup.verticals[p.ownerVertical]!.name, p.ownerEngineer ? (engineerName.get(p.ownerEngineer) ?? '') : '', ...p.buckets.map((b) => BUCKETS[b]!), dateLabel(p.lastUpdated)]);
     download(`halvard-projects-${rows.length}.csv`, toCsv(header, body));
   };

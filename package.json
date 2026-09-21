@@ -16,10 +16,13 @@
     "preview": "vite preview",
     "lint": "oxlint",
     "contrast": "bun scripts/check_contrast.ts",
-    "check": "bun run data && bun run reconcile && bun run stable && bun run typecheck && bun run lint && bun run motion && bun run build && bun run contrast",
+    "check": "bun run refs:check && bun run data && bun run reconcile && bun run stable && bun run typecheck && bun run lint && bun run motion && bun run build && bun run contrast && bun run refs:check",
     "interactions": "bun scripts/interactions.ts",
     "screenshots": "bun scripts/screenshots.ts",
     "scan": "bash scripts/scan_staged.sh",
+    "refs:restore": "bun scripts/refs.ts restore",
+    "refs:mask": "bun scripts/refs.ts mask",
+    "refs:check": "bun scripts/refs.ts check",
     "motion": "bun scripts/check_motion.ts"
   },
   "dependencies": {

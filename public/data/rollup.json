@@ -1895,31 +1895,31 @@
    "file": "projects/urban-construction-1.json",
    "sector": "Urban Construction",
    "count": 666,
-   "value": 84306.2
+   "value": 117649.9
   },
   {
    "file": "projects/urban-construction-2.json",
    "sector": "Urban Construction",
    "count": 666,
-   "value": 60829
+   "value": 117478.2
   },
   {
    "file": "projects/urban-construction-3.json",
    "sector": "Urban Construction",
    "count": 666,
-   "value": 100022.8
+   "value": 97429
   },
   {
    "file": "projects/urban-construction-4.json",
    "sector": "Urban Construction",
    "count": 666,
-   "value": 100643.9
+   "value": 78246.3
   },
   {
    "file": "projects/urban-construction-5.json",
    "sector": "Urban Construction",
    "count": 665,
-   "value": 151016.3
+   "value": 86014.8
   },
   {
    "file": "projects/industrial.json",
@@ -1950,8 +1950,8 @@
   "projects": 4536,
   "owned": 4187,
   "ownedValue": 838727.7,
-  "openEnquiriesAndQuotes": 3641,
-  "ordersThisYear": 501,
+  "openEnquiriesAndQuotes": 3598,
+  "ordersThisYear": 511,
   "unowned": 349
  },
  "sectorStage": [
@@ -2198,7 +2198,33 @@
  ],
  "chase": [
   {
-   "ref": "PRJAE24260451",
+   "ref": "AEWGMTTQS",
+   "name": "Dubai Strategic Sewerage Tunnels",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 22000,
+   "city": "Dubai",
+   "type": "Sewerage / Drainage Network",
+   "overall": 8,
+   "ownerVertical": 3,
+   "ownerEngineer": "omar-nasser",
+   "door": null
+  },
+  {
+   "ref": "AE7Z4LF2Y",
+   "name": "UAE-Qatar Causeway (West Link)",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 13000,
+   "city": "Abu Dhabi",
+   "type": "Bridge",
+   "overall": 5,
+   "ownerVertical": 7,
+   "ownerEngineer": "rami-aziz",
+   "door": null
+  },
+  {
+   "ref": "AEQ9DNGKZ",
    "name": "Passenger Terminal Building - Expansion of Al Maktoum International Airport - Phase 2",
    "stage": "Tender",
    "completionPct": null,
@@ -2207,7 +2233,7 @@
    "type": "Airport",
    "overall": 8,
    "ownerVertical": 6,
-   "ownerEngineer": "nadia-zaki",
+   "ownerEngineer": "vikram-fernandes",
    "door": {
     "kind": "consultant",
     "id": 475,
@@ -2215,7 +2241,7 @@
    }
   },
   {
-   "ref": "PRJAE24257495",
+   "ref": "AE4REMWBY",
    "name": "Jebel Ali Sewerage Links (Package Links) -Phase 2 - Dubai Strategic Sewerage Tunnels",
    "stage": "Tender",
    "completionPct": null,
@@ -2224,7 +2250,7 @@
    "type": "Sewerage / Drainage Network",
    "overall": 8,
    "ownerVertical": 3,
-   "ownerEngineer": "omar-nasser",
+   "ownerEngineer": "meera-dsouza",
    "door": {
     "kind": "consultant",
     "id": 1053,
@@ -2232,20 +2258,7 @@
    }
   },
   {
-   "ref": "PRJAE18154439",
-   "name": "Umm Shaif Gas Cap Offshore Development (Phase 1)",
-   "stage": "Tender",
-   "completionPct": null,
-   "value": 6600,
-   "city": "Abu Dhabi",
-   "type": "Gas Field Development",
-   "overall": 8,
-   "ownerVertical": 7,
-   "ownerEngineer": "rami-aziz",
-   "door": null
-  },
-  {
-   "ref": "PRJAE0400183",
+   "ref": "AENHUS5KX",
    "name": "ADNOC Refining - Naphtha Upgradation",
    "stage": "Tender",
    "completionPct": null,
@@ -2253,63 +2266,12 @@
    "city": "Abu Dhabi",
    "type": "Petrochemical Plant",
    "overall": 8,
-   "ownerVertical": 0,
-   "ownerEngineer": "rohan-pillai",
+   "ownerVertical": 6,
+   "ownerEngineer": "vikram-fernandes",
    "door": null
   },
   {
-   "ref": "PRJAE21200182",
-   "name": "Project Volta - TAZIZ Derivatives Park Complex",
-   "stage": "Under Construction",
-   "completionPct": 1,
-   "value": 3000,
-   "city": "Abu Dhabi",
-   "type": "Infrastructure",
-   "overall": 8,
-   "ownerVertical": 9,
-   "ownerEngineer": "ziad-abdel-rahman",
-   "door": {
-    "kind": "contractor",
-    "id": 422,
-    "name": "Alghanim International General Trading & Contracting, Water & Environment Technologies Company ( WETICO )"
-   }
-  },
-  {
-   "ref": "PRJAE0942338",
-   "name": "Dubai Metro Green Line Extension - Blue Line",
-   "stage": "Under Construction",
-   "completionPct": null,
-   "value": 2829,
-   "city": "Dubai",
-   "type": "Metro & Subway",
-   "overall": 8,
-   "ownerVertical": 6,
-   "ownerEngineer": "nadia-zaki",
-   "door": {
-    "kind": "contractor",
-    "id": 684,
-    "name": "CRRC Corporation, Limak Holding Inc., Mapa Construction Company"
-   }
-  },
-  {
-   "ref": "PRJAE1395353",
-   "name": "Dubai Metro Red Line Extension - Blue Line",
-   "stage": "Under Construction",
-   "completionPct": null,
-   "value": 2829,
-   "city": "Dubai",
-   "type": "Metro & Subway",
-   "overall": 8,
-   "ownerVertical": 6,
-   "ownerEngineer": "nadia-zaki",
-   "door": {
-    "kind": "contractor",
-    "id": 684,
-    "name": "CRRC Corporation, Limak Holding Inc., Mapa Construction Company"
-   }
-  },
-  {
-   "ref": "PRJAE16119252",
+   "ref": "AEBZ3A8DD",
    "name": "Dubai Square Mall - Dubai Creek Harbor",
    "stage": "Under Construction",
    "completionPct": 3,
@@ -2318,7 +2280,7 @@
    "type": "Shopping Mall",
    "overall": 8,
    "ownerVertical": 9,
-   "ownerEngineer": "priya-kulkarni",
+   "ownerEngineer": "ziad-abdel-rahman",
    "door": {
     "kind": "contractor",
     "id": 748,
@@ -2326,20 +2288,37 @@
    }
   },
   {
-   "ref": "PRJAE25276902",
-   "name": "Al Nouf Combined Cycle Gas Turbine (CCGT) Plant",
+   "ref": "AEP7DVTKU",
+   "name": "Concourses 1, 2, 3 & West Terminal Building (AMI-400) - Al Maktoum International Airport",
    "stage": "Tender",
    "completionPct": null,
-   "value": 2500,
-   "city": "Abu Dhabi",
-   "type": "Fossil-Fuel Power Plants",
+   "value": 2700,
+   "city": "Dubai",
+   "type": "Airport",
    "overall": 8,
    "ownerVertical": 6,
    "ownerEngineer": "vikram-fernandes",
+   "door": {
+    "kind": "consultant",
+    "id": 505,
+    "name": "Dar Al Handasah Consultants (Shair & Partners) (Dubai)"
+   }
+  },
+  {
+   "ref": "AEXCBWAKG",
+   "name": "Expansion of Upper Zakum Offshore Oilfield Development (UZ 1.5MMBD)",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 2400,
+   "city": "Abu Dhabi",
+   "type": "Oil Field Development",
+   "overall": 8,
+   "ownerVertical": 7,
+   "ownerEngineer": "rami-aziz",
    "door": null
   },
   {
-   "ref": "PRJAE25275471",
+   "ref": "AEK6R6HC6",
    "name": "Umm Shaif Gas Cap Offshore Development (Phase 1) (Package 4)",
    "stage": "Tender",
    "completionPct": null,
@@ -2356,38 +2335,38 @@
    }
   },
   {
-   "ref": "PRJAE19168839",
-   "name": "Umm Shaif Long-Term Development Plan 2",
-   "stage": "Under Construction",
-   "completionPct": 4,
-   "value": 2000,
+   "ref": "AEZ538BRR",
+   "name": "Umm Shaif Gas Cap Offshore Development (Phase 1) (Package 1)",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 2200,
    "city": "Abu Dhabi",
-   "type": "Oil Field Development",
+   "type": "Gas Field Development",
    "overall": 8,
    "ownerVertical": 7,
    "ownerEngineer": "rami-aziz",
    "door": {
-    "kind": "contractor",
-    "id": 1097,
-    "name": "McDermott Middle East Inc."
+    "kind": "consultant",
+    "id": 1280,
+    "name": "Worley - Abu Dhabi (Formerly Worley Parsons)"
    }
   },
   {
-   "ref": "PRJAE24261320",
-   "name": "Raha Island by RAK Properties - Mina Al Arab",
+   "ref": "AEA9JRHL4",
+   "name": "Expansion of Shah Sour Gas Facility",
    "stage": "Tender",
    "completionPct": null,
    "value": 2000,
-   "city": "Ras Al Khaimah",
-   "type": "Mega Urban Development",
+   "city": "Abu Dhabi",
+   "type": "Natural Gas Processing / Treatment Unit",
    "overall": 8,
-   "ownerVertical": 9,
-   "ownerEngineer": "ziad-abdel-rahman",
+   "ownerVertical": 6,
+   "ownerEngineer": "nadia-zaki",
    "door": null
   },
   {
-   "ref": "PRJAE24270779",
-   "name": "DAMAC Islands - Dubailand",
+   "ref": "AEWP2E2QA",
+   "name": "The Wilds by Aldaar",
    "stage": "Tender",
    "completionPct": null,
    "value": 2000,
@@ -2395,11 +2374,11 @@
    "type": "Mega Urban Development",
    "overall": 8,
    "ownerVertical": 9,
-   "ownerEngineer": "ziad-abdel-rahman",
+   "ownerEngineer": "priya-kulkarni",
    "door": null
   },
   {
-   "ref": "PRJAE24258613",
+   "ref": "AEPRMQ9AN",
    "name": "The Alba Residences by Omniyat - Palm Jumeirah",
    "stage": "Tender",
    "completionPct": null,
@@ -2416,7 +2395,7 @@
    }
   },
   {
-   "ref": "PRJAE1286287",
+   "ref": "AE8C42ERT",
    "name": "Burj Azizi - Sheikh Zayed Road",
    "stage": "Under Construction",
    "completionPct": 0,
@@ -2425,7 +2404,7 @@
    "type": "High Rise (15+)",
    "overall": 8,
    "ownerVertical": 3,
-   "ownerEngineer": "meera-dsouza",
+   "ownerEngineer": "omar-nasser",
    "door": {
     "kind": "contractor",
     "id": 875,
@@ -2433,7 +2412,24 @@
    }
   },
   {
-   "ref": "PRJAE23252776",
+   "ref": "AE9VG7TXK",
+   "name": "Automated People Mover - Expansion of Al Maktoum International Airport - Phase 2",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 1500,
+   "city": "Dubai",
+   "type": "Airport",
+   "overall": 8,
+   "ownerVertical": 6,
+   "ownerEngineer": "nadia-zaki",
+   "door": {
+    "kind": "consultant",
+    "id": 474,
+    "name": "Coop Himmelb (L) Au Architectural Prospective Drawings Services LLC, Dar Al Handasah Consultants (Shair & Partners) (Dubai)"
+   }
+  },
+  {
+   "ref": "AENS3Z7AP",
    "name": "Expansion of North East Bab Onshore Oilfield - On-Plot Facilities",
    "stage": "Tender",
    "completionPct": null,
@@ -2446,50 +2442,7 @@
    "door": null
   },
   {
-   "ref": "PRJAE24271777",
-   "name": "Bahria Mixed-Use Development - Dubai South",
-   "stage": "Tender",
-   "completionPct": null,
-   "value": 1500,
-   "city": "Dubai",
-   "type": "Mega Urban Development",
-   "overall": 8,
-   "ownerVertical": 9,
-   "ownerEngineer": "priya-kulkarni",
-   "door": null
-  },
-  {
-   "ref": "PRJAE25278448",
-   "name": "Waada by Bahria Town",
-   "stage": "Tender",
-   "completionPct": null,
-   "value": 1400,
-   "city": "Dubai",
-   "type": "Mega Urban Development",
-   "overall": 8,
-   "ownerVertical": 9,
-   "ownerEngineer": "priya-kulkarni",
-   "door": null
-  },
-  {
-   "ref": "PRJAE23251776",
-   "name": "JW Marriott Residence & JW Marriott Resort - Al Marjan Island",
-   "stage": "Tender",
-   "completionPct": null,
-   "value": 1306.6,
-   "city": "Ras Al Khaimah",
-   "type": "Hotel",
-   "overall": 8,
-   "ownerVertical": 9,
-   "ownerEngineer": "priya-kulkarni",
-   "door": {
-    "kind": "consultant",
-    "id": 335,
-    "name": "Ashai Design Corporation International,Architectural Design Unit (Adu)"
-   }
-  },
-  {
-   "ref": "PRJAE24271590",
+   "ref": "AEUBP5MG6",
    "name": "Mirfa to Liwa Water Transmission System",
    "stage": "Tender",
    "completionPct": null,
@@ -2498,11 +2451,54 @@
    "type": "Water Distribution Network",
    "overall": 8,
    "ownerVertical": 3,
-   "ownerEngineer": "omar-nasser",
+   "ownerEngineer": "meera-dsouza",
    "door": {
     "kind": "consultant",
     "id": 1052,
     "name": "Parsons International Limited - Abu Dhabi"
+   }
+  },
+  {
+   "ref": "AEZJJFVFF",
+   "name": "Trio Isle Interiors by Missoni - Al Marjan Island",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 1200,
+   "city": "Ras Al Khaimah",
+   "type": "High Rise (15+)",
+   "overall": 8,
+   "ownerVertical": 3,
+   "ownerEngineer": "meera-dsouza",
+   "door": null
+  },
+  {
+   "ref": "AE6HKAS9V",
+   "name": "Uniper/Masdar - Green Hydrogen Plant",
+   "stage": "Tender",
+   "completionPct": null,
+   "value": 1000,
+   "city": "Abu Dhabi",
+   "type": "Hydrogen Plants",
+   "overall": 8,
+   "ownerVertical": 7,
+   "ownerEngineer": "rami-aziz",
+   "door": null
+  },
+  {
+   "ref": "AEAMH5FZ7",
+   "name": "Mubarraz Oilfield Redevelopment",
+   "stage": "Under Construction",
+   "completionPct": 3,
+   "value": 1000,
+   "city": "Abu Dhabi",
+   "type": "Oil Field Development",
+   "overall": 8,
+   "ownerVertical": 7,
+   "ownerEngineer": "rami-aziz",
+   "door": {
+    "kind": "contractor",
+    "id": 1446,
+    "name": "Target Engineering Construction Co. LLC (Civil & Power Division)"
    }
   }
  ],
@@ -2512,20 +2508,20 @@
    "name": "Electrical Distribution",
    "channel": "contractors",
    "engineers": 5,
-   "owned": 831,
-   "ownedValue": 37820.4,
+   "owned": 749,
+   "ownedValue": 25640,
    "funnel": [
-    160,
-    236,
-    278,
-    300,
-    458,
-    275,
-    422,
-    716,
-    281,
-    355,
-    1055
+    183,
+    225,
+    244,
+    349,
+    429,
+    256,
+    413,
+    753,
+    277,
+    363,
+    1044
    ]
   },
   {
@@ -2533,20 +2529,20 @@
    "name": "Cooling",
    "channel": "consultants",
    "engineers": 3,
-   "owned": 236,
-   "ownedValue": 107278.5,
+   "owned": 238,
+   "ownedValue": 133142.2,
    "funnel": [
-    143,
-    170,
+    141,
+    186,
+    230,
+    290,
+    434,
     239,
-    307,
-    435,
-    224,
-    343,
-    704,
-    287,
-    299,
-    1385
+    373,
+    660,
+    284,
+    346,
+    1353
    ]
   },
   {
@@ -2554,20 +2550,20 @@
    "name": "Mechanical Systems",
    "channel": "consultants",
    "engineers": 3,
-   "owned": 237,
-   "ownedValue": 173932.9,
+   "owned": 238,
+   "ownedValue": 138398,
    "funnel": [
-    151,
-    135,
-    220,
-    280,
-    399,
-    260,
-    389,
-    685,
-    302,
-    350,
-    1365
+    142,
+    136,
+    233,
+    265,
+    457,
+    196,
+    362,
+    759,
+    288,
+    323,
+    1375
    ]
   },
   {
@@ -2575,20 +2571,20 @@
    "name": "Pumps and Water",
    "channel": "both",
    "engineers": 2,
-   "owned": 623,
-   "ownedValue": 122169,
+   "owned": 617,
+   "ownedValue": 123716,
    "funnel": [
-    121,
-    169,
-    270,
-    308,
-    463,
-    255,
-    377,
-    746,
-    306,
-    350,
-    1171
+    133,
+    175,
+    239,
+    334,
+    421,
+    271,
+    392,
+    718,
+    305,
+    372,
+    1176
    ]
   },
   {
@@ -2596,20 +2592,20 @@
    "name": "Vertical Transport",
    "channel": "consultants",
    "engineers": 3,
-   "owned": 235,
-   "ownedValue": 54153.1,
+   "owned": 237,
+   "ownedValue": 63118.1,
    "funnel": [
-    158,
-    181,
-    225,
-    283,
-    414,
-    244,
-    401,
-    716,
-    291,
+    155,
+    177,
+    231,
+    295,
+    449,
+    240,
     358,
-    1265
+    727,
+    271,
+    354,
+    1279
    ]
   },
   {
@@ -2618,19 +2614,19 @@
    "channel": "consultants",
    "engineers": 2,
    "owned": 237,
-   "ownedValue": 59683.2,
+   "ownedValue": 70877.4,
    "funnel": [
-    142,
-    182,
-    248,
-    282,
-    430,
-    207,
-    387,
-    721,
+    144,
+    167,
+    249,
     310,
-    358,
-    1269
+    433,
+    246,
+    344,
+    683,
+    303,
+    357,
+    1300
    ]
   },
   {
@@ -2638,20 +2634,20 @@
    "name": "Automation",
    "channel": "both",
    "engineers": 2,
-   "owned": 245,
-   "ownedValue": 133370,
+   "owned": 249,
+   "ownedValue": 126930.2,
    "funnel": [
-    51,
-    74,
-    96,
-    245,
-    371,
-    169,
-    377,
-    587,
-    330,
-    382,
-    1854
+    64,
+    70,
+    114,
+    219,
+    366,
+    177,
+    354,
+    610,
+    320,
+    413,
+    1829
    ]
   },
   {
@@ -2659,20 +2655,20 @@
    "name": "Fabrication",
    "channel": "contractors",
    "engineers": 1,
-   "owned": 268,
-   "ownedValue": 54779.3,
+   "owned": 262,
+   "ownedValue": 54041.1,
    "funnel": [
-    61,
-    68,
-    90,
-    236,
-    328,
-    157,
-    364,
-    539,
-    322,
+    44,
+    57,
+    98,
+    248,
+    352,
+    139,
+    382,
+    506,
+    326,
     383,
-    1988
+    2001
    ]
   },
   {
@@ -2680,20 +2676,20 @@
    "name": "Trading",
    "channel": "contractors",
    "engineers": 1,
-   "owned": 1008,
-   "ownedValue": 57191.7,
+   "owned": 1009,
+   "ownedValue": 56453.7,
    "funnel": [
-    152,
-    222,
+    128,
+    235,
+    248,
+    332,
+    407,
+    280,
+    420,
+    681,
     252,
-    328,
-    422,
-    261,
-    421,
-    644,
-    277,
-    354,
-    1203
+    357,
+    1196
    ]
   },
   {
@@ -2701,20 +2697,20 @@
    "name": "Services",
    "channel": "contractors",
    "engineers": 2,
-   "owned": 267,
-   "ownedValue": 38349.6,
+   "owned": 351,
+   "ownedValue": 46411,
    "funnel": [
-    91,
-    112,
-    174,
-    313,
-    441,
-    191,
-    361,
-    609,
-    315,
-    383,
-    1546
+    93,
+    96,
+    188,
+    295,
+    429,
+    177,
+    381,
+    644,
+    342,
+    368,
+    1523
    ]
   }
  ],
@@ -2723,1419 +2719,1419 @@
    "slug": "rohan-pillai",
    "name": "Rohan Pillai",
    "vertical": "electrical-distribution",
-   "owned": 132,
-   "ownedValue": 7564.6,
-   "funnel": [
-    3,
-    23,
-    10,
-    14,
-    10,
-    20,
-    17,
-    18,
-    7,
-    1,
-    9
-   ],
-   "workload": 290,
-   "capacity": 320,
-   "loadPct": 90.6,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "PRJAE0400183",
-     "name": "ADNOC Refining - Naphtha Upgradation",
-     "value": 3200,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE22214989",
-     "name": "Dubai Police Academy - Al Ruwayyah 1",
-     "value": 528.1,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "PRJAE25274087",
-     "name": "Flora Isle Beachfront Living - Dubai Islands",
-     "value": 284.6,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE24268511",
-     "name": "Mamsha Garden - Mamsha Al Saadiyat",
-     "value": 200,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE23248372",
-     "name": "Clearpoint Rashid Yachts & Marina - Mina Rashid",
-     "value": 190,
-     "stage": "Under Construction"
-    }
-   ],
-   "consultants": 110,
-   "contractors": 105
-  },
-  {
-   "slug": "farah-haddad",
-   "name": "Farah Haddad",
-   "vertical": "electrical-distribution",
-   "owned": 167,
-   "ownedValue": 7563.3,
-   "funnel": [
-    8,
-    13,
-    11,
-    14,
-    20,
-    15,
-    26,
-    24,
-    6,
-    6,
-    24
-   ],
-   "workload": 305,
-   "capacity": 320,
-   "loadPct": 95.3,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "PRJAE24269258",
-     "name": "Maysan - Phase 1 - Reem Island",
-     "value": 500,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE1390684",
-     "name": "The Address Residence Sky View - Downtown Dubai",
-     "value": 489,
-     "stage": "Completed (above 3 years)"
-    },
-    {
-     "ref": "PRJAE22225043",
-     "name": "One Canal - Dubai Water Canal",
-     "value": 450,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "PRJAE1056070",
-     "name": "Uniestate Living Bay - Al Marjan Island",
-     "value": 300,
-     "stage": "Completed (above 3 years)"
-    },
-    {
-     "ref": "PRJAE23252287",
-     "name": "Hillside Residences - Wasl Gate",
-     "value": 300,
-     "stage": "Tender"
-    }
-   ],
-   "consultants": 131,
-   "contractors": 138
-  },
-  {
-   "slug": "dinesh-iyer",
-   "name": "Dinesh Iyer",
-   "vertical": "electrical-distribution",
-   "owned": 211,
-   "ownedValue": 7558.2,
-   "funnel": [
-    11,
-    27,
-    18,
-    24,
-    16,
-    21,
-    32,
-    28,
-    7,
-    8,
-    19
-   ],
-   "workload": 439,
-   "capacity": 320,
-   "loadPct": 137.2,
-   "overloaded": true,
-   "top": [
-    {
-     "ref": "PRJAE1498435",
-     "name": "Dubai Design District - Phase 2 - Business Bay",
-     "value": 750,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "PRJAE0727345",
-     "name": "Sky Hills Residences 4 - Dubai Science Park",
-     "value": 325,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "PRJAE0944017",
-     "name": "Rosewood Hotel & Residence - Sowwah Square",
-     "value": 270,
-     "stage": "Completed (above 3 years)"
-    },
-    {
-     "ref": "PRJAE14101565",
-     "name": "Extension Of Sheikh Zayed Bin Sultan Street - Al Reem Island",
-     "value": 250,
-     "stage": "Completed (3 years)"
-    },
-    {
-     "ref": "PRJAE24270611",
-     "name": "SAAS Hills - Dubai Science Park",
-     "value": 250,
-     "stage": "Tender"
-    }
-   ],
-   "consultants": 169,
-   "contractors": 179
-  },
-  {
-   "slug": "marwan-saleh",
-   "name": "Marwan Saleh",
-   "vertical": "electrical-distribution",
-   "owned": 155,
-   "ownedValue": 7569.1,
+   "owned": 94,
+   "ownedValue": 5202.8,
    "funnel": [
     4,
-    19,
-    18,
+    12,
+    7,
+    13,
+    9,
     15,
     12,
-    19,
-    23,
-    17,
-    9,
+    10,
     4,
-    15
+    3,
+    5
    ],
-   "workload": 331,
+   "workload": 203,
    "capacity": 320,
-   "loadPct": 103.4,
-   "overloaded": true,
+   "loadPct": 63.4,
+   "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE1393610",
-     "name": "Uptown Tower - Burj 2020 District",
-     "value": 1200,
-     "stage": "Completed (3 years)"
-    },
-    {
-     "ref": "PRJAE0835488",
-     "name": "One Za'abeel Tower - Dubai World Trade Center",
-     "value": 817,
-     "stage": "Completed (3 years)"
-    },
-    {
-     "ref": "PRJAE24270150",
+     "ref": "AEBC4LRNX",
      "name": "Monaco Mansions - Azizi Venice",
      "value": 545,
      "stage": "Under Construction"
     },
     {
-     "ref": "PRJAE0726288",
-     "name": "W Hotel & Alef Residence - The Palm Jumeirah",
-     "value": 272.2,
-     "stage": "Completed (above 3 years)"
+     "ref": "AEXPRNYG4",
+     "name": "Dubai Police Academy - Al Ruwayyah 1",
+     "value": 528.1,
+     "stage": "Under Construction"
     },
     {
-     "ref": "PRJAE18144499",
-     "name": "Azizi Riviera - Phase 3 - Meydan One",
-     "value": 272.2,
-     "stage": "Completed (3 years)"
-    }
-   ],
-   "consultants": 118,
-   "contractors": 139
-  },
-  {
-   "slug": "kavya-nair",
-   "name": "Kavya Nair",
-   "vertical": "electrical-distribution",
-   "owned": 166,
-   "ownedValue": 7565.2,
-   "funnel": [
-    14,
-    10,
-    24,
-    20,
-    14,
-    15,
-    23,
-    17,
-    9,
-    4,
-    16
-   ],
-   "workload": 336,
-   "capacity": 320,
-   "loadPct": 105,
-   "overloaded": true,
-   "top": [
-    {
-     "ref": "PRJAE24267746",
-     "name": "Olfah Residences by Alef Group",
-     "value": 681,
+     "ref": "AE2WS49PE",
+     "name": "Maysan - Phase 1 - Reem Island",
+     "value": 500,
      "stage": "Tender"
     },
     {
-     "ref": "PRJAE1279076",
-     "name": "Fashion Hotel - Habtoor Palace - Phase 2",
-     "value": 545,
-     "stage": "Completed (above 3 years)"
-    },
-    {
-     "ref": "PRJAE22223096",
+     "ref": "AEU69258Z",
      "name": "Cavalli Couture - Al Wasl",
      "value": 420,
      "stage": "Under Construction"
     },
     {
-     "ref": "PRJAE0942762",
-     "name": "Sofitel Hotel & Residential Towers - Downtown Dubai",
-     "value": 381.2,
+     "ref": "AEET5A6DV",
+     "name": "Hillside Residences - Wasl Gate",
+     "value": 300,
+     "stage": "Tender"
+    }
+   ],
+   "consultants": 90,
+   "contractors": 80
+  },
+  {
+   "slug": "farah-haddad",
+   "name": "Farah Haddad",
+   "vertical": "electrical-distribution",
+   "owned": 187,
+   "ownedValue": 5102.8,
+   "funnel": [
+    12,
+    22,
+    14,
+    28,
+    15,
+    15,
+    25,
+    22,
+    10,
+    3,
+    21
+   ],
+   "workload": 380,
+   "capacity": 320,
+   "loadPct": 118.8,
+   "overloaded": true,
+   "top": [
+    {
+     "ref": "AE9AYRH86",
+     "name": "Olfah Residences by Alef Group",
+     "value": 681,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AEUYG83T5",
+     "name": "Edge Residences - Al Raha Island",
+     "value": 225.8,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AE6RXJQBN",
+     "name": "Nouran Living by Aldar - Phase 3 - Saadiyat Island",
+     "value": 150,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AEYXVLETZ",
+     "name": "Empire Estates - Arjan",
+     "value": 110,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "AE83RVV9W",
+     "name": "Asayel Avenue - Mirdif",
+     "value": 108.9,
+     "stage": "Under Construction"
+    }
+   ],
+   "consultants": 143,
+   "contractors": 155
+  },
+  {
+   "slug": "dinesh-iyer",
+   "name": "Dinesh Iyer",
+   "vertical": "electrical-distribution",
+   "owned": 205,
+   "ownedValue": 5092.9,
+   "funnel": [
+    10,
+    15,
+    29,
+    30,
+    12,
+    23,
+    28,
+    24,
+    10,
+    3,
+    21
+   ],
+   "workload": 443,
+   "capacity": 320,
+   "loadPct": 138.4,
+   "overloaded": true,
+   "top": [
+    {
+     "ref": "AEYYQ8KR3",
+     "name": "Manta Bay - Al Marjan Island",
+     "value": 270,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AEHSVVBXT",
+     "name": "Mamsha Garden - Mamsha Al Saadiyat",
+     "value": 200,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AEL6TGFB8",
+     "name": "MASA Residence - Al Marjan Island",
+     "value": 191,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "AEDYLSV86",
+     "name": "Clearpoint Rashid Yachts & Marina - Mina Rashid",
+     "value": 190,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "AERMSHWLX",
+     "name": "Ashley Hills - Arjan",
+     "value": 180,
+     "stage": "Under Construction"
+    }
+   ],
+   "consultants": 158,
+   "contractors": 168
+  },
+  {
+   "slug": "marwan-saleh",
+   "name": "Marwan Saleh",
+   "vertical": "electrical-distribution",
+   "owned": 158,
+   "ownedValue": 5117.5,
+   "funnel": [
+    5,
+    16,
+    14,
+    21,
+    16,
+    21,
+    19,
+    16,
+    9,
+    5,
+    16
+   ],
+   "workload": 324,
+   "capacity": 320,
+   "loadPct": 101.3,
+   "overloaded": true,
+   "top": [
+    {
+     "ref": "AE5BSTDYP",
+     "name": "Al Wasl Plaza - Dubai Exhibition City",
+     "value": 750,
      "stage": "Completed (above 3 years)"
     },
     {
-     "ref": "PRJAE1499821",
-     "name": "Dubai Digital Park - Dubai Silicon Oasis (DSO)",
-     "value": 354,
-     "stage": "Completed (above 3 years)"
+     "ref": "AET7W6BLA",
+     "name": "Flora Isle Beachfront Living - Dubai Islands",
+     "value": 284.6,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AE3ANSWYY",
+     "name": "Cluster 1 - Arada Central Business District (CBD)",
+     "value": 182.7,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "AEXGUNVC8",
+     "name": "South Bay - Phase 4 - Dubai South",
+     "value": 170,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "AEEV4SZMW",
+     "name": "California Residences - Dubailand",
+     "value": 163.4,
+     "stage": "Under Construction"
     }
    ],
-   "consultants": 127,
-   "contractors": 132
+   "consultants": 128,
+   "contractors": 130
+  },
+  {
+   "slug": "kavya-nair",
+   "name": "Kavya Nair",
+   "vertical": "electrical-distribution",
+   "owned": 105,
+   "ownedValue": 5124,
+   "funnel": [
+    5,
+    12,
+    6,
+    15,
+    13,
+    10,
+    12,
+    14,
+    5,
+    5,
+    8
+   ],
+   "workload": 202,
+   "capacity": 320,
+   "loadPct": 63.1,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "AE3JRD5PA",
+     "name": "Dubai Design District - Phase 2 - Business Bay",
+     "value": 750,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "AEV7AHV97",
+     "name": "One Canal - Dubai Water Canal",
+     "value": 450,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "AEKX5WS9F",
+     "name": "Damac Islands - Maldives",
+     "value": 333.3,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AEF95FPSQ",
+     "name": "Uniestate Living Bay - Al Marjan Island",
+     "value": 300,
+     "stage": "Completed (above 3 years)"
+    },
+    {
+     "ref": "AESVEGTSQ",
+     "name": "Das Island Residential Development (Phase 1)",
+     "value": 300,
+     "stage": "Under Construction"
+    }
+   ],
+   "consultants": 92,
+   "contractors": 95
   },
   {
    "slug": "joseph-villanueva",
    "name": "Joseph Villanueva",
    "vertical": "cooling",
-   "owned": 50,
-   "ownedValue": 33733.7,
+   "owned": 110,
+   "ownedValue": 43022.1,
    "funnel": [
-    0,
-    2,
-    6,
-    2,
-    3,
-    8,
-    6,
-    8,
-    0,
+    1,
+    4,
+    17,
+    10,
+    7,
+    11,
     9,
-    6
+    21,
+    2,
+    12,
+    16
    ],
-   "workload": 95,
+   "workload": 205,
    "capacity": 320,
-   "loadPct": 29.7,
+   "loadPct": 64.1,
    "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE24258455",
-     "name": "The Heights Country Club & Wellness - Al Yalayis",
-     "value": 14976.5,
+     "ref": "AE4SE6Y2D",
+     "name": "Grand Polo Club & Resort - Dubai Investment Park 2",
+     "value": 11164.3,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE21206507",
-     "name": "Hartland Sanctuary - MBR City",
-     "value": 4000,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE25279760",
-     "name": "Sobha Central",
-     "value": 3600,
+     "ref": "AEY6MWPAQ",
+     "name": "Disneyland - Yas Island",
+     "value": 10000,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE25283399",
-     "name": "Masaar 3 - Rowdat District",
-     "value": 2300,
+     "ref": "AE9F8PUK8",
+     "name": "Dubai Metro (LRT) - Phase 4 (Gold Line)",
+     "value": 5500,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE0719176",
-     "name": "Sharjah Sports City - Sharjah Central Route",
+     "ref": "AEMHD8CLS",
+     "name": "Milan Heights - Azizi Milan",
      "value": 2000,
      "stage": "Design"
+    },
+    {
+     "ref": "AESEP88GQ",
+     "name": "Shahama & Bahia Revitalization Districts",
+     "value": 2000,
+     "stage": "Concept"
     }
    ],
-   "consultants": 15,
-   "contractors": 2
+   "consultants": 34,
+   "contractors": 1
   },
   {
    "slug": "lina-khoury",
    "name": "Lina Khoury",
    "vertical": "cooling",
-   "owned": 146,
-   "ownedValue": 33681.3,
+   "owned": 85,
+   "ownedValue": 42066.6,
    "funnel": [
+    1,
     2,
-    3,
-    11,
-    19,
-    11,
+    10,
+    8,
+    6,
+    7,
+    12,
+    8,
+    4,
     14,
-    21,
-    17,
-    11,
-    19,
-    18
+    13
    ],
-   "workload": 271,
+   "workload": 157,
    "capacity": 320,
-   "loadPct": 84.7,
+   "loadPct": 49.1,
    "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE22220206",
+     "ref": "AE8U88ZQJ",
+     "name": "Azizi Milan",
+     "value": 20419.3,
+     "stage": "Design"
+    },
+    {
+     "ref": "AEYQXM7HG",
      "name": "MOON Dubai",
      "value": 5000,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE25277315",
-     "name": "17,080 Affordable Housing Units - Dubai",
-     "value": 2628,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE25279832",
-     "name": "Central Park - The Next Chapter",
-     "value": 2500,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE24265134",
-     "name": "Umm Shaif Long-Term Development Plan 2.1 & 2.2",
-     "value": 2000,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE25279632",
+     "ref": "AERWAHQ7S",
      "name": "Disneyland Resort - Yas Island",
      "value": 2000,
      "stage": "Design"
+    },
+    {
+     "ref": "AEYWPXP6G",
+     "name": "Mira Coral Bay - Al Mairid - Al Marjan Island",
+     "value": 1500,
+     "stage": "Design"
+    },
+    {
+     "ref": "AEZRK5ALN",
+     "name": "Village District - The Next Chapter",
+     "value": 1500,
+     "stage": "Concept"
     }
    ],
-   "consultants": 50,
+   "consultants": 39,
    "contractors": 0
   },
   {
    "slug": "arjun-sethi",
    "name": "Arjun Sethi",
    "vertical": "cooling",
-   "owned": 40,
-   "ownedValue": 39863.5,
+   "owned": 43,
+   "ownedValue": 48053.5,
    "funnel": [
     0,
-    1,
-    7,
-    7,
     3,
     4,
+    4,
     3,
-    5,
-    1,
+    6,
     2,
-    7
+    2,
+    3,
+    10,
+    6
    ],
-   "workload": 81,
+   "workload": 78,
    "capacity": 320,
-   "loadPct": 25.3,
+   "loadPct": 24.4,
    "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE25278626",
-     "name": "Azizi Milan",
-     "value": 20419.3,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE24258457",
-     "name": "Grand Polo Club & Resort - Dubai Investment Park 2",
-     "value": 11164.3,
+     "ref": "AEEYD4ZXY",
+     "name": "Emaar Hills",
+     "value": 27200,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE1389898",
-     "name": "Dubai Metro (LRT) - Phase 4 (Gold Line)",
-     "value": 5500,
+     "ref": "AE8SL5YGG",
+     "name": "The Heights Country Club & Wellness - Al Yalayis",
+     "value": 14976.5,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AEC64B6SS",
+     "name": "Dubai Car Market",
+     "value": 2000,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE23248758",
-     "name": "Umm Al-Dalkh Offshore Oil Field Development",
-     "value": 300,
+     "ref": "AE3S83998",
+     "name": "Sora Beach Residences - Al Marjan Island",
+     "value": 1100,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE23240466",
-     "name": "Le Méridien Resort & Spa- Marjan Island",
-     "value": 232,
+     "ref": "AE66RLNDU",
+     "name": "Keturah Downtown",
+     "value": 544.5,
      "stage": "Design"
     }
    ],
    "consultants": 16,
-   "contractors": 4
+   "contractors": 2
   },
   {
    "slug": "bassem-farouk",
    "name": "Bassem Farouk",
    "vertical": "mechanical-systems",
-   "owned": 102,
-   "ownedValue": 45263.1,
+   "owned": 94,
+   "ownedValue": 43427.9,
    "funnel": [
     0,
-    6,
+    1,
     11,
-    13,
-    6,
-    8,
+    9,
     10,
+    11,
     12,
-    5,
-    18,
-    13
+    15,
+    3,
+    16,
+    6
    ],
-   "workload": 192,
+   "workload": 172,
    "capacity": 320,
-   "loadPct": 60,
+   "loadPct": 53.8,
    "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE25279628",
-     "name": "Disneyland - Yas Island",
+     "ref": "AEXAQY5HU",
+     "name": "Khalifa Industrial Zone Expansion",
      "value": 10000,
-     "stage": "Design"
+     "stage": "Concept"
     },
     {
-     "ref": "PRJAE1061272",
+     "ref": "AE23ZPJYR",
      "name": "Bab Onshore Gas Cap Development",
      "value": 8200,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE19171557",
-     "name": "Non-Ferrous Metals Processing Facilities (Phase 3) - Khalifa Industrial Zone (KIZAD)",
-     "value": 5000,
+     "ref": "AECHQV5A7",
+     "name": "Bayn by ORA",
+     "value": 3000,
+     "stage": "Design"
+    },
+    {
+     "ref": "AESH5ETXJ",
+     "name": "Central Park - The Next Chapter",
+     "value": 2500,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE23233622",
-     "name": "Brooge Energy - Green Hydrogen & Ammonia Plant (Phase 1) - Khalifa Industrial Zone Abu Dhabi (KIZAD)",
-     "value": 1500,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE25275681",
-     "name": "Corinthia Dubai - Sheikh Zayed Road",
-     "value": 1500,
+     "ref": "AEHGNGLMV",
+     "name": "Chlor-Alkali, Ethylene Dichloride (EDC) & Polyvinyl Chloride (PVC) Facility - Taziz Derivatives Park Complex",
+     "value": 2000,
      "stage": "Design"
     }
    ],
-   "consultants": 23,
+   "consultants": 20,
    "contractors": 1
   },
   {
    "slug": "sneha-menon",
    "name": "Sneha Menon",
    "vertical": "mechanical-systems",
-   "owned": 86,
-   "ownedValue": 58242.9,
+   "owned": 64,
+   "ownedValue": 54562.7,
    "funnel": [
-    1,
     3,
-    11,
-    4,
-    3,
-    14,
-    9,
-    9,
-    5,
-    14,
-    13
-   ],
-   "workload": 165,
-   "capacity": 320,
-   "loadPct": 51.6,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "PRJAE25712046",
-     "name": "Full Scale Small City by Mira Developments",
-     "value": 15000,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE19171554",
-     "name": "Khalifa Industrial Zone Expansion",
-     "value": 10000,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE25280394",
-     "name": "Binghatti Master-Planned Community",
-     "value": 6800,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE25278423",
-     "name": "Habshan Long-Term Gas Processing Facilities",
-     "value": 5000,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE25279729",
-     "name": "Jebel Ali Racecourse Development",
-     "value": 5000,
-     "stage": "Design"
-    }
-   ],
-   "consultants": 24,
-   "contractors": 0
-  },
-  {
-   "slug": "tarek-hamdan",
-   "name": "Tarek Hamdan",
-   "vertical": "mechanical-systems",
-   "owned": 49,
-   "ownedValue": 70426.9,
-   "funnel": [
-    0,
     1,
-    9,
+    16,
     6,
-    3,
-    9,
-    3,
-    3,
-    2,
-    8,
-    5
+    6,
+    5,
+    7,
+    7,
+    5,
+    6,
+    2
    ],
-   "workload": 102,
+   "workload": 128,
    "capacity": 320,
-   "loadPct": 31.9,
+   "loadPct": 40,
    "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE25284478",
-     "name": "Emaar Hills",
-     "value": 27200,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE24260467",
+     "ref": "AEUWVJNC6",
      "name": "MOE - Second Nuclear Power Plant",
      "value": 24000,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE19171555",
+     "ref": "AE45GEXFD",
+     "name": "Bab Onshore Gas Cap Development (Package 1)",
+     "value": 6200,
+     "stage": "Design"
+    },
+    {
+     "ref": "AEFWJSGYX",
+     "name": "Non-Ferrous Metals Processing Facilities (Phase 3) - Khalifa Industrial Zone (KIZAD)",
+     "value": 5000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AE2AKAW3F",
+     "name": "Sobha Central",
+     "value": 3600,
+     "stage": "Design"
+    },
+    {
+     "ref": "AELZWQZV2",
+     "name": "Downtown UAQ",
+     "value": 3000,
+     "stage": "Concept"
+    }
+   ],
+   "consultants": 13,
+   "contractors": 2
+  },
+  {
+   "slug": "tarek-hamdan",
+   "name": "Tarek Hamdan",
+   "vertical": "mechanical-systems",
+   "owned": 80,
+   "ownedValue": 40407.4,
+   "funnel": [
+    0,
+    5,
+    10,
+    8,
+    6,
+    9,
+    9,
+    11,
+    3,
+    12,
+    7
+   ],
+   "workload": 156,
+   "capacity": 320,
+   "loadPct": 48.8,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "AE2HXT8AW",
+     "name": "Full Scale Small City by Mira Developments",
+     "value": 15000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AEX668LEK",
+     "name": "Habshan Long-Term Gas Processing Facilities",
+     "value": 5000,
+     "stage": "Design"
+    },
+    {
+     "ref": "AEFMUBQ3B",
      "name": "Alumina Refinery (Phase 1) - Khalifa Industrial Zone (KIZAD)",
      "value": 3000,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE14102078",
-     "name": "Mamzar Beachfront Development",
-     "value": 2720,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE19171556",
-     "name": "Red Mud Research Center & Recycling Plant (Phase 2) - Khalifa Industrial Zone (KIZAD)",
+     "ref": "AEPP9K3EX",
+     "name": "TAQA/ADPC - Green Hydrogen to Ammonia Export Facility - Khalifa Industrial Zone Abu Dhabi (KIZAD)",
      "value": 2000,
      "stage": "Concept"
+    },
+    {
+     "ref": "AESRUDFCH",
+     "name": "Sharjah Sports City - Sharjah Central Route",
+     "value": 2000,
+     "stage": "Design"
     }
    ],
-   "consultants": 6,
+   "consultants": 21,
    "contractors": 0
   },
   {
    "slug": "omar-nasser",
    "name": "Omar Nasser",
    "vertical": "pumps-and-water",
-   "owned": 354,
-   "ownedValue": 60919.9,
+   "owned": 302,
+   "ownedValue": 67527.1,
    "funnel": [
     10,
-    30,
-    34,
-    49,
+    32,
+    23,
     36,
-    35,
-    50,
-    50,
+    21,
+    26,
+    40,
+    44,
+    18,
     15,
-    13,
-    32
+    37
    ],
-   "workload": 714,
+   "workload": 595,
    "capacity": 320,
-   "loadPct": 223.1,
+   "loadPct": 185.9,
    "overloaded": true,
    "top": [
     {
-     "ref": "PRJAE24257495",
-     "name": "Jebel Ali Sewerage Links (Package Links) -Phase 2 - Dubai Strategic Sewerage Tunnels",
-     "value": 9000,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE25279631",
-     "name": "Disneyland Theme Park - Yas Island",
-     "value": 5000,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE24271590",
-     "name": "Mirfa to Liwa Water Transmission System",
-     "value": 1225.1,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE25276602",
-     "name": "Trio Isle Interiors by Missoni - Al Marjan Island",
-     "value": 1200,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE1392129",
-     "name": "FIVE Palm Jumeirah Hotel",
-     "value": 1170,
-     "stage": "Completed (above 3 years)"
-    }
-   ],
-   "consultants": 198,
-   "contractors": 224
-  },
-  {
-   "slug": "meera-dsouza",
-   "name": "Meera Dsouza",
-   "vertical": "pumps-and-water",
-   "owned": 269,
-   "ownedValue": 61249.1,
-   "funnel": [
-    11,
-    22,
-    27,
-    27,
-    25,
-    24,
-    34,
-    39,
-    16,
-    16,
-    28
-   ],
-   "workload": 512,
-   "capacity": 320,
-   "loadPct": 160,
-   "overloaded": true,
-   "top": [
-    {
-     "ref": "PRJAE17136651",
+     "ref": "AEWGMTTQS",
      "name": "Dubai Strategic Sewerage Tunnels",
      "value": 22000,
      "stage": "Tender"
     },
     {
-     "ref": "PRJAE24271872",
-     "name": "Dubai Walk",
-     "value": 3500,
+     "ref": "AE94DSZPK",
+     "name": "Disneyland Theme Park - Yas Island",
+     "value": 5000,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE0511351",
+     "ref": "AEVV49ESR",
      "name": "Gate Towers (Gate District) - Shams Abu Dhabi",
      "value": 1700,
      "stage": "Completed (above 3 years)"
     },
     {
-     "ref": "PRJAE25276376",
+     "ref": "AE8C42ERT",
+     "name": "Burj Azizi - Sheikh Zayed Road",
+     "value": 1500,
+     "stage": "Under Construction"
+    },
+    {
+     "ref": "AE6L622HW",
+     "name": "Bugatti Residences by Binghatti - Business Bay",
+     "value": 1000,
+     "stage": "Under Construction"
+    }
+   ],
+   "consultants": 172,
+   "contractors": 173
+  },
+  {
+   "slug": "meera-dsouza",
+   "name": "Meera Dsouza",
+   "vertical": "pumps-and-water",
+   "owned": 315,
+   "ownedValue": 56188.9,
+   "funnel": [
+    12,
+    20,
+    31,
+    35,
+    25,
+    38,
+    42,
+    33,
+    14,
+    25,
+    40
+   ],
+   "workload": 622,
+   "capacity": 320,
+   "loadPct": 194.4,
+   "overloaded": true,
+   "top": [
+    {
+     "ref": "AE4REMWBY",
+     "name": "Jebel Ali Sewerage Links (Package Links) -Phase 2 - Dubai Strategic Sewerage Tunnels",
+     "value": 9000,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AE2BQ8Z5W",
+     "name": "Dubai Walk",
+     "value": 3500,
+     "stage": "Design"
+    },
+    {
+     "ref": "AEZBHKQLN",
      "name": "Infrastructure Enhancements Works for Dubai Holding Developments",
      "value": 1633.7,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE1286287",
-     "name": "Burj Azizi - Sheikh Zayed Road",
-     "value": 1500,
-     "stage": "Under Construction"
+     "ref": "AEB2NETUR",
+     "name": "The W Residences - Dubai Harbour",
+     "value": 1361.3,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AEUBP5MG6",
+     "name": "Mirfa to Liwa Water Transmission System",
+     "value": 1225.1,
+     "stage": "Tender"
     }
    ],
-   "consultants": 159,
-   "contractors": 143
+   "consultants": 180,
+   "contractors": 172
   },
   {
    "slug": "hana-qureshi",
    "name": "Hana Qureshi",
    "vertical": "vertical-transport",
-   "owned": 73,
-   "ownedValue": 18027,
+   "owned": 53,
+   "ownedValue": 21220.1,
    "funnel": [
-    0,
     1,
-    7,
-    9,
-    2,
+    0,
+    3,
+    1,
     6,
-    8,
+    7,
+    10,
     12,
-    2,
-    18,
-    8
+    1,
+    6,
+    6
    ],
-   "workload": 133,
+   "workload": 89,
    "capacity": 320,
-   "loadPct": 41.6,
+   "loadPct": 27.8,
    "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE25279732",
-     "name": "Mixed-Use Community - Jebel Ali Racecourse Development",
+     "ref": "AE54XSUEW",
+     "name": "Sustainable Smart City - Ghantoot",
+     "value": 7000,
+     "stage": "Design"
+    },
+    {
+     "ref": "AEV58QEPN",
+     "name": "Mamzar Beachfront Development",
+     "value": 2720,
+     "stage": "Design"
+    },
+    {
+     "ref": "AE32UTVGC",
+     "name": "Umm Shaif Long-Term Development Plan 2.1 & 2.2",
      "value": 2000,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE24264785",
-     "name": "Mira Coral Bay - Al Mairid - Al Marjan Island",
+     "ref": "AEE9WMEVK",
+     "name": "Corinthia Dubai - Sheikh Zayed Road",
      "value": 1500,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE22213287",
-     "name": "Neutron Therapy Hospital",
-     "value": 1200,
+     "ref": "AEJXJ25WX",
+     "name": "Umm Al Quwain Logistics City",
+     "value": 800,
      "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE24260668",
-     "name": "Sora Beach Residences - Al Marjan Island",
-     "value": 1100,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE24269749",
-     "name": "The Cliffs - Dubai Water Canal",
-     "value": 1100,
-     "stage": "Design"
     }
    ],
-   "consultants": 21,
+   "consultants": 22,
    "contractors": 1
   },
   {
    "slug": "yusuf-rahman",
    "name": "Yusuf Rahman",
    "vertical": "vertical-transport",
-   "owned": 48,
-   "ownedValue": 17964,
+   "owned": 92,
+   "ownedValue": 20967.8,
    "funnel": [
     1,
-    1,
     3,
-    5,
     7,
-    3,
-    6,
-    3,
-    4,
-    8,
-    7
-   ],
-   "workload": 77,
-   "capacity": 320,
-   "loadPct": 24.1,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "PRJAE23236551",
-     "name": "Sustainable Smart City - Ghantoot",
-     "value": 7000,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE25279212",
-     "name": "Downtown UAQ",
-     "value": 3000,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE19180361",
-     "name": "MAG City - Phase 2 - MAG Eye",
-     "value": 816,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE25282853",
-     "name": "Cheval Blanc Maison - Naia Island",
-     "value": 600,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE25282192",
-     "name": "The S Tower - Sobha Hartland II",
-     "value": 545,
-     "stage": "Design"
-    }
-   ],
-   "consultants": 16,
-   "contractors": 2
-  },
-  {
-   "slug": "divya-bhatt",
-   "name": "Divya Bhatt",
-   "vertical": "vertical-transport",
-   "owned": 114,
-   "ownedValue": 18162.1,
-   "funnel": [
-    0,
-    6,
     10,
-    6,
-    5,
     11,
-    16,
-    16,
-    4,
-    24,
-    16
-   ],
-   "workload": 207,
-   "capacity": 320,
-   "loadPct": 64.7,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "PRJAE24263105",
-     "name": "Dubai Car Market",
-     "value": 2000,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE25282528",
-     "name": "Four Seasons Private Residences - Saadiyat Beach",
-     "value": 2000,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE24255318",
-     "name": "3004 Housing Units",
-     "value": 1500,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE24266366",
-     "name": "The National University of Dubai",
-     "value": 1230,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE25281497",
-     "name": "Hayat by Dubai South",
-     "value": 1200,
-     "stage": "Concept"
-    }
-   ],
-   "consultants": 46,
-   "contractors": 4
-  },
-  {
-   "slug": "karim-mansour",
-   "name": "Karim Mansour",
-   "vertical": "metering",
-   "owned": 119,
-   "ownedValue": 29647.5,
-   "funnel": [
-    1,
-    3,
-    13,
-    10,
+    8,
     6,
     13,
+    4,
     15,
-    16,
-    5,
-    27,
-    10
+    14
    ],
-   "workload": 221,
+   "workload": 149,
    "capacity": 320,
-   "loadPct": 69.1,
+   "loadPct": 46.6,
    "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE25280357",
-     "name": "Keturah Ardh",
-     "value": 6000,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE24271578",
-     "name": "EDF - 5GW Pumped-Storage Hydropower Plant",
-     "value": 3300,
-     "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE25278875",
+     "ref": "AEKTPBDNV",
      "name": "Ardee Al Marjan Island",
      "value": 2500,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE21204452",
+     "ref": "AE3RGYN3D",
+     "name": "Four Seasons Private Residences - Saadiyat Beach",
+     "value": 2000,
+     "stage": "Design"
+    },
+    {
+     "ref": "AEWWMEZCE",
+     "name": "The Second Sphere - Abu Dhabi",
+     "value": 1500,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AE9X33CKN",
+     "name": "Akala Hotel & Residences by Arada",
+     "value": 1361.3,
+     "stage": "Design"
+    },
+    {
+     "ref": "AER6LAX2S",
+     "name": "AD Ports/Nimex - LNG & LPG Terminal Hubs - Khalifa Port",
+     "value": 1034,
+     "stage": "Design"
+    }
+   ],
+   "consultants": 33,
+   "contractors": 3
+  },
+  {
+   "slug": "divya-bhatt",
+   "name": "Divya Bhatt",
+   "vertical": "vertical-transport",
+   "owned": 92,
+   "ownedValue": 20930.2,
+   "funnel": [
+    0,
+    4,
+    13,
+    7,
+    3,
+    9,
+    10,
+    22,
+    6,
+    10,
+    8
+   ],
+   "workload": 175,
+   "capacity": 320,
+   "loadPct": 54.7,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "AEMC7F48E",
+     "name": "The Next Chapter - Jumeirah Golf Estates",
+     "value": 6000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AE45FY38A",
+     "name": "17,080 Affordable Housing Units - Dubai",
+     "value": 2628,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AECDXVQXN",
+     "name": "Dunes Heights - Arabian Hills Estates",
+     "value": 2500,
+     "stage": "Design"
+    },
+    {
+     "ref": "AE8TABZ4J",
+     "name": "Development of Rail Bus System",
+     "value": 1000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AE9Z9HTWD",
+     "name": "RP One - Business Bay",
+     "value": 1000,
+     "stage": "Concept"
+    }
+   ],
+   "consultants": 29,
+   "contractors": 0
+  },
+  {
+   "slug": "karim-mansour",
+   "name": "Karim Mansour",
+   "vertical": "metering",
+   "owned": 100,
+   "ownedValue": 35737.1,
+   "funnel": [
+    0,
+    3,
+    10,
+    13,
+    8,
+    17,
+    10,
+    8,
+    5,
+    18,
+    8
+   ],
+   "workload": 198,
+   "capacity": 320,
+   "loadPct": 61.9,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "AEQ7C5BMH",
+     "name": "Keturah Ardh",
+     "value": 6000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AEH2AQHYB",
+     "name": "Jebel Ali Racecourse Development",
+     "value": 5000,
+     "stage": "Design"
+    },
+    {
+     "ref": "AEL6VWM92",
+     "name": "Hartland Sanctuary - MBR City",
+     "value": 4000,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AECY6TVUG",
      "name": "MOEI - Water Desalination Plants - Abu Dhabi, Dubai & Umm Al Quwain",
      "value": 2080,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE1278804",
-     "name": "Shahama & Bahia Revitalization Districts",
-     "value": 2000,
+     "ref": "AE3K9UAWP",
+     "name": "Avior by Acube",
+     "value": 1500,
      "stage": "Concept"
     }
    ],
-   "consultants": 25,
+   "consultants": 29,
    "contractors": 2
   },
   {
    "slug": "ananya-kapoor",
    "name": "Ananya Kapoor",
    "vertical": "metering",
-   "owned": 118,
-   "ownedValue": 30035.7,
+   "owned": 137,
+   "ownedValue": 35140.3,
    "funnel": [
-    0,
-    0,
-    11,
-    18,
+    1,
+    3,
+    22,
+    9,
     10,
+    17,
+    14,
     12,
-    11,
-    19,
-    10,
-    18,
-    9
+    7,
+    24,
+    18
    ],
-   "workload": 212,
+   "workload": 257,
    "capacity": 320,
-   "loadPct": 66.3,
+   "loadPct": 80.3,
    "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE25279831",
-     "name": "The Next Chapter - Jumeirah Golf Estates",
-     "value": 6000,
+     "ref": "AE5KDRYSP",
+     "name": "Binghatti Master-Planned Community",
+     "value": 6800,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE25279223",
-     "name": "Bayn by ORA",
-     "value": 3000,
+     "ref": "AERJ7DX2R",
+     "name": "EDF - 5GW Pumped-Storage Hydropower Plant",
+     "value": 3300,
+     "stage": "Concept"
+    },
+    {
+     "ref": "AEGEPSKCJ",
+     "name": "Mixed-Use Community - Jebel Ali Racecourse Development",
+     "value": 2000,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE24260867",
-     "name": "Dunes Heights - Arabian Hills Estates",
-     "value": 2500,
+     "ref": "AEMXXCDVH",
+     "name": "Taraf - Residential Community - Masdar City",
+     "value": 1500,
      "stage": "Design"
     },
     {
-     "ref": "PRJAE19177053",
+     "ref": "AEWHWATRY",
      "name": "FEWA/EWEC - Umm Al Quwain Gas-Fired Power Plant",
      "value": 1500,
      "stage": "Concept"
-    },
-    {
-     "ref": "PRJAE1287664",
-     "name": "Hospitality District - Mall of the World",
-     "value": 1000,
-     "stage": "Concept"
     }
    ],
-   "consultants": 32,
-   "contractors": 0
+   "consultants": 36,
+   "contractors": 4
   },
   {
    "slug": "nadia-zaki",
    "name": "Nadia Zaki",
    "vertical": "automation",
-   "owned": 162,
-   "ownedValue": 67047.1,
+   "owned": 135,
+   "ownedValue": 63365.2,
    "funnel": [
-    9,
-    10,
-    15,
+    4,
+    11,
+    14,
+    14,
+    11,
     17,
-    15,
-    15,
-    19,
+    12,
     20,
-    8,
-    15,
-    19
+    5,
+    11,
+    16
    ],
-   "workload": 299,
+   "workload": 260,
    "capacity": 320,
-   "loadPct": 93.4,
+   "loadPct": 81.3,
    "overloaded": false,
    "top": [
     {
-     "ref": "PRJAE17129415",
+     "ref": "AEKYY9FJR",
      "name": "UAE Nuclear Power Plant - Phase 2",
      "value": 12200,
      "stage": "Completed (3 years)"
     },
     {
-     "ref": "PRJAE24260451",
-     "name": "Passenger Terminal Building - Expansion of Al Maktoum International Airport - Phase 2",
-     "value": 10500,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE25712347",
-     "name": "Bab Onshore Gas Cap Development (Package 1)",
-     "value": 6200,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE16127633",
-     "name": "Dubai - Abu Dhabi Hyperloop",
-     "value": 4800,
-     "stage": "Design"
-    },
-    {
-     "ref": "PRJAE25279690",
-     "name": "Underground Train System - Al Maktoum International Airport Expansion",
-     "value": 3000,
-     "stage": "Design"
-    }
-   ],
-   "consultants": 76,
-   "contractors": 51
-  },
-  {
-   "slug": "vikram-fernandes",
-   "name": "Vikram Fernandes",
-   "vertical": "automation",
-   "owned": 83,
-   "ownedValue": 66322.9,
-   "funnel": [
-    0,
-    2,
-    11,
-    10,
-    7,
-    9,
-    13,
-    15,
-    7,
-    4,
-    5
-   ],
-   "workload": 166,
-   "capacity": 320,
-   "loadPct": 51.9,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "PRJAE23244755",
-     "name": "Upgrade of Das Island, Asab, Bu Hasa, Habshan & Habshan 5 Onshore Gas Facilities",
-     "value": 9900,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE18149020",
+     "ref": "AEEFUP9KH",
      "name": "Dubai - Riyadh Hyperloop",
      "value": 9000,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE16128586",
+     "ref": "AEGHA9WBZ",
      "name": "Abu Dhabi - Al Ain Hyperloop",
      "value": 6000,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE18149019",
+     "ref": "AEQ7YF7HF",
+     "name": "Habshan 7 New Gas Train (H7 NGT)",
+     "value": 4200,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AEUA3AYVK",
+     "name": "Midfield Terminal Building (MTB) - Midfield Terminal Complex (MTC)",
+     "value": 2940,
+     "stage": "Completed (3 years)"
+    }
+   ],
+   "consultants": 52,
+   "contractors": 42
+  },
+  {
+   "slug": "vikram-fernandes",
+   "name": "Vikram Fernandes",
+   "vertical": "automation",
+   "owned": 114,
+   "ownedValue": 63565,
+   "funnel": [
+    3,
+    10,
+    11,
+    10,
+    5,
+    16,
+    11,
+    18,
+    5,
+    15,
+    10
+   ],
+   "workload": 225,
+   "capacity": 320,
+   "loadPct": 70.3,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "AEQ9DNGKZ",
+     "name": "Passenger Terminal Building - Expansion of Al Maktoum International Airport - Phase 2",
+     "value": 10500,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AEBAM8JYD",
+     "name": "Upgrade of Das Island, Asab, Bu Hasa, Habshan & Habshan 5 Onshore Gas Facilities",
+     "value": 9900,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AEG86924E",
      "name": "Dubai - Fujairah Hyperloop",
      "value": 6000,
      "stage": "Concept"
     },
     {
-     "ref": "PRJAE16121536",
+     "ref": "AEHCAZVD4",
+     "name": "Dubai - Abu Dhabi Hyperloop",
+     "value": 4800,
+     "stage": "Design"
+    },
+    {
+     "ref": "AEQ2ED9JJ",
      "name": "Noor Energy 1 CSP/PV 950 MW Hybrid Solar Plant - Mohammad Bin Rashid Al Maktoum Solar Park - Phase 4",
      "value": 4296.2,
      "stage": "Completed (3 years)"
     }
    ],
-   "consultants": 34,
-   "contractors": 28
+   "consultants": 54,
+   "contractors": 39
   },
   {
    "slug": "rami-aziz",
    "name": "Rami Aziz",
    "vertical": "fabrication",
-   "owned": 268,
-   "ownedValue": 54779.3,
+   "owned": 262,
+   "ownedValue": 54041.1,
    "funnel": [
-    15,
-    25,
+    12,
     19,
-    29,
-    25,
-    23,
-    46,
+    14,
+    36,
+    32,
+    22,
     39,
-    17,
-    5,
-    25
+    38,
+    16,
+    6,
+    28
    ],
-   "workload": 527,
+   "workload": 490,
    "capacity": 320,
-   "loadPct": 164.7,
+   "loadPct": 153.1,
    "overloaded": true,
    "top": [
     {
-     "ref": "PRJAE0830320",
+     "ref": "AE7Z4LF2Y",
      "name": "UAE-Qatar Causeway (West Link)",
      "value": 13000,
      "stage": "Tender"
     },
     {
-     "ref": "PRJAE18154439",
+     "ref": "AEV2YQ9R3",
      "name": "Umm Shaif Gas Cap Offshore Development (Phase 1)",
      "value": 6600,
      "stage": "Tender"
     },
     {
-     "ref": "PRJAE1397447",
-     "name": "Hassyan Gas-Fired Power Plant - Phase 1 & 2",
-     "value": 3400,
-     "stage": "Completed (3 years)"
+     "ref": "AE963FZM3",
+     "name": "Al Nouf Combined Cycle Gas Turbine (CCGT) Plant",
+     "value": 2500,
+     "stage": "Tender"
     },
     {
-     "ref": "PRJAE25281302",
+     "ref": "AEXCBWAKG",
      "name": "Expansion of Upper Zakum Offshore Oilfield Development (UZ 1.5MMBD)",
      "value": 2400,
      "stage": "Tender"
     },
     {
-     "ref": "PRJAE25274085",
-     "name": "Umm Shaif Gas Cap Offshore Development (Phase 1) (Package 1)",
+     "ref": "AEK6R6HC6",
+     "name": "Umm Shaif Gas Cap Offshore Development (Phase 1) (Package 4)",
      "value": 2200,
      "stage": "Tender"
     }
    ],
-   "consultants": 149,
-   "contractors": 177
+   "consultants": 152,
+   "contractors": 176
   },
   {
    "slug": "faisal-reyes",
    "name": "Faisal Reyes",
    "vertical": "trading",
-   "owned": 1008,
-   "ownedValue": 57191.7,
+   "owned": 1009,
+   "ownedValue": 56453.7,
    "funnel": [
-    58,
-    107,
-    79,
-    122,
-    95,
-    80,
-    122,
-    156,
-    48,
-    29,
-    112
+    50,
+    114,
+    88,
+    106,
+    89,
+    87,
+    129,
+    152,
+    42,
+    44,
+    108
    ],
-   "workload": 1933,
+   "workload": 1968,
    "capacity": 320,
-   "loadPct": 604.1,
+   "loadPct": 615,
    "overloaded": true,
    "top": [
     {
-     "ref": "PRJAE23242989",
+     "ref": "AE7GEAHAA",
      "name": "Balghaiylam - Yas Island",
      "value": 2178,
      "stage": "Under Construction"
     },
     {
-     "ref": "PRJAE24258613",
+     "ref": "AEPRMQ9AN",
      "name": "The Alba Residences by Omniyat - Palm Jumeirah",
      "value": 1900,
      "stage": "Tender"
     },
     {
-     "ref": "PRJAE24259236",
+     "ref": "AED5GCTDA",
      "name": "Al Naseem Villas - Hudayriyat Island",
      "value": 1462.8,
      "stage": "Under Construction"
     },
     {
-     "ref": "PRJAE0722096",
+     "ref": "AEK476DFW",
      "name": "Six Senses Residences Dubai Marina",
      "value": 1200,
      "stage": "Under Construction"
     },
     {
-     "ref": "PRJAE0719195",
-     "name": "Damac Towers By Paramount - Business Bay",
+     "ref": "AESQ9WEFC",
+     "name": "Eden Hills Villas & Infrastructure Works - Dubai Hills",
      "value": 1000,
-     "stage": "Completed (above 3 years)"
+     "stage": "Tender"
     }
    ],
-   "consultants": 535,
-   "contractors": 636
+   "consultants": 534,
+   "contractors": 637
   },
   {
    "slug": "ziad-abdel-rahman",
    "name": "Ziad Abdel-Rahman",
    "vertical": "services",
-   "owned": 142,
-   "ownedValue": 19048.6,
+   "owned": 182,
+   "ownedValue": 23045.8,
    "funnel": [
-    8,
-    10,
-    16,
-    21,
-    18,
     13,
+    15,
+    16,
     20,
-    10,
-    9,
-    3,
-    14
+    16,
+    13,
+    28,
+    27,
+    13,
+    2,
+    19
    ],
-   "workload": 284,
+   "workload": 350,
    "capacity": 320,
-   "loadPct": 88.8,
-   "overloaded": false,
+   "loadPct": 109.4,
+   "overloaded": true,
    "top": [
     {
-     "ref": "PRJAE21200182",
+     "ref": "AEQ2H24QA",
      "name": "Project Volta - TAZIZ Derivatives Park Complex",
      "value": 3000,
      "stage": "Under Construction"
     },
     {
-     "ref": "PRJAE24261320",
-     "name": "Raha Island by RAK Properties - Mina Al Arab",
-     "value": 2000,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE24270779",
-     "name": "DAMAC Islands - Dubailand",
-     "value": 2000,
-     "stage": "Tender"
-    },
-    {
-     "ref": "PRJAE17132392",
-     "name": "The Island - Umm Suqeim 2",
-     "value": 1200,
-     "stage": "Under Construction"
-    },
-    {
-     "ref": "PRJAE24259725",
-     "name": "Yas Canal Residential Development - Al Raha Beach",
-     "value": 953,
-     "stage": "Tender"
-    }
-   ],
-   "consultants": 99,
-   "contractors": 87
-  },
-  {
-   "slug": "priya-kulkarni",
-   "name": "Priya Kulkarni",
-   "vertical": "services",
-   "owned": 125,
-   "ownedValue": 19301,
-   "funnel": [
-    3,
-    5,
-    12,
-    12,
-    11,
-    11,
-    17,
-    21,
-    8,
-    2,
-    23
-   ],
-   "workload": 228,
-   "capacity": 320,
-   "loadPct": 71.3,
-   "overloaded": false,
-   "top": [
-    {
-     "ref": "PRJAE16119252",
+     "ref": "AEBZ3A8DD",
      "name": "Dubai Square Mall - Dubai Creek Harbor",
      "value": 2700,
      "stage": "Under Construction"
     },
     {
-     "ref": "PRJAE24260093",
-     "name": "The Wilds by Aldaar",
+     "ref": "AE9VLWZ9A",
+     "name": "Raha Island by RAK Properties - Mina Al Arab",
      "value": 2000,
      "stage": "Tender"
     },
     {
-     "ref": "PRJAE23241153",
+     "ref": "AE5DP3X5F",
      "name": "1500 Residential Villas - West Baniyas",
      "value": 1715.5,
      "stage": "Under Construction"
     },
     {
-     "ref": "PRJAE24271777",
+     "ref": "AE4H5TCLB",
      "name": "Bahria Mixed-Use Development - Dubai South",
      "value": 1500,
      "stage": "Tender"
+    }
+   ],
+   "consultants": 120,
+   "contractors": 117
+  },
+  {
+   "slug": "priya-kulkarni",
+   "name": "Priya Kulkarni",
+   "vertical": "services",
+   "owned": 169,
+   "ownedValue": 23365.2,
+   "funnel": [
+    9,
+    12,
+    17,
+    20,
+    24,
+    6,
+    24,
+    26,
+    5,
+    3,
+    23
+   ],
+   "workload": 303,
+   "capacity": 320,
+   "loadPct": 94.7,
+   "overloaded": false,
+   "top": [
+    {
+     "ref": "AE4TJ5SB9",
+     "name": "DAMAC Islands - Dubailand",
+     "value": 2000,
+     "stage": "Tender"
     },
     {
-     "ref": "PRJAE25278448",
+     "ref": "AEWP2E2QA",
+     "name": "The Wilds by Aldaar",
+     "value": 2000,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AER4SWD6L",
      "name": "Waada by Bahria Town",
      "value": 1400,
      "stage": "Tender"
+    },
+    {
+     "ref": "AEY3Q7V7A",
+     "name": "JW Marriott Residence & JW Marriott Resort - Al Marjan Island",
+     "value": 1306.6,
+     "stage": "Tender"
+    },
+    {
+     "ref": "AE95EYQS2",
+     "name": "The Island - Umm Suqeim 2",
+     "value": 1200,
+     "stage": "Under Construction"
     }
    ],
-   "consultants": 88,
-   "contractors": 73
+   "consultants": 123,
+   "contractors": 108
   }
  ],
  "funnel": [
-  1230,
-  1549,
-  2092,
-  2882,
-  4161,
-  2243,
-  3842,
-  6667,
-  3021,
-  3572,
-  14101
+  1227,
+  1524,
+  2074,
+  2937,
+  4177,
+  2221,
+  3779,
+  6741,
+  2968,
+  3636,
+  14076
  ],
  "funnelProjects": [
-  1030,
-  1010,
-  962,
-  780,
-  498,
-  111,
-  102,
-  37,
-  5,
-  1,
+  1040,
+  978,
+  981,
+  785,
+  480,
+  127,
+  103,
+  36,
+  4,
+  2,
   0
  ],
  "parties": {
@@ -4181,7 +4177,7 @@
   "pipeline": {
    "key": "pipeline",
    "term": "Pipeline value owned",
-   "text": "The sum of the BNC whole-project values assigned to an engineer, in USD million. It is opportunity coverage, not booked revenue."
+   "text": "The sum of the source whole-project values assigned to an engineer, in USD million. It is opportunity coverage, not booked revenue."
   },
   "bucket": {
    "key": "bucket",
@@ -4231,12 +4227,12 @@
   "value": {
    "key": "value",
    "term": "Value",
-   "text": "The project value in source USD million to one decimal. Zero means the BNC source workbook did not record a value."
+   "text": "The project value in source USD million to one decimal. Zero means the source workbook did not record a value."
   },
   "completion": {
    "key": "completion",
    "term": "Completion",
-   "text": "Percent complete from the BNC workbook, shown for projects under construction when recorded."
+   "text": "Percent complete from the source workbook, shown for projects under construction when recorded."
   }
  },
  "precisionPolicy": [
@@ -4247,12 +4243,13 @@
   "Dates are calendar dates. Where the Other Sectors workbook has no per-project update date, its March 2026 workbook snapshot date is used and disclosed here."
  ],
  "assumptions": [
-  "4,568 supplied BNC rows resolve to 4,536 unique project references. 32 newer-source overlaps are de-duplicated by BNC reference: Urban & Industrial first, Other Sectors next, Brownfield last.",
-  "Source rows: 3-BNC-Urban-Ind.-Greenfield-Projects-Master-File.xlsx (3,327); 2-BNC_Other_Sectors_Master_File.xlsx (568); 1-Raw-Data-BNC-Brownfield-All-Sectors.xlsx (673). Project references, names, values, stages, locations, sectors, industries, types, owners, consultants and contractors come from these workbooks.",
+  "4,568 supplied register rows resolve to 4,536 unique project references. 32 newer-source overlaps are de-duplicated by source reference: Urban & Industrial first, Other Sectors next, Brownfield last.",
+  "Source rows: Urban and industrial greenfield extract (3,327); Other sectors extract (568); Brownfield all sectors extract (673). Project names, values, stages, locations, sectors, industries, types, owners, consultants and contractors come from these extracts of a licensed market-intelligence register.",
   "Money is kept in the source USD currency. No AED conversion, scaling, capping or synthetic value generation is applied. Two source rows without a positive value remain in the register at 0.0 and are described as not recorded.",
-  "Company cells are preserved as written. Because BNC uses commas both inside legal company names and between multiple companies, an ambiguous multi-company cell is shown as one source label rather than split incorrectly.",
+  "Company cells are preserved as written. Because the source register uses commas both inside legal company names and between multiple companies, an ambiguous multi-company cell is shown as one source label rather than split incorrectly.",
+  "Project references shown here are fictional identifiers. Each source reference is replaced by a stable, seeded, collision-free identifier of a two-letter country code and seven characters, so a project keeps one reference everywhere in this demo while the licensed register’s own numbering is not republished.",
   "Individual contact names, telephone numbers, email addresses and workbook assignee fields are deliberately excluded; project and company identities are retained.",
-  "The 24 sales engineers are fictional. Relevance scores, internal ownership, activity, workload, relationship level, rating and relationship owner are deterministic illustrative demo fields because the supplied BNC workbooks do not contain those internal records. 19.4 percent of firms form the illustrative no-relationship cohort.",
+  "The 24 sales engineers are fictional. Relevance scores, internal ownership, activity, workload, relationship level, rating and relationship owner are deterministic illustrative demo fields because the supplied workbooks do not contain those internal records. 19.4 percent of firms form the illustrative no-relationship cohort.",
   "Workload is a synthetic measure, 3 points per active project on the engineer's own vertical and 1 per order or quiet project, against a capacity of 320 points chosen so a few of the 24 books exceed it."
  ],
  "cascade": [
@@ -4306,7 +4303,7 @@
    "hi": 100,
    "unit": "projects",
    "basis": "Operating check: every fictional engineer should have a useful drill-down book",
-   "measured": 40,
+   "measured": 43,
    "pass": true
   },
   {
@@ -4316,7 +4313,7 @@
    "hi": 1200,
    "unit": "projects",
    "basis": "Operating check: the authentic project mix is allowed to concentrate in a high-relevance vertical",
-   "measured": 1008,
+   "measured": 1009,
    "pass": true
   },
   {
@@ -4326,7 +4323,7 @@
    "hi": 60,
    "unit": "percent",
    "basis": "Illustrative activity layer: about half of project-vertical pairs are quiet or awaiting follow-up",
-   "measured": 45.8,
+   "measured": 45.9,
    "pass": true
   },
   {
@@ -4351,7 +4348,7 @@
   },
   {
    "key": "mepConsultantFill",
-   "label": "BNC rows with an MEP consultant",
+   "label": "Register rows with an MEP consultant",
    "lo": 25,
    "hi": 35,
    "unit": "percent",
@@ -4361,7 +4358,7 @@
   },
   {
    "key": "mainContractorFill",
-   "label": "BNC rows with an appointed main or EPC contractor",
+   "label": "Register rows with an appointed main or EPC contractor",
    "lo": 32,
    "hi": 45,
    "unit": "percent",
@@ -4371,7 +4368,7 @@
   },
   {
    "key": "mepContractorFill",
-   "label": "BNC rows with an MEP contractor",
+   "label": "Register rows with an MEP contractor",
    "lo": 20,
    "hi": 32,
    "unit": "percent",
@@ -4385,7 +4382,7 @@
    "lo": 1,
    "hi": 2,
    "unit": "projects",
-   "basis": "BNC company cells are preserved intact; many labels occur on one project",
+   "basis": "Source company cells are preserved intact; many labels occur on one project",
    "measured": 1,
    "pass": true
   },
@@ -4405,7 +4402,7 @@
    "lo": 1,
    "hi": 2,
    "unit": "projects",
-   "basis": "BNC company cells are preserved intact; many labels occur on one project",
+   "basis": "Source company cells are preserved intact; many labels occur on one project",
    "measured": 1,
    "pass": true
   },
@@ -4712,7 +4709,7 @@
      "role": "both",
      "level": "Junior management",
      "rating": 2,
-     "owner": "meera-dsouza",
+     "owner": "omar-nasser",
      "projectCount": 14,
      "projectValue": 11775.1
     },
@@ -4722,7 +4719,7 @@
      "role": "lead",
      "level": "Middle management",
      "rating": 7,
-     "owner": "nadia-zaki",
+     "owner": "vikram-fernandes",
      "projectCount": 1,
      "projectValue": 10500
     },
@@ -4732,7 +4729,7 @@
      "role": "both",
      "level": "Senior management",
      "rating": 3,
-     "owner": "omar-nasser",
+     "owner": "ziad-abdel-rahman",
      "projectCount": 18,
      "projectValue": 8373.3
     },
@@ -4762,7 +4759,7 @@
      "role": "both",
      "level": "Middle management",
      "rating": 5,
-     "owner": "omar-nasser",
+     "owner": "faisal-reyes",
      "projectCount": 26,
      "projectValue": 5918.9
     },
@@ -4772,7 +4769,7 @@
      "role": "both",
      "level": "Senior management",
      "rating": 8,
-     "owner": "marwan-saleh",
+     "owner": "meera-dsouza",
      "projectCount": 12,
      "projectValue": 5305.6
     },
@@ -4792,7 +4789,7 @@
      "role": "mep",
      "level": "Middle management",
      "rating": 7,
-     "owner": "kavya-nair",
+     "owner": "priya-kulkarni",
      "projectCount": 17,
      "projectValue": 4016
     },
@@ -4832,7 +4829,7 @@
      "role": "both",
      "level": "Senior management",
      "rating": 4,
-     "owner": "faisal-reyes",
+     "owner": "farah-haddad",
      "projectCount": 34,
      "projectValue": 3404.1
     },
@@ -4842,7 +4839,7 @@
      "role": "lead",
      "level": "Middle management",
      "rating": 3,
-     "owner": "rami-aziz",
+     "owner": "vikram-fernandes",
      "projectCount": 1,
      "projectValue": 3400
     },
@@ -4852,7 +4849,7 @@
      "role": "both",
      "level": "Junior management",
      "rating": 2,
-     "owner": "faisal-reyes",
+     "owner": "bassem-farouk",
      "projectCount": 7,
      "projectValue": 3314
     },
@@ -4935,7 +4932,7 @@
      "role": "both",
      "level": "Senior management",
      "rating": 7,
-     "owner": "omar-nasser",
+     "owner": "faisal-reyes",
      "projectCount": 16,
      "projectValue": 3778.3
     },
@@ -4955,7 +4952,7 @@
      "role": "lead",
      "level": "Middle management",
      "rating": 6,
-     "owner": "rami-aziz",
+     "owner": "vikram-fernandes",
      "projectCount": 1,
      "projectValue": 3400
     },
@@ -5005,7 +5002,7 @@
      "role": "mep",
      "level": "Middle management",
      "rating": 8,
-     "owner": "vikram-fernandes",
+     "owner": "nadia-zaki",
      "projectCount": 1,
      "projectValue": 2940
     },
@@ -5015,7 +5012,7 @@
      "role": "lead",
      "level": "Middle management",
      "rating": 8,
-     "owner": "vikram-fernandes",
+     "owner": "nadia-zaki",
      "projectCount": 1,
      "projectValue": 2940
     },
@@ -5035,7 +5032,7 @@
      "role": "mep",
      "level": "Middle management",
      "rating": 7,
-     "owner": "priya-kulkarni",
+     "owner": "ziad-abdel-rahman",
      "projectCount": 1,
      "projectValue": 2700
     },
@@ -5045,7 +5042,7 @@
      "role": "both",
      "level": "Junior management",
      "rating": 2,
-     "owner": "omar-nasser",
+     "owner": "meera-dsouza",
      "projectCount": 4,
      "projectValue": 2688
     },
@@ -5085,7 +5082,7 @@
      "role": "lead",
      "level": "Middle management",
      "rating": 5,
-     "owner": "dinesh-iyer",
+     "owner": "faisal-reyes",
      "projectCount": 4,
      "projectValue": 2287.6
     }

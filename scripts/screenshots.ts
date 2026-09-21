@@ -10,9 +10,24 @@
  * viewport or any console error fails the run.
  */
 
-import { mkdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { mkdirSync, readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
+
+/** The largest published project, read from the built register rather than pinned as a literal. */
+function largestProjectRef(): string {
+  const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'data');
+  const rollup = JSON.parse(readFileSync(join(dir, 'rollup.json'), 'utf8')) as { shards: { file: string }[] };
+  let best = { ref: '', value: -1 };
+  for (const s of rollup.shards) {
+    const shard = JSON.parse(readFileSync(join(dir, s.file), 'utf8')) as { projects: { ref: string; value: number }[] };
+    for (const p of shard.projects) if (p.value > best.value) best = { ref: p.ref, value: p.value };
+  }
+  if (!best.ref) throw new Error('no published project found');
+  return best.ref;
+}
+
 
 const args = process.argv.slice(2);
 const arg = (name: string, fallback: string) => {
@@ -34,7 +49,7 @@ const pages = [
   { path: '/engineers/rohan-pillai', name: 'engineer-rohan-pillai', wait: '.vt-row' },
   { path: '/parties', name: 'parties', wait: '#plist' },
   { path: '/parties?kind=contractor&id=1', name: 'parties-contractor-1', wait: '#party-name' },
-  { path: '/p/PRJAE25284478', name: 'project-bnc-largest', wait: '#score-strip' },
+  { path: `/p/${largestProjectRef()}`, name: 'project-largest', wait: '#score-strip' },
   { path: '/data-basis', name: 'data-basis', wait: '#rec-categories' },
 ];
 

@@ -120,8 +120,8 @@
    "id": "shard-projects/urban-construction-1.json-value",
    "category": "Shards and register",
    "statement": "projects/urban-construction-1.json project values sum to its index entry",
-   "left": 84306.2,
-   "right": 84306.2,
+   "left": 117649.9,
+   "right": 117649.9,
    "pass": true
   },
   {
@@ -144,8 +144,8 @@
    "id": "shard-projects/urban-construction-2.json-value",
    "category": "Shards and register",
    "statement": "projects/urban-construction-2.json project values sum to its index entry",
-   "left": 60829,
-   "right": 60829,
+   "left": 117478.2,
+   "right": 117478.2,
    "pass": true
   },
   {
@@ -168,8 +168,8 @@
    "id": "shard-projects/urban-construction-3.json-value",
    "category": "Shards and register",
    "statement": "projects/urban-construction-3.json project values sum to its index entry",
-   "left": 100022.8,
-   "right": 100022.8,
+   "left": 97429,
+   "right": 97429,
    "pass": true
   },
   {
@@ -192,8 +192,8 @@
    "id": "shard-projects/urban-construction-4.json-value",
    "category": "Shards and register",
    "statement": "projects/urban-construction-4.json project values sum to its index entry",
-   "left": 100643.9,
-   "right": 100643.9,
+   "left": 78246.3,
+   "right": 78246.3,
    "pass": true
   },
   {
@@ -216,8 +216,8 @@
    "id": "shard-projects/urban-construction-5.json-value",
    "category": "Shards and register",
    "statement": "projects/urban-construction-5.json project values sum to its index entry",
-   "left": 151016.3,
-   "right": 151016.3,
+   "left": 86014.8,
+   "right": 86014.8,
    "pass": true
   },
   {
@@ -3128,112 +3128,112 @@
    "id": "eng-rohan-pillai-owned",
    "category": "Engineers",
    "statement": "Rohan Pillai: owned count equals the register",
-   "left": 132,
-   "right": 132,
+   "left": 94,
+   "right": 94,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-value",
    "category": "Engineers",
    "statement": "Rohan Pillai: pipeline value equals the sum of owned project values",
-   "left": 7564.6,
-   "right": 7564.6,
+   "left": 5202.8,
+   "right": 5202.8,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-sum",
    "category": "Engineers",
    "statement": "Rohan Pillai: funnel sums to owned count",
-   "left": 132,
-   "right": 132,
+   "left": 94,
+   "right": 94,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-0",
    "category": "Engineers",
    "statement": "Rohan Pillai: Order received equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-1",
    "category": "Engineers",
    "statement": "Rohan Pillai: Quote sent equals the register",
-   "left": 23,
-   "right": 23,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-2",
    "category": "Engineers",
    "statement": "Rohan Pillai: Enquiry generated equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-3",
    "category": "Engineers",
    "statement": "Rohan Pillai: Company profile shared equals the register",
-   "left": 14,
-   "right": 14,
+   "left": 13,
+   "right": 13,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-4",
    "category": "Engineers",
    "statement": "Rohan Pillai: Project closed equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 9,
+   "right": 9,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-5",
    "category": "Engineers",
    "statement": "Rohan Pillai: Visit done equals the register",
-   "left": 20,
-   "right": 20,
+   "left": 15,
+   "right": 15,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-6",
    "category": "Engineers",
    "statement": "Rohan Pillai: Reached out equals the register",
-   "left": 17,
-   "right": 17,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-7",
    "category": "Engineers",
    "statement": "Rohan Pillai: Waiting or follow up equals the register",
-   "left": 18,
-   "right": 18,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-8",
    "category": "Engineers",
    "statement": "Rohan Pillai: No response equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-9",
    "category": "Engineers",
    "statement": "Rohan Pillai: Contractor or consultant not yet awarded equals the register",
-   "left": 1,
-   "right": 1,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-funnel-10",
    "category": "Engineers",
    "statement": "Rohan Pillai: No update equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
@@ -3248,24 +3248,24 @@
    "id": "eng-rohan-pillai-consultants",
    "category": "Engineers",
    "statement": "Rohan Pillai: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 110,
-   "right": 110,
+   "left": 90,
+   "right": 90,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-contractors",
    "category": "Engineers",
    "statement": "Rohan Pillai: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 105,
-   "right": 105,
+   "left": 80,
+   "right": 80,
    "pass": true
   },
   {
    "id": "eng-rohan-pillai-workload",
    "category": "Engineers",
    "statement": "Rohan Pillai: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 290,
-   "right": 290,
+   "left": 203,
+   "right": 203,
    "pass": true
   },
   {
@@ -3280,8 +3280,8 @@
    "id": "eng-rohan-pillai-load",
    "category": "Engineers",
    "statement": "Rohan Pillai: load percent is workload over capacity to one decimal",
-   "left": 90.6,
-   "right": 90.6,
+   "left": 63.4,
+   "right": 63.4,
    "pass": true
   },
   {
@@ -3296,64 +3296,64 @@
    "id": "eng-farah-haddad-owned",
    "category": "Engineers",
    "statement": "Farah Haddad: owned count equals the register",
-   "left": 167,
-   "right": 167,
+   "left": 187,
+   "right": 187,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-value",
    "category": "Engineers",
    "statement": "Farah Haddad: pipeline value equals the sum of owned project values",
-   "left": 7563.3,
-   "right": 7563.3,
+   "left": 5102.8,
+   "right": 5102.8,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-sum",
    "category": "Engineers",
    "statement": "Farah Haddad: funnel sums to owned count",
-   "left": 167,
-   "right": 167,
+   "left": 187,
+   "right": 187,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-0",
    "category": "Engineers",
    "statement": "Farah Haddad: Order received equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-1",
    "category": "Engineers",
    "statement": "Farah Haddad: Quote sent equals the register",
-   "left": 13,
-   "right": 13,
+   "left": 22,
+   "right": 22,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-2",
    "category": "Engineers",
    "statement": "Farah Haddad: Enquiry generated equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-3",
    "category": "Engineers",
    "statement": "Farah Haddad: Company profile shared equals the register",
-   "left": 14,
-   "right": 14,
+   "left": 28,
+   "right": 28,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-4",
    "category": "Engineers",
    "statement": "Farah Haddad: Project closed equals the register",
-   "left": 20,
-   "right": 20,
+   "left": 15,
+   "right": 15,
    "pass": true
   },
   {
@@ -3368,40 +3368,40 @@
    "id": "eng-farah-haddad-funnel-6",
    "category": "Engineers",
    "statement": "Farah Haddad: Reached out equals the register",
-   "left": 26,
-   "right": 26,
+   "left": 25,
+   "right": 25,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-7",
    "category": "Engineers",
    "statement": "Farah Haddad: Waiting or follow up equals the register",
-   "left": 24,
-   "right": 24,
+   "left": 22,
+   "right": 22,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-8",
    "category": "Engineers",
    "statement": "Farah Haddad: No response equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-9",
    "category": "Engineers",
    "statement": "Farah Haddad: Contractor or consultant not yet awarded equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-funnel-10",
    "category": "Engineers",
    "statement": "Farah Haddad: No update equals the register",
-   "left": 24,
-   "right": 24,
+   "left": 21,
+   "right": 21,
    "pass": true
   },
   {
@@ -3416,24 +3416,24 @@
    "id": "eng-farah-haddad-consultants",
    "category": "Engineers",
    "statement": "Farah Haddad: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 131,
-   "right": 131,
+   "left": 143,
+   "right": 143,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-contractors",
    "category": "Engineers",
    "statement": "Farah Haddad: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 138,
-   "right": 138,
+   "left": 155,
+   "right": 155,
    "pass": true
   },
   {
    "id": "eng-farah-haddad-workload",
    "category": "Engineers",
    "statement": "Farah Haddad: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 305,
-   "right": 305,
+   "left": 380,
+   "right": 380,
    "pass": true
   },
   {
@@ -3448,8 +3448,8 @@
    "id": "eng-farah-haddad-load",
    "category": "Engineers",
    "statement": "Farah Haddad: load percent is workload over capacity to one decimal",
-   "left": 95.3,
-   "right": 95.3,
+   "left": 118.8,
+   "right": 118.8,
    "pass": true
   },
   {
@@ -3464,112 +3464,112 @@
    "id": "eng-dinesh-iyer-owned",
    "category": "Engineers",
    "statement": "Dinesh Iyer: owned count equals the register",
-   "left": 211,
-   "right": 211,
+   "left": 205,
+   "right": 205,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-value",
    "category": "Engineers",
    "statement": "Dinesh Iyer: pipeline value equals the sum of owned project values",
-   "left": 7558.2,
-   "right": 7558.2,
+   "left": 5092.9,
+   "right": 5092.9,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-sum",
    "category": "Engineers",
    "statement": "Dinesh Iyer: funnel sums to owned count",
-   "left": 211,
-   "right": 211,
+   "left": 205,
+   "right": 205,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-0",
    "category": "Engineers",
    "statement": "Dinesh Iyer: Order received equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-1",
    "category": "Engineers",
    "statement": "Dinesh Iyer: Quote sent equals the register",
-   "left": 27,
-   "right": 27,
+   "left": 15,
+   "right": 15,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-2",
    "category": "Engineers",
    "statement": "Dinesh Iyer: Enquiry generated equals the register",
-   "left": 18,
-   "right": 18,
+   "left": 29,
+   "right": 29,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-3",
    "category": "Engineers",
    "statement": "Dinesh Iyer: Company profile shared equals the register",
-   "left": 24,
-   "right": 24,
+   "left": 30,
+   "right": 30,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-4",
    "category": "Engineers",
    "statement": "Dinesh Iyer: Project closed equals the register",
-   "left": 16,
-   "right": 16,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-5",
    "category": "Engineers",
    "statement": "Dinesh Iyer: Visit done equals the register",
-   "left": 21,
-   "right": 21,
+   "left": 23,
+   "right": 23,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-6",
    "category": "Engineers",
    "statement": "Dinesh Iyer: Reached out equals the register",
-   "left": 32,
-   "right": 32,
+   "left": 28,
+   "right": 28,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-7",
    "category": "Engineers",
    "statement": "Dinesh Iyer: Waiting or follow up equals the register",
-   "left": 28,
-   "right": 28,
+   "left": 24,
+   "right": 24,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-8",
    "category": "Engineers",
    "statement": "Dinesh Iyer: No response equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-9",
    "category": "Engineers",
    "statement": "Dinesh Iyer: Contractor or consultant not yet awarded equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-funnel-10",
    "category": "Engineers",
    "statement": "Dinesh Iyer: No update equals the register",
-   "left": 19,
-   "right": 19,
+   "left": 21,
+   "right": 21,
    "pass": true
   },
   {
@@ -3584,24 +3584,24 @@
    "id": "eng-dinesh-iyer-consultants",
    "category": "Engineers",
    "statement": "Dinesh Iyer: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 169,
-   "right": 169,
+   "left": 158,
+   "right": 158,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-contractors",
    "category": "Engineers",
    "statement": "Dinesh Iyer: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 179,
-   "right": 179,
+   "left": 168,
+   "right": 168,
    "pass": true
   },
   {
    "id": "eng-dinesh-iyer-workload",
    "category": "Engineers",
    "statement": "Dinesh Iyer: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 439,
-   "right": 439,
+   "left": 443,
+   "right": 443,
    "pass": true
   },
   {
@@ -3616,8 +3616,8 @@
    "id": "eng-dinesh-iyer-load",
    "category": "Engineers",
    "statement": "Dinesh Iyer: load percent is workload over capacity to one decimal",
-   "left": 137.2,
-   "right": 137.2,
+   "left": 138.4,
+   "right": 138.4,
    "pass": true
   },
   {
@@ -3632,88 +3632,88 @@
    "id": "eng-marwan-saleh-owned",
    "category": "Engineers",
    "statement": "Marwan Saleh: owned count equals the register",
-   "left": 155,
-   "right": 155,
+   "left": 158,
+   "right": 158,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-value",
    "category": "Engineers",
    "statement": "Marwan Saleh: pipeline value equals the sum of owned project values",
-   "left": 7569.1,
-   "right": 7569.1,
+   "left": 5117.5,
+   "right": 5117.5,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-sum",
    "category": "Engineers",
    "statement": "Marwan Saleh: funnel sums to owned count",
-   "left": 155,
-   "right": 155,
+   "left": 158,
+   "right": 158,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-0",
    "category": "Engineers",
    "statement": "Marwan Saleh: Order received equals the register",
-   "left": 4,
-   "right": 4,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-1",
    "category": "Engineers",
    "statement": "Marwan Saleh: Quote sent equals the register",
-   "left": 19,
-   "right": 19,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-2",
    "category": "Engineers",
    "statement": "Marwan Saleh: Enquiry generated equals the register",
-   "left": 18,
-   "right": 18,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-3",
    "category": "Engineers",
    "statement": "Marwan Saleh: Company profile shared equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 21,
+   "right": 21,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-4",
    "category": "Engineers",
    "statement": "Marwan Saleh: Project closed equals the register",
-   "left": 12,
-   "right": 12,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-5",
    "category": "Engineers",
    "statement": "Marwan Saleh: Visit done equals the register",
-   "left": 19,
-   "right": 19,
+   "left": 21,
+   "right": 21,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-6",
    "category": "Engineers",
    "statement": "Marwan Saleh: Reached out equals the register",
-   "left": 23,
-   "right": 23,
+   "left": 19,
+   "right": 19,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-7",
    "category": "Engineers",
    "statement": "Marwan Saleh: Waiting or follow up equals the register",
-   "left": 17,
-   "right": 17,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
@@ -3728,16 +3728,16 @@
    "id": "eng-marwan-saleh-funnel-9",
    "category": "Engineers",
    "statement": "Marwan Saleh: Contractor or consultant not yet awarded equals the register",
-   "left": 4,
-   "right": 4,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-funnel-10",
    "category": "Engineers",
    "statement": "Marwan Saleh: No update equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
@@ -3752,24 +3752,24 @@
    "id": "eng-marwan-saleh-consultants",
    "category": "Engineers",
    "statement": "Marwan Saleh: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 118,
-   "right": 118,
+   "left": 128,
+   "right": 128,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-contractors",
    "category": "Engineers",
    "statement": "Marwan Saleh: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 139,
-   "right": 139,
+   "left": 130,
+   "right": 130,
    "pass": true
   },
   {
    "id": "eng-marwan-saleh-workload",
    "category": "Engineers",
    "statement": "Marwan Saleh: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 331,
-   "right": 331,
+   "left": 324,
+   "right": 324,
    "pass": true
   },
   {
@@ -3784,8 +3784,8 @@
    "id": "eng-marwan-saleh-load",
    "category": "Engineers",
    "statement": "Marwan Saleh: load percent is workload over capacity to one decimal",
-   "left": 103.4,
-   "right": 103.4,
+   "left": 101.3,
+   "right": 101.3,
    "pass": true
   },
   {
@@ -3800,112 +3800,112 @@
    "id": "eng-kavya-nair-owned",
    "category": "Engineers",
    "statement": "Kavya Nair: owned count equals the register",
-   "left": 166,
-   "right": 166,
+   "left": 105,
+   "right": 105,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-value",
    "category": "Engineers",
    "statement": "Kavya Nair: pipeline value equals the sum of owned project values",
-   "left": 7565.2,
-   "right": 7565.2,
+   "left": 5124,
+   "right": 5124,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-sum",
    "category": "Engineers",
    "statement": "Kavya Nair: funnel sums to owned count",
-   "left": 166,
-   "right": 166,
+   "left": 105,
+   "right": 105,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-0",
    "category": "Engineers",
    "statement": "Kavya Nair: Order received equals the register",
-   "left": 14,
-   "right": 14,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-1",
    "category": "Engineers",
    "statement": "Kavya Nair: Quote sent equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-2",
    "category": "Engineers",
    "statement": "Kavya Nair: Enquiry generated equals the register",
-   "left": 24,
-   "right": 24,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-3",
    "category": "Engineers",
    "statement": "Kavya Nair: Company profile shared equals the register",
-   "left": 20,
-   "right": 20,
+   "left": 15,
+   "right": 15,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-4",
    "category": "Engineers",
    "statement": "Kavya Nair: Project closed equals the register",
-   "left": 14,
-   "right": 14,
+   "left": 13,
+   "right": 13,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-5",
    "category": "Engineers",
    "statement": "Kavya Nair: Visit done equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-6",
    "category": "Engineers",
    "statement": "Kavya Nair: Reached out equals the register",
-   "left": 23,
-   "right": 23,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-7",
    "category": "Engineers",
    "statement": "Kavya Nair: Waiting or follow up equals the register",
-   "left": 17,
-   "right": 17,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-8",
    "category": "Engineers",
    "statement": "Kavya Nair: No response equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-9",
    "category": "Engineers",
    "statement": "Kavya Nair: Contractor or consultant not yet awarded equals the register",
-   "left": 4,
-   "right": 4,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-funnel-10",
    "category": "Engineers",
    "statement": "Kavya Nair: No update equals the register",
-   "left": 16,
-   "right": 16,
+   "left": 8,
+   "right": 8,
    "pass": true
   },
   {
@@ -3920,24 +3920,24 @@
    "id": "eng-kavya-nair-consultants",
    "category": "Engineers",
    "statement": "Kavya Nair: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 127,
-   "right": 127,
+   "left": 92,
+   "right": 92,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-contractors",
    "category": "Engineers",
    "statement": "Kavya Nair: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 132,
-   "right": 132,
+   "left": 95,
+   "right": 95,
    "pass": true
   },
   {
    "id": "eng-kavya-nair-workload",
    "category": "Engineers",
    "statement": "Kavya Nair: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 336,
-   "right": 336,
+   "left": 202,
+   "right": 202,
    "pass": true
   },
   {
@@ -3952,8 +3952,8 @@
    "id": "eng-kavya-nair-load",
    "category": "Engineers",
    "statement": "Kavya Nair: load percent is workload over capacity to one decimal",
-   "left": 105,
-   "right": 105,
+   "left": 63.1,
+   "right": 63.1,
    "pass": true
   },
   {
@@ -3968,112 +3968,112 @@
    "id": "eng-joseph-villanueva-owned",
    "category": "Engineers",
    "statement": "Joseph Villanueva: owned count equals the register",
-   "left": 50,
-   "right": 50,
+   "left": 110,
+   "right": 110,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-value",
    "category": "Engineers",
    "statement": "Joseph Villanueva: pipeline value equals the sum of owned project values",
-   "left": 33733.7,
-   "right": 33733.7,
+   "left": 43022.1,
+   "right": 43022.1,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-sum",
    "category": "Engineers",
    "statement": "Joseph Villanueva: funnel sums to owned count",
-   "left": 50,
-   "right": 50,
+   "left": 110,
+   "right": 110,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-0",
    "category": "Engineers",
    "statement": "Joseph Villanueva: Order received equals the register",
-   "left": 0,
-   "right": 0,
+   "left": 1,
+   "right": 1,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-1",
    "category": "Engineers",
    "statement": "Joseph Villanueva: Quote sent equals the register",
-   "left": 2,
-   "right": 2,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-2",
    "category": "Engineers",
    "statement": "Joseph Villanueva: Enquiry generated equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 17,
+   "right": 17,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-3",
    "category": "Engineers",
    "statement": "Joseph Villanueva: Company profile shared equals the register",
-   "left": 2,
-   "right": 2,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-4",
    "category": "Engineers",
    "statement": "Joseph Villanueva: Project closed equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-5",
    "category": "Engineers",
    "statement": "Joseph Villanueva: Visit done equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 11,
+   "right": 11,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-6",
    "category": "Engineers",
    "statement": "Joseph Villanueva: Reached out equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 9,
+   "right": 9,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-7",
    "category": "Engineers",
    "statement": "Joseph Villanueva: Waiting or follow up equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 21,
+   "right": 21,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-8",
    "category": "Engineers",
    "statement": "Joseph Villanueva: No response equals the register",
-   "left": 0,
-   "right": 0,
+   "left": 2,
+   "right": 2,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-9",
    "category": "Engineers",
    "statement": "Joseph Villanueva: Contractor or consultant not yet awarded equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-funnel-10",
    "category": "Engineers",
    "statement": "Joseph Villanueva: No update equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
@@ -4088,24 +4088,24 @@
    "id": "eng-joseph-villanueva-consultants",
    "category": "Engineers",
    "statement": "Joseph Villanueva: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 15,
-   "right": 15,
+   "left": 34,
+   "right": 34,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-contractors",
    "category": "Engineers",
    "statement": "Joseph Villanueva: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 2,
-   "right": 2,
+   "left": 1,
+   "right": 1,
    "pass": true
   },
   {
    "id": "eng-joseph-villanueva-workload",
    "category": "Engineers",
    "statement": "Joseph Villanueva: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 95,
-   "right": 95,
+   "left": 205,
+   "right": 205,
    "pass": true
   },
   {
@@ -4120,8 +4120,8 @@
    "id": "eng-joseph-villanueva-load",
    "category": "Engineers",
    "statement": "Joseph Villanueva: load percent is workload over capacity to one decimal",
-   "left": 29.7,
-   "right": 29.7,
+   "left": 64.1,
+   "right": 64.1,
    "pass": true
   },
   {
@@ -4136,112 +4136,112 @@
    "id": "eng-lina-khoury-owned",
    "category": "Engineers",
    "statement": "Lina Khoury: owned count equals the register",
-   "left": 146,
-   "right": 146,
+   "left": 85,
+   "right": 85,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-value",
    "category": "Engineers",
    "statement": "Lina Khoury: pipeline value equals the sum of owned project values",
-   "left": 33681.3,
-   "right": 33681.3,
+   "left": 42066.6,
+   "right": 42066.6,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-sum",
    "category": "Engineers",
    "statement": "Lina Khoury: funnel sums to owned count",
-   "left": 146,
-   "right": 146,
+   "left": 85,
+   "right": 85,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-0",
    "category": "Engineers",
    "statement": "Lina Khoury: Order received equals the register",
-   "left": 2,
-   "right": 2,
+   "left": 1,
+   "right": 1,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-1",
    "category": "Engineers",
    "statement": "Lina Khoury: Quote sent equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 2,
+   "right": 2,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-2",
    "category": "Engineers",
    "statement": "Lina Khoury: Enquiry generated equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-3",
    "category": "Engineers",
    "statement": "Lina Khoury: Company profile shared equals the register",
-   "left": 19,
-   "right": 19,
+   "left": 8,
+   "right": 8,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-4",
    "category": "Engineers",
    "statement": "Lina Khoury: Project closed equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-5",
    "category": "Engineers",
    "statement": "Lina Khoury: Visit done equals the register",
-   "left": 14,
-   "right": 14,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-6",
    "category": "Engineers",
    "statement": "Lina Khoury: Reached out equals the register",
-   "left": 21,
-   "right": 21,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-7",
    "category": "Engineers",
    "statement": "Lina Khoury: Waiting or follow up equals the register",
-   "left": 17,
-   "right": 17,
+   "left": 8,
+   "right": 8,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-8",
    "category": "Engineers",
    "statement": "Lina Khoury: No response equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-9",
    "category": "Engineers",
    "statement": "Lina Khoury: Contractor or consultant not yet awarded equals the register",
-   "left": 19,
-   "right": 19,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
    "id": "eng-lina-khoury-funnel-10",
    "category": "Engineers",
    "statement": "Lina Khoury: No update equals the register",
-   "left": 18,
-   "right": 18,
+   "left": 13,
+   "right": 13,
    "pass": true
   },
   {
@@ -4256,8 +4256,8 @@
    "id": "eng-lina-khoury-consultants",
    "category": "Engineers",
    "statement": "Lina Khoury: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 50,
-   "right": 50,
+   "left": 39,
+   "right": 39,
    "pass": true
   },
   {
@@ -4272,8 +4272,8 @@
    "id": "eng-lina-khoury-workload",
    "category": "Engineers",
    "statement": "Lina Khoury: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 271,
-   "right": 271,
+   "left": 157,
+   "right": 157,
    "pass": true
   },
   {
@@ -4288,8 +4288,8 @@
    "id": "eng-lina-khoury-load",
    "category": "Engineers",
    "statement": "Lina Khoury: load percent is workload over capacity to one decimal",
-   "left": 84.7,
-   "right": 84.7,
+   "left": 49.1,
+   "right": 49.1,
    "pass": true
   },
   {
@@ -4304,24 +4304,24 @@
    "id": "eng-arjun-sethi-owned",
    "category": "Engineers",
    "statement": "Arjun Sethi: owned count equals the register",
-   "left": 40,
-   "right": 40,
+   "left": 43,
+   "right": 43,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-value",
    "category": "Engineers",
    "statement": "Arjun Sethi: pipeline value equals the sum of owned project values",
-   "left": 39863.5,
-   "right": 39863.5,
+   "left": 48053.5,
+   "right": 48053.5,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-funnel-sum",
    "category": "Engineers",
    "statement": "Arjun Sethi: funnel sums to owned count",
-   "left": 40,
-   "right": 40,
+   "left": 43,
+   "right": 43,
    "pass": true
   },
   {
@@ -4336,24 +4336,24 @@
    "id": "eng-arjun-sethi-funnel-1",
    "category": "Engineers",
    "statement": "Arjun Sethi: Quote sent equals the register",
-   "left": 1,
-   "right": 1,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-funnel-2",
    "category": "Engineers",
    "statement": "Arjun Sethi: Enquiry generated equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-funnel-3",
    "category": "Engineers",
    "statement": "Arjun Sethi: Company profile shared equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
@@ -4368,48 +4368,48 @@
    "id": "eng-arjun-sethi-funnel-5",
    "category": "Engineers",
    "statement": "Arjun Sethi: Visit done equals the register",
-   "left": 4,
-   "right": 4,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-funnel-6",
    "category": "Engineers",
    "statement": "Arjun Sethi: Reached out equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 2,
+   "right": 2,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-funnel-7",
    "category": "Engineers",
    "statement": "Arjun Sethi: Waiting or follow up equals the register",
-   "left": 5,
-   "right": 5,
+   "left": 2,
+   "right": 2,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-funnel-8",
    "category": "Engineers",
    "statement": "Arjun Sethi: No response equals the register",
-   "left": 1,
-   "right": 1,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-funnel-9",
    "category": "Engineers",
    "statement": "Arjun Sethi: Contractor or consultant not yet awarded equals the register",
-   "left": 2,
-   "right": 2,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-funnel-10",
    "category": "Engineers",
    "statement": "Arjun Sethi: No update equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
@@ -4432,16 +4432,16 @@
    "id": "eng-arjun-sethi-contractors",
    "category": "Engineers",
    "statement": "Arjun Sethi: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 4,
-   "right": 4,
+   "left": 2,
+   "right": 2,
    "pass": true
   },
   {
    "id": "eng-arjun-sethi-workload",
    "category": "Engineers",
    "statement": "Arjun Sethi: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 81,
-   "right": 81,
+   "left": 78,
+   "right": 78,
    "pass": true
   },
   {
@@ -4456,8 +4456,8 @@
    "id": "eng-arjun-sethi-load",
    "category": "Engineers",
    "statement": "Arjun Sethi: load percent is workload over capacity to one decimal",
-   "left": 25.3,
-   "right": 25.3,
+   "left": 24.4,
+   "right": 24.4,
    "pass": true
   },
   {
@@ -4472,24 +4472,24 @@
    "id": "eng-bassem-farouk-owned",
    "category": "Engineers",
    "statement": "Bassem Farouk: owned count equals the register",
-   "left": 102,
-   "right": 102,
+   "left": 94,
+   "right": 94,
    "pass": true
   },
   {
    "id": "eng-bassem-farouk-value",
    "category": "Engineers",
    "statement": "Bassem Farouk: pipeline value equals the sum of owned project values",
-   "left": 45263.1,
-   "right": 45263.1,
+   "left": 43427.9,
+   "right": 43427.9,
    "pass": true
   },
   {
    "id": "eng-bassem-farouk-funnel-sum",
    "category": "Engineers",
    "statement": "Bassem Farouk: funnel sums to owned count",
-   "left": 102,
-   "right": 102,
+   "left": 94,
+   "right": 94,
    "pass": true
   },
   {
@@ -4504,8 +4504,8 @@
    "id": "eng-bassem-farouk-funnel-1",
    "category": "Engineers",
    "statement": "Bassem Farouk: Quote sent equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 1,
+   "right": 1,
    "pass": true
   },
   {
@@ -4520,64 +4520,64 @@
    "id": "eng-bassem-farouk-funnel-3",
    "category": "Engineers",
    "statement": "Bassem Farouk: Company profile shared equals the register",
-   "left": 13,
-   "right": 13,
+   "left": 9,
+   "right": 9,
    "pass": true
   },
   {
    "id": "eng-bassem-farouk-funnel-4",
    "category": "Engineers",
    "statement": "Bassem Farouk: Project closed equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-bassem-farouk-funnel-5",
    "category": "Engineers",
    "statement": "Bassem Farouk: Visit done equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 11,
+   "right": 11,
    "pass": true
   },
   {
    "id": "eng-bassem-farouk-funnel-6",
    "category": "Engineers",
    "statement": "Bassem Farouk: Reached out equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-bassem-farouk-funnel-7",
    "category": "Engineers",
    "statement": "Bassem Farouk: Waiting or follow up equals the register",
-   "left": 12,
-   "right": 12,
+   "left": 15,
+   "right": 15,
    "pass": true
   },
   {
    "id": "eng-bassem-farouk-funnel-8",
    "category": "Engineers",
    "statement": "Bassem Farouk: No response equals the register",
-   "left": 5,
-   "right": 5,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-bassem-farouk-funnel-9",
    "category": "Engineers",
    "statement": "Bassem Farouk: Contractor or consultant not yet awarded equals the register",
-   "left": 18,
-   "right": 18,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
    "id": "eng-bassem-farouk-funnel-10",
    "category": "Engineers",
    "statement": "Bassem Farouk: No update equals the register",
-   "left": 13,
-   "right": 13,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
@@ -4592,8 +4592,8 @@
    "id": "eng-bassem-farouk-consultants",
    "category": "Engineers",
    "statement": "Bassem Farouk: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 23,
-   "right": 23,
+   "left": 20,
+   "right": 20,
    "pass": true
   },
   {
@@ -4608,8 +4608,8 @@
    "id": "eng-bassem-farouk-workload",
    "category": "Engineers",
    "statement": "Bassem Farouk: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 192,
-   "right": 192,
+   "left": 172,
+   "right": 172,
    "pass": true
   },
   {
@@ -4624,8 +4624,8 @@
    "id": "eng-bassem-farouk-load",
    "category": "Engineers",
    "statement": "Bassem Farouk: load percent is workload over capacity to one decimal",
-   "left": 60,
-   "right": 60,
+   "left": 53.8,
+   "right": 53.8,
    "pass": true
   },
   {
@@ -4640,88 +4640,88 @@
    "id": "eng-sneha-menon-owned",
    "category": "Engineers",
    "statement": "Sneha Menon: owned count equals the register",
-   "left": 86,
-   "right": 86,
+   "left": 64,
+   "right": 64,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-value",
    "category": "Engineers",
    "statement": "Sneha Menon: pipeline value equals the sum of owned project values",
-   "left": 58242.9,
-   "right": 58242.9,
+   "left": 54562.7,
+   "right": 54562.7,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-sum",
    "category": "Engineers",
    "statement": "Sneha Menon: funnel sums to owned count",
-   "left": 86,
-   "right": 86,
+   "left": 64,
+   "right": 64,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-0",
    "category": "Engineers",
    "statement": "Sneha Menon: Order received equals the register",
-   "left": 1,
-   "right": 1,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-1",
    "category": "Engineers",
    "statement": "Sneha Menon: Quote sent equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 1,
+   "right": 1,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-2",
    "category": "Engineers",
    "statement": "Sneha Menon: Enquiry generated equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-3",
    "category": "Engineers",
    "statement": "Sneha Menon: Company profile shared equals the register",
-   "left": 4,
-   "right": 4,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-4",
    "category": "Engineers",
    "statement": "Sneha Menon: Project closed equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-5",
    "category": "Engineers",
    "statement": "Sneha Menon: Visit done equals the register",
-   "left": 14,
-   "right": 14,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-6",
    "category": "Engineers",
    "statement": "Sneha Menon: Reached out equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-7",
    "category": "Engineers",
    "statement": "Sneha Menon: Waiting or follow up equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
@@ -4736,16 +4736,16 @@
    "id": "eng-sneha-menon-funnel-9",
    "category": "Engineers",
    "statement": "Sneha Menon: Contractor or consultant not yet awarded equals the register",
-   "left": 14,
-   "right": 14,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-funnel-10",
    "category": "Engineers",
    "statement": "Sneha Menon: No update equals the register",
-   "left": 13,
-   "right": 13,
+   "left": 2,
+   "right": 2,
    "pass": true
   },
   {
@@ -4760,24 +4760,24 @@
    "id": "eng-sneha-menon-consultants",
    "category": "Engineers",
    "statement": "Sneha Menon: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 24,
-   "right": 24,
+   "left": 13,
+   "right": 13,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-contractors",
    "category": "Engineers",
    "statement": "Sneha Menon: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 0,
-   "right": 0,
+   "left": 2,
+   "right": 2,
    "pass": true
   },
   {
    "id": "eng-sneha-menon-workload",
    "category": "Engineers",
    "statement": "Sneha Menon: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 165,
-   "right": 165,
+   "left": 128,
+   "right": 128,
    "pass": true
   },
   {
@@ -4792,8 +4792,8 @@
    "id": "eng-sneha-menon-load",
    "category": "Engineers",
    "statement": "Sneha Menon: load percent is workload over capacity to one decimal",
-   "left": 51.6,
-   "right": 51.6,
+   "left": 40,
+   "right": 40,
    "pass": true
   },
   {
@@ -4808,24 +4808,24 @@
    "id": "eng-tarek-hamdan-owned",
    "category": "Engineers",
    "statement": "Tarek Hamdan: owned count equals the register",
-   "left": 49,
-   "right": 49,
+   "left": 80,
+   "right": 80,
    "pass": true
   },
   {
    "id": "eng-tarek-hamdan-value",
    "category": "Engineers",
    "statement": "Tarek Hamdan: pipeline value equals the sum of owned project values",
-   "left": 70426.9,
-   "right": 70426.9,
+   "left": 40407.4,
+   "right": 40407.4,
    "pass": true
   },
   {
    "id": "eng-tarek-hamdan-funnel-sum",
    "category": "Engineers",
    "statement": "Tarek Hamdan: funnel sums to owned count",
-   "left": 49,
-   "right": 49,
+   "left": 80,
+   "right": 80,
    "pass": true
   },
   {
@@ -4840,32 +4840,32 @@
    "id": "eng-tarek-hamdan-funnel-1",
    "category": "Engineers",
    "statement": "Tarek Hamdan: Quote sent equals the register",
-   "left": 1,
-   "right": 1,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-tarek-hamdan-funnel-2",
    "category": "Engineers",
    "statement": "Tarek Hamdan: Enquiry generated equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-tarek-hamdan-funnel-3",
    "category": "Engineers",
    "statement": "Tarek Hamdan: Company profile shared equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 8,
+   "right": 8,
    "pass": true
   },
   {
    "id": "eng-tarek-hamdan-funnel-4",
    "category": "Engineers",
    "statement": "Tarek Hamdan: Project closed equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
@@ -4880,40 +4880,40 @@
    "id": "eng-tarek-hamdan-funnel-6",
    "category": "Engineers",
    "statement": "Tarek Hamdan: Reached out equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 9,
+   "right": 9,
    "pass": true
   },
   {
    "id": "eng-tarek-hamdan-funnel-7",
    "category": "Engineers",
    "statement": "Tarek Hamdan: Waiting or follow up equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 11,
+   "right": 11,
    "pass": true
   },
   {
    "id": "eng-tarek-hamdan-funnel-8",
    "category": "Engineers",
    "statement": "Tarek Hamdan: No response equals the register",
-   "left": 2,
-   "right": 2,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-tarek-hamdan-funnel-9",
    "category": "Engineers",
    "statement": "Tarek Hamdan: Contractor or consultant not yet awarded equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-tarek-hamdan-funnel-10",
    "category": "Engineers",
    "statement": "Tarek Hamdan: No update equals the register",
-   "left": 5,
-   "right": 5,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
@@ -4928,8 +4928,8 @@
    "id": "eng-tarek-hamdan-consultants",
    "category": "Engineers",
    "statement": "Tarek Hamdan: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 6,
-   "right": 6,
+   "left": 21,
+   "right": 21,
    "pass": true
   },
   {
@@ -4944,8 +4944,8 @@
    "id": "eng-tarek-hamdan-workload",
    "category": "Engineers",
    "statement": "Tarek Hamdan: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 102,
-   "right": 102,
+   "left": 156,
+   "right": 156,
    "pass": true
   },
   {
@@ -4960,8 +4960,8 @@
    "id": "eng-tarek-hamdan-load",
    "category": "Engineers",
    "statement": "Tarek Hamdan: load percent is workload over capacity to one decimal",
-   "left": 31.9,
-   "right": 31.9,
+   "left": 48.8,
+   "right": 48.8,
    "pass": true
   },
   {
@@ -4976,24 +4976,24 @@
    "id": "eng-omar-nasser-owned",
    "category": "Engineers",
    "statement": "Omar Nasser: owned count equals the register",
-   "left": 354,
-   "right": 354,
+   "left": 302,
+   "right": 302,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-value",
    "category": "Engineers",
    "statement": "Omar Nasser: pipeline value equals the sum of owned project values",
-   "left": 60919.9,
-   "right": 60919.9,
+   "left": 67527.1,
+   "right": 67527.1,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-sum",
    "category": "Engineers",
    "statement": "Omar Nasser: funnel sums to owned count",
-   "left": 354,
-   "right": 354,
+   "left": 302,
+   "right": 302,
    "pass": true
   },
   {
@@ -5008,80 +5008,80 @@
    "id": "eng-omar-nasser-funnel-1",
    "category": "Engineers",
    "statement": "Omar Nasser: Quote sent equals the register",
-   "left": 30,
-   "right": 30,
+   "left": 32,
+   "right": 32,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-2",
    "category": "Engineers",
    "statement": "Omar Nasser: Enquiry generated equals the register",
-   "left": 34,
-   "right": 34,
+   "left": 23,
+   "right": 23,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-3",
    "category": "Engineers",
    "statement": "Omar Nasser: Company profile shared equals the register",
-   "left": 49,
-   "right": 49,
+   "left": 36,
+   "right": 36,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-4",
    "category": "Engineers",
    "statement": "Omar Nasser: Project closed equals the register",
-   "left": 36,
-   "right": 36,
+   "left": 21,
+   "right": 21,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-5",
    "category": "Engineers",
    "statement": "Omar Nasser: Visit done equals the register",
-   "left": 35,
-   "right": 35,
+   "left": 26,
+   "right": 26,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-6",
    "category": "Engineers",
    "statement": "Omar Nasser: Reached out equals the register",
-   "left": 50,
-   "right": 50,
+   "left": 40,
+   "right": 40,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-7",
    "category": "Engineers",
    "statement": "Omar Nasser: Waiting or follow up equals the register",
-   "left": 50,
-   "right": 50,
+   "left": 44,
+   "right": 44,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-8",
    "category": "Engineers",
    "statement": "Omar Nasser: No response equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 18,
+   "right": 18,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-9",
    "category": "Engineers",
    "statement": "Omar Nasser: Contractor or consultant not yet awarded equals the register",
-   "left": 13,
-   "right": 13,
+   "left": 15,
+   "right": 15,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-funnel-10",
    "category": "Engineers",
    "statement": "Omar Nasser: No update equals the register",
-   "left": 32,
-   "right": 32,
+   "left": 37,
+   "right": 37,
    "pass": true
   },
   {
@@ -5096,24 +5096,24 @@
    "id": "eng-omar-nasser-consultants",
    "category": "Engineers",
    "statement": "Omar Nasser: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 198,
-   "right": 198,
+   "left": 172,
+   "right": 172,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-contractors",
    "category": "Engineers",
    "statement": "Omar Nasser: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 224,
-   "right": 224,
+   "left": 173,
+   "right": 173,
    "pass": true
   },
   {
    "id": "eng-omar-nasser-workload",
    "category": "Engineers",
    "statement": "Omar Nasser: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 714,
-   "right": 714,
+   "left": 595,
+   "right": 595,
    "pass": true
   },
   {
@@ -5128,8 +5128,8 @@
    "id": "eng-omar-nasser-load",
    "category": "Engineers",
    "statement": "Omar Nasser: load percent is workload over capacity to one decimal",
-   "left": 223.1,
-   "right": 223.1,
+   "left": 185.9,
+   "right": 185.9,
    "pass": true
   },
   {
@@ -5144,56 +5144,56 @@
    "id": "eng-meera-dsouza-owned",
    "category": "Engineers",
    "statement": "Meera Dsouza: owned count equals the register",
-   "left": 269,
-   "right": 269,
+   "left": 315,
+   "right": 315,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-value",
    "category": "Engineers",
    "statement": "Meera Dsouza: pipeline value equals the sum of owned project values",
-   "left": 61249.1,
-   "right": 61249.1,
+   "left": 56188.9,
+   "right": 56188.9,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-sum",
    "category": "Engineers",
    "statement": "Meera Dsouza: funnel sums to owned count",
-   "left": 269,
-   "right": 269,
+   "left": 315,
+   "right": 315,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-0",
    "category": "Engineers",
    "statement": "Meera Dsouza: Order received equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-1",
    "category": "Engineers",
    "statement": "Meera Dsouza: Quote sent equals the register",
-   "left": 22,
-   "right": 22,
+   "left": 20,
+   "right": 20,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-2",
    "category": "Engineers",
    "statement": "Meera Dsouza: Enquiry generated equals the register",
-   "left": 27,
-   "right": 27,
+   "left": 31,
+   "right": 31,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-3",
    "category": "Engineers",
    "statement": "Meera Dsouza: Company profile shared equals the register",
-   "left": 27,
-   "right": 27,
+   "left": 35,
+   "right": 35,
    "pass": true
   },
   {
@@ -5208,48 +5208,48 @@
    "id": "eng-meera-dsouza-funnel-5",
    "category": "Engineers",
    "statement": "Meera Dsouza: Visit done equals the register",
-   "left": 24,
-   "right": 24,
+   "left": 38,
+   "right": 38,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-6",
    "category": "Engineers",
    "statement": "Meera Dsouza: Reached out equals the register",
-   "left": 34,
-   "right": 34,
+   "left": 42,
+   "right": 42,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-7",
    "category": "Engineers",
    "statement": "Meera Dsouza: Waiting or follow up equals the register",
-   "left": 39,
-   "right": 39,
+   "left": 33,
+   "right": 33,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-8",
    "category": "Engineers",
    "statement": "Meera Dsouza: No response equals the register",
-   "left": 16,
-   "right": 16,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-9",
    "category": "Engineers",
    "statement": "Meera Dsouza: Contractor or consultant not yet awarded equals the register",
-   "left": 16,
-   "right": 16,
+   "left": 25,
+   "right": 25,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-funnel-10",
    "category": "Engineers",
    "statement": "Meera Dsouza: No update equals the register",
-   "left": 28,
-   "right": 28,
+   "left": 40,
+   "right": 40,
    "pass": true
   },
   {
@@ -5264,24 +5264,24 @@
    "id": "eng-meera-dsouza-consultants",
    "category": "Engineers",
    "statement": "Meera Dsouza: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 159,
-   "right": 159,
+   "left": 180,
+   "right": 180,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-contractors",
    "category": "Engineers",
    "statement": "Meera Dsouza: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 143,
-   "right": 143,
+   "left": 172,
+   "right": 172,
    "pass": true
   },
   {
    "id": "eng-meera-dsouza-workload",
    "category": "Engineers",
    "statement": "Meera Dsouza: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 512,
-   "right": 512,
+   "left": 622,
+   "right": 622,
    "pass": true
   },
   {
@@ -5296,8 +5296,8 @@
    "id": "eng-meera-dsouza-load",
    "category": "Engineers",
    "statement": "Meera Dsouza: load percent is workload over capacity to one decimal",
-   "left": 160,
-   "right": 160,
+   "left": 194.4,
+   "right": 194.4,
    "pass": true
   },
   {
@@ -5312,80 +5312,80 @@
    "id": "eng-hana-qureshi-owned",
    "category": "Engineers",
    "statement": "Hana Qureshi: owned count equals the register",
-   "left": 73,
-   "right": 73,
+   "left": 53,
+   "right": 53,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-value",
    "category": "Engineers",
    "statement": "Hana Qureshi: pipeline value equals the sum of owned project values",
-   "left": 18027,
-   "right": 18027,
+   "left": 21220.1,
+   "right": 21220.1,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-sum",
    "category": "Engineers",
    "statement": "Hana Qureshi: funnel sums to owned count",
-   "left": 73,
-   "right": 73,
+   "left": 53,
+   "right": 53,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-0",
    "category": "Engineers",
    "statement": "Hana Qureshi: Order received equals the register",
-   "left": 0,
-   "right": 0,
+   "left": 1,
+   "right": 1,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-1",
    "category": "Engineers",
    "statement": "Hana Qureshi: Quote sent equals the register",
-   "left": 1,
-   "right": 1,
+   "left": 0,
+   "right": 0,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-2",
    "category": "Engineers",
    "statement": "Hana Qureshi: Enquiry generated equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-3",
    "category": "Engineers",
    "statement": "Hana Qureshi: Company profile shared equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 1,
+   "right": 1,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-4",
    "category": "Engineers",
    "statement": "Hana Qureshi: Project closed equals the register",
-   "left": 2,
-   "right": 2,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-5",
    "category": "Engineers",
    "statement": "Hana Qureshi: Visit done equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-6",
    "category": "Engineers",
    "statement": "Hana Qureshi: Reached out equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
@@ -5400,24 +5400,24 @@
    "id": "eng-hana-qureshi-funnel-8",
    "category": "Engineers",
    "statement": "Hana Qureshi: No response equals the register",
-   "left": 2,
-   "right": 2,
+   "left": 1,
+   "right": 1,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-9",
    "category": "Engineers",
    "statement": "Hana Qureshi: Contractor or consultant not yet awarded equals the register",
-   "left": 18,
-   "right": 18,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-hana-qureshi-funnel-10",
    "category": "Engineers",
    "statement": "Hana Qureshi: No update equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
@@ -5432,8 +5432,8 @@
    "id": "eng-hana-qureshi-consultants",
    "category": "Engineers",
    "statement": "Hana Qureshi: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 21,
-   "right": 21,
+   "left": 22,
+   "right": 22,
    "pass": true
   },
   {
@@ -5448,8 +5448,8 @@
    "id": "eng-hana-qureshi-workload",
    "category": "Engineers",
    "statement": "Hana Qureshi: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 133,
-   "right": 133,
+   "left": 89,
+   "right": 89,
    "pass": true
   },
   {
@@ -5464,8 +5464,8 @@
    "id": "eng-hana-qureshi-load",
    "category": "Engineers",
    "statement": "Hana Qureshi: load percent is workload over capacity to one decimal",
-   "left": 41.6,
-   "right": 41.6,
+   "left": 27.8,
+   "right": 27.8,
    "pass": true
   },
   {
@@ -5480,24 +5480,24 @@
    "id": "eng-yusuf-rahman-owned",
    "category": "Engineers",
    "statement": "Yusuf Rahman: owned count equals the register",
-   "left": 48,
-   "right": 48,
+   "left": 92,
+   "right": 92,
    "pass": true
   },
   {
    "id": "eng-yusuf-rahman-value",
    "category": "Engineers",
    "statement": "Yusuf Rahman: pipeline value equals the sum of owned project values",
-   "left": 17964,
-   "right": 17964,
+   "left": 20967.8,
+   "right": 20967.8,
    "pass": true
   },
   {
    "id": "eng-yusuf-rahman-funnel-sum",
    "category": "Engineers",
    "statement": "Yusuf Rahman: funnel sums to owned count",
-   "left": 48,
-   "right": 48,
+   "left": 92,
+   "right": 92,
    "pass": true
   },
   {
@@ -5512,40 +5512,40 @@
    "id": "eng-yusuf-rahman-funnel-1",
    "category": "Engineers",
    "statement": "Yusuf Rahman: Quote sent equals the register",
-   "left": 1,
-   "right": 1,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-yusuf-rahman-funnel-2",
    "category": "Engineers",
    "statement": "Yusuf Rahman: Enquiry generated equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
    "id": "eng-yusuf-rahman-funnel-3",
    "category": "Engineers",
    "statement": "Yusuf Rahman: Company profile shared equals the register",
-   "left": 5,
-   "right": 5,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-yusuf-rahman-funnel-4",
    "category": "Engineers",
    "statement": "Yusuf Rahman: Project closed equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 11,
+   "right": 11,
    "pass": true
   },
   {
    "id": "eng-yusuf-rahman-funnel-5",
    "category": "Engineers",
    "statement": "Yusuf Rahman: Visit done equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 8,
+   "right": 8,
    "pass": true
   },
   {
@@ -5560,8 +5560,8 @@
    "id": "eng-yusuf-rahman-funnel-7",
    "category": "Engineers",
    "statement": "Yusuf Rahman: Waiting or follow up equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 13,
+   "right": 13,
    "pass": true
   },
   {
@@ -5576,16 +5576,16 @@
    "id": "eng-yusuf-rahman-funnel-9",
    "category": "Engineers",
    "statement": "Yusuf Rahman: Contractor or consultant not yet awarded equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 15,
+   "right": 15,
    "pass": true
   },
   {
    "id": "eng-yusuf-rahman-funnel-10",
    "category": "Engineers",
    "statement": "Yusuf Rahman: No update equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
@@ -5600,24 +5600,24 @@
    "id": "eng-yusuf-rahman-consultants",
    "category": "Engineers",
    "statement": "Yusuf Rahman: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 16,
-   "right": 16,
+   "left": 33,
+   "right": 33,
    "pass": true
   },
   {
    "id": "eng-yusuf-rahman-contractors",
    "category": "Engineers",
    "statement": "Yusuf Rahman: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 2,
-   "right": 2,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-yusuf-rahman-workload",
    "category": "Engineers",
    "statement": "Yusuf Rahman: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 77,
-   "right": 77,
+   "left": 149,
+   "right": 149,
    "pass": true
   },
   {
@@ -5632,8 +5632,8 @@
    "id": "eng-yusuf-rahman-load",
    "category": "Engineers",
    "statement": "Yusuf Rahman: load percent is workload over capacity to one decimal",
-   "left": 24.1,
-   "right": 24.1,
+   "left": 46.6,
+   "right": 46.6,
    "pass": true
   },
   {
@@ -5648,24 +5648,24 @@
    "id": "eng-divya-bhatt-owned",
    "category": "Engineers",
    "statement": "Divya Bhatt: owned count equals the register",
-   "left": 114,
-   "right": 114,
+   "left": 92,
+   "right": 92,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-value",
    "category": "Engineers",
    "statement": "Divya Bhatt: pipeline value equals the sum of owned project values",
-   "left": 18162.1,
-   "right": 18162.1,
+   "left": 20930.2,
+   "right": 20930.2,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-sum",
    "category": "Engineers",
    "statement": "Divya Bhatt: funnel sums to owned count",
-   "left": 114,
-   "right": 114,
+   "left": 92,
+   "right": 92,
    "pass": true
   },
   {
@@ -5680,80 +5680,80 @@
    "id": "eng-divya-bhatt-funnel-1",
    "category": "Engineers",
    "statement": "Divya Bhatt: Quote sent equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-2",
    "category": "Engineers",
    "statement": "Divya Bhatt: Enquiry generated equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 13,
+   "right": 13,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-3",
    "category": "Engineers",
    "statement": "Divya Bhatt: Company profile shared equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-4",
    "category": "Engineers",
    "statement": "Divya Bhatt: Project closed equals the register",
-   "left": 5,
-   "right": 5,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-5",
    "category": "Engineers",
    "statement": "Divya Bhatt: Visit done equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 9,
+   "right": 9,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-6",
    "category": "Engineers",
    "statement": "Divya Bhatt: Reached out equals the register",
-   "left": 16,
-   "right": 16,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-7",
    "category": "Engineers",
    "statement": "Divya Bhatt: Waiting or follow up equals the register",
-   "left": 16,
-   "right": 16,
+   "left": 22,
+   "right": 22,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-8",
    "category": "Engineers",
    "statement": "Divya Bhatt: No response equals the register",
-   "left": 4,
-   "right": 4,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-9",
    "category": "Engineers",
    "statement": "Divya Bhatt: Contractor or consultant not yet awarded equals the register",
-   "left": 24,
-   "right": 24,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-funnel-10",
    "category": "Engineers",
    "statement": "Divya Bhatt: No update equals the register",
-   "left": 16,
-   "right": 16,
+   "left": 8,
+   "right": 8,
    "pass": true
   },
   {
@@ -5768,24 +5768,24 @@
    "id": "eng-divya-bhatt-consultants",
    "category": "Engineers",
    "statement": "Divya Bhatt: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 46,
-   "right": 46,
+   "left": 29,
+   "right": 29,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-contractors",
    "category": "Engineers",
    "statement": "Divya Bhatt: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 4,
-   "right": 4,
+   "left": 0,
+   "right": 0,
    "pass": true
   },
   {
    "id": "eng-divya-bhatt-workload",
    "category": "Engineers",
    "statement": "Divya Bhatt: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 207,
-   "right": 207,
+   "left": 175,
+   "right": 175,
    "pass": true
   },
   {
@@ -5800,8 +5800,8 @@
    "id": "eng-divya-bhatt-load",
    "category": "Engineers",
    "statement": "Divya Bhatt: load percent is workload over capacity to one decimal",
-   "left": 64.7,
-   "right": 64.7,
+   "left": 54.7,
+   "right": 54.7,
    "pass": true
   },
   {
@@ -5816,32 +5816,32 @@
    "id": "eng-karim-mansour-owned",
    "category": "Engineers",
    "statement": "Karim Mansour: owned count equals the register",
-   "left": 119,
-   "right": 119,
+   "left": 100,
+   "right": 100,
    "pass": true
   },
   {
    "id": "eng-karim-mansour-value",
    "category": "Engineers",
    "statement": "Karim Mansour: pipeline value equals the sum of owned project values",
-   "left": 29647.5,
-   "right": 29647.5,
+   "left": 35737.1,
+   "right": 35737.1,
    "pass": true
   },
   {
    "id": "eng-karim-mansour-funnel-sum",
    "category": "Engineers",
    "statement": "Karim Mansour: funnel sums to owned count",
-   "left": 119,
-   "right": 119,
+   "left": 100,
+   "right": 100,
    "pass": true
   },
   {
    "id": "eng-karim-mansour-funnel-0",
    "category": "Engineers",
    "statement": "Karim Mansour: Order received equals the register",
-   "left": 1,
-   "right": 1,
+   "left": 0,
+   "right": 0,
    "pass": true
   },
   {
@@ -5856,48 +5856,48 @@
    "id": "eng-karim-mansour-funnel-2",
    "category": "Engineers",
    "statement": "Karim Mansour: Enquiry generated equals the register",
-   "left": 13,
-   "right": 13,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-karim-mansour-funnel-3",
    "category": "Engineers",
    "statement": "Karim Mansour: Company profile shared equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 13,
+   "right": 13,
    "pass": true
   },
   {
    "id": "eng-karim-mansour-funnel-4",
    "category": "Engineers",
    "statement": "Karim Mansour: Project closed equals the register",
-   "left": 6,
-   "right": 6,
+   "left": 8,
+   "right": 8,
    "pass": true
   },
   {
    "id": "eng-karim-mansour-funnel-5",
    "category": "Engineers",
    "statement": "Karim Mansour: Visit done equals the register",
-   "left": 13,
-   "right": 13,
+   "left": 17,
+   "right": 17,
    "pass": true
   },
   {
    "id": "eng-karim-mansour-funnel-6",
    "category": "Engineers",
    "statement": "Karim Mansour: Reached out equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
    "id": "eng-karim-mansour-funnel-7",
    "category": "Engineers",
    "statement": "Karim Mansour: Waiting or follow up equals the register",
-   "left": 16,
-   "right": 16,
+   "left": 8,
+   "right": 8,
    "pass": true
   },
   {
@@ -5912,16 +5912,16 @@
    "id": "eng-karim-mansour-funnel-9",
    "category": "Engineers",
    "statement": "Karim Mansour: Contractor or consultant not yet awarded equals the register",
-   "left": 27,
-   "right": 27,
+   "left": 18,
+   "right": 18,
    "pass": true
   },
   {
    "id": "eng-karim-mansour-funnel-10",
    "category": "Engineers",
    "statement": "Karim Mansour: No update equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 8,
+   "right": 8,
    "pass": true
   },
   {
@@ -5936,8 +5936,8 @@
    "id": "eng-karim-mansour-consultants",
    "category": "Engineers",
    "statement": "Karim Mansour: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 25,
-   "right": 25,
+   "left": 29,
+   "right": 29,
    "pass": true
   },
   {
@@ -5952,8 +5952,8 @@
    "id": "eng-karim-mansour-workload",
    "category": "Engineers",
    "statement": "Karim Mansour: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 221,
-   "right": 221,
+   "left": 198,
+   "right": 198,
    "pass": true
   },
   {
@@ -5968,8 +5968,8 @@
    "id": "eng-karim-mansour-load",
    "category": "Engineers",
    "statement": "Karim Mansour: load percent is workload over capacity to one decimal",
-   "left": 69.1,
-   "right": 69.1,
+   "left": 61.9,
+   "right": 61.9,
    "pass": true
   },
   {
@@ -5984,56 +5984,56 @@
    "id": "eng-ananya-kapoor-owned",
    "category": "Engineers",
    "statement": "Ananya Kapoor: owned count equals the register",
-   "left": 118,
-   "right": 118,
+   "left": 137,
+   "right": 137,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-value",
    "category": "Engineers",
    "statement": "Ananya Kapoor: pipeline value equals the sum of owned project values",
-   "left": 30035.7,
-   "right": 30035.7,
+   "left": 35140.3,
+   "right": 35140.3,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-sum",
    "category": "Engineers",
    "statement": "Ananya Kapoor: funnel sums to owned count",
-   "left": 118,
-   "right": 118,
+   "left": 137,
+   "right": 137,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-0",
    "category": "Engineers",
    "statement": "Ananya Kapoor: Order received equals the register",
-   "left": 0,
-   "right": 0,
+   "left": 1,
+   "right": 1,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-1",
    "category": "Engineers",
    "statement": "Ananya Kapoor: Quote sent equals the register",
-   "left": 0,
-   "right": 0,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-2",
    "category": "Engineers",
    "statement": "Ananya Kapoor: Enquiry generated equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 22,
+   "right": 22,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-3",
    "category": "Engineers",
    "statement": "Ananya Kapoor: Company profile shared equals the register",
-   "left": 18,
-   "right": 18,
+   "left": 9,
+   "right": 9,
    "pass": true
   },
   {
@@ -6048,48 +6048,48 @@
    "id": "eng-ananya-kapoor-funnel-5",
    "category": "Engineers",
    "statement": "Ananya Kapoor: Visit done equals the register",
-   "left": 12,
-   "right": 12,
+   "left": 17,
+   "right": 17,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-6",
    "category": "Engineers",
    "statement": "Ananya Kapoor: Reached out equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-7",
    "category": "Engineers",
    "statement": "Ananya Kapoor: Waiting or follow up equals the register",
-   "left": 19,
-   "right": 19,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-8",
    "category": "Engineers",
    "statement": "Ananya Kapoor: No response equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 7,
+   "right": 7,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-9",
    "category": "Engineers",
    "statement": "Ananya Kapoor: Contractor or consultant not yet awarded equals the register",
-   "left": 18,
-   "right": 18,
+   "left": 24,
+   "right": 24,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-funnel-10",
    "category": "Engineers",
    "statement": "Ananya Kapoor: No update equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 18,
+   "right": 18,
    "pass": true
   },
   {
@@ -6104,24 +6104,24 @@
    "id": "eng-ananya-kapoor-consultants",
    "category": "Engineers",
    "statement": "Ananya Kapoor: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 32,
-   "right": 32,
+   "left": 36,
+   "right": 36,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-contractors",
    "category": "Engineers",
    "statement": "Ananya Kapoor: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 0,
-   "right": 0,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
    "id": "eng-ananya-kapoor-workload",
    "category": "Engineers",
    "statement": "Ananya Kapoor: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 212,
-   "right": 212,
+   "left": 257,
+   "right": 257,
    "pass": true
   },
   {
@@ -6136,8 +6136,8 @@
    "id": "eng-ananya-kapoor-load",
    "category": "Engineers",
    "statement": "Ananya Kapoor: load percent is workload over capacity to one decimal",
-   "left": 66.3,
-   "right": 66.3,
+   "left": 80.3,
+   "right": 80.3,
    "pass": true
   },
   {
@@ -6152,80 +6152,80 @@
    "id": "eng-nadia-zaki-owned",
    "category": "Engineers",
    "statement": "Nadia Zaki: owned count equals the register",
-   "left": 162,
-   "right": 162,
+   "left": 135,
+   "right": 135,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-value",
    "category": "Engineers",
    "statement": "Nadia Zaki: pipeline value equals the sum of owned project values",
-   "left": 67047.1,
-   "right": 67047.1,
+   "left": 63365.2,
+   "right": 63365.2,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-sum",
    "category": "Engineers",
    "statement": "Nadia Zaki: funnel sums to owned count",
-   "left": 162,
-   "right": 162,
+   "left": 135,
+   "right": 135,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-0",
    "category": "Engineers",
    "statement": "Nadia Zaki: Order received equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-1",
    "category": "Engineers",
    "statement": "Nadia Zaki: Quote sent equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 11,
+   "right": 11,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-2",
    "category": "Engineers",
    "statement": "Nadia Zaki: Enquiry generated equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-3",
    "category": "Engineers",
    "statement": "Nadia Zaki: Company profile shared equals the register",
-   "left": 17,
-   "right": 17,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-4",
    "category": "Engineers",
    "statement": "Nadia Zaki: Project closed equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 11,
+   "right": 11,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-5",
    "category": "Engineers",
    "statement": "Nadia Zaki: Visit done equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 17,
+   "right": 17,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-6",
    "category": "Engineers",
    "statement": "Nadia Zaki: Reached out equals the register",
-   "left": 19,
-   "right": 19,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
@@ -6240,24 +6240,24 @@
    "id": "eng-nadia-zaki-funnel-8",
    "category": "Engineers",
    "statement": "Nadia Zaki: No response equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-9",
    "category": "Engineers",
    "statement": "Nadia Zaki: Contractor or consultant not yet awarded equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 11,
+   "right": 11,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-funnel-10",
    "category": "Engineers",
    "statement": "Nadia Zaki: No update equals the register",
-   "left": 19,
-   "right": 19,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
@@ -6272,24 +6272,24 @@
    "id": "eng-nadia-zaki-consultants",
    "category": "Engineers",
    "statement": "Nadia Zaki: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 76,
-   "right": 76,
+   "left": 52,
+   "right": 52,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-contractors",
    "category": "Engineers",
    "statement": "Nadia Zaki: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 51,
-   "right": 51,
+   "left": 42,
+   "right": 42,
    "pass": true
   },
   {
    "id": "eng-nadia-zaki-workload",
    "category": "Engineers",
    "statement": "Nadia Zaki: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 299,
-   "right": 299,
+   "left": 260,
+   "right": 260,
    "pass": true
   },
   {
@@ -6304,8 +6304,8 @@
    "id": "eng-nadia-zaki-load",
    "category": "Engineers",
    "statement": "Nadia Zaki: load percent is workload over capacity to one decimal",
-   "left": 93.4,
-   "right": 93.4,
+   "left": 81.3,
+   "right": 81.3,
    "pass": true
   },
   {
@@ -6320,40 +6320,40 @@
    "id": "eng-vikram-fernandes-owned",
    "category": "Engineers",
    "statement": "Vikram Fernandes: owned count equals the register",
-   "left": 83,
-   "right": 83,
+   "left": 114,
+   "right": 114,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-value",
    "category": "Engineers",
    "statement": "Vikram Fernandes: pipeline value equals the sum of owned project values",
-   "left": 66322.9,
-   "right": 66322.9,
+   "left": 63565,
+   "right": 63565,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-funnel-sum",
    "category": "Engineers",
    "statement": "Vikram Fernandes: funnel sums to owned count",
-   "left": 83,
-   "right": 83,
+   "left": 114,
+   "right": 114,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-funnel-0",
    "category": "Engineers",
    "statement": "Vikram Fernandes: Order received equals the register",
-   "left": 0,
-   "right": 0,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-funnel-1",
    "category": "Engineers",
    "statement": "Vikram Fernandes: Quote sent equals the register",
-   "left": 2,
-   "right": 2,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
@@ -6376,56 +6376,56 @@
    "id": "eng-vikram-fernandes-funnel-4",
    "category": "Engineers",
    "statement": "Vikram Fernandes: Project closed equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-funnel-5",
    "category": "Engineers",
    "statement": "Vikram Fernandes: Visit done equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-funnel-6",
    "category": "Engineers",
    "statement": "Vikram Fernandes: Reached out equals the register",
-   "left": 13,
-   "right": 13,
+   "left": 11,
+   "right": 11,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-funnel-7",
    "category": "Engineers",
    "statement": "Vikram Fernandes: Waiting or follow up equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 18,
+   "right": 18,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-funnel-8",
    "category": "Engineers",
    "statement": "Vikram Fernandes: No response equals the register",
-   "left": 7,
-   "right": 7,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-funnel-9",
    "category": "Engineers",
    "statement": "Vikram Fernandes: Contractor or consultant not yet awarded equals the register",
-   "left": 4,
-   "right": 4,
+   "left": 15,
+   "right": 15,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-funnel-10",
    "category": "Engineers",
    "statement": "Vikram Fernandes: No update equals the register",
-   "left": 5,
-   "right": 5,
+   "left": 10,
+   "right": 10,
    "pass": true
   },
   {
@@ -6440,24 +6440,24 @@
    "id": "eng-vikram-fernandes-consultants",
    "category": "Engineers",
    "statement": "Vikram Fernandes: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 34,
-   "right": 34,
+   "left": 54,
+   "right": 54,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-contractors",
    "category": "Engineers",
    "statement": "Vikram Fernandes: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 28,
-   "right": 28,
+   "left": 39,
+   "right": 39,
    "pass": true
   },
   {
    "id": "eng-vikram-fernandes-workload",
    "category": "Engineers",
    "statement": "Vikram Fernandes: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 166,
-   "right": 166,
+   "left": 225,
+   "right": 225,
    "pass": true
   },
   {
@@ -6472,8 +6472,8 @@
    "id": "eng-vikram-fernandes-load",
    "category": "Engineers",
    "statement": "Vikram Fernandes: load percent is workload over capacity to one decimal",
-   "left": 51.9,
-   "right": 51.9,
+   "left": 70.3,
+   "right": 70.3,
    "pass": true
   },
   {
@@ -6488,112 +6488,112 @@
    "id": "eng-rami-aziz-owned",
    "category": "Engineers",
    "statement": "Rami Aziz: owned count equals the register",
-   "left": 268,
-   "right": 268,
+   "left": 262,
+   "right": 262,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-value",
    "category": "Engineers",
    "statement": "Rami Aziz: pipeline value equals the sum of owned project values",
-   "left": 54779.3,
-   "right": 54779.3,
+   "left": 54041.1,
+   "right": 54041.1,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-sum",
    "category": "Engineers",
    "statement": "Rami Aziz: funnel sums to owned count",
-   "left": 268,
-   "right": 268,
+   "left": 262,
+   "right": 262,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-0",
    "category": "Engineers",
    "statement": "Rami Aziz: Order received equals the register",
-   "left": 15,
-   "right": 15,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-1",
    "category": "Engineers",
    "statement": "Rami Aziz: Quote sent equals the register",
-   "left": 25,
-   "right": 25,
+   "left": 19,
+   "right": 19,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-2",
    "category": "Engineers",
    "statement": "Rami Aziz: Enquiry generated equals the register",
-   "left": 19,
-   "right": 19,
+   "left": 14,
+   "right": 14,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-3",
    "category": "Engineers",
    "statement": "Rami Aziz: Company profile shared equals the register",
-   "left": 29,
-   "right": 29,
+   "left": 36,
+   "right": 36,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-4",
    "category": "Engineers",
    "statement": "Rami Aziz: Project closed equals the register",
-   "left": 25,
-   "right": 25,
+   "left": 32,
+   "right": 32,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-5",
    "category": "Engineers",
    "statement": "Rami Aziz: Visit done equals the register",
-   "left": 23,
-   "right": 23,
+   "left": 22,
+   "right": 22,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-6",
    "category": "Engineers",
    "statement": "Rami Aziz: Reached out equals the register",
-   "left": 46,
-   "right": 46,
+   "left": 39,
+   "right": 39,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-7",
    "category": "Engineers",
    "statement": "Rami Aziz: Waiting or follow up equals the register",
-   "left": 39,
-   "right": 39,
+   "left": 38,
+   "right": 38,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-8",
    "category": "Engineers",
    "statement": "Rami Aziz: No response equals the register",
-   "left": 17,
-   "right": 17,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-9",
    "category": "Engineers",
    "statement": "Rami Aziz: Contractor or consultant not yet awarded equals the register",
-   "left": 5,
-   "right": 5,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-funnel-10",
    "category": "Engineers",
    "statement": "Rami Aziz: No update equals the register",
-   "left": 25,
-   "right": 25,
+   "left": 28,
+   "right": 28,
    "pass": true
   },
   {
@@ -6608,24 +6608,24 @@
    "id": "eng-rami-aziz-consultants",
    "category": "Engineers",
    "statement": "Rami Aziz: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 149,
-   "right": 149,
+   "left": 152,
+   "right": 152,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-contractors",
    "category": "Engineers",
    "statement": "Rami Aziz: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 177,
-   "right": 177,
+   "left": 176,
+   "right": 176,
    "pass": true
   },
   {
    "id": "eng-rami-aziz-workload",
    "category": "Engineers",
    "statement": "Rami Aziz: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 527,
-   "right": 527,
+   "left": 490,
+   "right": 490,
    "pass": true
   },
   {
@@ -6640,8 +6640,8 @@
    "id": "eng-rami-aziz-load",
    "category": "Engineers",
    "statement": "Rami Aziz: load percent is workload over capacity to one decimal",
-   "left": 164.7,
-   "right": 164.7,
+   "left": 153.1,
+   "right": 153.1,
    "pass": true
   },
   {
@@ -6656,112 +6656,112 @@
    "id": "eng-faisal-reyes-owned",
    "category": "Engineers",
    "statement": "Faisal Reyes: owned count equals the register",
-   "left": 1008,
-   "right": 1008,
+   "left": 1009,
+   "right": 1009,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-value",
    "category": "Engineers",
    "statement": "Faisal Reyes: pipeline value equals the sum of owned project values",
-   "left": 57191.7,
-   "right": 57191.7,
+   "left": 56453.7,
+   "right": 56453.7,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-sum",
    "category": "Engineers",
    "statement": "Faisal Reyes: funnel sums to owned count",
-   "left": 1008,
-   "right": 1008,
+   "left": 1009,
+   "right": 1009,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-0",
    "category": "Engineers",
    "statement": "Faisal Reyes: Order received equals the register",
-   "left": 58,
-   "right": 58,
+   "left": 50,
+   "right": 50,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-1",
    "category": "Engineers",
    "statement": "Faisal Reyes: Quote sent equals the register",
-   "left": 107,
-   "right": 107,
+   "left": 114,
+   "right": 114,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-2",
    "category": "Engineers",
    "statement": "Faisal Reyes: Enquiry generated equals the register",
-   "left": 79,
-   "right": 79,
+   "left": 88,
+   "right": 88,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-3",
    "category": "Engineers",
    "statement": "Faisal Reyes: Company profile shared equals the register",
-   "left": 122,
-   "right": 122,
+   "left": 106,
+   "right": 106,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-4",
    "category": "Engineers",
    "statement": "Faisal Reyes: Project closed equals the register",
-   "left": 95,
-   "right": 95,
+   "left": 89,
+   "right": 89,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-5",
    "category": "Engineers",
    "statement": "Faisal Reyes: Visit done equals the register",
-   "left": 80,
-   "right": 80,
+   "left": 87,
+   "right": 87,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-6",
    "category": "Engineers",
    "statement": "Faisal Reyes: Reached out equals the register",
-   "left": 122,
-   "right": 122,
+   "left": 129,
+   "right": 129,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-7",
    "category": "Engineers",
    "statement": "Faisal Reyes: Waiting or follow up equals the register",
-   "left": 156,
-   "right": 156,
+   "left": 152,
+   "right": 152,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-8",
    "category": "Engineers",
    "statement": "Faisal Reyes: No response equals the register",
-   "left": 48,
-   "right": 48,
+   "left": 42,
+   "right": 42,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-9",
    "category": "Engineers",
    "statement": "Faisal Reyes: Contractor or consultant not yet awarded equals the register",
-   "left": 29,
-   "right": 29,
+   "left": 44,
+   "right": 44,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-funnel-10",
    "category": "Engineers",
    "statement": "Faisal Reyes: No update equals the register",
-   "left": 112,
-   "right": 112,
+   "left": 108,
+   "right": 108,
    "pass": true
   },
   {
@@ -6776,24 +6776,24 @@
    "id": "eng-faisal-reyes-consultants",
    "category": "Engineers",
    "statement": "Faisal Reyes: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 535,
-   "right": 535,
+   "left": 534,
+   "right": 534,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-contractors",
    "category": "Engineers",
    "statement": "Faisal Reyes: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 636,
-   "right": 636,
+   "left": 637,
+   "right": 637,
    "pass": true
   },
   {
    "id": "eng-faisal-reyes-workload",
    "category": "Engineers",
    "statement": "Faisal Reyes: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 1933,
-   "right": 1933,
+   "left": 1968,
+   "right": 1968,
    "pass": true
   },
   {
@@ -6808,8 +6808,8 @@
    "id": "eng-faisal-reyes-load",
    "category": "Engineers",
    "statement": "Faisal Reyes: load percent is workload over capacity to one decimal",
-   "left": 604.1,
-   "right": 604.1,
+   "left": 615,
+   "right": 615,
    "pass": true
   },
   {
@@ -6824,40 +6824,40 @@
    "id": "eng-ziad-abdel-rahman-owned",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: owned count equals the register",
-   "left": 142,
-   "right": 142,
+   "left": 182,
+   "right": 182,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-value",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: pipeline value equals the sum of owned project values",
-   "left": 19048.6,
-   "right": 19048.6,
+   "left": 23045.8,
+   "right": 23045.8,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-funnel-sum",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: funnel sums to owned count",
-   "left": 142,
-   "right": 142,
+   "left": 182,
+   "right": 182,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-funnel-0",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: Order received equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 13,
+   "right": 13,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-funnel-1",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: Quote sent equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 15,
+   "right": 15,
    "pass": true
   },
   {
@@ -6872,16 +6872,16 @@
    "id": "eng-ziad-abdel-rahman-funnel-3",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: Company profile shared equals the register",
-   "left": 21,
-   "right": 21,
+   "left": 20,
+   "right": 20,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-funnel-4",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: Project closed equals the register",
-   "left": 18,
-   "right": 18,
+   "left": 16,
+   "right": 16,
    "pass": true
   },
   {
@@ -6896,40 +6896,40 @@
    "id": "eng-ziad-abdel-rahman-funnel-6",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: Reached out equals the register",
-   "left": 20,
-   "right": 20,
+   "left": 28,
+   "right": 28,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-funnel-7",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: Waiting or follow up equals the register",
-   "left": 10,
-   "right": 10,
+   "left": 27,
+   "right": 27,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-funnel-8",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: No response equals the register",
-   "left": 9,
-   "right": 9,
+   "left": 13,
+   "right": 13,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-funnel-9",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: Contractor or consultant not yet awarded equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 2,
+   "right": 2,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-funnel-10",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: No update equals the register",
-   "left": 14,
-   "right": 14,
+   "left": 19,
+   "right": 19,
    "pass": true
   },
   {
@@ -6944,24 +6944,24 @@
    "id": "eng-ziad-abdel-rahman-consultants",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 99,
-   "right": 99,
+   "left": 120,
+   "right": 120,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-contractors",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 87,
-   "right": 87,
+   "left": 117,
+   "right": 117,
    "pass": true
   },
   {
    "id": "eng-ziad-abdel-rahman-workload",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 284,
-   "right": 284,
+   "left": 350,
+   "right": 350,
    "pass": true
   },
   {
@@ -6976,8 +6976,8 @@
    "id": "eng-ziad-abdel-rahman-load",
    "category": "Engineers",
    "statement": "Ziad Abdel-Rahman: load percent is workload over capacity to one decimal",
-   "left": 88.8,
-   "right": 88.8,
+   "left": 109.4,
+   "right": 109.4,
    "pass": true
   },
   {
@@ -6992,104 +6992,104 @@
    "id": "eng-priya-kulkarni-owned",
    "category": "Engineers",
    "statement": "Priya Kulkarni: owned count equals the register",
-   "left": 125,
-   "right": 125,
+   "left": 169,
+   "right": 169,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-value",
    "category": "Engineers",
    "statement": "Priya Kulkarni: pipeline value equals the sum of owned project values",
-   "left": 19301,
-   "right": 19301,
+   "left": 23365.2,
+   "right": 23365.2,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-sum",
    "category": "Engineers",
    "statement": "Priya Kulkarni: funnel sums to owned count",
-   "left": 125,
-   "right": 125,
+   "left": 169,
+   "right": 169,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-0",
    "category": "Engineers",
    "statement": "Priya Kulkarni: Order received equals the register",
-   "left": 3,
-   "right": 3,
+   "left": 9,
+   "right": 9,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-1",
    "category": "Engineers",
    "statement": "Priya Kulkarni: Quote sent equals the register",
-   "left": 5,
-   "right": 5,
+   "left": 12,
+   "right": 12,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-2",
    "category": "Engineers",
    "statement": "Priya Kulkarni: Enquiry generated equals the register",
-   "left": 12,
-   "right": 12,
+   "left": 17,
+   "right": 17,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-3",
    "category": "Engineers",
    "statement": "Priya Kulkarni: Company profile shared equals the register",
-   "left": 12,
-   "right": 12,
+   "left": 20,
+   "right": 20,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-4",
    "category": "Engineers",
    "statement": "Priya Kulkarni: Project closed equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 24,
+   "right": 24,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-5",
    "category": "Engineers",
    "statement": "Priya Kulkarni: Visit done equals the register",
-   "left": 11,
-   "right": 11,
+   "left": 6,
+   "right": 6,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-6",
    "category": "Engineers",
    "statement": "Priya Kulkarni: Reached out equals the register",
-   "left": 17,
-   "right": 17,
+   "left": 24,
+   "right": 24,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-7",
    "category": "Engineers",
    "statement": "Priya Kulkarni: Waiting or follow up equals the register",
-   "left": 21,
-   "right": 21,
+   "left": 26,
+   "right": 26,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-8",
    "category": "Engineers",
    "statement": "Priya Kulkarni: No response equals the register",
-   "left": 8,
-   "right": 8,
+   "left": 5,
+   "right": 5,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-funnel-9",
    "category": "Engineers",
    "statement": "Priya Kulkarni: Contractor or consultant not yet awarded equals the register",
-   "left": 2,
-   "right": 2,
+   "left": 3,
+   "right": 3,
    "pass": true
   },
   {
@@ -7112,24 +7112,24 @@
    "id": "eng-priya-kulkarni-consultants",
    "category": "Engineers",
    "statement": "Priya Kulkarni: consultant relationships equal the distinct consultants on owned projects plus those owned",
-   "left": 88,
-   "right": 88,
+   "left": 123,
+   "right": 123,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-contractors",
    "category": "Engineers",
    "statement": "Priya Kulkarni: contractor relationships equal the distinct contractors on owned projects plus those owned",
-   "left": 73,
-   "right": 73,
+   "left": 108,
+   "right": 108,
    "pass": true
   },
   {
    "id": "eng-priya-kulkarni-workload",
    "category": "Engineers",
    "statement": "Priya Kulkarni: workload equals the weighted activity bands of the owned projects (3 active, 1 order or quiet, 0 closed)",
-   "left": 228,
-   "right": 228,
+   "left": 303,
+   "right": 303,
    "pass": true
   },
   {
@@ -7144,8 +7144,8 @@
    "id": "eng-priya-kulkarni-load",
    "category": "Engineers",
    "statement": "Priya Kulkarni: load percent is workload over capacity to one decimal",
-   "left": 71.3,
-   "right": 71.3,
+   "left": 94.7,
+   "right": 94.7,
    "pass": true
   },
   {
@@ -7200,16 +7200,16 @@
    "id": "vert-electrical-distribution-owned",
    "category": "Verticals",
    "statement": "Electrical Distribution: owned count equals the register",
-   "left": 831,
-   "right": 831,
+   "left": 749,
+   "right": 749,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-value",
    "category": "Verticals",
    "statement": "Electrical Distribution: owned value equals the sum of owned project values",
-   "left": 37820.4,
-   "right": 37820.4,
+   "left": 25640,
+   "right": 25640,
    "pass": true
   },
   {
@@ -7224,8 +7224,8 @@
    "id": "vert-electrical-distribution-owned-eng",
    "category": "Verticals",
    "statement": "Electrical Distribution: owned count equals the sum of its engineers' books",
-   "left": 831,
-   "right": 831,
+   "left": 749,
+   "right": 749,
    "pass": true
   },
   {
@@ -7240,104 +7240,104 @@
    "id": "vert-electrical-distribution-funnel-0",
    "category": "Verticals",
    "statement": "Electrical Distribution: Order received equals the register",
-   "left": 160,
-   "right": 160,
+   "left": 183,
+   "right": 183,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-1",
    "category": "Verticals",
    "statement": "Electrical Distribution: Quote sent equals the register",
-   "left": 236,
-   "right": 236,
+   "left": 225,
+   "right": 225,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-2",
    "category": "Verticals",
    "statement": "Electrical Distribution: Enquiry generated equals the register",
-   "left": 278,
-   "right": 278,
+   "left": 244,
+   "right": 244,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-3",
    "category": "Verticals",
    "statement": "Electrical Distribution: Company profile shared equals the register",
-   "left": 300,
-   "right": 300,
+   "left": 349,
+   "right": 349,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-4",
    "category": "Verticals",
    "statement": "Electrical Distribution: Project closed equals the register",
-   "left": 458,
-   "right": 458,
+   "left": 429,
+   "right": 429,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-5",
    "category": "Verticals",
    "statement": "Electrical Distribution: Visit done equals the register",
-   "left": 275,
-   "right": 275,
+   "left": 256,
+   "right": 256,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-6",
    "category": "Verticals",
    "statement": "Electrical Distribution: Reached out equals the register",
-   "left": 422,
-   "right": 422,
+   "left": 413,
+   "right": 413,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-7",
    "category": "Verticals",
    "statement": "Electrical Distribution: Waiting or follow up equals the register",
-   "left": 716,
-   "right": 716,
+   "left": 753,
+   "right": 753,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-8",
    "category": "Verticals",
    "statement": "Electrical Distribution: No response equals the register",
-   "left": 281,
-   "right": 281,
+   "left": 277,
+   "right": 277,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-9",
    "category": "Verticals",
    "statement": "Electrical Distribution: Contractor or consultant not yet awarded equals the register",
-   "left": 355,
-   "right": 355,
+   "left": 363,
+   "right": 363,
    "pass": true
   },
   {
    "id": "vert-electrical-distribution-funnel-10",
    "category": "Verticals",
    "statement": "Electrical Distribution: No update equals the register",
-   "left": 1055,
-   "right": 1055,
+   "left": 1044,
+   "right": 1044,
    "pass": true
   },
   {
    "id": "vert-cooling-owned",
    "category": "Verticals",
    "statement": "Cooling: owned count equals the register",
-   "left": 236,
-   "right": 236,
+   "left": 238,
+   "right": 238,
    "pass": true
   },
   {
    "id": "vert-cooling-value",
    "category": "Verticals",
    "statement": "Cooling: owned value equals the sum of owned project values",
-   "left": 107278.5,
-   "right": 107278.5,
+   "left": 133142.2,
+   "right": 133142.2,
    "pass": true
   },
   {
@@ -7352,8 +7352,8 @@
    "id": "vert-cooling-owned-eng",
    "category": "Verticals",
    "statement": "Cooling: owned count equals the sum of its engineers' books",
-   "left": 236,
-   "right": 236,
+   "left": 238,
+   "right": 238,
    "pass": true
   },
   {
@@ -7368,104 +7368,104 @@
    "id": "vert-cooling-funnel-0",
    "category": "Verticals",
    "statement": "Cooling: Order received equals the register",
-   "left": 143,
-   "right": 143,
+   "left": 141,
+   "right": 141,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-1",
    "category": "Verticals",
    "statement": "Cooling: Quote sent equals the register",
-   "left": 170,
-   "right": 170,
+   "left": 186,
+   "right": 186,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-2",
    "category": "Verticals",
    "statement": "Cooling: Enquiry generated equals the register",
-   "left": 239,
-   "right": 239,
+   "left": 230,
+   "right": 230,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-3",
    "category": "Verticals",
    "statement": "Cooling: Company profile shared equals the register",
-   "left": 307,
-   "right": 307,
+   "left": 290,
+   "right": 290,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-4",
    "category": "Verticals",
    "statement": "Cooling: Project closed equals the register",
-   "left": 435,
-   "right": 435,
+   "left": 434,
+   "right": 434,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-5",
    "category": "Verticals",
    "statement": "Cooling: Visit done equals the register",
-   "left": 224,
-   "right": 224,
+   "left": 239,
+   "right": 239,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-6",
    "category": "Verticals",
    "statement": "Cooling: Reached out equals the register",
-   "left": 343,
-   "right": 343,
+   "left": 373,
+   "right": 373,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-7",
    "category": "Verticals",
    "statement": "Cooling: Waiting or follow up equals the register",
-   "left": 704,
-   "right": 704,
+   "left": 660,
+   "right": 660,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-8",
    "category": "Verticals",
    "statement": "Cooling: No response equals the register",
-   "left": 287,
-   "right": 287,
+   "left": 284,
+   "right": 284,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-9",
    "category": "Verticals",
    "statement": "Cooling: Contractor or consultant not yet awarded equals the register",
-   "left": 299,
-   "right": 299,
+   "left": 346,
+   "right": 346,
    "pass": true
   },
   {
    "id": "vert-cooling-funnel-10",
    "category": "Verticals",
    "statement": "Cooling: No update equals the register",
-   "left": 1385,
-   "right": 1385,
+   "left": 1353,
+   "right": 1353,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-owned",
    "category": "Verticals",
    "statement": "Mechanical Systems: owned count equals the register",
-   "left": 237,
-   "right": 237,
+   "left": 238,
+   "right": 238,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-value",
    "category": "Verticals",
    "statement": "Mechanical Systems: owned value equals the sum of owned project values",
-   "left": 173932.9,
-   "right": 173932.9,
+   "left": 138398,
+   "right": 138398,
    "pass": true
   },
   {
@@ -7480,8 +7480,8 @@
    "id": "vert-mechanical-systems-owned-eng",
    "category": "Verticals",
    "statement": "Mechanical Systems: owned count equals the sum of its engineers' books",
-   "left": 237,
-   "right": 237,
+   "left": 238,
+   "right": 238,
    "pass": true
   },
   {
@@ -7496,104 +7496,104 @@
    "id": "vert-mechanical-systems-funnel-0",
    "category": "Verticals",
    "statement": "Mechanical Systems: Order received equals the register",
-   "left": 151,
-   "right": 151,
+   "left": 142,
+   "right": 142,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-1",
    "category": "Verticals",
    "statement": "Mechanical Systems: Quote sent equals the register",
-   "left": 135,
-   "right": 135,
+   "left": 136,
+   "right": 136,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-2",
    "category": "Verticals",
    "statement": "Mechanical Systems: Enquiry generated equals the register",
-   "left": 220,
-   "right": 220,
+   "left": 233,
+   "right": 233,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-3",
    "category": "Verticals",
    "statement": "Mechanical Systems: Company profile shared equals the register",
-   "left": 280,
-   "right": 280,
+   "left": 265,
+   "right": 265,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-4",
    "category": "Verticals",
    "statement": "Mechanical Systems: Project closed equals the register",
-   "left": 399,
-   "right": 399,
+   "left": 457,
+   "right": 457,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-5",
    "category": "Verticals",
    "statement": "Mechanical Systems: Visit done equals the register",
-   "left": 260,
-   "right": 260,
+   "left": 196,
+   "right": 196,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-6",
    "category": "Verticals",
    "statement": "Mechanical Systems: Reached out equals the register",
-   "left": 389,
-   "right": 389,
+   "left": 362,
+   "right": 362,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-7",
    "category": "Verticals",
    "statement": "Mechanical Systems: Waiting or follow up equals the register",
-   "left": 685,
-   "right": 685,
+   "left": 759,
+   "right": 759,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-8",
    "category": "Verticals",
    "statement": "Mechanical Systems: No response equals the register",
-   "left": 302,
-   "right": 302,
+   "left": 288,
+   "right": 288,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-9",
    "category": "Verticals",
    "statement": "Mechanical Systems: Contractor or consultant not yet awarded equals the register",
-   "left": 350,
-   "right": 350,
+   "left": 323,
+   "right": 323,
    "pass": true
   },
   {
    "id": "vert-mechanical-systems-funnel-10",
    "category": "Verticals",
    "statement": "Mechanical Systems: No update equals the register",
-   "left": 1365,
-   "right": 1365,
+   "left": 1375,
+   "right": 1375,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-owned",
    "category": "Verticals",
    "statement": "Pumps and Water: owned count equals the register",
-   "left": 623,
-   "right": 623,
+   "left": 617,
+   "right": 617,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-value",
    "category": "Verticals",
    "statement": "Pumps and Water: owned value equals the sum of owned project values",
-   "left": 122169,
-   "right": 122169,
+   "left": 123716,
+   "right": 123716,
    "pass": true
   },
   {
@@ -7608,8 +7608,8 @@
    "id": "vert-pumps-and-water-owned-eng",
    "category": "Verticals",
    "statement": "Pumps and Water: owned count equals the sum of its engineers' books",
-   "left": 623,
-   "right": 623,
+   "left": 617,
+   "right": 617,
    "pass": true
   },
   {
@@ -7624,104 +7624,104 @@
    "id": "vert-pumps-and-water-funnel-0",
    "category": "Verticals",
    "statement": "Pumps and Water: Order received equals the register",
-   "left": 121,
-   "right": 121,
+   "left": 133,
+   "right": 133,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-1",
    "category": "Verticals",
    "statement": "Pumps and Water: Quote sent equals the register",
-   "left": 169,
-   "right": 169,
+   "left": 175,
+   "right": 175,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-2",
    "category": "Verticals",
    "statement": "Pumps and Water: Enquiry generated equals the register",
-   "left": 270,
-   "right": 270,
+   "left": 239,
+   "right": 239,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-3",
    "category": "Verticals",
    "statement": "Pumps and Water: Company profile shared equals the register",
-   "left": 308,
-   "right": 308,
+   "left": 334,
+   "right": 334,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-4",
    "category": "Verticals",
    "statement": "Pumps and Water: Project closed equals the register",
-   "left": 463,
-   "right": 463,
+   "left": 421,
+   "right": 421,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-5",
    "category": "Verticals",
    "statement": "Pumps and Water: Visit done equals the register",
-   "left": 255,
-   "right": 255,
+   "left": 271,
+   "right": 271,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-6",
    "category": "Verticals",
    "statement": "Pumps and Water: Reached out equals the register",
-   "left": 377,
-   "right": 377,
+   "left": 392,
+   "right": 392,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-7",
    "category": "Verticals",
    "statement": "Pumps and Water: Waiting or follow up equals the register",
-   "left": 746,
-   "right": 746,
+   "left": 718,
+   "right": 718,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-8",
    "category": "Verticals",
    "statement": "Pumps and Water: No response equals the register",
-   "left": 306,
-   "right": 306,
+   "left": 305,
+   "right": 305,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-9",
    "category": "Verticals",
    "statement": "Pumps and Water: Contractor or consultant not yet awarded equals the register",
-   "left": 350,
-   "right": 350,
+   "left": 372,
+   "right": 372,
    "pass": true
   },
   {
    "id": "vert-pumps-and-water-funnel-10",
    "category": "Verticals",
    "statement": "Pumps and Water: No update equals the register",
-   "left": 1171,
-   "right": 1171,
+   "left": 1176,
+   "right": 1176,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-owned",
    "category": "Verticals",
    "statement": "Vertical Transport: owned count equals the register",
-   "left": 235,
-   "right": 235,
+   "left": 237,
+   "right": 237,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-value",
    "category": "Verticals",
    "statement": "Vertical Transport: owned value equals the sum of owned project values",
-   "left": 54153.1,
-   "right": 54153.1,
+   "left": 63118.1,
+   "right": 63118.1,
    "pass": true
   },
   {
@@ -7736,8 +7736,8 @@
    "id": "vert-vertical-transport-owned-eng",
    "category": "Verticals",
    "statement": "Vertical Transport: owned count equals the sum of its engineers' books",
-   "left": 235,
-   "right": 235,
+   "left": 237,
+   "right": 237,
    "pass": true
   },
   {
@@ -7752,88 +7752,88 @@
    "id": "vert-vertical-transport-funnel-0",
    "category": "Verticals",
    "statement": "Vertical Transport: Order received equals the register",
-   "left": 158,
-   "right": 158,
+   "left": 155,
+   "right": 155,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-1",
    "category": "Verticals",
    "statement": "Vertical Transport: Quote sent equals the register",
-   "left": 181,
-   "right": 181,
+   "left": 177,
+   "right": 177,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-2",
    "category": "Verticals",
    "statement": "Vertical Transport: Enquiry generated equals the register",
-   "left": 225,
-   "right": 225,
+   "left": 231,
+   "right": 231,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-3",
    "category": "Verticals",
    "statement": "Vertical Transport: Company profile shared equals the register",
-   "left": 283,
-   "right": 283,
+   "left": 295,
+   "right": 295,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-4",
    "category": "Verticals",
    "statement": "Vertical Transport: Project closed equals the register",
-   "left": 414,
-   "right": 414,
+   "left": 449,
+   "right": 449,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-5",
    "category": "Verticals",
    "statement": "Vertical Transport: Visit done equals the register",
-   "left": 244,
-   "right": 244,
+   "left": 240,
+   "right": 240,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-6",
    "category": "Verticals",
    "statement": "Vertical Transport: Reached out equals the register",
-   "left": 401,
-   "right": 401,
+   "left": 358,
+   "right": 358,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-7",
    "category": "Verticals",
    "statement": "Vertical Transport: Waiting or follow up equals the register",
-   "left": 716,
-   "right": 716,
+   "left": 727,
+   "right": 727,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-8",
    "category": "Verticals",
    "statement": "Vertical Transport: No response equals the register",
-   "left": 291,
-   "right": 291,
+   "left": 271,
+   "right": 271,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-9",
    "category": "Verticals",
    "statement": "Vertical Transport: Contractor or consultant not yet awarded equals the register",
-   "left": 358,
-   "right": 358,
+   "left": 354,
+   "right": 354,
    "pass": true
   },
   {
    "id": "vert-vertical-transport-funnel-10",
    "category": "Verticals",
    "statement": "Vertical Transport: No update equals the register",
-   "left": 1265,
-   "right": 1265,
+   "left": 1279,
+   "right": 1279,
    "pass": true
   },
   {
@@ -7848,8 +7848,8 @@
    "id": "vert-metering-value",
    "category": "Verticals",
    "statement": "Metering: owned value equals the sum of owned project values",
-   "left": 59683.2,
-   "right": 59683.2,
+   "left": 70877.4,
+   "right": 70877.4,
    "pass": true
   },
   {
@@ -7880,104 +7880,104 @@
    "id": "vert-metering-funnel-0",
    "category": "Verticals",
    "statement": "Metering: Order received equals the register",
-   "left": 142,
-   "right": 142,
+   "left": 144,
+   "right": 144,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-1",
    "category": "Verticals",
    "statement": "Metering: Quote sent equals the register",
-   "left": 182,
-   "right": 182,
+   "left": 167,
+   "right": 167,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-2",
    "category": "Verticals",
    "statement": "Metering: Enquiry generated equals the register",
-   "left": 248,
-   "right": 248,
+   "left": 249,
+   "right": 249,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-3",
    "category": "Verticals",
    "statement": "Metering: Company profile shared equals the register",
-   "left": 282,
-   "right": 282,
+   "left": 310,
+   "right": 310,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-4",
    "category": "Verticals",
    "statement": "Metering: Project closed equals the register",
-   "left": 430,
-   "right": 430,
+   "left": 433,
+   "right": 433,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-5",
    "category": "Verticals",
    "statement": "Metering: Visit done equals the register",
-   "left": 207,
-   "right": 207,
+   "left": 246,
+   "right": 246,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-6",
    "category": "Verticals",
    "statement": "Metering: Reached out equals the register",
-   "left": 387,
-   "right": 387,
+   "left": 344,
+   "right": 344,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-7",
    "category": "Verticals",
    "statement": "Metering: Waiting or follow up equals the register",
-   "left": 721,
-   "right": 721,
+   "left": 683,
+   "right": 683,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-8",
    "category": "Verticals",
    "statement": "Metering: No response equals the register",
-   "left": 310,
-   "right": 310,
+   "left": 303,
+   "right": 303,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-9",
    "category": "Verticals",
    "statement": "Metering: Contractor or consultant not yet awarded equals the register",
-   "left": 358,
-   "right": 358,
+   "left": 357,
+   "right": 357,
    "pass": true
   },
   {
    "id": "vert-metering-funnel-10",
    "category": "Verticals",
    "statement": "Metering: No update equals the register",
-   "left": 1269,
-   "right": 1269,
+   "left": 1300,
+   "right": 1300,
    "pass": true
   },
   {
    "id": "vert-automation-owned",
    "category": "Verticals",
    "statement": "Automation: owned count equals the register",
-   "left": 245,
-   "right": 245,
+   "left": 249,
+   "right": 249,
    "pass": true
   },
   {
    "id": "vert-automation-value",
    "category": "Verticals",
    "statement": "Automation: owned value equals the sum of owned project values",
-   "left": 133370,
-   "right": 133370,
+   "left": 126930.2,
+   "right": 126930.2,
    "pass": true
   },
   {
@@ -7992,8 +7992,8 @@
    "id": "vert-automation-owned-eng",
    "category": "Verticals",
    "statement": "Automation: owned count equals the sum of its engineers' books",
-   "left": 245,
-   "right": 245,
+   "left": 249,
+   "right": 249,
    "pass": true
   },
   {
@@ -8008,104 +8008,104 @@
    "id": "vert-automation-funnel-0",
    "category": "Verticals",
    "statement": "Automation: Order received equals the register",
-   "left": 51,
-   "right": 51,
+   "left": 64,
+   "right": 64,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-1",
    "category": "Verticals",
    "statement": "Automation: Quote sent equals the register",
-   "left": 74,
-   "right": 74,
+   "left": 70,
+   "right": 70,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-2",
    "category": "Verticals",
    "statement": "Automation: Enquiry generated equals the register",
-   "left": 96,
-   "right": 96,
+   "left": 114,
+   "right": 114,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-3",
    "category": "Verticals",
    "statement": "Automation: Company profile shared equals the register",
-   "left": 245,
-   "right": 245,
+   "left": 219,
+   "right": 219,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-4",
    "category": "Verticals",
    "statement": "Automation: Project closed equals the register",
-   "left": 371,
-   "right": 371,
+   "left": 366,
+   "right": 366,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-5",
    "category": "Verticals",
    "statement": "Automation: Visit done equals the register",
-   "left": 169,
-   "right": 169,
+   "left": 177,
+   "right": 177,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-6",
    "category": "Verticals",
    "statement": "Automation: Reached out equals the register",
-   "left": 377,
-   "right": 377,
+   "left": 354,
+   "right": 354,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-7",
    "category": "Verticals",
    "statement": "Automation: Waiting or follow up equals the register",
-   "left": 587,
-   "right": 587,
+   "left": 610,
+   "right": 610,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-8",
    "category": "Verticals",
    "statement": "Automation: No response equals the register",
-   "left": 330,
-   "right": 330,
+   "left": 320,
+   "right": 320,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-9",
    "category": "Verticals",
    "statement": "Automation: Contractor or consultant not yet awarded equals the register",
-   "left": 382,
-   "right": 382,
+   "left": 413,
+   "right": 413,
    "pass": true
   },
   {
    "id": "vert-automation-funnel-10",
    "category": "Verticals",
    "statement": "Automation: No update equals the register",
-   "left": 1854,
-   "right": 1854,
+   "left": 1829,
+   "right": 1829,
    "pass": true
   },
   {
    "id": "vert-fabrication-owned",
    "category": "Verticals",
    "statement": "Fabrication: owned count equals the register",
-   "left": 268,
-   "right": 268,
+   "left": 262,
+   "right": 262,
    "pass": true
   },
   {
    "id": "vert-fabrication-value",
    "category": "Verticals",
    "statement": "Fabrication: owned value equals the sum of owned project values",
-   "left": 54779.3,
-   "right": 54779.3,
+   "left": 54041.1,
+   "right": 54041.1,
    "pass": true
   },
   {
@@ -8120,8 +8120,8 @@
    "id": "vert-fabrication-owned-eng",
    "category": "Verticals",
    "statement": "Fabrication: owned count equals the sum of its engineers' books",
-   "left": 268,
-   "right": 268,
+   "left": 262,
+   "right": 262,
    "pass": true
   },
   {
@@ -8136,72 +8136,72 @@
    "id": "vert-fabrication-funnel-0",
    "category": "Verticals",
    "statement": "Fabrication: Order received equals the register",
-   "left": 61,
-   "right": 61,
+   "left": 44,
+   "right": 44,
    "pass": true
   },
   {
    "id": "vert-fabrication-funnel-1",
    "category": "Verticals",
    "statement": "Fabrication: Quote sent equals the register",
-   "left": 68,
-   "right": 68,
+   "left": 57,
+   "right": 57,
    "pass": true
   },
   {
    "id": "vert-fabrication-funnel-2",
    "category": "Verticals",
    "statement": "Fabrication: Enquiry generated equals the register",
-   "left": 90,
-   "right": 90,
+   "left": 98,
+   "right": 98,
    "pass": true
   },
   {
    "id": "vert-fabrication-funnel-3",
    "category": "Verticals",
    "statement": "Fabrication: Company profile shared equals the register",
-   "left": 236,
-   "right": 236,
+   "left": 248,
+   "right": 248,
    "pass": true
   },
   {
    "id": "vert-fabrication-funnel-4",
    "category": "Verticals",
    "statement": "Fabrication: Project closed equals the register",
-   "left": 328,
-   "right": 328,
+   "left": 352,
+   "right": 352,
    "pass": true
   },
   {
    "id": "vert-fabrication-funnel-5",
    "category": "Verticals",
    "statement": "Fabrication: Visit done equals the register",
-   "left": 157,
-   "right": 157,
+   "left": 139,
+   "right": 139,
    "pass": true
   },
   {
    "id": "vert-fabrication-funnel-6",
    "category": "Verticals",
    "statement": "Fabrication: Reached out equals the register",
-   "left": 364,
-   "right": 364,
+   "left": 382,
+   "right": 382,
    "pass": true
   },
   {
    "id": "vert-fabrication-funnel-7",
    "category": "Verticals",
    "statement": "Fabrication: Waiting or follow up equals the register",
-   "left": 539,
-   "right": 539,
+   "left": 506,
+   "right": 506,
    "pass": true
   },
   {
    "id": "vert-fabrication-funnel-8",
    "category": "Verticals",
    "statement": "Fabrication: No response equals the register",
-   "left": 322,
-   "right": 322,
+   "left": 326,
+   "right": 326,
    "pass": true
   },
   {
@@ -8216,24 +8216,24 @@
    "id": "vert-fabrication-funnel-10",
    "category": "Verticals",
    "statement": "Fabrication: No update equals the register",
-   "left": 1988,
-   "right": 1988,
+   "left": 2001,
+   "right": 2001,
    "pass": true
   },
   {
    "id": "vert-trading-owned",
    "category": "Verticals",
    "statement": "Trading: owned count equals the register",
-   "left": 1008,
-   "right": 1008,
+   "left": 1009,
+   "right": 1009,
    "pass": true
   },
   {
    "id": "vert-trading-value",
    "category": "Verticals",
    "statement": "Trading: owned value equals the sum of owned project values",
-   "left": 57191.7,
-   "right": 57191.7,
+   "left": 56453.7,
+   "right": 56453.7,
    "pass": true
   },
   {
@@ -8248,8 +8248,8 @@
    "id": "vert-trading-owned-eng",
    "category": "Verticals",
    "statement": "Trading: owned count equals the sum of its engineers' books",
-   "left": 1008,
-   "right": 1008,
+   "left": 1009,
+   "right": 1009,
    "pass": true
   },
   {
@@ -8264,104 +8264,104 @@
    "id": "vert-trading-funnel-0",
    "category": "Verticals",
    "statement": "Trading: Order received equals the register",
-   "left": 152,
-   "right": 152,
+   "left": 128,
+   "right": 128,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-1",
    "category": "Verticals",
    "statement": "Trading: Quote sent equals the register",
-   "left": 222,
-   "right": 222,
+   "left": 235,
+   "right": 235,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-2",
    "category": "Verticals",
    "statement": "Trading: Enquiry generated equals the register",
-   "left": 252,
-   "right": 252,
+   "left": 248,
+   "right": 248,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-3",
    "category": "Verticals",
    "statement": "Trading: Company profile shared equals the register",
-   "left": 328,
-   "right": 328,
+   "left": 332,
+   "right": 332,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-4",
    "category": "Verticals",
    "statement": "Trading: Project closed equals the register",
-   "left": 422,
-   "right": 422,
+   "left": 407,
+   "right": 407,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-5",
    "category": "Verticals",
    "statement": "Trading: Visit done equals the register",
-   "left": 261,
-   "right": 261,
+   "left": 280,
+   "right": 280,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-6",
    "category": "Verticals",
    "statement": "Trading: Reached out equals the register",
-   "left": 421,
-   "right": 421,
+   "left": 420,
+   "right": 420,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-7",
    "category": "Verticals",
    "statement": "Trading: Waiting or follow up equals the register",
-   "left": 644,
-   "right": 644,
+   "left": 681,
+   "right": 681,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-8",
    "category": "Verticals",
    "statement": "Trading: No response equals the register",
-   "left": 277,
-   "right": 277,
+   "left": 252,
+   "right": 252,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-9",
    "category": "Verticals",
    "statement": "Trading: Contractor or consultant not yet awarded equals the register",
-   "left": 354,
-   "right": 354,
+   "left": 357,
+   "right": 357,
    "pass": true
   },
   {
    "id": "vert-trading-funnel-10",
    "category": "Verticals",
    "statement": "Trading: No update equals the register",
-   "left": 1203,
-   "right": 1203,
+   "left": 1196,
+   "right": 1196,
    "pass": true
   },
   {
    "id": "vert-services-owned",
    "category": "Verticals",
    "statement": "Services: owned count equals the register",
-   "left": 267,
-   "right": 267,
+   "left": 351,
+   "right": 351,
    "pass": true
   },
   {
    "id": "vert-services-value",
    "category": "Verticals",
    "statement": "Services: owned value equals the sum of owned project values",
-   "left": 38349.6,
-   "right": 38349.6,
+   "left": 46411,
+   "right": 46411,
    "pass": true
   },
   {
@@ -8376,8 +8376,8 @@
    "id": "vert-services-owned-eng",
    "category": "Verticals",
    "statement": "Services: owned count equals the sum of its engineers' books",
-   "left": 267,
-   "right": 267,
+   "left": 351,
+   "right": 351,
    "pass": true
   },
   {
@@ -8392,88 +8392,88 @@
    "id": "vert-services-funnel-0",
    "category": "Verticals",
    "statement": "Services: Order received equals the register",
-   "left": 91,
-   "right": 91,
+   "left": 93,
+   "right": 93,
    "pass": true
   },
   {
    "id": "vert-services-funnel-1",
    "category": "Verticals",
    "statement": "Services: Quote sent equals the register",
-   "left": 112,
-   "right": 112,
+   "left": 96,
+   "right": 96,
    "pass": true
   },
   {
    "id": "vert-services-funnel-2",
    "category": "Verticals",
    "statement": "Services: Enquiry generated equals the register",
-   "left": 174,
-   "right": 174,
+   "left": 188,
+   "right": 188,
    "pass": true
   },
   {
    "id": "vert-services-funnel-3",
    "category": "Verticals",
    "statement": "Services: Company profile shared equals the register",
-   "left": 313,
-   "right": 313,
+   "left": 295,
+   "right": 295,
    "pass": true
   },
   {
    "id": "vert-services-funnel-4",
    "category": "Verticals",
    "statement": "Services: Project closed equals the register",
-   "left": 441,
-   "right": 441,
+   "left": 429,
+   "right": 429,
    "pass": true
   },
   {
    "id": "vert-services-funnel-5",
    "category": "Verticals",
    "statement": "Services: Visit done equals the register",
-   "left": 191,
-   "right": 191,
+   "left": 177,
+   "right": 177,
    "pass": true
   },
   {
    "id": "vert-services-funnel-6",
    "category": "Verticals",
    "statement": "Services: Reached out equals the register",
-   "left": 361,
-   "right": 361,
+   "left": 381,
+   "right": 381,
    "pass": true
   },
   {
    "id": "vert-services-funnel-7",
    "category": "Verticals",
    "statement": "Services: Waiting or follow up equals the register",
-   "left": 609,
-   "right": 609,
+   "left": 644,
+   "right": 644,
    "pass": true
   },
   {
    "id": "vert-services-funnel-8",
    "category": "Verticals",
    "statement": "Services: No response equals the register",
-   "left": 315,
-   "right": 315,
+   "left": 342,
+   "right": 342,
    "pass": true
   },
   {
    "id": "vert-services-funnel-9",
    "category": "Verticals",
    "statement": "Services: Contractor or consultant not yet awarded equals the register",
-   "left": 383,
-   "right": 383,
+   "left": 368,
+   "right": 368,
    "pass": true
   },
   {
    "id": "vert-services-funnel-10",
    "category": "Verticals",
    "statement": "Services: No update equals the register",
-   "left": 1546,
-   "right": 1546,
+   "left": 1523,
+   "right": 1523,
    "pass": true
   },
   {
@@ -8528,16 +8528,16 @@
    "id": "kpi-open",
    "category": "Headline figures",
    "statement": "Open enquiries and quotes equal the pairs in those two buckets",
-   "left": 3641,
-   "right": 3641,
+   "left": 3598,
+   "right": 3598,
    "pass": true
   },
   {
    "id": "kpi-orders",
    "category": "Headline figures",
    "statement": "Orders received this year equal the Order received pairs dated 2026",
-   "left": 501,
-   "right": 501,
+   "left": 511,
+   "right": 511,
    "pass": true
   },
   {
@@ -9368,168 +9368,168 @@
    "id": "funnel-0",
    "category": "Activity funnel",
    "statement": "Order received: pair count equals the register",
-   "left": 1230,
-   "right": 1230,
+   "left": 1227,
+   "right": 1227,
    "pass": true
   },
   {
    "id": "funnel-projects-0",
    "category": "Activity funnel",
    "statement": "Order received: project count by best bucket equals the register",
-   "left": 1030,
-   "right": 1030,
+   "left": 1040,
+   "right": 1040,
    "pass": true
   },
   {
    "id": "funnel-1",
    "category": "Activity funnel",
    "statement": "Quote sent: pair count equals the register",
-   "left": 1549,
-   "right": 1549,
+   "left": 1524,
+   "right": 1524,
    "pass": true
   },
   {
    "id": "funnel-projects-1",
    "category": "Activity funnel",
    "statement": "Quote sent: project count by best bucket equals the register",
-   "left": 1010,
-   "right": 1010,
+   "left": 978,
+   "right": 978,
    "pass": true
   },
   {
    "id": "funnel-2",
    "category": "Activity funnel",
    "statement": "Enquiry generated: pair count equals the register",
-   "left": 2092,
-   "right": 2092,
+   "left": 2074,
+   "right": 2074,
    "pass": true
   },
   {
    "id": "funnel-projects-2",
    "category": "Activity funnel",
    "statement": "Enquiry generated: project count by best bucket equals the register",
-   "left": 962,
-   "right": 962,
+   "left": 981,
+   "right": 981,
    "pass": true
   },
   {
    "id": "funnel-3",
    "category": "Activity funnel",
    "statement": "Company profile shared: pair count equals the register",
-   "left": 2882,
-   "right": 2882,
+   "left": 2937,
+   "right": 2937,
    "pass": true
   },
   {
    "id": "funnel-projects-3",
    "category": "Activity funnel",
    "statement": "Company profile shared: project count by best bucket equals the register",
-   "left": 780,
-   "right": 780,
+   "left": 785,
+   "right": 785,
    "pass": true
   },
   {
    "id": "funnel-4",
    "category": "Activity funnel",
    "statement": "Project closed: pair count equals the register",
-   "left": 4161,
-   "right": 4161,
+   "left": 4177,
+   "right": 4177,
    "pass": true
   },
   {
    "id": "funnel-projects-4",
    "category": "Activity funnel",
    "statement": "Project closed: project count by best bucket equals the register",
-   "left": 498,
-   "right": 498,
+   "left": 480,
+   "right": 480,
    "pass": true
   },
   {
    "id": "funnel-5",
    "category": "Activity funnel",
    "statement": "Visit done: pair count equals the register",
-   "left": 2243,
-   "right": 2243,
+   "left": 2221,
+   "right": 2221,
    "pass": true
   },
   {
    "id": "funnel-projects-5",
    "category": "Activity funnel",
    "statement": "Visit done: project count by best bucket equals the register",
-   "left": 111,
-   "right": 111,
+   "left": 127,
+   "right": 127,
    "pass": true
   },
   {
    "id": "funnel-6",
    "category": "Activity funnel",
    "statement": "Reached out: pair count equals the register",
-   "left": 3842,
-   "right": 3842,
+   "left": 3779,
+   "right": 3779,
    "pass": true
   },
   {
    "id": "funnel-projects-6",
    "category": "Activity funnel",
    "statement": "Reached out: project count by best bucket equals the register",
-   "left": 102,
-   "right": 102,
+   "left": 103,
+   "right": 103,
    "pass": true
   },
   {
    "id": "funnel-7",
    "category": "Activity funnel",
    "statement": "Waiting or follow up: pair count equals the register",
-   "left": 6667,
-   "right": 6667,
+   "left": 6741,
+   "right": 6741,
    "pass": true
   },
   {
    "id": "funnel-projects-7",
    "category": "Activity funnel",
    "statement": "Waiting or follow up: project count by best bucket equals the register",
-   "left": 37,
-   "right": 37,
+   "left": 36,
+   "right": 36,
    "pass": true
   },
   {
    "id": "funnel-8",
    "category": "Activity funnel",
    "statement": "No response: pair count equals the register",
-   "left": 3021,
-   "right": 3021,
+   "left": 2968,
+   "right": 2968,
    "pass": true
   },
   {
    "id": "funnel-projects-8",
    "category": "Activity funnel",
    "statement": "No response: project count by best bucket equals the register",
-   "left": 5,
-   "right": 5,
+   "left": 4,
+   "right": 4,
    "pass": true
   },
   {
    "id": "funnel-9",
    "category": "Activity funnel",
    "statement": "Contractor or consultant not yet awarded: pair count equals the register",
-   "left": 3572,
-   "right": 3572,
+   "left": 3636,
+   "right": 3636,
    "pass": true
   },
   {
    "id": "funnel-projects-9",
    "category": "Activity funnel",
    "statement": "Contractor or consultant not yet awarded: project count by best bucket equals the register",
-   "left": 1,
-   "right": 1,
+   "left": 2,
+   "right": 2,
    "pass": true
   },
   {
    "id": "funnel-10",
    "category": "Activity funnel",
    "statement": "No update: pair count equals the register",
-   "left": 14101,
-   "right": 14101,
+   "left": 14076,
+   "right": 14076,
    "pass": true
   },
   {
@@ -9581,161 +9581,161 @@
    "pass": true
   },
   {
-   "id": "chase-PRJAE24260451",
+   "id": "chase-AEWGMTTQS",
    "category": "Worth chasing",
-   "statement": "PRJAE24260451: value, owner and door reproduce the register and the door rule",
+   "statement": "AEWGMTTQS: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE24257495",
+   "id": "chase-AE7Z4LF2Y",
    "category": "Worth chasing",
-   "statement": "PRJAE24257495: value, owner and door reproduce the register and the door rule",
+   "statement": "AE7Z4LF2Y: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE18154439",
+   "id": "chase-AEQ9DNGKZ",
    "category": "Worth chasing",
-   "statement": "PRJAE18154439: value, owner and door reproduce the register and the door rule",
+   "statement": "AEQ9DNGKZ: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE0400183",
+   "id": "chase-AE4REMWBY",
    "category": "Worth chasing",
-   "statement": "PRJAE0400183: value, owner and door reproduce the register and the door rule",
+   "statement": "AE4REMWBY: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE21200182",
+   "id": "chase-AENHUS5KX",
    "category": "Worth chasing",
-   "statement": "PRJAE21200182: value, owner and door reproduce the register and the door rule",
+   "statement": "AENHUS5KX: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE0942338",
+   "id": "chase-AEBZ3A8DD",
    "category": "Worth chasing",
-   "statement": "PRJAE0942338: value, owner and door reproduce the register and the door rule",
+   "statement": "AEBZ3A8DD: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE1395353",
+   "id": "chase-AEP7DVTKU",
    "category": "Worth chasing",
-   "statement": "PRJAE1395353: value, owner and door reproduce the register and the door rule",
+   "statement": "AEP7DVTKU: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE16119252",
+   "id": "chase-AEXCBWAKG",
    "category": "Worth chasing",
-   "statement": "PRJAE16119252: value, owner and door reproduce the register and the door rule",
+   "statement": "AEXCBWAKG: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE25276902",
+   "id": "chase-AEK6R6HC6",
    "category": "Worth chasing",
-   "statement": "PRJAE25276902: value, owner and door reproduce the register and the door rule",
+   "statement": "AEK6R6HC6: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE25275471",
+   "id": "chase-AEZ538BRR",
    "category": "Worth chasing",
-   "statement": "PRJAE25275471: value, owner and door reproduce the register and the door rule",
+   "statement": "AEZ538BRR: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE19168839",
+   "id": "chase-AEA9JRHL4",
    "category": "Worth chasing",
-   "statement": "PRJAE19168839: value, owner and door reproduce the register and the door rule",
+   "statement": "AEA9JRHL4: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE24261320",
+   "id": "chase-AEWP2E2QA",
    "category": "Worth chasing",
-   "statement": "PRJAE24261320: value, owner and door reproduce the register and the door rule",
+   "statement": "AEWP2E2QA: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE24270779",
+   "id": "chase-AEPRMQ9AN",
    "category": "Worth chasing",
-   "statement": "PRJAE24270779: value, owner and door reproduce the register and the door rule",
+   "statement": "AEPRMQ9AN: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE24258613",
+   "id": "chase-AE8C42ERT",
    "category": "Worth chasing",
-   "statement": "PRJAE24258613: value, owner and door reproduce the register and the door rule",
+   "statement": "AE8C42ERT: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE1286287",
+   "id": "chase-AE9VG7TXK",
    "category": "Worth chasing",
-   "statement": "PRJAE1286287: value, owner and door reproduce the register and the door rule",
+   "statement": "AE9VG7TXK: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE23252776",
+   "id": "chase-AENS3Z7AP",
    "category": "Worth chasing",
-   "statement": "PRJAE23252776: value, owner and door reproduce the register and the door rule",
+   "statement": "AENS3Z7AP: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE24271777",
+   "id": "chase-AEUBP5MG6",
    "category": "Worth chasing",
-   "statement": "PRJAE24271777: value, owner and door reproduce the register and the door rule",
+   "statement": "AEUBP5MG6: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE25278448",
+   "id": "chase-AEZJJFVFF",
    "category": "Worth chasing",
-   "statement": "PRJAE25278448: value, owner and door reproduce the register and the door rule",
+   "statement": "AEZJJFVFF: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE23251776",
+   "id": "chase-AE6HKAS9V",
    "category": "Worth chasing",
-   "statement": "PRJAE23251776: value, owner and door reproduce the register and the door rule",
+   "statement": "AE6HKAS9V: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
   },
   {
-   "id": "chase-PRJAE24271590",
+   "id": "chase-AEAMH5FZ7",
    "category": "Worth chasing",
-   "statement": "PRJAE24271590: value, owner and door reproduce the register and the door rule",
+   "statement": "AEAMH5FZ7: value, owner and door reproduce the register and the door rule",
    "left": 1,
    "right": 1,
    "pass": true
@@ -33392,48 +33392,48 @@
    "id": "shape-smallestBook-measured",
    "category": "Source shape",
    "statement": "Smallest engineer book: the published measurement equals the figure re-measured from the files",
-   "left": 40,
-   "right": 40,
+   "left": 43,
+   "right": 43,
    "pass": true
   },
   {
    "id": "shape-smallestBook-range",
    "category": "Source shape",
-   "statement": "Smallest engineer book: 40 projects lies inside the declared 20 to 100",
-   "left": 40,
-   "right": 40,
+   "statement": "Smallest engineer book: 43 projects lies inside the declared 20 to 100",
+   "left": 43,
+   "right": 43,
    "pass": true
   },
   {
    "id": "shape-largestBook-measured",
    "category": "Source shape",
    "statement": "Largest engineer book: the published measurement equals the figure re-measured from the files",
-   "left": 1008,
-   "right": 1008,
+   "left": 1009,
+   "right": 1009,
    "pass": true
   },
   {
    "id": "shape-largestBook-range",
    "category": "Source shape",
-   "statement": "Largest engineer book: 1008 projects lies inside the declared 700 to 1200",
-   "left": 1008,
-   "right": 1008,
+   "statement": "Largest engineer book: 1009 projects lies inside the declared 700 to 1200",
+   "left": 1009,
+   "right": 1009,
    "pass": true
   },
   {
    "id": "shape-quietShare-measured",
    "category": "Source shape",
    "statement": "No update plus Waiting or follow up, share of pairs: the published measurement equals the figure re-measured from the files",
-   "left": 45.8,
-   "right": 45.8,
+   "left": 45.9,
+   "right": 45.9,
    "pass": true
   },
   {
    "id": "shape-quietShare-range",
    "category": "Source shape",
-   "statement": "No update plus Waiting or follow up, share of pairs: 45.8 percent lies inside the declared 40 to 60",
-   "left": 45.8,
-   "right": 45.8,
+   "statement": "No update plus Waiting or follow up, share of pairs: 45.9 percent lies inside the declared 40 to 60",
+   "left": 45.9,
+   "right": 45.9,
    "pass": true
   },
   {
@@ -33471,7 +33471,7 @@
   {
    "id": "shape-mepConsultantFill-measured",
    "category": "Source shape",
-   "statement": "BNC rows with an MEP consultant: the published measurement equals the figure re-measured from the files",
+   "statement": "Register rows with an MEP consultant: the published measurement equals the figure re-measured from the files",
    "left": 27.8,
    "right": 27.8,
    "pass": true
@@ -33479,7 +33479,7 @@
   {
    "id": "shape-mepConsultantFill-range",
    "category": "Source shape",
-   "statement": "BNC rows with an MEP consultant: 27.8 percent lies inside the declared 25 to 35",
+   "statement": "Register rows with an MEP consultant: 27.8 percent lies inside the declared 25 to 35",
    "left": 27.8,
    "right": 27.8,
    "pass": true
@@ -33487,7 +33487,7 @@
   {
    "id": "shape-mainContractorFill-measured",
    "category": "Source shape",
-   "statement": "BNC rows with an appointed main or EPC contractor: the published measurement equals the figure re-measured from the files",
+   "statement": "Register rows with an appointed main or EPC contractor: the published measurement equals the figure re-measured from the files",
    "left": 38.2,
    "right": 38.2,
    "pass": true
@@ -33495,7 +33495,7 @@
   {
    "id": "shape-mainContractorFill-range",
    "category": "Source shape",
-   "statement": "BNC rows with an appointed main or EPC contractor: 38.2 percent lies inside the declared 32 to 45",
+   "statement": "Register rows with an appointed main or EPC contractor: 38.2 percent lies inside the declared 32 to 45",
    "left": 38.2,
    "right": 38.2,
    "pass": true
@@ -33503,7 +33503,7 @@
   {
    "id": "shape-mepContractorFill-measured",
    "category": "Source shape",
-   "statement": "BNC rows with an MEP contractor: the published measurement equals the figure re-measured from the files",
+   "statement": "Register rows with an MEP contractor: the published measurement equals the figure re-measured from the files",
    "left": 23.2,
    "right": 23.2,
    "pass": true
@@ -33511,7 +33511,7 @@
   {
    "id": "shape-mepContractorFill-range",
    "category": "Source shape",
-   "statement": "BNC rows with an MEP contractor: 23.2 percent lies inside the declared 20 to 32",
+   "statement": "Register rows with an MEP contractor: 23.2 percent lies inside the declared 20 to 32",
    "left": 23.2,
    "right": 23.2,
    "pass": true

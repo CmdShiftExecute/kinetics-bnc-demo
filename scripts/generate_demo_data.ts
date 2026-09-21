@@ -1,5 +1,5 @@
 /**
- * Deterministic BNC-backed data for the Halvard Project Intelligence System demo.
+ * Deterministic register-backed data for the Halvard Project Intelligence System demo.
  *
  * Run:  bun scripts/generate_demo_data.ts
  * Out:  public/data/rollup.json, projects/<shard>.json, parties/{consultants,contractors,owners}.json
@@ -11,7 +11,7 @@
  * No published file carries a timestamp. The data-as-of date is the constant DATA_AS_OF
  * below, so a re-run writes byte-identical files and `git status` stays clean.
  *
- * Project, value, geography and company fields come from the three private BNC extracts.
+ * Project, value, geography and company fields come from the three private register extracts.
  * The ten verticals, 24 engineers, relevance model, ownership, relationship ratings and
  * activity are an illustrative internal commercial layer for the closed demo.
  */
@@ -22,6 +22,7 @@ import { fileURLToPath } from 'node:url';
 import { CHANNELS } from '../data/channels';
 import { ACTIVITY_BANDS, ENGINEER_CAPACITY, GRADE_SCORE, WORKLOAD_WEIGHTS, gradeOf, NOT_YET_AWARDED, NO_UPDATE, ORDER_RECEIVED, PROJECT_CLOSED, QUOTE_SENT, ENQUIRY_GENERATED, SCOPE_FLOOR, BUYING_COMPLETION_FLOOR_PCT, bestBucket, cascade, pctOf, pickEngineer, r1, sum1, worthChasing, workloadOf, stageGate } from '../data/rules';
 import { SHAPE_TARGETS } from '../data/shape';
+import { buildRefMask, mulberry32, refMapFile, scrubVendor, REAL_REF_RE_G, VENDOR_RE } from './ref_mask';
 import type {
   Attribute,
   BucketCode,
@@ -103,17 +104,27 @@ interface BncSource {
 const bnc = JSON.parse(readFileSync(join(here, '..', '.private', 'bnc-source.json'), 'utf8')) as BncSource;
 const TARGET_PROJECTS = bnc.projects.length;
 
+/* ---------- reference masking ---------- */
+
+/**
+ * The published register carries fictional references only. The real ones stay in the private
+ * layer, written to .private/ref-map.json (gitignored) so this local copy can restore them
+ * without reopening any workbook.
+ */
+/** Neutral, publishable names for the three private extracts. */
+const SOURCE_LABEL: Record<string, string> = {
+  urban_industrial: 'Urban and industrial greenfield extract',
+  other_sectors: 'Other sectors extract',
+  brownfield: 'Brownfield all sectors extract',
+};
+
+const refMask = buildRefMask(bnc.projects);
+const maskRef = (real: string) => refMask.toFictional.get(real) ?? real;
+writeFileSync(join(here, '..', '.private', 'ref-map.json'), JSON.stringify(refMapFile(refMask), null, 1) + '\n');
+
+
 /* ---------- deterministic randomness ---------- */
 
-function mulberry32(a: number) {
-  return function () {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
 const rnd = mulberry32(SEED);
 const between = (lo: number, hi: number) => lo + rnd() * (hi - lo);
 const int = (lo: number, hi: number) => Math.floor(between(lo, hi + 1));
@@ -542,7 +553,7 @@ const MEP_CONTRACTOR_SHARE = 0.28;
 const NO_RELATIONSHIP_P = { noOwnedProject: 0.6, smallBook: 0.2, midBook: 0.05 };
 
 function drawValue(type: string): number {
-  /* Match the supplied BNC source shape: p10 about 1m, median about 15m, p90 about 266m, maximum 27bn. */
+  /* Match the supplied source shape: p10 about 1m, median about 15m, p90 about 266m, maximum 27bn. */
   const base = Math.exp(Math.log(13.5) + 2.2 * gauss() * 0.84) * (VALUE_MULT[type] ?? 1);
   return r1(Math.min(27000, Math.max(0.5, base)));
 }
@@ -607,8 +618,8 @@ for (const p of bnc.projects) {
   if (row === undefined) throw new Error(`no matrix row for ${p.ref}`);
   drafts.push({
     row,
-    ref: p.ref,
-    name: p.name,
+    ref: maskRef(p.ref),
+    name: scrubVendor(p.name),
     stage: p.stage,
     completionPct: p.completionPct,
     completionDate: p.completionDate,
@@ -618,7 +629,7 @@ for (const p of bnc.projects) {
     category: p.category,
     industry: p.industry,
     type: p.type,
-    location: p.location,
+    location: scrubVendor(p.location),
     source: p.source,
     attributes: p.attributes,
     owners: p.owners.map((name) => ownerId.get(name)!),
@@ -627,7 +638,7 @@ for (const p of bnc.projects) {
     mainContractors: p.mainContractors.map((name) => contractorId.get(name)!),
     mepContractor: p.mepContractors.length ? contractorId.get(p.mepContractors[0]!)! : null,
     lastUpdated: p.lastUpdated,
-    sourceDescription: p.description,
+    sourceDescription: scrubVendor(p.description),
   });
 }
 if (bnc.projects.length === 0) for (let n = 0; n < TARGET_PROJECTS; n++) {
@@ -736,6 +747,14 @@ function bucketDate(code: BucketCode): string {
   const span = code === NO_UPDATE ? [120, 540] : code === NOT_YET_AWARDED ? [30, 400] : [1, 300];
   return addDays(DATA_AS_OF, -int(span[0]!, span[1]!));
 }
+
+/*
+ * Published-reference order. The cascade's running counts and the engineer pipeline depend on the
+ * order projects are visited, and the Data basis page states that order is reference order. The
+ * reference a reader can see is the masked one, so the register is sorted on it here; reconcile.ts
+ * replays the cascade over the published shards sorted the same way.
+ */
+drafts.sort((a, b) => a.ref.localeCompare(b.ref));
 
 for (const d of drafts) {
   const r = matrix[d.row]!;
@@ -1050,7 +1069,7 @@ const definitions: Record<string, Definition> = Object.fromEntries(
       ['relevance', 'Relevance score', `The grade of the project's type on the relevance matrix, converted to a number: High ${GRADE_SCORE.High}, Medium ${GRADE_SCORE.Medium}, Low ${GRADE_SCORE.Low}, none blank. A few rows carry a hand-adjusted score between the grades, shown to one decimal.`],
       ['overall', 'Overall relevance', 'The highest of the ten vertical scores.'],
       ['owner', 'Owner', 'The engineer the ownership cascade assigns the project to, or none. Each project has at most one owner.'],
-      ['pipeline', 'Pipeline value owned', 'The sum of the BNC whole-project values assigned to an engineer, in USD million. It is opportunity coverage, not booked revenue.'],
+      ['pipeline', 'Pipeline value owned', 'The sum of the source whole-project values assigned to an engineer, in USD million. It is opportunity coverage, not booked revenue.'],
       ['bucket', 'Activity bucket', 'Exactly one sales-activity state per project and vertical, chosen by priority: the highest-priority thing that has happened wins.'],
       ['open', 'Open enquiries and quotes', 'Project-and-vertical pairs whose bucket is Enquiry generated or Quote sent.'],
       ['orders', 'Orders received this year', `Project-and-vertical pairs whose bucket is Order received with an activity date in ${FISCAL_YEAR}.`],
@@ -1060,8 +1079,8 @@ const definitions: Record<string, Definition> = Object.fromEntries(
       ['rating', 'Relationship rating', 'A whole number from 1 to 10 recorded by the relationship owner; none where there is no relationship.'],
       ['workload', 'Workload', `Synthetic points per engineer: each owned project counts ${WORKLOAD_WEIGHTS.active} when its bucket on the engineer's vertical is active (quote, enquiry, profile shared, visit, reached out), ${WORKLOAD_WEIGHTS.won} for an order or a waiting or quiet bucket, ${WORKLOAD_WEIGHTS.closed} when closed. An engineer is over capacity above ${ENGINEER_CAPACITY} points.`],
       ['norel', 'No relationship yet', 'A firm on the register that Halvard has never worked with: its level, rating and owner are all blank. Not the same as a low rating.'],
-      ['value', 'Value', 'The project value in source USD million to one decimal. Zero means the BNC source workbook did not record a value.'],
-      ['completion', 'Completion', 'Percent complete from the BNC workbook, shown for projects under construction when recorded.'],
+      ['value', 'Value', 'The project value in source USD million to one decimal. Zero means the source workbook did not record a value.'],
+      ['completion', 'Completion', 'Percent complete from the source workbook, shown for projects under construction when recorded.'],
     ] as const
   ).map(([key, term, text]) => [key, { key, term, text }]),
 );
@@ -1073,12 +1092,13 @@ const precisionPolicy = [
   'Dates are calendar dates. Where the Other Sectors workbook has no per-project update date, its March 2026 workbook snapshot date is used and disclosed here.',
 ];
 const assumptions = [
-  `${bnc.metadata.rawRows.toLocaleString('en-GB')} supplied BNC rows resolve to ${TARGET_PROJECTS.toLocaleString('en-GB')} unique project references. ${bnc.metadata.overlapRows} newer-source overlaps are de-duplicated by BNC reference: Urban & Industrial first, Other Sectors next, Brownfield last.`,
-  `Source rows: ${bnc.metadata.sources.map((s) => `${s.file} (${s.rows.toLocaleString('en-GB')})`).join('; ')}. Project references, names, values, stages, locations, sectors, industries, types, owners, consultants and contractors come from these workbooks.`,
+  `${bnc.metadata.rawRows.toLocaleString('en-GB')} supplied register rows resolve to ${TARGET_PROJECTS.toLocaleString('en-GB')} unique project references. ${bnc.metadata.overlapRows} newer-source overlaps are de-duplicated by source reference: Urban & Industrial first, Other Sectors next, Brownfield last.`,
+  `Source rows: ${bnc.metadata.sources.map((s) => `${SOURCE_LABEL[s.key] ?? s.key} (${s.rows.toLocaleString('en-GB')})`).join('; ')}. Project names, values, stages, locations, sectors, industries, types, owners, consultants and contractors come from these extracts of a licensed market-intelligence register.`,
   'Money is kept in the source USD currency. No AED conversion, scaling, capping or synthetic value generation is applied. Two source rows without a positive value remain in the register at 0.0 and are described as not recorded.',
-  'Company cells are preserved as written. Because BNC uses commas both inside legal company names and between multiple companies, an ambiguous multi-company cell is shown as one source label rather than split incorrectly.',
+  'Company cells are preserved as written. Because the source register uses commas both inside legal company names and between multiple companies, an ambiguous multi-company cell is shown as one source label rather than split incorrectly.',
+  'Project references shown here are fictional identifiers. Each source reference is replaced by a stable, seeded, collision-free identifier of a two-letter country code and seven characters, so a project keeps one reference everywhere in this demo while the licensed register\u2019s own numbering is not republished.',
   'Individual contact names, telephone numbers, email addresses and workbook assignee fields are deliberately excluded; project and company identities are retained.',
-  `The 24 sales engineers are fictional. Relevance scores, internal ownership, activity, workload, relationship level, rating and relationship owner are deterministic illustrative demo fields because the supplied BNC workbooks do not contain those internal records. ${measuredShape.noRelationshipShare!.toFixed(1)} percent of firms form the illustrative no-relationship cohort.`,
+  `The 24 sales engineers are fictional. Relevance scores, internal ownership, activity, workload, relationship level, rating and relationship owner are deterministic illustrative demo fields because the supplied workbooks do not contain those internal records. ${measuredShape.noRelationshipShare!.toFixed(1)} percent of firms form the illustrative no-relationship cohort.`,
   `Workload is a synthetic measure, ${WORKLOAD_WEIGHTS.active} points per active project on the engineer's own vertical and ${WORKLOAD_WEIGHTS.won} per order or quiet project, against a capacity of ${ENGINEER_CAPACITY} points chosen so a few of the 24 books exceed it.`,
 ];
 const workloadRule = [
@@ -1123,6 +1143,14 @@ const meta: Meta = {
 rmSync(outDir, { recursive: true, force: true });
 mkdirSync(join(outDir, 'projects'), { recursive: true });
 mkdirSync(join(outDir, 'parties'), { recursive: true });
+/** Nothing carrying a real source reference or the vendor's name may reach public/. */
+function writeOut(file: string, body: string) {
+  const hits = body.match(REAL_REF_RE_G);
+  if (hits) throw new Error(`refusing to write ${file}: it carries ${hits.length} real source reference(s), first ${hits[0]}`);
+  const vendor = body.match(new RegExp(VENDOR_RE.source, 'gi'));
+  if (vendor) throw new Error(`refusing to write ${file}: it names the source vendor ${vendor.length} time(s)`);
+  writeFileSync(file, body);
+}
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 const shards: Shard[] = [];
 for (const sector of SECTORS) {
@@ -1132,13 +1160,13 @@ for (const sector of SECTORS) {
   for (let i = 0; i < parts; i++) {
     const chunk = ps.slice(i * size, (i + 1) * size);
     const file = `projects/${slug(sector)}${parts > 1 ? `-${i + 1}` : ''}.json`;
-    writeFileSync(join(outDir, file), JSON.stringify({ sector, projects: chunk }) + '\n');
+    writeOut(join(outDir, file), JSON.stringify({ sector, projects: chunk }) + '\n');
     shards.push({ file, sector, count: chunk.length, value: sum1(chunk.map((p) => p.value)) });
   }
 }
-writeFileSync(join(outDir, 'parties', 'consultants.json'), JSON.stringify(consultantsOut) + '\n');
-writeFileSync(join(outDir, 'parties', 'contractors.json'), JSON.stringify(contractorsOut) + '\n');
-writeFileSync(join(outDir, 'parties', 'owners.json'), JSON.stringify(ownersOut) + '\n');
+writeOut(join(outDir, 'parties', 'consultants.json'), JSON.stringify(consultantsOut) + '\n');
+writeOut(join(outDir, 'parties', 'contractors.json'), JSON.stringify(contractorsOut) + '\n');
+writeOut(join(outDir, 'parties', 'owners.json'), JSON.stringify(ownersOut) + '\n');
 
 const rollup: Rollup = {
   meta,
@@ -1176,7 +1204,7 @@ const rollup: Rollup = {
   matrixSummary,
   partySummary,
 };
-writeFileSync(join(outDir, 'rollup.json'), JSON.stringify(rollup, null, 1) + '\n');
+writeOut(join(outDir, 'rollup.json'), JSON.stringify(rollup, null, 1) + '\n');
 
 /* ---------- report ---------- */
 

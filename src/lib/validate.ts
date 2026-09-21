@@ -154,7 +154,7 @@ export function validateShard(file: string, v: unknown, V: number) {
     const at = `projects[${i}]`;
     need(file, p, PROJECT_KEYS, at);
     needString(file, p.ref, `${at}.ref`);
-    if (!/^PRJAE\d+$/.test(p.ref)) throw new DataShapeError(file, `${at}.ref "${p.ref}" is not a BNC project reference`);
+    if (!/^[A-Z]{2}[A-HJ-NP-Z2-9]{7}$/.test(p.ref)) throw new DataShapeError(file, `${at}.ref "${p.ref}" is not a published project reference`);
     if (refs.has(p.ref)) throw new DataShapeError(file, `${at}.ref "${p.ref}" appears twice`);
     refs.add(p.ref);
     needString(file, p.name, `${at}.name`);
