@@ -8,7 +8,7 @@ Source provenance, the real/synthetic boundary, definitions, and the machine's o
 
 - **Source provenance**: where the project and company data comes from, and what was excluded.
 - **The authentic and illustrative boundary**, stated plainly rather than implied.
-- **Quality checks**: the live reconciliation table, 2,783 assertions across 15 categories.
+- **Quality checks**: the live reconciliation table, 4,189 assertions across 15 categories.
 - **Definitions**: the grade scale, the ownership cascade steps, the workload model, the activity buckets.
 - **The declared source shape**: fourteen ranges, measured against declared.
 

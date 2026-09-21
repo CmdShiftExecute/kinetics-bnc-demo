@@ -4,7 +4,7 @@ This is a one-page plain-words guide to the Halvard Project Intelligence System 
 
 ## What the register is
 
-The market register is one list of every construction project the demo knows about, 3,500 of them, across the UAE. Each project carries where it is, what it is, how far along it is, how much it is worth, and which consultants, contractors and developers are on it. Sitting beside the register is a relevance matrix: a table of about 80 rows, one for every combination of sector, industry and project type the register uses, with a rating against each of Halvard's ten verticals. That matrix is the demo's only opinion about what matters; everything else follows from it.
+The market register is one list of every construction project the demo knows about, 4,536 of them, across the UAE. Each project carries where it is, what it is, how far along it is, how much it is worth, and which consultants, contractors and developers are on it. Sitting beside the register is a relevance matrix: a table of about 80 rows, one for every combination of sector, industry and project type the register uses, with a rating against each of Halvard's ten verticals. That matrix is the demo's only opinion about what matters; everything else follows from it.
 
 ## How a project gets its ten scores
 

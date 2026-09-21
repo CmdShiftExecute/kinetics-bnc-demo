@@ -1,5 +1,7 @@
 # Project Detail
 
+<img src="assets/project-detail.png" alt="Project detail page with the ownership cascade in words" width="100%" />
+
 One project's full record, at `/p/:ref`, including the exact reasoning behind who owns it.
 
 ## What is on the page

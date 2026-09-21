@@ -27,7 +27,7 @@ The one design rule the whole app turns on: relevance measures fit, ownership as
 ## Highlights
 
 - **4,536 unique projects** in the register, deduplicated from 4,568 raw source rows across three category imports, with the 32 overlaps resolved by source recency.
-- **2,783 reconciliation assertions across 15 categories** (`bun run reconcile`), all currently passing, published live on the Data basis page.
+- **4,189 reconciliation assertions across 15 categories** (`bun run reconcile`), all currently passing, published live on the Data basis page.
 - **194 interaction, keyboard and resilience checks** (`bun scripts/interactions.ts`) drive a real served build with Playwright, and every positive check carries a negative control that must fail before the positive is trusted.
 - **A five-step ownership cascade** assigns each project to one vertical and one engineer, publishes its own tie-break record on every project, and explains itself from that record rather than restating the rule.
 - **24 engineers, ten verticals, an 80-row relevance matrix**, and a workload model that scores books by activity rather than by raw count, so owning many quiet projects is not read as being busy.
@@ -58,7 +58,7 @@ See [docs/data-model.md](docs/data-model.md) for the full schema and [docs/08-Da
 
 ## Quality gates
 
-- `bun run reconcile` re-reads the written JSON independently of the generator's own in-memory checks and publishes **2,783 assertions across 15 categories** (shards and register, precision policy, relevance matrix, ownership cascade, descriptions, engineers, verticals, headline figures, sector by stage, activity funnel, worth chasing, consultants and contractors, matrix summary, party summary, source shape). Five deliberate corruptions are its negative controls.
+- `bun run reconcile` re-reads the written JSON independently of the generator's own in-memory checks and publishes **4,189 assertions across 15 categories** (shards and register, precision policy, relevance matrix, ownership cascade, descriptions, engineers, verticals, headline figures, sector by stage, activity funnel, worth chasing, consultants and contractors, matrix summary, party summary, source shape). Five deliberate corruptions are its negative controls.
 - `src/lib/validate.ts` checks the published data at the boundary before the register cache is populated, every row of every file, not a sample.
 - `bun run stable` hashes every published file, regenerates from the seed, hashes again, and fails on any file that changed, appeared or disappeared.
 - `bun run typecheck` runs the TypeScript compiler in strict mode with no emitted output.
