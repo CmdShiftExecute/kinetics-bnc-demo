@@ -62,7 +62,7 @@ export default function DataBasis() {
           <div>
             <dt>Company</dt>
             <dd>
-              {meta.company}, {meta.division}. The project, location, value and company fields come from the three supplied register workbooks. The Halvard team, relevance, ownership, relationships, workload and activity are illustrative demo data.
+              {meta.company}, {meta.division}. The project, location, value and company fields come from the three supplied register workbooks. The team, relevance, ownership, relationships, workload and activity are illustrative demo data.
             </dd>
           </div>
           <div>
@@ -82,9 +82,9 @@ export default function DataBasis() {
         </dl>
       </Section>
 
-      <Section id="grades" title="The relevance grade scale" note="How a project gets its ten scores" defs={['relevance', 'overall']} definitions={definitions}>
+      <Section id="grades" title="The relevance grade scale" note="How a project gets its vertical scores" defs={['relevance', 'overall']} definitions={definitions}>
         <p>
-          The relevance matrix has one row per source sector, industry and project type ({count(data.matrix.length)} rows) and one column per vertical. Each cell is High, Medium, Low or none. Grades convert to numbers: High {gradeScore.High.toFixed(1)}, Medium {gradeScore.Medium.toFixed(1)}, Low {gradeScore.Low.toFixed(1)}, none blank. This relevance layer is illustrative: source project types are mapped to the nearest demo taxonomy type, then scored consistently across the register. Overall relevance is the highest of the ten.
+          The relevance matrix has one row per source sector, industry and project type ({count(data.matrix.length)} rows) and one column per vertical. Each cell is High, Medium, Low or none. Grades convert to numbers: High {gradeScore.High.toFixed(1)}, Medium {gradeScore.Medium.toFixed(1)}, Low {gradeScore.Low.toFixed(1)}, none blank. This relevance layer is illustrative: source project types are mapped to the nearest demo taxonomy type, then scored consistently across the register. Overall relevance is the highest of the set.
         </p>
       </Section>
 

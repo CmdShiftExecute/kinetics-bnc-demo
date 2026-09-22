@@ -159,7 +159,7 @@ export type PartyRole = 'lead' | 'mep' | 'both';
 export type RelationshipLevel = 'Junior management' | 'Middle management' | 'Senior management';
 
 /**
- * A firm on the register. A firm may be KNOWN (it sits on projects) without Halvard holding
+ * A firm on the register. A firm may be KNOWN (it sits on projects) without the group holding
  * any relationship with it: then level, rating and owner are all null together. That is the
  * "no relationship yet" state the parties page filters on; it is never implied by a low rating.
  */
@@ -172,7 +172,7 @@ export interface Party {
   verticalCounts: number[];
   /** Per vertical, in vertical order: USD million of those projects. */
   verticalValues: number[];
-  /** Null when Halvard holds no relationship with the firm. */
+  /** Null when the group holds no relationship with the firm. */
   level: RelationshipLevel | null;
   /** 1 to 10, whole; null when no relationship. */
   rating: number | null;
@@ -312,7 +312,7 @@ export interface PartyKindSummary {
   senior: number;
   middle: number;
   junior: number;
-  /** Firms Halvard holds no relationship with (level, rating and owner all null). */
+  /** Firms the group holds no relationship with (level, rating and owner all null). */
   noRelationship: number;
   /** AED million of projects those firms sit on. */
   noRelationshipValue: number;

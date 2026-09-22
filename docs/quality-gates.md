@@ -12,7 +12,7 @@ Every gate below is a real command in this repository, not a description of one.
 
 ## Validation at the boundary
 
-`src/lib/validate.ts` checks the published data before the register cache is populated, and it checks all of it, every row of every file rather than a sample: each field's type, the closed vocabularies, the ten-long score, bucket and date vectors, the score and bucket domains, the tie record's internal consistency, and the whole-or-absent relationship state. `validateReferences` in `src/lib/register.ts` then resolves every party id, project reference, engineer slug and vertical index across files.
+`src/lib/validate.ts` checks the published data before the register cache is populated, and it checks all of it, every row of every file rather than a sample: each field's type, the closed vocabularies, the multi-vertical score, bucket and date vectors, the score and bucket domains, the tie record's internal consistency, and the whole-or-absent relationship state. `validateReferences` in `src/lib/register.ts` then resolves every party id, project reference, engineer slug and vertical index across files.
 
 ## Byte-stability
 

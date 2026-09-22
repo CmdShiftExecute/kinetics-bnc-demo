@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs or re-installs the nginx site for the Halvard Project Intelligence System demo on node-ss. Idempotent:
+# Installs or re-installs the nginx site for the Project Intelligence System demo on node-ss. Idempotent:
 # run it after any change to deploy/kinetics-bnc-demo.nginx or after a rebuild that needs nothing more
 # than a reload (a rebuild alone needs no reload, nginx serves dist/ as static files).
 #
@@ -66,7 +66,7 @@ done
 title=$(grep -o '<title>[^<]*' /tmp/pis-index.html | head -1)
 say "928 answers $code, $title"
 [ "$code" = 200 ] || exit 1
-grep -q 'Halvard Project Intelligence System' /tmp/pis-index.html || { say "928 did not serve the PIS index"; exit 1; }
+grep -q 'Project Intelligence System' /tmp/pis-index.html || { say "928 did not serve the PIS index"; exit 1; }
 mis=$(curl -sk -o /dev/null -w '%{http_code}' --resolve "$SITE_HOST:926:$SITE_ADDR" "https://$SITE_HOST:926/" || true)
 wms=$(curl -sk -o /dev/null -w '%{http_code}' --resolve "$SITE_HOST:927:$SITE_ADDR" "https://$SITE_HOST:927/" || true)
 say "926 (MIS demo, untouched) answers $mis; 927 (WMS demo, untouched) answers $wms"

@@ -199,7 +199,7 @@ export default function PartiesPage() {
                   <div>
                     <dt>Relationship level</dt>
                     <dd className="big small">None yet</dd>
-                    <dd className="sub">Halvard has not worked with this firm</dd>
+                    <dd className="sub">The group has not worked with this firm</dd>
                   </div>
                   <div>
                     <dt>Rating</dt>

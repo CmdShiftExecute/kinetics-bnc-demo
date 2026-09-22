@@ -1,7 +1,7 @@
 {
  "meta": {
-  "company": "Halvard Engineering Group",
-  "division": "Building Technologies Division",
+  "company": "A multi-divisional engineering group",
+  "division": "Projects & Technical Services",
   "system": "Project Intelligence System",
   "dataAsOf": "2026-05-04",
   "dataAsOfLabel": "04 May 2026",
@@ -4207,7 +4207,7 @@
   "level": {
    "key": "level",
    "term": "Relationship level",
-   "text": "The highest management level Halvard has a working relationship with at the party: junior, middle or senior management. A known firm Halvard has never worked with has no level, no rating and no owner."
+   "text": "The highest management level the group has a working relationship with at the party: junior, middle or senior management. A known firm the group has never worked with has no level, no rating and no owner."
   },
   "rating": {
    "key": "rating",
@@ -4222,7 +4222,7 @@
   "norel": {
    "key": "norel",
    "term": "No relationship yet",
-   "text": "A firm on the register that Halvard has never worked with: its level, rating and owner are all blank. Not the same as a low rating."
+   "text": "A firm on the register that the group has never worked with: its level, rating and owner are all blank. Not the same as a low rating."
   },
   "value": {
    "key": "value",
@@ -4281,8 +4281,8 @@
   "Both are synthetic: an illustration of the kind of rule a capacity view needs, never a record of hours worked."
  ],
  "relationshipRule": [
-  "A firm is known when it sits on at least one project of the register. Halvard holds a relationship with a known firm when a level, a rating and an owner are recorded; the three are always recorded together or not at all.",
-  "The no-relationship cohort is drawn per firm: a firm with no project owned by Halvard has a 60 percent chance of no relationship, a firm on three projects or fewer 20 percent, a firm on four to eight 5 percent, and a larger book always has one.",
+  "A firm is known when it sits on at least one project of the register. The group holds a relationship with a known firm when a level, a rating and an owner are recorded; the three are always recorded together or not at all.",
+  "The no-relationship cohort is drawn per firm: a firm with no project owned by the group has a 60 percent chance of no relationship, a firm on three projects or fewer 20 percent, a firm on four to eight 5 percent, and a larger book always has one.",
   "The parties page filters on this state, and the \"No relationship yet\" figure counts exactly those firms."
  ],
  "shape": [

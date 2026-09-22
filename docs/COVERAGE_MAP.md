@@ -30,14 +30,14 @@ Disposition codes: **Reproduced** (present, same meaning); **Adapted** (present,
 | MEP contractors | `Project.mepContractor`, one id into `parties/contractors.json` with role `mep` or `both` | Adapted: single slot, same reasoning as the MEP consultant field |
 | Description | `Project.description`, a generated sentence naming the type, city, value, stage, parties and completion date | Adapted: authored by the generator from the other fields on the same row, rather than typed by a person, so it can never disagree with the structured fields beside it |
 | Last updated | `Project.lastUpdated`, an ISO calendar date | Reproduced |
-| Ten vertical scores | `Project.scores`, one per Halvard vertical, 0.0 to 8.0 or null, with `Project.adjusted` naming which of the ten were hand-nudged off the matrix grade | Reproduced |
+| Vertical scores | `Project.scores`, one per vertical, 0.0 to 8.0 or null, with `Project.adjusted` naming which were hand-nudged off the matrix grade | Reproduced |
 
 ## Consultant Relationship Matrix sheet and Contractor Relationship Matrix sheet
 
 | Source sheet | Application in this demo | Disposition |
 |---|---|---|
-| Consultant Relationship Matrix | `parties/consultants.json`, one `Party` per consultant (kind `consultant`), with `role`, `verticalCounts` and `verticalValues` (a project count and an AED million figure against all ten verticals, not a short list of the ones that matter most), `level`, `rating`, `owner`, `projectCount`, `projectValue` and `projects`; browsed on `/parties` | Adapted: one party table carrying the full ten-vertical vectors per firm, in place of a matrix with a vertical down every column, so every vertical a firm is in play on is published with its count rather than a top few. `level`, `rating` and `owner` are nullable and always null together, the state of a firm that sits on projects but that Halvard holds no relationship with, drawn as a synthetic cohort weighted toward firms with no owned project and small books |
-| Contractor Relationship Matrix | `parties/contractors.json`, the same shape with kind `contractor`, role `lead`, `mep` or `both`, the same ten-vertical count and value vectors, and the same nullable relationship fields | Adapted, same reasoning |
+| Consultant Relationship Matrix | `parties/consultants.json`, one `Party` per consultant (kind `consultant`), with `role`, `verticalCounts` and `verticalValues` (a project count and an AED million figure against every vertical, not a short list of the ones that matter most), `level`, `rating`, `owner`, `projectCount`, `projectValue` and `projects`; browsed on `/parties` | Adapted: one party table carrying the full per-vertical vectors per firm, in place of a matrix with a vertical down every column, so every vertical a firm is in play on is published with its count rather than a top few. `level`, `rating` and `owner` are nullable and always null together, the state of a firm that sits on projects but that the group holds no relationship with, drawn as a synthetic cohort weighted toward firms with no owned project and small books |
+| Contractor Relationship Matrix | `parties/contractors.json`, the same shape with kind `contractor`, role `lead`, `mep` or `both`, the same per-vertical count and value vectors, and the same nullable relationship fields | Adapted, same reasoning |
 
 ## Owners sheet
 
@@ -55,7 +55,7 @@ Disposition codes: **Reproduced** (present, same meaning); **Adapted** (present,
 
 | Source field or sheet | Application in this demo | Disposition |
 |---|---|---|
-| 20 vertical score columns across four divisions | `Project.scores`, ten columns in one division: Halvard's own ten verticals | Simplified: twenty columns across four divisions collapse to the ten verticals this demo actually names, because Halvard's Building Technologies Division is one division, not four |
+| 20 vertical score columns across four divisions | `Project.scores`, one column per vertical, in one division: the group's own multi-vertical scoring | Simplified: twenty columns across four divisions collapse to the verticals this demo actually names, because the group's engineering division is one division, not four |
 | Summary by Project Type | `rollup.matrixRows`, one count and value per relevance-matrix row, read on `/relevance` and filterable on `/projects` | Reproduced |
 | Summary by Industry | No dedicated per-industry rollup table | Not reproduced: an industry-level total is one filter away on `/projects` (filter by industry, read the always-visible count and value), so a fixed summary table would only restate what the filter already answers |
 | Summary by Sector | `rollup.sectorStage` (sector by stage) and `rollup.distributions.sectors`, both read on the Overview page's "Where the value sits" chart | Reproduced |
@@ -98,10 +98,10 @@ Disposition codes: **Reproduced** (present, same meaning); **Adapted** (present,
 | UAE Consultants sheet | `parties/consultants.json` | Reproduced |
 | One sheet per engineer | `/engineers/:slug`, the Engineer page: figures, funnel, full project table, held consultants and contractors | Reproduced |
 | Consultant Relationship Matrix | See the Consultant Relationship Matrix row above | Adapted |
-| Project Assignment sheet: register plus per-vertical owner columns | `Project.ownerVertical` and `Project.ownerEngineer`, a single owner per project rather than a column per vertical | Simplified: the ownership cascade already resolves a project to exactly one vertical and one engineer, so a column per vertical would carry nine empty cells for every filled one |
+| Project Assignment sheet: register plus per-vertical owner columns | `Project.ownerVertical` and `Project.ownerEngineer`, a single owner per project rather than a column per vertical | Simplified: the ownership cascade already resolves a project to exactly one vertical and one engineer, so a column per vertical would sit mostly empty beside the one that is filled |
 | Project Assignment sheet: project owner column | `Project.ownerEngineer` | Reproduced |
 | Project Assignment sheet: decision-log columns | `Project.why` (`OwnerWhy`): the eligible verticals, the gate that fired, the candidates that passed it, and whether a tie was broken; shown on the Project page and checked whole by reconcile category "Ownership cascade" | Reproduced |
-| Project Assignment sheet: no-scoring flag | Not carried as a separate flag | Not reproduced: a project the matrix has no view on already reads as ten null scores, which the cascade already treats as "no eligible vertical," so a second flag would duplicate what a null already states |
+| Project Assignment sheet: no-scoring flag | Not carried as a separate flag | Not reproduced: a project the matrix has no view on already reads as null across every vertical, which the cascade already treats as "no eligible vertical," so a second flag would duplicate what a null already states |
 
 ## Workbook per sales engineer (Projects, Contractors, Consultants, Sign-Off)
 

@@ -12,7 +12,7 @@ A `Project` carries the masked reference, name, stage, completion fields, source
 
 ## The relevance grade scale
 
-`data/rules.ts` converts a grade to a number: High is 8.0, Medium is 5.0, Low is 2.0, no relevance is null. Source project types are mapped deterministically to the nearest demo taxonomy type. Overall relevance is the highest of a project's ten scores.
+`data/rules.ts` converts a grade to a number: High is 8.0, Medium is 5.0, Low is 2.0, no relevance is null. Source project types are mapped deterministically to the nearest demo taxonomy type. Overall relevance is the highest of a project's vertical scores.
 
 ## The ownership cascade
 

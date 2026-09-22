@@ -49,7 +49,7 @@ export function IconMenu({ label, icon, children }: { label: string; icon: React
         const next = event.key === 'Home' ? 0 : event.key === 'End' ? entries.length - 1 : (index + (event.key === 'ArrowDown' ? 1 : -1) + entries.length) % entries.length;
         entries[next]?.focus();
       }}>
-        <p className="mast-menu-heading">{label === 'Module' ? 'Halvard intelligence' : 'Appearance'}</p>
+        <p className="mast-menu-heading">{label === 'Module' ? 'Group intelligence' : 'Appearance'}</p>
         {children}
       </div>
     </div>

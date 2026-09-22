@@ -3,7 +3,7 @@ import { chromium, firefox } from 'playwright';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 const base = process.env.BASE ?? 'http://127.0.0.1:4182';
-const out = process.env.OUT ?? '/tmp/halvard-pis-refinement';
+const out = process.env.OUT ?? '/tmp/pis-refinement';
 mkdirSync(out,{recursive:true});
 const data = JSON.parse(readFileSync('public/data/rollup.json','utf8'));
 const checks=[];
@@ -102,7 +102,7 @@ for(const route of routes.slice(1)){
  }
 }
 for(const denied of [false,true]){
- const c=await browser.newContext();await c.addInitScript(denied?()=>{Object.defineProperty(window,'localStorage',{get(){throw new DOMException('Denied','SecurityError');}});}:()=>localStorage.setItem('halvard-pis-theme','invalid'));
+ const c=await browser.newContext();await c.addInitScript(denied?()=>{Object.defineProperty(window,'localStorage',{get(){throw new DOMException('Denied','SecurityError');}});}:()=>localStorage.setItem('pis-theme','invalid'));
  const p=await c.newPage();await p.goto(base);await wait(p);check((await state(p)).theme==='parchment',`${denied?'Denied':'Invalid'} storage keeps render available`);await choose(p,'Dark');check((await state(p)).theme==='dark',`${denied?'Denied':'Invalid'} storage still permits theme switching`);await c.close();
 }
 check(errors.length===0,'No uncaught browser errors',errors);

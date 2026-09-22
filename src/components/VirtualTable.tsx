@@ -128,7 +128,7 @@ export function VirtualTable({ rows, sort, onSort, shown, engineerName, scoreInd
         <thead>
           <tr>
             {cols.map((c) => (
-              <SortTh key={c.key} label={c.key === 'score' && scoreName ? `${scoreName} score` : c.label} active={sort.key === c.key} dir={sort.dir} natural={c.natural} onSort={(n) => onSort(c.key, n)} className={c.num ? 'num' : 'left'} title={c.key === 'overall' ? 'Overall relevance: the highest of the ten vertical scores' : c.key === 'completionPct' ? 'Percent complete, under construction only' : undefined} />
+              <SortTh key={c.key} label={c.key === 'score' && scoreName ? `${scoreName} score` : c.label} active={sort.key === c.key} dir={sort.dir} natural={c.natural} onSort={(n) => onSort(c.key, n)} className={c.num ? 'num' : 'left'} title={c.key === 'overall' ? 'Overall relevance: the highest of the vertical scores' : c.key === 'completionPct' ? 'Percent complete, under construction only' : undefined} />
             ))}
           </tr>
         </thead>

@@ -7,7 +7,7 @@ One project's full record, at `/p/:ref`, including the exact reasoning behind wh
 ## What is on the page
 
 - **Six figures**: value, stage, overall relevance, verticals in scope, owner, best activity.
-- **The ten vertical scores** at the section's full width directly beneath the headline figures.
+- **The per-vertical scores** at the section's full width directly beneath the headline figures.
 - **Identity and the four party slots**: lead consultant, MEP consultant, main contractor, MEP contractor.
 - **The owner and the cascade step that decided it**, with a tie explained from its own record when one occurred.
 - **The activity bucket per vertical.**

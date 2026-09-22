@@ -37,7 +37,7 @@ const arg = (name: string, fallback: string) => {
 const base = arg('base', 'http://127.0.0.1:4182').replace(/\/$/, '');
 const out = arg('out', join(process.cwd(), 'screenshots'));
 const insecure = args.includes('--insecure');
-const tag = arg('tag', 'halvard-pis');
+const tag = arg('tag', 'pis');
 const widths = arg('widths', '1440,1024,390').split(',').map((w) => Number(w));
 
 const pages = [

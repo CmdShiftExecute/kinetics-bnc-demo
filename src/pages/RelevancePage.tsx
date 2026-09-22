@@ -57,7 +57,7 @@ export default function RelevancePage() {
       <motion.div className="page-head" {...rise()}>
         <div>
           <h1 className="display page-title">Relevance matrix</h1>
-          <p className="page-sub">How closely each project type fits a Halvard vertical</p>
+          <p className="page-sub">How closely each project type fits a vertical</p>
         </div>
         <p className="page-basis">
           {count(data.matrix.length)} rows by {data.verticals.length} verticals, {count(ms.cellsGraded)} graded cells
@@ -91,7 +91,7 @@ export default function RelevancePage() {
         />
       </Section>
 
-      <Section id="matrix" title="The matrix" note="Rows: project types under industry under sector. Columns: the ten verticals. Point at a cell to read it; click it to open the Projects page filtered to it.">
+      <Section id="matrix" title="The matrix" note="Rows: project types under industry under sector. Columns: every vertical. Point at a cell to read it; click it to open the Projects page filtered to it.">
         <div className="seg-row" role="group" aria-label="Matrix view">
           <button type="button" id="roll-toggle" className={cx('segb small press', !rolled && 'on')} aria-pressed={!rolled} onClick={() => setRolled(false)}>
             Sector, industry, type
@@ -122,7 +122,7 @@ export default function RelevancePage() {
             <dt>
               <span className="swatch hg-med" aria-hidden="true" /> Medium
             </dt>
-            <dd>{gradeScore.Medium.toFixed(1)}. Usually present, not always Halvard's to win.</dd>
+            <dd>{gradeScore.Medium.toFixed(1)}. Usually present, not always the group's to win.</dd>
           </div>
           <div>
             <dt>
@@ -150,7 +150,7 @@ export default function RelevancePage() {
 
       <Section id="how-scores" title="How a project gets its scores" defs={['relevance', 'overall']} definitions={definitions} link={{ to: '/data-basis#grades', label: 'Data basis' }}>
         <p>
-          Every project carries one score per vertical, looked up by its project type on this matrix when it enters the register, and it never changes with stage or location. Grades convert to {gradeScore.High.toFixed(1)}, {gradeScore.Medium.toFixed(1)} and {gradeScore.Low.toFixed(1)}. {count(ms.projectsAdjusted)} projects carry a hand-adjusted score between the grades; those show to one decimal, marked with an asterisk, on the project page. A project's overall relevance is the highest of its ten scores, so {count(ms.projectsOverallHigh)} projects read High overall.{' '}
+          Every project carries one score per vertical, looked up by its project type on this matrix when it enters the register, and it never changes with stage or location. Grades convert to {gradeScore.High.toFixed(1)}, {gradeScore.Medium.toFixed(1)} and {gradeScore.Low.toFixed(1)}. {count(ms.projectsAdjusted)} projects carry a hand-adjusted score between the grades; those show to one decimal, marked with an asterisk, on the project page. A project's overall relevance is the highest of its vertical scores, so {count(ms.projectsOverallHigh)} projects read High overall.{' '}
           <Link to="/data-basis#cascade" className="elink">
             The ownership cascade
           </Link>{' '}

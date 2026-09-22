@@ -1,5 +1,5 @@
 /**
- * Copies the ten Halvard verticals and the 24 engineers (slug, name, vertical) from the
+ * Copies the verticals and the 24 engineers (slug, name, vertical) from the
  * MIS demo's published index into data/verticals.json and data/engineers.json, so this
  * demo names the same people and verticals as the MIS without anyone retyping them.
  *

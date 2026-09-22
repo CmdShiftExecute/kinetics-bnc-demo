@@ -1,5 +1,5 @@
 /**
- * Deterministic register-backed data for the Halvard Project Intelligence System demo.
+ * Deterministic register-backed data for the Project Intelligence System demo.
  *
  * Run:  bun scripts/generate_demo_data.ts
  * Out:  public/data/rollup.json, projects/<shard>.json, parties/{consultants,contractors,owners}.json
@@ -545,8 +545,8 @@ const CONTRACTOR_FILL_BY_STAGE: Record<Stage, number> = { Concept: 0.55, Design:
 /** MEP contractor fill as a share of the main-contractor fill, so about a fifth of the register overall. */
 const MEP_CONTRACTOR_SHARE = 0.28;
 /**
- * The no-relationship cohort: a KNOWN firm Halvard has never worked with. Drawn by how much
- * of the firm's book Halvard owns and how big the book is: a firm with no owned project is
+ * The no-relationship cohort: a KNOWN firm the group has never worked with. Drawn by how much
+ * of the firm's book the group owns and how big the book is: a firm with no owned project is
  * usually a stranger, a small book often is, a large book almost never. Synthetic, declared
  * on the Data basis page, and the answer to "where do we have no relationship at all".
  */
@@ -831,7 +831,7 @@ function finishParty(d: PartyDraft): Party | null {
   const verticalValues = verticalTenths.map((t) => t / 10);
   const topVertical = verticalCounts.map((c, i) => ({ c, i })).sort((a, b) => b.c - a.c || a.i - b.i)[0]!.i;
   const n = refs.length;
-  /* the relationship, or none: a firm Halvard has never worked with has no level, no rating and no owner, all three together */
+  /* the relationship, or none: a firm the group has never worked with has no level, no rating and no owner, all three together */
   const owned = new Map<string, number>();
   for (const p of ps) if (p.ownerEngineer) owned.set(p.ownerEngineer, (owned.get(p.ownerEngineer) ?? 0) + 1);
   const pNone = owned.size === 0 ? NO_RELATIONSHIP_P.noOwnedProject : n <= 3 ? NO_RELATIONSHIP_P.smallBook : n <= 8 ? NO_RELATIONSHIP_P.midBook : 0;
@@ -1075,10 +1075,10 @@ const definitions: Record<string, Definition> = Object.fromEntries(
       ['orders', 'Orders received this year', `Project-and-vertical pairs whose bucket is Order received with an activity date in ${FISCAL_YEAR}.`],
       ['chase', 'Worth chasing now', `Projects at Tender, or under construction at ${BUYING_COMPLETION_FLOOR_PCT.toFixed(1)} percent or less, with overall relevance ${(5).toFixed(1)} or more and no vertical in Project closed; the top twenty by value.`],
       ['door', 'Door in', 'The party through which the owning vertical reaches the project: at specification stage the MEP consultant, else the lead consultant; at buying stage the main contractor, else the MEP contractor, else the lead consultant.'],
-      ['level', 'Relationship level', 'The highest management level Halvard has a working relationship with at the party: junior, middle or senior management. A known firm Halvard has never worked with has no level, no rating and no owner.'],
+      ['level', 'Relationship level', 'The highest management level the group has a working relationship with at the party: junior, middle or senior management. A known firm the group has never worked with has no level, no rating and no owner.'],
       ['rating', 'Relationship rating', 'A whole number from 1 to 10 recorded by the relationship owner; none where there is no relationship.'],
       ['workload', 'Workload', `Synthetic points per engineer: each owned project counts ${WORKLOAD_WEIGHTS.active} when its bucket on the engineer's vertical is active (quote, enquiry, profile shared, visit, reached out), ${WORKLOAD_WEIGHTS.won} for an order or a waiting or quiet bucket, ${WORKLOAD_WEIGHTS.closed} when closed. An engineer is over capacity above ${ENGINEER_CAPACITY} points.`],
-      ['norel', 'No relationship yet', 'A firm on the register that Halvard has never worked with: its level, rating and owner are all blank. Not the same as a low rating.'],
+      ['norel', 'No relationship yet', 'A firm on the register that the group has never worked with: its level, rating and owner are all blank. Not the same as a low rating.'],
       ['value', 'Value', 'The project value in source USD million to one decimal. Zero means the source workbook did not record a value.'],
       ['completion', 'Completion', 'Percent complete from the source workbook, shown for projects under construction when recorded.'],
     ] as const
@@ -1107,8 +1107,8 @@ const workloadRule = [
   'Both are synthetic: an illustration of the kind of rule a capacity view needs, never a record of hours worked.',
 ];
 const relationshipRule = [
-  'A firm is known when it sits on at least one project of the register. Halvard holds a relationship with a known firm when a level, a rating and an owner are recorded; the three are always recorded together or not at all.',
-  `The no-relationship cohort is drawn per firm: a firm with no project owned by Halvard has a ${Math.round(NO_RELATIONSHIP_P.noOwnedProject * 100)} percent chance of no relationship, a firm on three projects or fewer ${Math.round(NO_RELATIONSHIP_P.smallBook * 100)} percent, a firm on four to eight ${Math.round(NO_RELATIONSHIP_P.midBook * 100)} percent, and a larger book always has one.`,
+  'A firm is known when it sits on at least one project of the register. The group holds a relationship with a known firm when a level, a rating and an owner are recorded; the three are always recorded together or not at all.',
+  `The no-relationship cohort is drawn per firm: a firm with no project owned by the group has a ${Math.round(NO_RELATIONSHIP_P.noOwnedProject * 100)} percent chance of no relationship, a firm on three projects or fewer ${Math.round(NO_RELATIONSHIP_P.smallBook * 100)} percent, a firm on four to eight ${Math.round(NO_RELATIONSHIP_P.midBook * 100)} percent, and a larger book always has one.`,
   'The parties page filters on this state, and the "No relationship yet" figure counts exactly those firms.',
 ];
 const cascadeText = [
@@ -1126,8 +1126,8 @@ const bucketRule = [
 ];
 
 const meta: Meta = {
-  company: 'Halvard Engineering Group',
-  division: 'Building Technologies Division',
+  company: 'A multi-divisional engineering group',
+  division: 'Projects & Technical Services',
   system: 'Project Intelligence System',
   dataAsOf: DATA_AS_OF,
   dataAsOfLabel: DATA_AS_OF_LABEL,

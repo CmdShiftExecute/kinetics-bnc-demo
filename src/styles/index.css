@@ -127,27 +127,12 @@ p {
 .mast {
   padding-top: var(--s-xl);
 }
-/* Three columns with equal outer tracks, so the system title is centred on the page, as on the MIS. */
+/* Two tracks: the system identity takes the remaining space, the module/theme tools stay fixed-width at the right. */
 .mast-row {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto;
   align-items: end;
   gap: var(--s-xl);
-}
-.mast-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.wordmark {
-  font-size: 28px;
-  letter-spacing: 0.02em;
-}
-.mast-division {
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-2);
 }
 /* The system's name at the page-heading size, so the masthead says which system this is. */
 .mast-system {
@@ -2563,10 +2548,8 @@ html { scroll-padding-top: var(--mast-offset, 210px); }
   background: var(--paper);
   padding-top: 18px;
 }
-.mast-row { grid-template-columns: auto 1fr auto; align-items: center; gap: 28px; }
-.mast-brand { gap: 5px; }
+.mast-row { grid-template-columns: 1fr auto; align-items: center; gap: 28px; }
 .mast-system { font-size: 16px; white-space: normal; margin: 0 0 6px; }
-.mast-identity { padding-left: 26px; border-left: 1px solid var(--rule); }
 .mast-identity .stamp { justify-content: flex-start; font-size: 10px; }
 .mast-identity .stamp > div { display: flex; gap: 8px; }
 .mast-identity .stamp dt, .mast-identity .stamp dd { margin: 0; }
@@ -2644,8 +2627,7 @@ table.mis.compact td, table.mis.compact th { padding-top: 10px; padding-bottom: 
 .plist { flex: 1 1 auto; min-height: 0; max-height: none; }
 section.sec, [id] { scroll-margin-top: 8px; }
 @media (max-width: 1100px) {
- .mast-row { grid-template-columns: auto 1fr auto; gap: 16px; }
- .mast-identity { padding-left: 16px; }
+ .mast-row { grid-template-columns: 1fr auto; gap: 16px; }
  .mast-system { font-size: 13px; }
  .nav { gap: 10px 16px; }
  .overview #kpis > div { padding-left: 16px; padding-right: 16px; }
@@ -2657,10 +2639,6 @@ section.sec, [id] { scroll-margin-top: 8px; }
 @media (max-width: 760px) {
  .mast { padding-top: 12px; }
  .mast-row { grid-template-columns: 1fr auto; gap: 10px; }
- .mast-brand { order: 1; }
- .mast-tools { order: 2; }
- .mast-identity { order: 3; grid-column: 1 / -1; border: 0; padding: 0; }
- .mast-identity .mast-system { display: none; }
  .mast-identity .stamp { font-size: 10px; }
  .nav { margin-top: 10px; gap: 6px; padding: 8px 0; }
  .nav-reports { width: 100%; flex-wrap: nowrap; overflow-x: auto; gap: 18px; padding: 4px 2px 8px; scrollbar-width: thin; }
@@ -2682,8 +2660,6 @@ section.sec, [id] { scroll-margin-top: 8px; }
  .attention-item strong { font-size: 13px; }
  .sec-head { flex-wrap: wrap; gap: 12px; }
  .rail { max-height: none; }
- .wordmark { font-size: 24px; }
- .mast-division { font-size: 10px; }
 }
 
 :root { --readbox-hazard: #ff9a9a; --stage-1: #cfccc3; --stage-3: #7d7a71; --stage-4: #5e5b54; --stage-5: #45433d; --stage-6: #2f2e2a; }

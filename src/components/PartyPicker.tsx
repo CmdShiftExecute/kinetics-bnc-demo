@@ -8,7 +8,7 @@ const ROLE_LABEL: Record<PartyKind, Record<PartyRole, string>> = {
 };
 export const roleLabel = (kind: PartyKind, role: PartyRole) => ROLE_LABEL[kind][role];
 
-/** The relationship filter: any firm, firms Halvard holds a relationship with, or firms it has none with yet. */
+/** The relationship filter: any firm, firms the group holds a relationship with, or firms it has none with yet. */
 export type RelFilter = 'any' | 'held' | 'none';
 
 /**

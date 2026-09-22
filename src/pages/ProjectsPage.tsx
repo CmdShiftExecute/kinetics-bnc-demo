@@ -78,7 +78,7 @@ export default function ProjectsPage() {
   const exportCsv = () => {
     const header = ['Reference', 'Project', 'Stage', 'Completion %', 'Value USD m', 'City', 'Location', 'Sector', 'Industry', 'Type', 'Category', 'Source register', 'Overall relevance', ...rollup.verticals.map((v) => `${v.name} score`), 'Owner vertical', 'Owner engineer', ...rollup.verticals.map((v) => `${v.name} activity`), 'Last updated'];
     const body = rows.map((p) => [p.ref, p.name, p.stage, p.completionPct, p.value, p.city, p.location, p.sector, p.industry, p.type, p.category, p.source, p.overall, ...p.scores, p.ownerVertical == null ? '' : rollup.verticals[p.ownerVertical]!.name, p.ownerEngineer ? (engineerName.get(p.ownerEngineer) ?? '') : '', ...p.buckets.map((b) => BUCKETS[b]!), dateLabel(p.lastUpdated)]);
-    download(`halvard-projects-${rows.length}.csv`, toCsv(header, body));
+    download(`pis-projects-${rows.length}.csv`, toCsv(header, body));
   };
   const toggleCol = (key: SortKey) => {
     const n = new Set(shown);
@@ -155,7 +155,7 @@ export default function ProjectsPage() {
           <Chips chips={chips} set={(patch) => set(patch)} clearAll={clearAll} />
           <VirtualTable rows={rows} sort={{ key: filters.sort, dir: filters.dir }} onSort={onSort} shown={shown} engineerName={engineerName} scoreIndex={vi} scoreName={scoreName} height={tableH} />
           <p className="muted" style={{ fontSize: 11, margin: 'var(--s-sm) 0 0' }}>
-            Relev. is the highest of the ten vertical scores{vi != null ? `; Score is the ${scoreName} score` : ''}. Done is percent complete, under construction only. Sorted by {COLUMNS.find((c) => c.key === filters.sort)?.label ?? filters.sort}, {filters.dir === 'asc' ? 'ascending' : 'descending'}
+            Relev. is the highest of the vertical scores{vi != null ? `; Score is the ${scoreName} score` : ''}. Done is percent complete, under construction only. Sorted by {COLUMNS.find((c) => c.key === filters.sort)?.label ?? filters.sort}, {filters.dir === 'asc' ? 'ascending' : 'descending'}
             {rows[0] ? `; first row ${rows[0].ref}, relevance ${score(rows[0].overall)}` : ''}.
           </p>
         </div>

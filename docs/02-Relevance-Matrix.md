@@ -1,13 +1,13 @@
 # Relevance Matrix
 
-The register's only opinion about what matters lives in one table: every sector, industry and project type on one side, the ten business verticals across the top, and a grade in every cell. Everything else in the app follows from this matrix.
+The register's only opinion about what matters lives in one table: every sector, industry and project type on one side, every business vertical across the top, and a grade in every cell. Everything else in the app follows from this matrix.
 
 <img src="assets/relevance-matrix.png" alt="Relevance matrix, top" width="100%" />
 <img src="assets/relevance-detail.png" alt="Relevance matrix detail and grade scale" width="100%" />
 
 ## What is on the page
 
-- **The heatmap**: rows for sector, industry and project type, columns for the ten verticals, shaded by grade.
+- **The heatmap**: rows for sector, industry and project type, columns for every vertical, shaded by grade.
 - **How far each vertical reaches**: a summary of how much of the register each vertical is eligible for.
 - **The grade scale**: how High, Medium and Low convert to numbers.
 - **How a project gets its scores**: the plain-English walk-through of the scoring rule.
@@ -15,7 +15,7 @@ The register's only opinion about what matters lives in one table: every sector,
 ## How the figures are built
 
 - A grade converts to a number: High is 8.0, Medium is 5.0, Low is 2.0, no relevance is null.
-- Every project's type maps deterministically to one row of the matrix, and that row's ten grades become the project's own ten scores.
+- Every project's type maps deterministically to one row of the matrix, and that row's grades become the project's own scores.
 - This commercial relevance layer is illustrative and kept distinct from the source project fields it sits beside.
 
 ## Interactions

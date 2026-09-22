@@ -26,12 +26,6 @@ export function Masthead({ meta }: { meta: Meta }) {
   return (
     <header className="mast" ref={header}>
       <div className="mast-row">
-        <div className="mast-brand">
-          <Link to="/" className="wordmark display" aria-label="Halvard, back to the overview">
-            Halvard
-          </Link>
-          <span className="mast-division">{meta.division}</span>
-        </div>
         <div className="mast-identity">
           <p className="mast-system display">Project Intelligence System</p>
           <dl className="stamp" aria-label="Reporting stamp">

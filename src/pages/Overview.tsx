@@ -77,7 +77,7 @@ export default function Overview() {
         ]}
       />
 
-      <p className="value-context">Values describe whole projects, not Halvard revenue or addressable contract value. Ownership assigns a relationship; it does not indicate an order win.</p>
+      <p className="value-context">Values describe whole projects, not the group's revenue or addressable contract value. Ownership assigns a relationship; it does not indicate an order win.</p>
 
       <motion.aside className="management-attention" aria-labelledby="attention-title" {...rise(0.15)}>
         <h2 className="label" id="attention-title">Management attention</h2>

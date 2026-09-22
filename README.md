@@ -14,7 +14,7 @@
 
 ## What it is
 
-A sales desk cannot chase everything in a market at once, so this dashboard answers one question first: of everything currently being built, which projects actually matter to us, who already owns that relationship, and how far has it gone. Every construction project in the register carries ten scores, one per business vertical, and an ownership cascade assigns each qualifying project to exactly one salesperson so books fill evenly rather than by whoever asks first.
+A sales desk cannot chase everything in a market at once, so this dashboard answers one question first: of everything currently being built, which projects actually matter to us, who already owns that relationship, and how far has it gone. Every construction project in the register carries a score per business vertical, and an ownership cascade assigns each qualifying project to exactly one salesperson so books fill evenly rather than by whoever asks first.
 
 The one design rule the whole app turns on: relevance measures fit, ownership assigns a relationship, and neither one is an order. A high score means a project is worth chasing, not that it has been won, and every page keeps that distinction visible rather than collapsing pipeline value into a single misleading number.
 
@@ -30,7 +30,7 @@ The one design rule the whole app turns on: relevance measures fit, ownership as
 - **4,189 reconciliation assertions across 15 categories** (`bun run reconcile`), all currently passing, published live on the Data basis page.
 - **194 interaction, keyboard and resilience checks** (`bun scripts/interactions.ts`) drive a real served build with Playwright, and every positive check carries a negative control that must fail before the positive is trusted.
 - **A five-step ownership cascade** assigns each project to one vertical and one engineer, publishes its own tie-break record on every project, and explains itself from that record rather than restating the rule.
-- **24 engineers, ten verticals, an 80-row relevance matrix**, and a workload model that scores books by activity rather than by raw count, so owning many quiet projects is not read as being busy.
+- **24 engineers, multi-vertical scoring, an 80-row relevance matrix**, and a workload model that scores books by activity rather than by raw count, so owning many quiet projects is not read as being busy.
 - **Byte-stable by construction**: a seeded pseudo-random generator (`bun run stable`) hashes every published file, regenerates from the same seed, hashes again, and fails on any difference.
 - **Every reference masked**: real market-register identifiers never enter the published tree, replaced by a seeded fictional id (`bun run refs:check` refuses any real reference in the tree before every commit and push).
 - **Full URL state on the register**: filters, sort, taxonomy, ownership, relevance floor and activity year all live in the address bar, so any view is a shareable link.
@@ -40,12 +40,12 @@ The one design rule the whole app turns on: relevance measures fit, ownership as
 | Page | What it shows | Guide |
 |---|---|---|
 | Overview | Register size, owned value, the top-twenty chase shortlist, management attention, value by sector and stage, and the full activity funnel | [01-Overview](docs/01-Overview.md) |
-| Relevance matrix | Every sector, industry and project type against the ten verticals, as a heatmap that click-throughs to a filtered register | [02-Relevance-Matrix](docs/02-Relevance-Matrix.md) |
+| Relevance matrix | Every sector, industry and project type against every vertical, as a heatmap that click-throughs to a filtered register | [02-Relevance-Matrix](docs/02-Relevance-Matrix.md) |
 | Projects | The full register: filter rail, removable chips, sortable columns, a column chooser and CSV export, all state in the URL | [03-Projects](docs/03-Projects.md) |
 | Engineers | Six desk-wide cards, an over-capacity list, and one ruled block per engineer with owned count, pipeline value and activity | [04-Engineers](docs/04-Engineers.md) |
 | Engineer book | One engineer's full detail: workload against capacity, activity funnel, project table, and their consultants and contractors | [05-Engineer-Book](docs/05-Engineer-Book.md) |
 | Parties | Consultants and contractors ranked by value or count, filterable to firms with no relationship yet | [06-Parties](docs/06-Parties.md) |
-| Project detail | One project's figures, its ten vertical scores, its four party slots, and the ownership decision explained from its own record | [07-Project-Detail](docs/07-Project-Detail.md) |
+| Project detail | One project's figures, its per-vertical scores, its four party slots, and the ownership decision explained from its own record | [07-Project-Detail](docs/07-Project-Detail.md) |
 | Data basis | Source provenance, the synthetic/real boundary, definitions, and the live reconciliation table | [08-Data-Basis](docs/08-Data-Basis.md) |
 
 ## The data behind it
@@ -84,10 +84,10 @@ See [docs/design-system.md](docs/design-system.md).
 
 ## Sibling demos
 
-Two other demos share the same fictional Halvard Engineering Group and the same design system:
+Two other demos share the same fictional multi-divisional engineering group and the same design system:
 
-- **[Halvard MIS](https://github.com/CmdShiftExecute/kinetics-mis-demo)**, a management information system covering sales, pipeline, net profit and receivables. [Live demo](https://kinetics-mis-demo.vercel.app/)
-- **[Halvard Central Store](https://github.com/CmdShiftExecute/kinetics-wms-demo)**, a warehouse management system for stock, inbound and replenishment. [Live demo](https://kinetics-wms-demo.vercel.app/)
+- **[Management Information System](https://github.com/CmdShiftExecute/kinetics-mis-demo)**, a management information system covering sales, pipeline, net profit and receivables. [Live demo](https://kinetics-mis-demo.vercel.app/)
+- **[Warehouse Information System](https://github.com/CmdShiftExecute/kinetics-wms-demo)**, a warehouse management system for stock, inbound and replenishment. [Live demo](https://kinetics-wms-demo.vercel.app/)
 
 ---
 

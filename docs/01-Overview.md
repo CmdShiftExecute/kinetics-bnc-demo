@@ -17,7 +17,7 @@ The landing page answers three questions in order: how big is the register, how 
 ## How the figures are built
 
 - The chase list is every project at Tender, or Under Construction at 5.0 percent complete or less, with overall relevance 5.0 or more, and no vertical already marked Project closed. The top twenty by value publish here.
-- Overall relevance is the highest of a project's ten vertical scores, so a project that matters to one vertical is never read as low priority overall.
+- Overall relevance is the highest of a project's vertical scores, so a project that matters to one vertical is never read as low priority overall.
 - The no-owner figure and the over-capacity engineers come straight from the ownership cascade and the workload model documented in [data-model.md](data-model.md).
 - Every number on this page is reconciled independently by `bun run reconcile` under the "Headline figures", "Sector by stage", "Worth chasing" and "Activity funnel" categories.
 

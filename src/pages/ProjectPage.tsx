@@ -77,9 +77,9 @@ export default function ProjectPage() {
         cols={6}
         label="Project figures"
         items={[
-          { label: 'Whole-project value', value: p.value, f: aedLabel, sub: p.value > 0 ? 'Source register value; not Halvard revenue' : 'Not recorded in the source register', id: 'p-value' },
+          { label: 'Whole-project value', value: p.value, f: aedLabel, sub: p.value > 0 ? 'Source register value; not the group\'s revenue' : 'Not recorded in the source register', id: 'p-value' },
           { label: 'Stage', value: 0, f: () => p.stage, text: true, sub: p.completionPct != null ? `${pct(p.completionPct)} complete` : p.stage === 'Under Construction' ? 'completion not recorded' : 'not under construction', id: 'p-stage' },
-          { label: 'Overall relevance', value: p.overall ?? 0, f: (n) => (p.overall == null ? 'none' : n.toFixed(1)), sub: p.overall == null ? 'no graded vertical' : `${gradeOf(p.overall)}, highest of ten`, id: 'p-overall' },
+          { label: 'Overall relevance', value: p.overall ?? 0, f: (n) => (p.overall == null ? 'none' : n.toFixed(1)), sub: p.overall == null ? 'no graded vertical' : `${gradeOf(p.overall)}, highest across verticals`, id: 'p-overall' },
           { label: 'Verticals in scope', value: why.eligible.length, f: count, sub: `of ${verticals.length} score ${rollup.scopeFloor.toFixed(1)} or more; ${count(why.candidates.length)} pass the stage gate`, id: 'p-eligible' },
           { label: 'Owner', value: 0, f: () => (p.ownerEngineer ? (engName.get(p.ownerEngineer) ?? '') : 'None'), text: true, sub: ownerV ? ownerV.name : why.gate === 'held' ? 'held: no contractor appointed' : 'no eligible vertical', to: p.ownerEngineer ? `/engineers/${p.ownerEngineer}` : undefined, id: 'p-owner' },
           { label: 'Best activity', value: 0, f: () => BUCKETS[best]!, text: true, sub: `on ${bestOn.length === verticals.length ? 'every vertical' : bestOn.slice(0, 2).join(' and ')}${bestOn.length > 2 && bestOn.length < verticals.length ? ` and ${count(bestOn.length - 2)} more` : ''}`, bad: best === 4, id: 'p-best' },
