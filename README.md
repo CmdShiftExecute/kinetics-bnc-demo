@@ -10,7 +10,14 @@
 ![Tailwind v4](https://img.shields.io/badge/Tailwind-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![Motion](https://img.shields.io/badge/Motion-animated-0055FF?style=for-the-badge)
 ![Bun](https://img.shields.io/badge/Bun-runtime-000000?style=for-the-badge&logo=bun&logoColor=white)
-[![Live Demo](https://img.shields.io/badge/▶-Live%20Demo-000000?style=for-the-badge)](https://kinetics-pis-demo.vercel.app/)
+[![MIT licence](https://img.shields.io/badge/Licence-MIT-6B7280?style=for-the-badge)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/▶-Live%20Demo-000000?style=for-the-badge)](https://project-intelligence-system-dashboard.vercel.app/)
+
+## In one glance
+
+- **What it answers**: of everything currently being built, which projects are worth chasing, who inside the business already owns the relationship, and how far it has gone.
+- **What is synthetic or masked**: the market register is real and licensed; every reference in it is replaced by a seeded fictional id, and the scores, ownership and activity built on top of it are synthetic.
+- **How it is built**: a seeded generator writes every published JSON file from the imported register plus a set of published rules, and 4,189 reconciliation assertions re-read the written files independently on every build.
 
 ## What it is
 
@@ -20,7 +27,7 @@ The one design rule the whole app turns on: relevance measures fit, ownership as
 
 ## Live demo
 
-**[kinetics-pis-demo.vercel.app](https://kinetics-pis-demo.vercel.app/)**
+**[project-intelligence-system-dashboard.vercel.app](https://project-intelligence-system-dashboard.vercel.app/)**
 
 <img src="docs/assets/overview-hero.png" alt="Overview page" width="100%" />
 
@@ -56,6 +63,12 @@ Precision is a stated policy, not a convention: project values are stored in USD
 
 See [docs/data-model.md](docs/data-model.md) for the full schema and [docs/08-Data-Basis.md](docs/08-Data-Basis.md) for the source and synthetic boundary.
 
+## Use it with your own data
+
+The generator entry point is `scripts/generate_demo_data.ts` (seed `20260913`): it reads the imported register plus the published rules in `data/rules.ts`, `data/channels.ts` and `data/taxonomy.ts`, and writes every file under `public/data`. Every page reads only that published JSON, never the generator or the source workbooks directly, so pointing the generator at a different register and re-running `bun run data` is enough to retarget the whole app.
+
+The JSON contract lives in `public/data` (see [docs/data-model.md](docs/data-model.md) for the full schema). `src/lib/validate.ts` checks every row of every published file at the app boundary, `bun run reconcile` (`scripts/reconcile.ts`) independently re-reads the written files and re-derives every figure the pages show, and `bun run stable` (`scripts/check_stable.ts`) proves the generator is deterministic by hashing, regenerating from the seed, and hashing again.
+
 ## Quality gates
 
 - `bun run reconcile` re-reads the written JSON independently of the generator's own in-memory checks and publishes **4,189 assertions across 15 categories** (shards and register, precision policy, relevance matrix, ownership cascade, descriptions, engineers, verticals, headline figures, sector by stage, activity funnel, worth chasing, consultants and contractors, matrix summary, party summary, source shape). Five deliberate corruptions are its negative controls.
@@ -84,11 +97,17 @@ See [docs/design-system.md](docs/design-system.md).
 
 ## Sibling demos
 
-Two other demos share the same fictional multi-divisional engineering group and the same design system:
+Two other demos share the same print-style Swiss industrial design system and the same masthead:
 
-- **[Management Information System](https://github.com/CmdShiftExecute/kinetics-mis-demo)**, a management information system covering sales, pipeline, net profit and receivables. [Live demo](https://kinetics-mis-demo.vercel.app/)
-- **[Warehouse Information System](https://github.com/CmdShiftExecute/kinetics-wms-demo)**, a warehouse management system for stock, inbound and replenishment. [Live demo](https://kinetics-wms-demo.vercel.app/)
+- **[Management Information System](https://github.com/CmdShiftExecute/management-information-system)**, a management information system covering sales, pipeline, net profit and receivables. [Live demo](https://management-information-system-dashboard.vercel.app/)
+- **[Warehouse Management System](https://github.com/CmdShiftExecute/warehouse-management-system)**, a warehouse management system for stock, inbound and replenishment. [Live demo](https://warehouse-management-system-dashboard.vercel.app/)
 
----
+## Roadmap
 
-Project labels come from a licensed market-intelligence register with every reference masked; every internal score, owner and activity is synthetic. No real company, person or figure is represented.
+- A configurable relevance-matrix weighting so a reader can re-score the whole register against a different set of verticals without editing `data/rules.ts` by hand.
+- An exportable per-engineer book (PDF or CSV) matching what `04-Engineers`/`05-Engineer-Book` show on screen, for use outside the dashboard.
+- A pluggable import adapter for the register (beyond the single `scripts/import_bnc_data.py` shape), so a different source workbook layout does not need a hand-written parser.
+
+## License
+
+The code is [MIT licensed](LICENSE). Project labels come from a licensed market-intelligence register with every reference masked; every internal score, owner and activity is synthetic; no real company, person or figure is represented. See [DATA-NOTICE.md](DATA-NOTICE.md) for the full data notice.

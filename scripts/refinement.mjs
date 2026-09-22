@@ -37,8 +37,8 @@ await page.getByRole('button',{name:'Module',exact:true}).click();
 check(await page.getByRole('menuitem',{name:'Project Intelligence'}).getAttribute('aria-current')==='true','Current module is marked inside menu');
 const moduleLinks=await page.locator('[aria-label="Module options"] a').evaluateAll(es=>es.map(e=>e.getAttribute('href')));
 // The masthead's destinations are a build flag (src/lib/suite.ts), so the expected pair is one too.
-const suiteMis=process.env.VITE_SUITE_MIS??'https://kinetics-mis-demo.vercel.app/';
-const suiteWms=process.env.VITE_SUITE_WMS??'https://kinetics-wms-demo.vercel.app/';
+const suiteMis=process.env.VITE_SUITE_MIS??'https://management-information-system-dashboard.vercel.app/';
+const suiteWms=process.env.VITE_SUITE_WMS??'https://warehouse-management-system-dashboard.vercel.app/';
 check(JSON.stringify(moduleLinks)===JSON.stringify([suiteMis,suiteWms,'/']),'Suite destinations match the build flags',moduleLinks);
 // Intercept only the probe's activation to prove Space dispatch without leaving the preview.
 await page.getByRole('menuitem',{name:'Central Store'}).evaluate(e=>e.addEventListener('click',ev=>{ev.preventDefault();window.__moduleActivated=true;},{once:true}));

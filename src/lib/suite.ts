@@ -15,7 +15,7 @@
 const env = import.meta.env as Record<string, string | undefined>
 
 export const SUITE = {
-  mis: env.VITE_SUITE_MIS ?? 'https://kinetics-mis-demo.vercel.app/',
-  wms: env.VITE_SUITE_WMS ?? 'https://kinetics-wms-demo.vercel.app/',
-  pis: env.VITE_SUITE_PIS ?? 'https://kinetics-pis-demo.vercel.app/',
+  mis: env.VITE_SUITE_MIS ?? 'https://management-information-system-dashboard.vercel.app/',
+  wms: env.VITE_SUITE_WMS ?? 'https://warehouse-management-system-dashboard.vercel.app/',
+  pis: env.VITE_SUITE_PIS ?? 'https://project-intelligence-system-dashboard.vercel.app/',
 } as const

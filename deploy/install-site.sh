@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Installs or re-installs the nginx site for the Project Intelligence System demo on node-ss. Idempotent:
-# run it after any change to deploy/kinetics-bnc-demo.nginx or after a rebuild that needs nothing more
+# run it after any change to deploy/site.nginx or after a rebuild that needs nothing more
 # than a reload (a rebuild alone needs no reload, nginx serves dist/ as static files).
 #
 #   bash "$(git rev-parse --show-toplevel)/deploy/install-site.sh"
@@ -9,12 +9,19 @@
 # sites-enabled symlink points at it, runs sudo nginx -t, reloads only on
 # a passing test, then proves port 928 answers from 127.0.0.1 with the built index.html. It never
 # touches any other site file, including the MIS demo on 926.
+#
+# The installed site name is derived from this repo's own directory name (SITE_NAME below), never
+# hardcoded, so it tracks a local checkout rename automatically. Note for node-ss: the previous
+# install used the literal directory name this repo carried before the public-launch rename, so
+# re-running this script installs under a NEW site/unit name; the old sites-available/sites-enabled
+# entries under the old name are left behind and should be removed by hand once the new one is proven.
 set -euo pipefail
 
 REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
-TEMPLATE="$REPO/deploy/kinetics-bnc-demo.nginx"
-DST=/etc/nginx/sites-available/kinetics-bnc-demo
-LINK=/etc/nginx/sites-enabled/kinetics-bnc-demo
+SITE_NAME="${SITE_NAME:-$(basename "$REPO")}"
+TEMPLATE="$REPO/deploy/site.nginx"
+DST="/etc/nginx/sites-available/$SITE_NAME"
+LINK="/etc/nginx/sites-enabled/$SITE_NAME"
 say() { printf '%s %s\n' "$(date '+%H:%M:%S')" "$*"; }
 
 # The site file is a template; nothing host-specific is committed. Every value below can be
@@ -24,7 +31,7 @@ SITE_ADDR="${SITE_ADDR:-$(tailscale ip -4 | head -1)}"
 SITE_ROOT="${SITE_ROOT:-$REPO/dist}"
 SSL_CERT="${SSL_CERT:-/etc/nginx/ssl/${SITE_HOST%%.*}.crt}"
 SSL_KEY="${SSL_KEY:-/etc/nginx/ssl/${SITE_HOST%%.*}.key}"
-SRC=$(mktemp -t kinetics-bnc-site.XXXXXX)
+SRC=$(mktemp -t "${SITE_NAME}-site.XXXXXX")
 trap 'rm -f "$SRC"' EXIT
 sed -e "s|__SITE_ADDR__|$SITE_ADDR|g" \
     -e "s|__SITE_HOST__|$SITE_HOST|g" \

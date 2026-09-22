@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://project-intelligence-system-dashboard.vercel.app/</loc>
+  </url>
+  <url>
+    <loc>https://project-intelligence-system-dashboard.vercel.app/relevance</loc>
+  </url>
+  <url>
+    <loc>https://project-intelligence-system-dashboard.vercel.app/projects</loc>
+  </url>
+  <url>
+    <loc>https://project-intelligence-system-dashboard.vercel.app/engineers</loc>
+  </url>
+  <url>
+    <loc>https://project-intelligence-system-dashboard.vercel.app/parties</loc>
+  </url>
+  <url>
+    <loc>https://project-intelligence-system-dashboard.vercel.app/data-basis</loc>
+  </url>
+</urlset>

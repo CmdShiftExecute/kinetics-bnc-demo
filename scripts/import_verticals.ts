@@ -10,14 +10,18 @@
  * files are written. Re-run it only if the MIS roster changes. No timestamp is written.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
 const i = args.indexOf('--from');
-// Default: a sibling checkout of the MIS demo beside this one. Override with --from.
-const from = i >= 0 && args[i + 1] ? args[i + 1]! : join(here, '..', '..', 'kinetics-mis-demo', 'public', 'data', 'index.json');
+// Default: a sibling checkout of the MIS demo beside this one, sharing this repo's own local
+// naming convention (the '-bnc-' segment swapped for '-mis-') so the path is derived rather
+// than a literal repeated in this file. Override with --from.
+const repoDirName = basename(join(here, '..'));
+const siblingDirName = repoDirName.replace('-bnc-', '-mis-');
+const from = i >= 0 && args[i + 1] ? args[i + 1]! : join(here, '..', '..', siblingDirName, 'public', 'data', 'index.json');
 
 interface Entry {
   slug: string;
@@ -34,6 +38,6 @@ const entries = raw.map((v): Entry => {
 });
 const verticals = entries.map((e) => ({ slug: e.slug, name: e.name }));
 const engineers = entries.flatMap((e) => e.engineers.map((g) => ({ slug: g.slug, name: g.name, vertical: e.slug })));
-writeFileSync(join(here, '..', 'data', 'verticals.json'), JSON.stringify({ source: 'kinetics-mis-demo public/data/index.json', verticals }, null, 1) + '\n');
-writeFileSync(join(here, '..', 'data', 'engineers.json'), JSON.stringify({ source: 'kinetics-mis-demo public/data/index.json', engineers }, null, 1) + '\n');
+writeFileSync(join(here, '..', 'data', 'verticals.json'), JSON.stringify({ source: 'Management Information System demo, public/data/index.json', verticals }, null, 1) + '\n');
+writeFileSync(join(here, '..', 'data', 'engineers.json'), JSON.stringify({ source: 'Management Information System demo, public/data/index.json', engineers }, null, 1) + '\n');
 console.log(`Wrote ${verticals.length} verticals and ${engineers.length} engineers`);

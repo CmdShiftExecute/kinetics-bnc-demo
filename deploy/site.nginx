@@ -1,8 +1,8 @@
-# Project Intelligence System demo (kinetics-bnc-demo): static Vite build, tailnet-only HTTPS on port 928.
+# Project Intelligence System demo: static Vite build, tailnet-only HTTPS on port 928.
 # This is a TEMPLATE. deploy/install-site.sh renders the __PLACEHOLDERS__ from the host it runs on
 # (SITE_HOST/SITE_ADDR from tailscale, SITE_ROOT from the repo, SSL_CERT/SSL_KEY from the short host
-# name) and installs the result into /etc/nginx/sites-enabled/kinetics-bnc-demo. Edit here, then
-# re-run the installer. Override any value by exporting it before the run.
+# name) and installs the result into /etc/nginx/sites-enabled/<this repo's own directory name>. Edit
+# here, then re-run the installer. Override any value by exporting it before the run.
 # The register is about 3 MB of JSON across eight shards, so JSON is gzipped here (the global nginx.conf compresses HTML only).
 
 server {

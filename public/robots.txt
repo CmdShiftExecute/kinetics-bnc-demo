@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://project-intelligence-system-dashboard.vercel.app/sitemap.xml

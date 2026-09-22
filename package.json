@@ -1,8 +1,35 @@
 {
-  "name": "kinetics-pis-demo",
+  "name": "project-intelligence-system",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "Project intelligence dashboard for construction-market sales: a scored register of 4,536 projects, a relevance heatmap by sector and product line, one owner per project from a published cascade, and an activity funnel. Static React and TypeScript, masked references, 4,189 reconciliation checks. Live demo included.",
+  "homepage": "https://project-intelligence-system-dashboard.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CmdShiftExecute/project-intelligence-system.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "project-intelligence",
+    "construction-projects",
+    "market-intelligence",
+    "sales-pipeline",
+    "lead-scoring",
+    "relevance-matrix",
+    "business-development",
+    "crm",
+    "heatmap",
+    "react",
+    "typescript",
+    "vite",
+    "tailwindcss",
+    "d3",
+    "data-visualization",
+    "demo",
+    "bun",
+    "engineering-sales"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

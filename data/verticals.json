@@ -1,5 +1,5 @@
 {
- "source": "kinetics-mis-demo public/data/index.json",
+ "source": "Management Information System demo, public/data/index.json",
  "verticals": [
   {
    "slug": "electrical-distribution",

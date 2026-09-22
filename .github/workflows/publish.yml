@@ -22,6 +22,6 @@ jobs:
           bun-version: 1.3.14
       - run: bun install --frozen-lockfile
       - run: bun run build
-      - run: bash deploy/vercel-publish.sh kinetics-pis-demo
+      - run: bash deploy/vercel-publish.sh project-intelligence-system-dashboard
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

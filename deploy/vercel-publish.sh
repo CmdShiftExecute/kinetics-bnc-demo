@@ -8,14 +8,19 @@
 # OUTPUT, never a rebuild of its own, so what Vercel serves is what the caller just built
 # and gated. Two callers, one script: the GitHub Action (.github/workflows/publish.yml)
 # on every push to main, with the token held as the repository secret VERCEL_TOKEN; and
-# ~/server-ops/bin/kinetics-vercel-deploy.sh on node-ss by hand, which sources the token
-# from ~/.vercel_token and calls this. The token is read from the environment only.
+# the per-repo Vercel deploy wrapper on node-ss (~/server-ops/bin) by hand, which sources
+# the token from ~/.vercel_token and calls this. The token is read from the environment only.
 #
-# Two things every one of these apps needs and a bare static upload does not give:
-#   1. A single-page-app fallback. The app uses path-based routing (BrowserRouter), so
-#      /projects is not a file on disk. Without the rewrite, every deep link and every
-#      page refresh returns 404 and only the homepage works.
-#   2. noindex headers. This is a closed client demo and must not reach a search engine.
+# The one thing every one of these apps needs and a bare static upload does not give: a
+# single-page-app fallback. The app uses path-based routing (BrowserRouter), so /projects is
+# not a file on disk. Without the rewrite, every deep link and every page refresh returns 404
+# and only the homepage works.
+#
+# This is a public-launch repo (indexable by design: index.html carries "index, follow" plus
+# OG/Twitter/JSON-LD tags, and public/robots.txt + public/sitemap.xml are committed and built
+# into dist/ by Vite). So, unlike an internal demo, this script must NOT inject a noindex
+# header or overwrite the committed robots.txt with a Disallow line - either would silently
+# undo the discoverability the README and GitHub metadata promise.
 set -euo pipefail
 
 PROJECT=${1:?vercel project name required}
@@ -40,14 +45,14 @@ cat > "$STAGE/vercel.json" <<'JSON'
   "rewrites": [{ "source": "/((?!assets/|data/|.*\\.[a-zA-Z0-9]+$).*)", "destination": "/index.html" }],
   "headers": [
     { "source": "/(.*)", "headers": [
-      { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" },
       { "key": "X-Content-Type-Options", "value": "nosniff" },
       { "key": "Referrer-Policy", "value": "no-referrer" }
     ]}
   ]
 }
 JSON
-printf 'User-agent: *\nDisallow: /\n' > "$STAGE/robots.txt"
+# robots.txt and sitemap.xml are committed under public/ and already copied into $DIST by Vite;
+# this staging step must leave them exactly as built, never overwrite them.
 
 echo "publishing $PROJECT from $DIST ($(du -sh "$DIST" | cut -f1))"
 

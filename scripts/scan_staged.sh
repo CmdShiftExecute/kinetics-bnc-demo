@@ -17,6 +17,7 @@
 # a file it cannot have. Anyone can restore the gate by writing their own list at that path.
 set -uo pipefail
 cd "$(dirname "$0")/.."
+REPO_SLUG=$(basename "$(pwd)")
 TERMS=${FORBIDDEN_TERMS:-.private/forbidden_terms.txt}
 mode=${1:-staged}
 fail=0
@@ -89,7 +90,7 @@ while IFS= read -r f; do
   # the remote) and carries the vendor shorthand; it is masked before the term check so the
   # bare term is still refused everywhere else.
   if is_imported "$f"; then pattern="$hard_pattern"; else pattern="$hard_pattern|$authored_pattern"; fi
-  hits=$(content "$f" | sed 's/kinetics-bnc-demo/REPO-SLUG/g' | grep -noiE "\b($pattern)\b" | head -5)
+  hits=$(content "$f" | sed "s/$REPO_SLUG/REPO-SLUG/g" | grep -noiE "\b($pattern)\b" | head -5)
   if [ -n "$hits" ]; then say "REFUSED: forbidden term in $f:"; say "$hits" | sed 's/^/    /'; fail=1; fi
 done <<< "$files"
 
